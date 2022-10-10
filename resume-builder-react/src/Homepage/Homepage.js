@@ -8,7 +8,7 @@ function Homepage(){
         <div className="button-basics-example">
             <MediaObject>
     <MediaObjectSection >
-      <Thumbnail src="public\photos\man-sitting.jpg"/>
+      <Thumbnail src="\photos\man-sitting.jpg"/>
     </MediaObjectSection>
     {/* <MediaObjectSection isMain>
       <h4>Dreams feel real while we're in them.</h4>
