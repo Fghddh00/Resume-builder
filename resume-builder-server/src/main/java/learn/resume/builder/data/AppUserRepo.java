@@ -5,11 +5,13 @@ import learn.resume.builder.domain.Result;
 import learn.resume.builder.models.AppUser;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -32,9 +34,7 @@ public class AppUserRepo {
 
     @Transactional
     public AppUser create(AppUser user) {
-        final String sql = "insert into app_user (username, email, password_hash, first_name, last_name, address," +
-                " phone_number, disabled) values" +
-                " (?, ?, ?, ?, ?, ?, ?, ?);";
+        final String sql = "insert into app_user (username, password_hash) values (?, ?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -55,13 +55,34 @@ public class AppUserRepo {
 
     @Transactional
     public void update(AppUser user) {
-        throw new UnsupportedOperationException();
+        final String sql = "update app_user set"
+                + " username = ?, disabled = ?"
+                + " where user_id = ?;";
+        jdbcTemplate.update(sql,
+                user.getUsername(), !user.isEnabled(), user.getUserId());
+
+        updateRoles(user);
     }
     private void updateRoles(AppUser user) {
-        throw new UnsupportedOperationException();
+        jdbcTemplate.update("delete from app_user_role where user_id = ?;", user.getUserId());
+        Collection<GrantedAuthority> authorities = user.getAuthorities();
+
+        if (authorities == null) {
+            return;
+        }
+        for (String role : AppUser.convertAuthoritiesToRoles(authorities)) {
+            String sql= "insert into app_user_role (user_id, role_id)"
+                    + " select ?, role_id from app_role where role_name = ?;";
+            jdbcTemplate.update(sql, user.getUserId(), role);
+        }
     }
 
     private List<String> getRolesByUsername(String username) {
-        throw new UnsupportedOperationException();
+        final String sql = "select r.role_name"
+                + " from app_user_role ur"
+                + " inner join app_role r on ur.role_id = r.role_id"
+                + " inner join app_user au on ur.user_id = au.user_id"
+                + " where au.username = ?;";
+        return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("role_name"), username);
     }
 }
