@@ -37,6 +37,10 @@ insert into app_role (role_name) values
     ('JOBSEEKER'),
     ('EMPLOYER'),
     ('ADMIN');
+        
+    insert into app_user values (1, "jasonniv", "jason@gmail.com", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", "jason", "oh", "addressrandominfocitystate", "11100097845", 0);
+    
+    insert into app_user_role values (1 , 1);
 
 create table education (
     education_id 	int primary key auto_increment,
