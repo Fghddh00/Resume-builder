@@ -20,14 +20,7 @@ public class AppUser extends User {
     private String lastName;
     private String address;
     private String phoneNumber;
-<<<<<<< HEAD
     private List<String> roles = new ArrayList<>();
-=======
-    private List<AppRole> userRoles;
-
-    public AppUser(int userId, String username, String passHash, List<AppRole> roles) {
-        super(username, passHash, roles.stream().map( r -> r.getAuthority()).collect(Collectors.toList()));
->>>>>>> 371a69f40869ed4627e990374037fa0c39f5a58a
 
     public AppUser(int userId, String username, String password,
                    boolean disabled, List<String> roles) {
@@ -36,7 +29,6 @@ public class AppUser extends User {
                 convertRolesToAuthorities(roles));
         this.userId = userId;
     }
-
 
     public static List<GrantedAuthority> convertRolesToAuthorities(List<String> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>(roles.size());
