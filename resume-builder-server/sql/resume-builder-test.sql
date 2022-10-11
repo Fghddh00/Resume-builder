@@ -162,6 +162,7 @@ begin
     
     insert into app_user_role values (1 , 1);
     
+    
     insert into education values (1, "College", "Bachelors");
     
     insert into work_history values 

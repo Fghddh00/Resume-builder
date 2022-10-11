@@ -28,6 +28,7 @@ create table app_user_info (
         references app_user(user_id)
 );
 
+
 create table app_user_role (
     user_id int not null,
     role_id int not null,
