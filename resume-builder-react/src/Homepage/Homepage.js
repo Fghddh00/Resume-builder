@@ -16,7 +16,7 @@ function Homepage() {
       <div  className="Homepage">
         <div className='createAccount'>
           <GridContainer>
-            <Link size={Sizes.LARGE} to="/createAccount" >
+            <Link size={Sizes.LARGE} to="/create_account" >
                <Button>Create Account </Button>
               </Link>
           </GridContainer>

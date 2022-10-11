@@ -78,6 +78,7 @@ public class AuthController {
             String username = credentials.get("username");
             String password = credentials.get("password");
 
+
             appUser = appUserService.create(username, password);
         } catch (ValidationException ex) {
             return new ResponseEntity<>(List.of(ex.getMessage()), HttpStatus.BAD_REQUEST);

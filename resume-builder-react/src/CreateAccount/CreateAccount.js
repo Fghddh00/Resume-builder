@@ -9,8 +9,28 @@ function CreateAccount() {
 
     function handleSubmit( event ){
         event.preventDefault();
-        history.push("/");
-        console.log(account)
+
+        fetch( "http://localhost:8080/create_account", {
+            method: "POST",
+            body: JSON.stringify(account)
+            ,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(async response => {
+            if( response.status === 201 ){
+                
+                history.push( "/" );
+                console.log(account);
+               
+                
+            } else {
+                setErrors(await response.json());
+                console.log(errors);
+                //Display error messages
+                console.log(account);
+            }
+        });
     }
 
     function inputChangeHandler( inputChangedEvent ){
@@ -128,6 +148,9 @@ function CreateAccount() {
         </Grid>
         <Grid >
             <Cell medium={6}>
+            <label> Username
+                <input type="text" placeholder="Username" name="username" onChange={inputChangeHandler}/>
+            </label>
             <label> Password
                 <input type="text" placeholder="Password" name="password" onChange={inputChangeHandler}/>
             </label>
