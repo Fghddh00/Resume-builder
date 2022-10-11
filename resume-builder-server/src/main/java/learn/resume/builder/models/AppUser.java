@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AppUser extends User {
-    private int user_id;
+    private int userId;
     private String username;
     private String passHash;
     private String email;
@@ -16,11 +16,11 @@ public class AppUser extends User {
     private String phoneNumber;
     private List<AppRole> userRoles;
 
-    public AppUser(int user_id, String username, String passHash, String email, String firstName, String lastName,
+    public AppUser(int userId, String username, String passHash, String email, String firstName, String lastName,
                    String address, String phoneNumber, List<AppRole> roles) {
         super(username, passHash, roles.stream().map( r -> r.getAuthority()).collect(Collectors.toList()));
 
-        this.user_id = user_id;
+        this.userId = userId;
         this.username = username;
         this.passHash = passHash;
         this.email = email;
@@ -32,11 +32,11 @@ public class AppUser extends User {
     }
 
     public int getUser_id() {
-        return user_id;
+        return userId;
     }
 
     public void setUser_id(int user_id) {
-        this.user_id = user_id;
+        this.userId = userId;
     }
 
     @Override
