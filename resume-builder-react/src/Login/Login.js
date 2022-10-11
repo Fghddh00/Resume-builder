@@ -15,7 +15,7 @@ function Login(props){
         const password = document.getElementById("password").value;
         const loginRequest = {username, password};
 
-        fetch("http://localhost:8080/login", {
+        fetch("http://localhost:8080/authenticate", {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"
