@@ -1,9 +1,9 @@
 package learn.resume.builder.controller;
 
-import learn.resume.builder.domain.Result;
 import learn.resume.builder.models.AppUser;
 import learn.resume.builder.security.AppUserService;
 import learn.resume.builder.security.JwtConverter;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.ValidationException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -57,7 +59,7 @@ public class AuthController {
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
-    @PostMapping("/refreshtoken")
+    @PostMapping("/refresh_token")
     public ResponseEntity<Map<String, String>> refreshToken(UsernamePasswordAuthenticationToken principal) {
         User user = new User(principal.getName(), principal.getName(), principal.getAuthorities());
         String jwtToken = converter.getTokenFromUser(user);
@@ -68,20 +70,23 @@ public class AuthController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    @PostMapping("/createaccount")
+    @PostMapping("/create_account")
     public ResponseEntity<?> createAccount(@RequestBody Map<String, String> credentials) {
+        AppUser appUser = null;
 
-        String username = credentials.get("username");
-        String password = credentials.get("password");
+        try {
+            String username = credentials.get("username");
+            String password = credentials.get("password");
 
-        Result<AppUser> result = appUserService.create(username, password);
-
-        if (!result.isSuccess()) {
-            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
+            appUser = appUserService.create(username, password);
+        } catch (ValidationException ex) {
+            return new ResponseEntity<>(List.of(ex.getMessage()), HttpStatus.BAD_REQUEST);
+        } catch (DuplicateKeyException ex) {
+            return new ResponseEntity<>(List.of("The provided username already exists"), HttpStatus.BAD_REQUEST);
         }
 
         HashMap<String, Integer> map = new HashMap<>();
-        map.put("userId", result.getPayload().getUser_id());
+        map.put("user_id", appUser.getUserId());
 
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }

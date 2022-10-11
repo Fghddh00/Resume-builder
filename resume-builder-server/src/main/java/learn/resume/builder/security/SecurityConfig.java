@@ -24,8 +24,8 @@ public class SecurityConfig {
 
         http.authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
-                .antMatchers("/createaccount").permitAll()
-                .antMatchers("/refreshtoken").authenticated()
+                .antMatchers("/create_account").permitAll()
+                .antMatchers("/refresh_token").authenticated()
 
 
                 //denying everything from here
