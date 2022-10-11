@@ -11,13 +11,21 @@ create table app_role (
 create table app_user (
     user_id 		int primary key auto_increment,
     username		varchar(50) not null unique,
-    email 			varchar(50) not null,
     password_hash 	varchar(2048) not null,
+    disabled 		bit not null default(0)
+);
+
+create table app_user_info (
+	info_id			int primary key auto_increment,
+    email 			varchar(50) not null,
     first_name 		varchar(100) not null,
     last_name 		varchar(100) not null,
     address 		varchar(200) null,
     phone_number 	varchar(11) not null,
-    disabled 		bit not null default(0)
+	user_id 		int not null,
+    constraint fk_app_user_role_user_id
+        foreign key (user_id)
+        references app_user(user_id)
 );
 
 create table app_user_role (
@@ -33,12 +41,16 @@ create table app_user_role (
         references app_role(role_id)
 );
 
+insert into app_user_info 
+values
+( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845", 1);
+
 insert into app_role (role_name) values
     ('JOBSEEKER'),
     ('EMPLOYER'),
     ('ADMIN');
         
-    insert into app_user values (1, "jasonniv", "jason@gmail.com", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", "jason", "oh", "addressrandominfocitystate", "11100097845", 0);
+    insert into app_user values (1, "jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", 0);
     
     insert into app_user_role values (1 , 1);
 

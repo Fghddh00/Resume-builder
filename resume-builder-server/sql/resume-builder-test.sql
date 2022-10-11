@@ -11,13 +11,21 @@ create table app_role (
 create table app_user (
     user_id 		int primary key auto_increment,
     username		varchar(50) not null unique,
-    email 			varchar(50) not null,
     password_hash 	varchar(2048) not null,
+    disabled 		bit not null default(0)
+);
+
+create table app_user_info (
+	info_id			int primary key auto_increment,
+    email 			varchar(50) not null,
     first_name 		varchar(100) not null,
     last_name 		varchar(100) not null,
     address 		varchar(200) null,
     phone_number 	varchar(11) not null,
-	disabled 		bit not null default(0)
+	user_id 		int not null,
+    constraint fk_app_user_role_user_id
+        foreign key (user_id)
+        references app_user(user_id)
 );
 
 create table app_user_role (
@@ -32,6 +40,7 @@ create table app_user_role (
         foreign key (role_id)
         references app_role(role_id)
 );
+
 
 create table education (
     education_id 	int primary key auto_increment,
@@ -136,6 +145,8 @@ begin
     alter table education auto_increment = 1;
     delete from app_user_role;
     alter table app_user_role auto_increment = 1;
+    delete from app_user_info;
+    alter table app_user_info auto_increment = 1;
 	delete from app_user;
     alter table app_user auto_increment = 1;
 	delete from app_role;
@@ -143,30 +154,40 @@ begin
     
     insert into app_role values (1, "Job Seeker");
     
-    insert into app_user values (1, "jasonniv", "jason@gmail.com", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", "jason", "oh", "addressrandominfocitystate", "11100097845");
+    insert into app_user values (1, "jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", 0);
+    
+    insert into app_user_info 
+	values
+	( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845", 1);
     
     insert into app_user_role values (1 , 1);
     
     insert into education values (1, "College", "Bachelors");
     
-    insert into work_history values (1, "Singer", '2010-06-16', '2010-10-16', "I won American Idol");
+    insert into work_history values 
+    (1, "Singer", '2010-06-16', '2010-10-16', "I sing and won American Idol"),
+	(1, "Dancer", '2010-11-16', '2010-12-16', "I dance and I am a ballerina");
     
+    insert into skill values 
+    (1, "sing"),
+    (2, "dance"),
+    (3, "cook");
     
+    insert into resume_app 
+    values
+    (1, 1, 1);
     
-create table work_history (
-    work_history_id 	int primary key auto_increment,
-    job_title 			varchar(50) not null,
-    start_date 			date not null,
-    end_date			date null,
-    job_description		varchar(2000) not null
-);
-
-create table skill (
-    skill_id 	int primary key auto_increment,
-    skill_name 	varchar(100) not null
-);
-);
+    insert into resume_education
+    values
+    (1,1);
     
+	insert into resume_work_history
+    values
+    (1,1);
+    
+    insert into resume_skill
+    values
+    (1,1);
 
 end //
 delimiter ;
