@@ -1,24 +1,30 @@
-// import { Link } from "react-router-dom";
-import {Button, Link, MediaObject, MediaObjectSection, Thumbnail} from "react-foundation";
+import { Link } from "react-router-dom";
+import './Homepage.css';
+import {
+  Button,
+  Grid,
+  GridContainer,
+  MediaObject,
+  MediaObjectSection,
+  Thumbnail,
+  Sizes
+} from "react-foundation";
 
-
-function Homepage(){
+function Homepage() {
+  
     return (
-
-        <div className="button-basics-example">
-            <MediaObject>
-    <MediaObjectSection >
-      <Thumbnail src="\photos\man-sitting.jpg"/>
-    </MediaObjectSection>
-    {/* <MediaObjectSection isMain>
-      <h4>Dreams feel real while we're in them.</h4>
-      <p>I'm going to improvise. Listen, there's something you should know about me... about inception. An idea is like a virus, resilient, highly contagious. The smallest seed of an idea can grow. It can grow to define or destroy you.</p>
-    </MediaObjectSection> */}
-  </MediaObject>
-
+      <div  className="Homepage">
+        <div className='createAccount'>
+          <GridContainer>
+            <Link size={Sizes.LARGE} to="/createAccount" >
+               <Button>Create Account </Button>
+              </Link>
+          </GridContainer>
 
         </div>
-    )
+      </div>
+    );
+  
 }
 
 export default Homepage;

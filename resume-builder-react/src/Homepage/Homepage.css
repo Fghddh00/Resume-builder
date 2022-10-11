@@ -1,0 +1,16 @@
+.Homepage {
+    background-color: rgb(146, 92, 130);
+    background-size: "cover";
+    height: 150vh;
+    margin-top: -70px;
+    
+    background-repeat:no-repeat; 
+  }
+
+.createAccount {
+    width: 1000px;
+    height: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

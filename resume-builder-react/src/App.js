@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import NavigationBar from './NavigationBar/NavigationBar';
 import Homepage from './Homepage/Homepage';
+import CreateAccount from './CreateAccount/CreateAccount';
 
 function App() {
   return (
@@ -10,9 +11,14 @@ function App() {
       <BrowserRouter>
       <NavigationBar/>
       <Switch>
-        <Route exact path="/">
+      <Route exact path="/">
           <Homepage/>
         </Route>
+      <Route path="/createAccount">
+          <CreateAccount/>
+        </Route>
+        
+        
       </Switch>
       </BrowserRouter>
     </div>
