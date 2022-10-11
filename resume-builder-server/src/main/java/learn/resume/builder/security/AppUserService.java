@@ -37,8 +37,17 @@ public class AppUserService {
         return appUser;
     }
 
-    public Result<AppUser> create(String username, String password) {
-        throw new UnsupportedOperationException();
+    public Result<AppUser> create(String username, String password, String email, String firstName,
+                                  String lastName, String address, String phoneNumber) {
+        validate(username);
+        validate(password);
+
+        password = encoder.encode(password);
+
+        AppUser appUser = new AppUser(0, username,password, email, firstName, lastName,
+                address, phoneNumber, );
+        return repository.create(appUser);
+
     }
 
     private void validate(String username) {
