@@ -40,6 +40,7 @@ public class AppUserService {
     public Result<AppUser> create(String username, String password) {
         throw new UnsupportedOperationException();
     }
+
     private void validate(String username) {
         if (username == null || username.isBlank()) {
             throw new ValidationException("username is required");

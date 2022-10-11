@@ -16,8 +16,7 @@ public class AppUser extends User {
     private String phoneNumber;
     private List<AppRole> userRoles;
 
-    public AppUser(int userId, String username, String passHash, String email, String firstName, String lastName,
-                   String address, String phoneNumber, List<AppRole> roles) {
+    public AppUser(int userId, String username, String passHash, List<AppRole> roles) {
         super(username, passHash, roles.stream().map( r -> r.getAuthority()).collect(Collectors.toList()));
 
         this.userId = userId;
