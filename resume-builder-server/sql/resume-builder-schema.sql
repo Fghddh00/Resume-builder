@@ -2,6 +2,8 @@ drop database if exists resume_builder;
 create database resume_builder;
 use resume_builder;
 
+drop table if exists app_role;
+alter table app_role auto_increment = 1;
 
 create table app_role (
     role_id 		int primary key auto_increment,
@@ -16,8 +18,7 @@ create table app_user (
     first_name 		varchar(100) not null,
     last_name 		varchar(100) not null,
     address 		varchar(200) null,
-    phone_number 	varchar(11) not null,
-    disabled 		bit not null default(0)
+    phone_number 	varchar(11) not null
 );
 
 create table app_user_role (
