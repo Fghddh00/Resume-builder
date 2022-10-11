@@ -23,7 +23,7 @@ create table app_user_info (
     address 		varchar(200) null,
     phone_number 	varchar(11) not null,
 	user_id 		int not null,
-    constraint fk_app_user_role_user_id
+    constraint fk_app_user_user_info
         foreign key (user_id)
         references app_user(user_id)
 );
@@ -41,16 +41,16 @@ create table app_user_role (
         references app_role(role_id)
 );
 
-insert into app_user_info 
-values
-( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845", 1);
-
 insert into app_role (role_name) values
     ('JOBSEEKER'),
     ('EMPLOYER'),
     ('ADMIN');
         
     insert into app_user values (1, "jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", 0);
+    
+    insert into app_user_info 
+values
+( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845", 1);
     
     insert into app_user_role values (1 , 1);
 
