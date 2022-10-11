@@ -1,42 +1,60 @@
 package learn.resume.builder.models;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.util.Assert;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AppUser extends User {
-    private int user_id;
+    private static final String AUTHORITY_PREFIX = "ROLE_";
+    private int userId;
     private String username;
-    private String passHash;
+    private String password;
     private String email;
     private String firstName;
     private String lastName;
     private String address;
     private String phoneNumber;
-    private List<AppRole> userRoles;
+    private List<String> roles = new ArrayList<>();
 
-    public AppUser(int user_id, String username, String passHash, String email, String firstName, String lastName,
-                   String address, String phoneNumber, List<AppRole> roles) {
-        super(username, passHash, roles.stream().map( r -> r.getAuthority()).collect(Collectors.toList()));
-
-        this.user_id = user_id;
-        this.username = username;
-        this.passHash = passHash;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.userRoles = roles;
+    public AppUser(int userId, String username, String password,
+                   boolean disabled, List<String> roles) {
+        super(username, password, !disabled,
+                true, true, true,
+                convertRolesToAuthorities(roles));
+        this.userId = userId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public static List<GrantedAuthority> convertRolesToAuthorities(List<String> roles) {
+        List<GrantedAuthority> authorities = new ArrayList<>(roles.size());
+        for (String role : roles) {
+            Assert.isTrue(!role.startsWith(AUTHORITY_PREFIX),
+                    () ->
+                            String.
+                                    format("%s cannot start with %s (it is automatically added)",
+                                            role, AUTHORITY_PREFIX));
+            authorities.add(new SimpleGrantedAuthority(AUTHORITY_PREFIX + role));
+        }
+        return authorities;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public static List<String> convertAuthoritiesToRoles(Collection<GrantedAuthority> authorities) {
+        return authorities.stream()
+                .map(a -> a.getAuthority().substring(AUTHORITY_PREFIX.length()))
+                .collect(Collectors.toList());
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -48,12 +66,13 @@ public class AppUser extends User {
         this.username = username;
     }
 
-    public String getPassHash() {
-        return passHash;
+    @Override
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassHash(String passHash) {
-        this.passHash = passHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -94,13 +113,5 @@ public class AppUser extends User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public List<AppRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(List<AppRole> userRoles) {
-        this.userRoles = userRoles;
     }
 }
