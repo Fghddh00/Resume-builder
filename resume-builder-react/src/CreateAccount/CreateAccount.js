@@ -1,31 +1,59 @@
+import { createContext, useState } from "react";
 import { Button, Cell, Colors, Grid, GridContainer, InputTypes, Label } from "react-foundation";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function CreateAccount() {
+    const history = useHistory();
+    const [account, setAccount] = useState({});
+    const [errors, setErrors] = useState([]);
+
+    function handleSubmit( event ){
+        event.preventDefault();
+        history.push("/");
+        console.log(account)
+    }
+
+    function inputChangeHandler( inputChangedEvent ){
+        
+
+        const propertyName = inputChangedEvent.target.name;
+        const newValue = inputChangedEvent.target.value;
+
+        const accountCopy = {...account};
+
+        
+        accountCopy[propertyName] = newValue;
+
+       
+        setAccount( accountCopy );
+    }
+
+    
+
   return (
     <div>
       <h1>Create Account</h1>
       <GridContainer>
+        
+       <form onSubmit={handleSubmit}>
         <Grid>
           <Cell medium={5}>  
-            <label>First Name
-              <input className="half-form" type="text" placeholder="name" />
-            </label>
+            <label htmlFor="firstName">First Name </label>
+              <input className="half-form" type="text" placeholder="name"  name="firstName" onChange={inputChangeHandler}/>
           </Cell>
           <Cell medium={6} offsetOnMedium={1}>
-            <label>  Last Name
-              <input className="half-form" type="text" placeholder="name" />
-            </label>
+            <label>  Last Name </label>
+              <input className="half-form" type="text" placeholder="name" name="lastName" onChange={inputChangeHandler}/>
           </Cell>
 
           <Cell>
             <label>   Address
-              <input type="text" placeholder="Street Address" />
-              <input type="text" placeholder="Street Address Line 2" />
+              <input type="text" placeholder="Street Address" name="streetAddress" onChange={inputChangeHandler}/>
+              <input type="text" placeholder="Street Address Line 2" name="streetAddress2" onChange={inputChangeHandler}/>
             </label>
           </Cell>
           <Cell >
-              <select name="state" size="1">
+              <select name="state" size="1" onChange={inputChangeHandler}>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
@@ -80,31 +108,31 @@ function CreateAccount() {
               </select>      
           </Cell>
           <Cell medium={5}>    
-              <input type="text" placeholder="City" /> 
+              <input type="text" placeholder="City" name="city" onChange={inputChangeHandler}/> 
           </Cell>
           <Cell medium={6} offsetOnMedium={1}>
-              <input type="number" placeholder="Postal/Zip Code" /> 
+              <input type="number" placeholder="Postal/Zip Code" name="zipCode" onChange={inputChangeHandler}/> 
           </Cell>
 
           <Cell medium={5}>
             <label> Phone Number
-              <input type="tel" placeholder="Phone number" />
+              <input type="tel" placeholder="Phone number" name="phoneNumber" onChange={inputChangeHandler}/>
             </label>
           </Cell>
 
           <Cell >
             <label> Email
-              <input type="text" placeholder="Email" />
+              <input type="text" placeholder="Email" name="email" onChange={inputChangeHandler}/>
             </label>
           </Cell>
         </Grid>
         <Grid >
             <Cell medium={6}>
             <label> Password
-                <input type="text" placeholder="Password" />
+                <input type="text" placeholder="Password" name="password" onChange={inputChangeHandler}/>
             </label>
             <label> Confirm Password
-                <input type="text" placeholder="Confirm Password" />
+                <input type="text" placeholder="Confirm Password" name="confirmPassword" onChange={inputChangeHandler}/>
             </label>
             </Cell>
         </Grid>
@@ -112,7 +140,8 @@ function CreateAccount() {
         <Button>Submit</Button> 
         <Button color={Colors.ALERT}>Cancel</Button> 
         </div>
-
+        </form>
+            
       </GridContainer>
 
       <Link to="/login"> Already Have an account? Click here to login</Link>
