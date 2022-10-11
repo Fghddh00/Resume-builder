@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { Button, Cell, Colors, Grid, GridContainer, InputTypes, Label } from "react-foundation";
 import { Link, useHistory } from "react-router-dom";
+import ErrorMessages from "../ErrorMessages/ErrorMessages";
 
 function CreateAccount() {
     const history = useHistory();
@@ -164,7 +165,7 @@ function CreateAccount() {
         <Button color={Colors.ALERT}>Cancel</Button> 
         </div>
         </form>
-            
+        <ErrorMessages errorList= {errors} />
       </GridContainer>
 
       <Link to="/login"> Already Have an account? Click here to login</Link>

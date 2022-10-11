@@ -1,10 +1,13 @@
 import {Link, useHistory} from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import { Button } from 'react-foundation';
+import { useState } from 'react';
+import ErrorMessages from '../ErrorMessages/ErrorMessages';
 
 function Login(props){
 
     const history = useHistory();
+    const [errors, setErrors] = useState([]);
 
     function loginHandler(e){
 
@@ -22,12 +25,15 @@ function Login(props){
             },
             body: JSON.stringify(loginRequest)
         })
-        .then( response => {
+        .then( async response => {
             if( response.status === 200 ){
                 return response.json(); //if we had just returned the raw token, we would have to do .text()
+            }else if(response.status === 403){ 
+                setErrors(["Username/Password incorrect"]);
             } else {
                 //TODO: add Error component and display problem
-                console.log( response );
+                console.log("fail")
+                setErrors( await response.json() );
             }
         } )
         .then( jwtContainer => {
@@ -68,6 +74,7 @@ function Login(props){
                     <Link to="/" className="btn btn-danger">Cancel</Link>
                 </div>
             </form>
+            <ErrorMessages errorList= {errors} />
         </div>
     );
 }
