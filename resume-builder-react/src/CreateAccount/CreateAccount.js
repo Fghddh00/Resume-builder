@@ -1,11 +1,11 @@
-import {
-    
-  } from "react-foundation";
+
+import { Link } from "react-router-dom";
 
 function CreateAccount(){
     return(
         <div>
             create account form
+            
         </div>
     )
 
