@@ -26,6 +26,14 @@ public class SkillDbRepository implements SkillRepo {
     }
 
     @Override
+    public List<Skill> getSkillByResumeId(int resumeId) {
+        return jdbcTemplate.query("select skill.*\n" +
+                "from skill \n" +
+                "inner join resume_skill on skill.skill_id = resume_skill.skill_id\n" +
+                "where resume_id = ?;", new SkillMapper(), resumeId);
+    }
+
+    @Override
     public Skill add(Skill skill) {
         throw new UnsupportedOperationException();
     }

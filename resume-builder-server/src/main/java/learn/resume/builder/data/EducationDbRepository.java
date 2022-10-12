@@ -23,6 +23,14 @@ public class EducationDbRepository implements EducationRepo {
     }
 
     @Override
+    public List<Education> getEducationByResumeId(int resumeId) {
+        return jdbcTemplate.query("select education.*\n" +
+                "from education \n" +
+                "inner join resume_education on education.education_id = resume_education.education_id\n" +
+                "where resume_id = ?;", new EducationMapper(), resumeId);
+    }
+
+    @Override
     public Education add(Education education) {
         throw new UnsupportedOperationException();
     }

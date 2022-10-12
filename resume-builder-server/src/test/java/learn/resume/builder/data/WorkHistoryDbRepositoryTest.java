@@ -4,12 +4,14 @@ import learn.resume.builder.models.WorkHistory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 class WorkHistoryDbRepositoryTest {
     @Autowired
     WorkHistoryDbRepository repository;
@@ -27,8 +29,7 @@ class WorkHistoryDbRepositoryTest {
         List<WorkHistory> actual = repository.findAll();
 
         assertNotNull(actual);
-        assertTrue(actual.size() >= 3);
-
+        assertTrue(actual.size() >= 2);
     }
 
 }
