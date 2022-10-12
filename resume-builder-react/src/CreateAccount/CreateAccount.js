@@ -54,7 +54,7 @@ function CreateAccount() {
 
   return (
     <div>
-      <h1>Create Account</h1>
+      <h1 className="header">Create Account</h1>
       <GridContainer className="form-group">
         
        <form onSubmit={handleSubmit}>

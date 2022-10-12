@@ -9,6 +9,7 @@ import AuthContext from "./AuthContext";
 import ViewResume from "./ViewResume/ViewResume";
 import jwtDecode from "jwt-decode";
 import NotFound from "./NotFound/NotFound";
+import AddResume from "./AddResume/AddResume";
 
 const LOCAL_STORAGE_TOKEN_KEY = "resumeToken";
 
@@ -82,6 +83,9 @@ function App() {
             </Route>
             <Route exact path="/viewResume">
               {loginInfo ? <ViewResume/> : <Redirect to="/login"/>}
+            </Route>
+            <Route exact path="/addResume">
+              {loginInfo ? <AddResume/> : <Redirect to="/login"/>}
             </Route>
             <Route >
               <NotFound />

@@ -1,0 +1,21 @@
+.UnderConstruction {
+    background: url("https://images.pexels.com/photos/8821015/pexels-photo-8821015.jpeg?cs=srgb&dl=pexels-ron-lach-8821015.jpg&fm=jpg") no-repeat center center fixed;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  
+}
+
+.UCText {
+    width: 200px;
+    height: 883px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    text-align: center;
+    transform: rotate(-45deg);
+    margin-right: -100rem;
+}
+

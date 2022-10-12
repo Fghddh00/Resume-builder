@@ -1,8 +1,5 @@
 import AuthContext from "../AuthContext";
 import { useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import Widget from "../Widget/Widget";
-import { Block, Callout, Cell, Colors, Grid } from "react-foundation";
 import "./ViewResume.css";
 import Resume from "../Resume/Resume";
 
@@ -33,6 +30,7 @@ function ViewResume() {
   }
 
   return (
+    
     <div className="ResumeTable">
       <table>
         <thead>
@@ -53,6 +51,8 @@ function ViewResume() {
         </tbody>
       </table>
     </div>
+    
+   
   );
 }
 export default ViewResume;

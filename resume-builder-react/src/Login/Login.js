@@ -56,7 +56,7 @@ function Login(props){
     }
 
     return (
-      
+      <div className='body'>
         <div className="container">
             <form onSubmit={loginHandler} className="form-group">
 
@@ -82,6 +82,7 @@ function Login(props){
             </form>
             <ErrorMessages errorList= {errors} />
             
+        </div>
         </div>
     );
 }
