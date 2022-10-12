@@ -25,21 +25,4 @@ public class SkillDbRepository implements SkillRepo {
         return jdbcTemplate.query(sql, new SkillMapper());
     }
 
-    @Override
-    public Skill findById(int skillId) {
-        final String sql = "select skill_id, skill_name"
-                + " from skill"
-                + " where skill_id = ?;";
-        Skill skill = jdbcTemplate.query(sql, new SkillMapper(), skillId)
-                .stream().findFirst().orElse(null);
-        if(skill != null){
-            addResume(skill);
-        }
-        return skill;
-    }
-
-    private void addResume(Skill skill) {
-        // need help w/ sql statement
-        throw new UnsupportedOperationException();
-    }
 }

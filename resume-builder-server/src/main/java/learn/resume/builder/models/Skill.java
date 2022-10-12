@@ -1,8 +1,11 @@
 package learn.resume.builder.models;
 
+import java.util.List;
+
 public class Skill {
     private int skillId;
     private String skillName;
+    List<Resume> resumes;
 
 
     public int getSkillId() {
@@ -19,5 +22,13 @@ public class Skill {
 
     public void setSkillName(String skillName) {
         this.skillName = skillName;
+    }
+
+    public List<Resume> getResumes() {
+        return resumes;
+    }
+
+    public void setResumes(List<Resume> resumes) {
+        this.resumes = resumes;
     }
 }

@@ -8,5 +8,4 @@ public interface SkillRepo {
 
     List<Skill> findAll();
 
-    Skill findById(int skillId);
 }

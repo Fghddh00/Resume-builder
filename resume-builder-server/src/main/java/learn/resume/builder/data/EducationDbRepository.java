@@ -22,23 +22,4 @@ public class EducationDbRepository implements EducationRepo {
         return jdbcTemplate.query(sql, new EducationMapper());
     }
 
-    @Override
-    public Education findById(int educationId) {
-        final String sql = "select education_id, school_name, education_level"
-                + " from education"
-                + " where education_id = ?;";
-
-        Education education = jdbcTemplate.query(sql, new EducationMapper(), educationId)
-                .stream().findFirst().orElse(null);
-
-        if(education != null){
-            addResume(education);
-        }
-        return education;
-    }
-
-    private void addResume(Education education) {
-        //need help with sql statement
-        throw new UnsupportedOperationException();
-    }
 }

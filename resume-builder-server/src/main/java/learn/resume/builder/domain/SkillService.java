@@ -19,7 +19,4 @@ public class SkillService {
         return repository.findAll();
     }
 
-    public Skill findById(int skillId) {
-        return repository.findById(skillId);
-    }
 }

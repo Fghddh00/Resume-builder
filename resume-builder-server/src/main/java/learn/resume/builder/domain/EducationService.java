@@ -17,7 +17,4 @@ public class EducationService {
         return repository.findAll();
     }
 
-    public Education findById(int educationId) {
-        return repository.findById(educationId);
-    }
 }

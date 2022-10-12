@@ -1,9 +1,13 @@
 package learn.resume.builder.models;
 
+import java.util.List;
+
 public class Education {
     private int educationId;
     private String schoolName;
     private String educationLevel;
+    List<Resume> resumes;
+
 
     public int getEducationId() {
         return educationId;
@@ -27,5 +31,12 @@ public class Education {
 
     public void setEducationLevel(String educationLevel) {
         this.educationLevel = educationLevel;
+    }
+    public List<Resume> getResumes() {
+        return resumes;
+    }
+
+    public void setResumes(List<Resume> resumes) {
+        this.resumes = resumes;
     }
 }
