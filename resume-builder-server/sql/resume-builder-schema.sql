@@ -21,11 +21,7 @@ create table app_user_info (
     first_name 		varchar(100) not null,
     last_name 		varchar(100) not null,
     address 		varchar(200) null,
-    phone_number 	varchar(11) not null,
-	user_id 		int not null,
-    constraint fk_app_user_user_info
-        foreign key (user_id)
-        references app_user(user_id)
+    phone_number 	varchar(11) not null
 );
 
 
@@ -82,6 +78,10 @@ create table resume_app (
 --     work_history_id int not null,
 --     skill_id		int not null,
     user_id			int not null,
+	info_id 		int not null,
+    constraint fk_resume_app_user_info
+        foreign key (user_info)
+        references app_user_info(user_info),
 	constraint fk_resume_user_id
 		foreign key (user_id)
 		references app_user(user_id)
