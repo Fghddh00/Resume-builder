@@ -4,13 +4,67 @@ import NavigationBar from "./NavigationBar/NavigationBar";
 import Homepage from "./Homepage/Homepage";
 import CreateAccount from "./CreateAccount/CreateAccount";
 import Login from "./Login/Login";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
 import PersonalWidgetDashboard from "./PersonalWidgetDashboard/PersonalWidgetDashboard";
 import ViewResume from "./ViewResume/ViewResume";
+import jwtDecode from "jwt-decode";
+import NotFound from "./NotFound/NotFound";
+
+const LOCAL_STORAGE_TOKEN_KEY = "resumeToken";
 
 function App() {
   const [loginInfo, setLoginInfo] = useState(null);
+
+  const [restoreLoginAttemptCompleted, setRestoreLoginAttemptCompleted] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
+    if (token) {
+      login(token);
+    }
+    setRestoreLoginAttemptCompleted(true);
+  }, []);
+
+  const login = (token) => {
+    localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
+
+    // Decode the token
+    const { sub: username, authorities: authoritiesString } = jwtDecode(token);
+  
+    // Split the authorities string into an array of roles
+    const roles = authoritiesString.split(',');
+  
+    // Create the "user" object
+    const loginInfo = {
+      username,
+      roles,
+      token,
+      hasRole(role) {
+        return this.roles.includes(role);
+      }
+    };
+  
+    console.log(loginInfo);  
+    setLoginInfo(loginInfo);  
+    return loginInfo;
+  };
+  
+  const logout = () => {
+    setLoginInfo(null);
+    localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
+  };
+
+  const auth = {
+    loginInfo: loginInfo ? { ...loginInfo } : null,
+    login,
+    logout
+  };
+
+
+  if (!restoreLoginAttemptCompleted) {
+    return null;
+  }
 
   return (
     <div className="App">
@@ -25,10 +79,13 @@ function App() {
               <CreateAccount />
             </Route>
             <Route exact path="/login">
-              <Login setLoginInfo={setLoginInfo} />
+              {!loginInfo ? <Login setLoginInfo={setLoginInfo} /> : <Redirect to="viewResume"/>}
             </Route>
             <Route exact path="/viewResume">
               {loginInfo ? <ViewResume/> : <Redirect to="/login"/>}
+            </Route>
+            <Route >
+              <NotFound />
             </Route>
           </Switch>
         </BrowserRouter>
