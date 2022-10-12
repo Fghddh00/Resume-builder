@@ -21,11 +21,7 @@ create table app_user_info (
     first_name 		varchar(100) not null,
     last_name 		varchar(100) not null,
     address 		varchar(200) null,
-    phone_number 	varchar(11) not null,
-	user_id 		int not null,
-    constraint fk_app_user_user_info
-        foreign key (user_id)
-        references app_user(user_id)
+    phone_number 	varchar(11) not null
 );
 
 create table app_user_role (
@@ -65,23 +61,16 @@ create table skill (
 create table resume_app (
 	resume_id 		int primary key auto_increment,
     template_id 	int not null,
--- 	education_id	int not null,
---     work_history_id int not null,
---     skill_id		int not null,
     user_id			int not null,
+	info_id 		int not null,
+    constraint fk_resume_app_user_info
+        foreign key (user_info)
+        references app_user_info(user_info),
 	constraint fk_resume_user_id
 		foreign key (user_id)
 		references app_user(user_id)
-	-- constraint fk_resume_education_id
--- 		foreign key (education_id)
--- 		references education(education_id),
---     constraint fk_resume_work_id
--- 		foreign key (work_history_id)
--- 		references work_history(work_history_id),
---     constraint fk_resume_skill_id
--- 		foreign key (skill_id)
--- 		references skill(skill_id),
 );
+
 
 create table resume_education (
     education_id 		int not null,
@@ -125,6 +114,7 @@ create table resume_skill (
 
 delimiter //
 create procedure set_known_good_state()
+
 begin
 
 	delete from resume_skill;
@@ -158,7 +148,7 @@ begin
     
     insert into app_user_info 
 	values
-	( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845", 1);
+	( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845");
     
     insert into app_user_role values (1 , 1);
     
@@ -176,7 +166,7 @@ begin
     
     insert into resume_app 
     values
-    (1, 1, 1);
+    (1, 1, 1, 1);
     
     insert into resume_education
     values

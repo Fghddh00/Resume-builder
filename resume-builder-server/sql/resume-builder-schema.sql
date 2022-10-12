@@ -38,19 +38,6 @@ create table app_user_role (
         references app_role(role_id)
 );
 
-insert into app_role (role_name) values
-    ('JOBSEEKER'),
-    ('EMPLOYER'),
-    ('ADMIN');
-        
-    insert into app_user values (1, "jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", 0);
-    
-    insert into app_user_info 
-values
-( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845", 1);
-    
-    insert into app_user_role values (1 , 1);
-
 create table education (
     education_id 	int primary key auto_increment,
     school_name 	varchar(50) not null,
@@ -74,9 +61,6 @@ create table skill (
 create table resume_app (
 	resume_id 		int primary key auto_increment,
     template_id 	int not null,
--- 	education_id	int not null,
---     work_history_id int not null,
---     skill_id		int not null,
     user_id			int not null,
 	info_id 		int not null,
     constraint fk_resume_app_user_info
@@ -85,15 +69,6 @@ create table resume_app (
 	constraint fk_resume_user_id
 		foreign key (user_id)
 		references app_user(user_id)
-	-- constraint fk_resume_education_id
--- 		foreign key (education_id)
--- 		references education(education_id),
---     constraint fk_resume_work_id
--- 		foreign key (work_history_id)
--- 		references work_history(work_history_id),
---     constraint fk_resume_skill_id
--- 		foreign key (skill_id)
--- 		references skill(skill_id),
 );
 
 create table resume_education (
@@ -135,3 +110,16 @@ create table resume_skill (
 	constraint pk_resume_education
         primary key (skill_id, resume_id)
 );
+
+insert into app_role (role_name) values
+    ('JOBSEEKER'),
+    ('EMPLOYER'),
+    ('ADMIN');
+        
+    insert into app_user values (1, "jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", 0);
+    
+    insert into app_user_info 
+values
+( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845", 1);
+    
+    insert into app_user_role values (1 , 1);
