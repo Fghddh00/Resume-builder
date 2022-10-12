@@ -22,8 +22,4 @@ public class EducationController {
         return service.findAll();
     }
 
-    @GetMapping("/{educationId}")
-    public Education findById(@PathVariable int educationId) {
-        return service.findById(educationId);
-    }
 }

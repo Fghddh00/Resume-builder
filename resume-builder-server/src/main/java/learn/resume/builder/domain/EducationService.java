@@ -16,5 +16,5 @@ public class EducationService {
     public List<Education> findAll() {
         return repository.findAll();
     }
-    
+
 }

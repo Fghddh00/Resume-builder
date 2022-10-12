@@ -22,8 +22,4 @@ public class SkillController {
         return service.findAll();
     }
 
-    @GetMapping("/{skillId}")
-    public Skill findById(@PathVariable int skillId) {
-        return service.findById(skillId);
-    }
 }
