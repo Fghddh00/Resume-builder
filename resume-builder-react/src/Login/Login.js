@@ -1,6 +1,6 @@
-import {Link, useHistory} from 'react-router-dom';
+import { Link, useHistory} from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import { Button } from 'react-foundation';
+import { Button,Colors } from 'react-foundation';
 import { useState } from 'react';
 import ErrorMessages from '../ErrorMessages/ErrorMessages';
 
@@ -27,20 +27,17 @@ function Login(props){
         })
         .then( async response => {
             if( response.status === 200 ){
-                return response.json(); //if we had just returned the raw token, we would have to do .text()
+                return response.json(); 
             }else if(response.status === 403){ 
                 setErrors(["Username/Password incorrect"]);
             } else {
-                //TODO: add Error component and display problem
+               
                 console.log("fail")
                 setErrors( await response.json() );
             }
         } )
         .then( jwtContainer => {
-            //what do we do here???
-            //TODO: store token
-            //TODO: decode token to get object of all claims
-            //TODO: store the claims
+            
 
             const jwt = jwtContainer.jwt_token;
             const claimsObject = jwtDecode( jwt );
@@ -69,11 +66,14 @@ function Login(props){
                 <input id="password" name="password" type="password" className="form-control"/>
                 </div>
 
-                <div className="text-right">
-                    <Button className="btn btn-primary ">Log In</Button>
-                    <Link to="/" className="btn btn-danger">Cancel</Link>
+                <div >
+                    <Button >Log In</Button>
+                    <Link to="/">
+                        <Button color={Colors.ALERT}>Cancel</Button> 
+                    </Link>
                 </div>
             </form>
+            <Link to="/create_account"> Create an account</Link>
             <ErrorMessages errorList= {errors} />
         </div>
     );

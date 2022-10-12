@@ -1,4 +1,5 @@
 
+import { useContext } from "react";
 import {
   
   TopBar,
@@ -13,9 +14,18 @@ import {
   Sizes,
   Button,
 } from "react-foundation";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import AuthContext from "../AuthContext";
 
-function NavigationBar() {
+function NavigationBar(props) {
+  const loginInfo = useContext(AuthContext);
+  const history = useHistory();
+
+  function logoutHandler(){
+        props.setLoginInfo(null);
+        history.push( "/" );
+      }
+
   return (
     <TopBar>
       <TopBarLeft className="my-top-bar-right">
@@ -23,18 +33,22 @@ function NavigationBar() {
           {/* make it have state so it can say log in or log out maybe*/}
           <Link to="/" > Home </Link>
 
-            {/* Hidden while logged out */}
-          <MenuItem isHidden>
-            <a>View Resume</a>
+           {loginInfo ? 
+          <MenuItem >
+            <Link to="/viewResume">View Resume</Link>
           </MenuItem>
+          : null
+          }
 
 
         </Menu>
       </TopBarLeft>
 
       <TopBarRight className="my-top-bar-right">
+      
         <Menu>
-          <MenuText>Build That Resume!!</MenuText>
+        {loginInfo ? <Button onClick={logoutHandler} className="btn btn-outline-success my-2 my-sm-0">Log Out {loginInfo.claims.sub}</Button> :
+                    <Link className="btn btn-outline-success my-2 my-sm-0" to="/login" >Log In</Link>}
           <MenuItem>
             <a href="https://www.linkedin.com/company/genesis10/" >LinkedIn</a>
           </MenuItem>
