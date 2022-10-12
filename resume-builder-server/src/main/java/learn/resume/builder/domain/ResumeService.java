@@ -4,6 +4,7 @@ import learn.resume.builder.data.EducationRepo;
 import learn.resume.builder.data.ResumeRepo;
 import learn.resume.builder.data.SkillRepo;
 import learn.resume.builder.data.WorkHistoryRepository;
+import learn.resume.builder.models.Education;
 import learn.resume.builder.models.Resume;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,14 @@ public class ResumeService {
 
     public List<Resume> findAll() {
         return resumeRepo.findAll();
+    }
+
+    public Resume findById(int resumeId) {
+        Resume toHydrate = resumeRepo.getById(resumeId);
+
+        if (toHydrate != null){
+            List<Education> educationList = educationRepo.
+        }
+
     }
 }

@@ -2,10 +2,9 @@ package learn.resume.builder.controller;
 
 import learn.resume.builder.domain.ResumeService;
 import learn.resume.builder.models.Resume;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +22,16 @@ public class ResumeController {
     @GetMapping
     public List<Resume> findAll(){
         return service.findAll();
+    }
+
+    @GetMapping("/{resumeId}")
+    public ResponseEntity<Resume> findById(@PathVariable int resumeId){
+        Resume resume = service.findById(resumeId);
+
+        if (resume == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(resume);
     }
 
 

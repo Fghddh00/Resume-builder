@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ResumeRepo {
     List<Resume> findAll();
+
+    Resume getById(int resumeId);
 }
