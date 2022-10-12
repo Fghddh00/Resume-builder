@@ -6,7 +6,6 @@ import CreateAccount from "./CreateAccount/CreateAccount";
 import Login from "./Login/Login";
 import { useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
-import PersonalWidgetDashboard from "./PersonalWidgetDashboard/PersonalWidgetDashboard";
 import ViewResume from "./ViewResume/ViewResume";
 import jwtDecode from "jwt-decode";
 import NotFound from "./NotFound/NotFound";

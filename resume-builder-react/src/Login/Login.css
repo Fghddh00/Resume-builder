@@ -1,11 +1,10 @@
-.login { 
-  padding: 15px 25px;
-  cursor: pointer;
-  border-radius: 50px;
+.container{
+    margin-top: 100px;
+    padding: 100px ;
 }
 
 .form-group{
-    background: hsl(0deg 0% 100%);
+        background: hsl(0deg 0% 100%);
 		box-shadow: 0 0 2em hsl(231deg 62% 94%);
 		padding: 1em;
 		display: flex;
@@ -14,9 +13,16 @@
 		border-radius: 20px;
 		color: hsl(0deg 0% 30%);
 		margin-top: -3em;
+    
 }
 
-.container{
-    margin-top: 100px;
-    padding: 100px ;
-}
+.login { 
+    padding: 15px 25px;
+    cursor: pointer;
+    border-radius: 50px;
+    
+  }
+
+body {
+    background-color:#9DC88D ;
+  }
