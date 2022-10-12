@@ -2,12 +2,17 @@ package learn.resume.builder.domain;
 
 import learn.resume.builder.data.WorkHistoryRepository;
 import learn.resume.builder.models.WorkHistory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
 
+
+@Service
 public class WorkHistoryService {
 
+    @Autowired
     private final WorkHistoryRepository repository;
 
     public WorkHistoryService(WorkHistoryRepository repository) {

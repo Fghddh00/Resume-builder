@@ -1,17 +1,23 @@
 package learn.resume.builder.data;
 
 import learn.resume.builder.models.WorkHistory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 
+
+
+@Repository
 public class WorkHistoryDbRepository implements WorkHistoryRepository{
 
+    @Autowired
     private final JdbcTemplate jdbcTemplate;
 
     public WorkHistoryDbRepository(JdbcTemplate jdbcTemplate) {
