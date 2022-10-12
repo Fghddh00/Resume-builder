@@ -111,15 +111,65 @@ create table resume_skill (
         primary key (skill_id, resume_id)
 );
 
-insert into app_role (role_name) values
-    ('JOBSEEKER'),
-    ('EMPLOYER'),
-    ('ADMIN');
-        
+	delete from resume_skill;
+    alter table resume_skill auto_increment = 1;
+    delete from resume_work_history;
+    alter table resume_work_history auto_increment = 1;
+	delete from resume_education;
+    alter table resume_education auto_increment = 1;
+    delete from resume_work_history;
+    alter table resume_work_history auto_increment = 1;
+    delete from resume_app;
+    alter table resume_app auto_increment = 1;
+    delete from skill;
+    alter table skill auto_increment = 1;
+    delete from work_history;
+    alter table work_history auto_increment = 1;
+    delete from education;
+    alter table education auto_increment = 1;
+    delete from app_user_role;
+    alter table app_user_role auto_increment = 1;
+    delete from app_user_info;
+    alter table app_user_info auto_increment = 1;
+	delete from app_user;
+    alter table app_user auto_increment = 1;
+	delete from app_role;
+    alter table app_role auto_increment = 1;
+    
+    insert into app_role values (1, "Job Seeker");
+    
     insert into app_user values (1, "jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", 0);
     
     insert into app_user_info 
-values
-( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845");
+	values
+	( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845");
     
     insert into app_user_role values (1 , 1);
+    
+    
+    insert into education values (1, "College", "Bachelors");
+    
+    insert into work_history values 
+    (1, "Singer", '2010-06-16', '2010-10-16', "I sing and won American Idol"),
+	(2, "Dancer", '2010-11-16', '2010-12-16', "I dance and I am a ballerina");
+    
+    insert into skill values 
+    (1, "sing"),
+    (2, "dance"),
+    (3, "cook");
+    
+    insert into resume_app 
+    values
+    (1, 1, 1, 1);
+    
+    insert into resume_education
+    values
+    (1,1);
+    
+	insert into resume_work_history
+    values
+    (1,1);
+    
+    insert into resume_skill
+    values
+    (1,1);
