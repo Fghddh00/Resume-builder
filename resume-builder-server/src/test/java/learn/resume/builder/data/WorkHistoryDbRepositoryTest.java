@@ -12,7 +12,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+<<<<<<< HEAD
 public class WorkHistoryDbRepositoryTest {
+=======
+class WorkHistoryDbRepositoryTest {
+>>>>>>> 727fac340ffaba865cd682d548b8f9b20921243c
     @Autowired
     WorkHistoryDbRepository repository;
 
@@ -29,8 +33,7 @@ public class WorkHistoryDbRepositoryTest {
         List<WorkHistory> actual = repository.findAll();
 
         assertNotNull(actual);
-        assertTrue(actual.size() >= 3);
-
+        assertTrue(actual.size() >= 2);
     }
 
 }

@@ -2,6 +2,7 @@ package learn.resume.builder.data;
 
 import learn.resume.builder.models.AppUserInfo;
 import learn.resume.builder.models.Education;
+import learn.resume.builder.models.Skill;
 
 import java.util.List;
 

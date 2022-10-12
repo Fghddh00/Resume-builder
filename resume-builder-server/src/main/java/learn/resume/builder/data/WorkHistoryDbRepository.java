@@ -33,6 +33,14 @@ public class WorkHistoryDbRepository implements WorkHistoryRepository{
     }
 
     @Override
+    public List<WorkHistory> getWorkHistoryByResumeId(int resumeId) {
+        return jdbcTemplate.query("select work_history.*\n" +
+                "from work_history \n" +
+                "inner join resume_work_history on work_history.work_history_id = resume_work_history.work_history_id\n" +
+                "where resume_id = ?;", new WorkHistoryMapper(), resumeId);
+    }
+
+    @Override
     public WorkHistory add(WorkHistory workHistory) {
 
 //        job_title 			varchar(50) not null,

@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import { Button, Cell, Colors, Grid, GridContainer, InputTypes, Label } from "react-foundation";
 import { Link, useHistory } from "react-router-dom";
 import ErrorMessages from "../ErrorMessages/ErrorMessages";
+import './CreateAccount.css'; 
 
 function CreateAccount() {
     const history = useHistory();
@@ -54,21 +55,23 @@ function CreateAccount() {
   return (
     <div>
       <h1>Create Account</h1>
-      <GridContainer>
+      <GridContainer className="form-group">
         
        <form onSubmit={handleSubmit}>
-        <Grid>
+        <Grid >
           <Cell medium={5}>  
-            <label htmlFor="firstName">First Name </label>
-              <input className="half-form" type="text" placeholder="name"  name="firstName" onChange={inputChangeHandler}/>
+            <label htmlFor="firstName" >First Name 
+              <input  type="text" placeholder="name"  name="firstName" onChange={inputChangeHandler}/>
+              </label>
           </Cell>
           <Cell medium={6} offsetOnMedium={1}>
-            <label>  Last Name </label>
-              <input className="half-form" type="text" placeholder="name" name="lastName" onChange={inputChangeHandler}/>
+            <label >  Last Name 
+              <input  type="text" placeholder="name" name="lastName" onChange={inputChangeHandler}/>
+              </label>
           </Cell>
 
           <Cell>
-            <label>   Address
+            <label >   Address
               <input type="text" placeholder="Street Address" name="streetAddress" onChange={inputChangeHandler}/>
               <input type="text" placeholder="Street Address Line 2" name="streetAddress2" onChange={inputChangeHandler}/>
             </label>
@@ -161,16 +164,19 @@ function CreateAccount() {
             </Cell>
         </Grid>
         <div>
-        <Button>Submit</Button> 
+        <Button className="button">Submit</Button> 
         <Link to="/">
-        <Button color={Colors.ALERT}>Cancel</Button> 
+        <Button color={Colors.ALERT} className="button">Cancel</Button> 
         </Link>
+        <Link to="/login"> Already Have an account? Click here to login</Link>
         </div>
         </form>
         <ErrorMessages errorList= {errors} />
+
+        
       </GridContainer>
 
-      <Link to="/login"> Already Have an account? Click here to login</Link>
+      
     </div>
   );
 }

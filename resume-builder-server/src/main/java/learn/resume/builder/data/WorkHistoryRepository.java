@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface WorkHistoryRepository {
     List<WorkHistory> findAll();
+
+    List<WorkHistory> getWorkHistoryByResumeId(int resumeId);
+
     WorkHistory add(WorkHistory workHistory);
 }

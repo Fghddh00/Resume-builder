@@ -21,4 +21,29 @@ public class SkillService {
         return repository.findAll();
     }
 
+    public Result<Skill> add (Skill skill){
+        Result<Skill> result = validate(skill);
+        if (!result.isSuccess()) {
+            return result;
+        }
+        if (skill.getSkillId() != 0) {
+            result.addMessage("skillId cannot be set for `add` operation", ResultType.INVALID);
+            return result;
+        }
+        skill = repository.add(skill);
+        result.setPayload(skill);
+        return result;
+    }
+    private Result<Skill> validate(Skill skill) {
+        Result<Skill> result = new Result<>();
+        if (skill == null) {
+            result.addMessage("skill cannot be null", ResultType.INVALID);
+            return result;
+        }
+        if (skill.getSkillName() == null || skill.getSkillName().isBlank()){
+            result.addMessage("skill name is required", ResultType.INVALID);
+        }
+        return result;
+    }
+
 }
