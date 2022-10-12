@@ -23,7 +23,7 @@ create table app_user_info (
     address 		varchar(200) null,
     phone_number 	varchar(11) not null,
 	user_id 		int not null,
-    constraint fk_app_user_role_user_id
+    constraint fk_app_user_user_info
         foreign key (user_id)
         references app_user(user_id)
 );
