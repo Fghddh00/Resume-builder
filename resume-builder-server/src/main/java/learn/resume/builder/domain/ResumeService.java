@@ -17,8 +17,14 @@ public class ResumeService {
     private final EducationRepo educationRepo;
     private final ResumeRepo resumeRepo;
 
+    public ResumeService(WorkHistoryRepository workHistoryRepository, SkillRepo skillRepo, EducationRepo educationRepo, ResumeRepo resumeRepo) {
+        this.workHistoryRepository = workHistoryRepository;
+        this.skillRepo = skillRepo;
+        this.educationRepo = educationRepo;
+        this.resumeRepo = resumeRepo;
+    }
 
     public List<Resume> findAll() {
-        throw new UnsupportedOperationException();
+        return resumeRepo.findAll();
     }
 }
