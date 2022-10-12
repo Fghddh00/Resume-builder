@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode';
 import { Button,Colors } from 'react-foundation';
 import { useState } from 'react';
 import ErrorMessages from '../ErrorMessages/ErrorMessages';
+import "./Login.css";
 
 function Login(props){
 
@@ -57,19 +58,21 @@ function Login(props){
     return (
         <div className="container">
             <form onSubmit={loginHandler}>
+
                 <div className="form-group">
                 <label htmlFor="username">User Name</label>
-                <input id="username" name="username" className="form-control"/>
+                <input id="username" name="username" type="text" className="form-control"/>
                 </div>
+
                 <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input id="password" name="password" type="password" className="form-control"/>
                 </div>
 
                 <div >
-                    <Button >Log In</Button>
+                    <Button className='login'>Log In</Button>
                     <Link to="/">
-                        <Button color={Colors.ALERT}>Cancel</Button> 
+                        <Button className='login' color={Colors.ALERT}>Cancel</Button> 
                     </Link>
                 </div>
             </form>

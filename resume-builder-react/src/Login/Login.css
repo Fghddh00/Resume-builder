@@ -1,0 +1,22 @@
+.login { 
+  padding: 15px 25px;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.form-group{
+    background: hsl(0deg 0% 100%);
+		box-shadow: 0 0 2em hsl(231deg 62% 94%);
+		padding: 1em;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+		border-radius: 20px;
+		color: hsl(0deg 0% 30%);
+		margin-top: -3em;
+}
+
+.container{
+    margin-top: 100px;
+    padding: 100px ;
+}

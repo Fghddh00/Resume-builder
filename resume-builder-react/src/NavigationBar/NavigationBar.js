@@ -1,21 +1,16 @@
 
 import { useContext } from "react";
 import {
-  
   TopBar,
   Menu,
   TopBarLeft,
   TopBarRight,
   MenuItem,
-  MenuText,
-  ResponsiveNavigation,
-  GridContainer,
-  Grid,
-  Sizes,
   Button,
 } from "react-foundation";
 import { Link, useHistory } from "react-router-dom";
 import AuthContext from "../AuthContext";
+import "./NavigationBar.css";
 
 function NavigationBar(props) {
   const loginInfo = useContext(AuthContext);
@@ -48,16 +43,18 @@ function NavigationBar(props) {
       
         <Menu>
         {loginInfo ? <Button onClick={logoutHandler} className="btn btn-outline-success my-2 my-sm-0">Log Out {loginInfo.claims.sub}</Button> :
-                    <Link className="btn btn-outline-success my-2 my-sm-0" to="/login" >Log In</Link>}
+                    <Link className="login" to="/login" >Log In</Link>}
+          
           <MenuItem>
-            <a href="https://www.linkedin.com/company/genesis10/" >LinkedIn</a>
+            <a className="links" href="https://www.linkedin.com/company/genesis10/" >LinkedIn</a>
           </MenuItem>
           <MenuItem>
-            <a href="https://www.facebook.com/Genesis10Page">FB</a>
+            <a className="links" href="https://www.facebook.com/Genesis10Page">FB</a>
           </MenuItem>
           <MenuItem>
-            <a href="https://twitter.com/Genesis10Corp">Twitter</a>
+            <a className="links" href="https://twitter.com/Genesis10Corp">Twitter</a>
           </MenuItem>
+         
         </Menu>
       </TopBarRight>
     </TopBar>
