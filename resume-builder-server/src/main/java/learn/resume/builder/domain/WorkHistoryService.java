@@ -1,12 +1,13 @@
 package learn.resume.builder.domain;
 
 import learn.resume.builder.data.WorkHistoryRepository;
+import learn.resume.builder.models.Skill;
 import learn.resume.builder.models.WorkHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-
+import java.util.List;
 
 
 @Service
@@ -19,7 +20,9 @@ public class WorkHistoryService {
         this.repository = repository;
     }
 
-
+    public List<WorkHistory> findAll() {
+        return repository.findAll();
+    }
     public Result<WorkHistory> addWorkHistory(WorkHistory workHistory) {
         Result<WorkHistory> result = validate(workHistory);
 

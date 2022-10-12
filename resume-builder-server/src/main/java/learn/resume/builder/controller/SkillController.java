@@ -3,6 +3,7 @@ package learn.resume.builder.controller;
 import learn.resume.builder.domain.SkillService;
 import learn.resume.builder.models.Education;
 import learn.resume.builder.models.Skill;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequestMapping("/api/skill")
 public class SkillController {
 
+    @Autowired
     private final SkillService service;
 
     public SkillController(SkillService service) {

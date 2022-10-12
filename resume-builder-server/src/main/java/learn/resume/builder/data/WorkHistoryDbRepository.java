@@ -1,5 +1,7 @@
 package learn.resume.builder.data;
 
+import learn.resume.builder.data.mapper.SkillMapper;
+import learn.resume.builder.data.mapper.WorkHistoryMapper;
 import learn.resume.builder.models.WorkHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,8 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-
-
+import java.util.List;
 
 
 @Repository
@@ -22,6 +23,13 @@ public class WorkHistoryDbRepository implements WorkHistoryRepository{
 
     public WorkHistoryDbRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<WorkHistory> findAll() {
+        final String sql = "select work_history_id, job_title, start_date, end_date, job_description\n" +
+                "from work_history;";
+        return jdbcTemplate.query(sql, new WorkHistoryMapper());
     }
 
     @Override

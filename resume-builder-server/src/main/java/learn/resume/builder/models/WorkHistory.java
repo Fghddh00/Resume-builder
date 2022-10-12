@@ -22,6 +22,10 @@ public class WorkHistory {
         this.jobDescription = jobDescription;
     }
 
+    public WorkHistory(){
+
+    }
+
     public List<Resume> getResumes() {
         return resumes;
     }
