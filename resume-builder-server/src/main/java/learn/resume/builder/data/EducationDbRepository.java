@@ -22,4 +22,9 @@ public class EducationDbRepository implements EducationRepo {
         return jdbcTemplate.query(sql, new EducationMapper());
     }
 
+    @Override
+    public Education add(Education education) {
+        throw new UnsupportedOperationException();
+    }
+
 }

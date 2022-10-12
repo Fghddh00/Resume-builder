@@ -18,4 +18,16 @@ public class EducationService {
         return repository.findAll();
     }
 
+    private Result<Education> validate(Education education) {
+        Result<Education> result = new Result<>();
+        if (education == null) {
+            result.addMessage("education cannot be null", ResultType.INVALID);
+            return result;
+        }
+
+
+
+        return result;
+    }
+
 }

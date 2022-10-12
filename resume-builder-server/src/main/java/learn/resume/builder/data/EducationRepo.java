@@ -7,4 +7,5 @@ import java.util.List;
 public interface EducationRepo {
     List<Education> findAll();
 
+    Education add(Education education);
 }

@@ -8,4 +8,6 @@ public interface SkillRepo {
 
     List<Skill> findAll();
 
+    Skill add(Skill skill);
+
 }

@@ -25,4 +25,9 @@ public class SkillDbRepository implements SkillRepo {
         return jdbcTemplate.query(sql, new SkillMapper());
     }
 
+    @Override
+    public Skill add(Skill skill) {
+        throw new UnsupportedOperationException();
+    }
+
 }
