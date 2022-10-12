@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
-@RequestMapping("/view_resume")
+@RequestMapping("/api/skill")
 public class SkillController {
 
     private final SkillService service;
