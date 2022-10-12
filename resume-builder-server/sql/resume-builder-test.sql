@@ -157,7 +157,7 @@ begin
     
     insert into work_history values 
     (1, "Singer", '2010-06-16', '2010-10-16', "I sing and won American Idol"),
-	(1, "Dancer", '2010-11-16', '2010-12-16', "I dance and I am a ballerina");
+	(2, "Dancer", '2010-11-16', '2010-12-16', "I dance and I am a ballerina");
     
     insert into skill values 
     (1, "sing"),
@@ -183,4 +183,4 @@ begin
 end //
 delimiter ;
     
-    
+CALL set_known_good_state();
