@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import NavigationBar from "./NavigationBar/NavigationBar";
 import Homepage from "./Homepage/Homepage";
 import CreateAccount from "./CreateAccount/CreateAccount";
@@ -28,7 +28,7 @@ function App() {
               <Login setLoginInfo={setLoginInfo} />
             </Route>
             <Route exact path="/viewResume">
-              <ViewResume/>
+              {loginInfo ? <ViewResume/> : <Redirect to="/login"/>}
             </Route>
           </Switch>
         </BrowserRouter>
