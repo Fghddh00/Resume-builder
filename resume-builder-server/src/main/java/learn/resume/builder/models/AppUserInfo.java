@@ -6,4 +6,5 @@ public class AppUserInfo {
     private String firstName;
     private String lastName;
     private String address;
+    private Resume resume;
 }

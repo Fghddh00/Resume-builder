@@ -7,5 +7,4 @@ import java.util.List;
 public interface EducationRepo {
     List<Education> findAll();
 
-    Education findById(int educationId);
 }
