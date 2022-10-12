@@ -1,16 +1,17 @@
-.Homepage {
-    background-color: rgb(146, 92, 130);
-    background-size: "cover";
-    height: 150vh;
-    margin-top: -70px;
-    
-    background-repeat:no-repeat; 
-  }
+
 
 .createAccount {
     width: 1000px;
-    height: 1200px;
+    height: 883px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.homepage { 
+  background: url("https://images.pexels.com/photos/5989925/pexels-photo-5989925.jpeg?cs=srgb&dl=pexels-cottonbro-5989925.jpg&fm=jpg") no-repeat center center fixed;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 

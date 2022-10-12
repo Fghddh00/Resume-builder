@@ -13,7 +13,7 @@ import {
 function Homepage() {
   
     return (
-      <div  className="Homepage">
+      <div  className="homepage">
         <div className='createAccount'>
           <GridContainer>
             <Link size={Sizes.LARGE} to="/create_account" >
