@@ -58,14 +58,14 @@ function Login(props){
     return (
       
         <div className="container">
-            <form onSubmit={loginHandler}>
+            <form onSubmit={loginHandler} className="form-group">
 
-                <div className="form-group">
+                <div >
                 <label htmlFor="username">User Name</label>
                 <input id="username" name="username" type="text" className="form-control"/>
                 </div>
 
-                <div className="form-group">
+                <div >
                 <label htmlFor="password">Password</label>
                 <input id="password" name="password" type="password" className="form-control"/>
                 </div>
@@ -76,9 +76,12 @@ function Login(props){
                         <Button className='login' color={Colors.ALERT}>Cancel</Button> 
                     </Link>
                 </div>
+
+                <Link to="/create_account"> Create an account</Link>
+            
             </form>
-            <Link to="/create_account"> Create an account</Link>
             <ErrorMessages errorList= {errors} />
+            
         </div>
     );
 }

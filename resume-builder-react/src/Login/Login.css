@@ -13,12 +13,14 @@
 		border-radius: 20px;
 		color: hsl(0deg 0% 30%);
 		margin-top: -3em;
+    
 }
 
 .login { 
     padding: 15px 25px;
     cursor: pointer;
     border-radius: 50px;
+    
   }
 
 body {

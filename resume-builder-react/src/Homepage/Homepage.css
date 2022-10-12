@@ -1,11 +1,12 @@
 
 
 .createAccount {
-    width: 1000px;
+    width: 200px;
     height: 883px;
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 .homepage { 
