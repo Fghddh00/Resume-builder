@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 
+
 public class WorkHistoryDbRepository implements WorkHistoryRepository{
 
     private final JdbcTemplate jdbcTemplate;
