@@ -153,16 +153,18 @@ function CreateAccount() {
                 <input type="text" placeholder="Username" name="username" onChange={inputChangeHandler}/>
             </label>
             <label> Password
-                <input type="text" placeholder="Password" name="password" onChange={inputChangeHandler}/>
+                <input type="password" placeholder="Password" name="password" onChange={inputChangeHandler}/>
             </label>
             <label> Confirm Password
-                <input type="text" placeholder="Confirm Password" name="confirmPassword" onChange={inputChangeHandler}/>
+                <input type="password" placeholder="Confirm Password" name="confirmPassword" onChange={inputChangeHandler}/>
             </label>
             </Cell>
         </Grid>
         <div>
         <Button>Submit</Button> 
+        <Link to="/">
         <Button color={Colors.ALERT}>Cancel</Button> 
+        </Link>
         </div>
         </form>
         <ErrorMessages errorList= {errors} />
