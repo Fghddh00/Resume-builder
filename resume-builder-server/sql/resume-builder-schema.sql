@@ -120,6 +120,6 @@ insert into app_role (role_name) values
     
     insert into app_user_info 
 values
-( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845", 1);
+( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845");
     
     insert into app_user_role values (1 , 1);
