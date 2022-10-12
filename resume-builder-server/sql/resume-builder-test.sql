@@ -64,8 +64,8 @@ create table resume_app (
     user_id			int not null,
 	info_id 		int not null,
     constraint fk_resume_app_user_info
-        foreign key (user_info)
-        references app_user_info(user_info),
+        foreign key (info_id)
+        references app_user_info(info_id),
 	constraint fk_resume_user_id
 		foreign key (user_id)
 		references app_user(user_id)
