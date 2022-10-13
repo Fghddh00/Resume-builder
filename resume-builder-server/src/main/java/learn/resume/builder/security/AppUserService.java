@@ -1,6 +1,8 @@
 package learn.resume.builder.security;
 
+import learn.resume.builder.data.AppRoleRepo;
 import learn.resume.builder.data.AppUserRepo;
+import learn.resume.builder.models.AppRole;
 import learn.resume.builder.models.AppUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,11 +16,14 @@ import java.util.List;
 @Service
 public class AppUserService implements UserDetailsService {
     private final AppUserRepo repository;
+    private final AppRoleRepo roleRepo;
     private final PasswordEncoder encoder;
 
     public AppUserService(AppUserRepo repository,
+                          AppRoleRepo roleRepo,
                           PasswordEncoder encoder) {
         this.repository = repository;
+        this.roleRepo = roleRepo;
         this.encoder = encoder;
     }
     @Override
@@ -31,13 +36,14 @@ public class AppUserService implements UserDetailsService {
         return appUser;
     }
 
-    public AppUser create(String username, String password) {
+    public AppUser createJobSeeker(String username, String password) {
         validate(username);
         validatePassword(password);
 
         password = encoder.encode(password);
 
-        AppUser appUser = new AppUser(0, username, password, false, List.of("JOBSEEKER"));
+        AppRole role = roleRepo.findByName("Job Seeker");
+        AppUser appUser = new AppUser(0, username, password, false, List.of(role));
 
         return repository.create(appUser);
     }

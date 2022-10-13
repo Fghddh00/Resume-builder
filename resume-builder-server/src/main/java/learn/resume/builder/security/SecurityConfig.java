@@ -1,5 +1,6 @@
 package learn.resume.builder.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,6 +14,9 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     private final JwtConverter converter;
 
+    @Autowired
+    private AppUserService service;
+
     public SecurityConfig(JwtConverter converter) {
         this.converter = converter;
     }
@@ -23,10 +27,10 @@ public class SecurityConfig {
         http.cors();
 
         http.authorizeRequests()
-                .antMatchers("/authenticate").permitAll()
-                .antMatchers("/create_account").permitAll()
-                .antMatchers("/refresh_token").authenticated()
-                .antMatchers(HttpMethod.GET, "/api/resume","/api/resume/*" ).hasRole("Job Seeker")
+                .antMatchers("/auth/authenticate").permitAll()
+                .antMatchers("/auth/create").permitAll()
+                .antMatchers("/auth/refresh_token").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/resume/user" ).hasRole("Job Seeker")
 
 
 
@@ -34,7 +38,7 @@ public class SecurityConfig {
                 //denying everything from here
                 .antMatchers("/**").denyAll()
                 .and()
-                .addFilter(new JwtRequestFilter(authenticationManager(authConfig), converter))
+                .addFilter(new JwtRequestFilter(authenticationManager(authConfig), converter, service))
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 

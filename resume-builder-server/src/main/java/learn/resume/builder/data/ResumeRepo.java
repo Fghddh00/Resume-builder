@@ -11,5 +11,5 @@ public interface ResumeRepo {
 
     Resume add(Resume resumeToAdd);
 
-    List<Resume> getResumeByUserId(int userId);
+    List<Resume> getResumesByUser(int userId);
 }

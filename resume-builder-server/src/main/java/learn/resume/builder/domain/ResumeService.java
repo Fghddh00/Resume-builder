@@ -54,10 +54,10 @@ public class ResumeService {
         return toHydrate;
     }
 
-    public Result<List<Resume>> getResumeByUserId(int userId) {
+    public Result<List<Resume>> getResumesByUser(int userId) {
         Result getResult = new Result();
 
-        List<Resume> userResumes = resumeRepo.getResumeByUserId( userId );
+        List<Resume> userResumes = resumeRepo.getResumesByUser( userId );
 
         getResult.setPayload(userResumes );
 

@@ -1,5 +1,7 @@
 package learn.resume.builder.security;
 
+import learn.resume.builder.models.AppUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,9 +16,13 @@ import java.io.IOException;
 public class JwtRequestFilter extends BasicAuthenticationFilter {
     private final JwtConverter converter;
 
-    public JwtRequestFilter(AuthenticationManager authenticationManager, JwtConverter converter) {
+
+    private AppUserService service;
+
+    public JwtRequestFilter(AuthenticationManager authenticationManager, JwtConverter converter, AppUserService service) {
         super(authenticationManager);
         this.converter = converter;
+        this.service = service;
     }
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -30,8 +36,11 @@ public class JwtRequestFilter extends BasicAuthenticationFilter {
             if (user == null) {
                 response.setStatus(403); // Forbidden
             } else {
+
+                UserDetails appUser = service.loadUserByUsername(user.getUsername());
+
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                        user.getUsername(), null, user.getAuthorities());
+                        appUser, null, user.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(token);
             }

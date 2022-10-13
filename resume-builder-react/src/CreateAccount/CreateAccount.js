@@ -12,7 +12,7 @@ function CreateAccount() {
     function handleSubmit( event ){
         event.preventDefault();
 
-        fetch( "http://localhost:8080/create_account", {
+        fetch( "http://localhost:8080/auth/create", {
             method: "POST",
             body: JSON.stringify(account)
             ,

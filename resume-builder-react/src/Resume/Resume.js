@@ -21,9 +21,9 @@ function Resume(props) {
 
   return (
     <tr>
-      <td>Content Goes Here</td>
+      <td>{props.resumeId}</td>
       <td>
-      {props.resumeData}
+      {props.name}
       </td>
       <td className="publicButton">
         <div className="switch">

@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.ValidationException;
@@ -22,10 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/auth")
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtConverter converter;
     private final AppUserService appUserService;
+
 
     public AuthController(AuthenticationManager authenticationManager,
                           JwtConverter converter,
@@ -70,8 +73,8 @@ public class AuthController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    @PostMapping("/create_account")
-    public ResponseEntity<?> createAccount(@RequestBody Map<String, String> credentials) {
+    @PostMapping("/create")
+    public ResponseEntity<?> createJobSeekerAccount(@RequestBody Map<String, String> credentials) {
         AppUser appUser = null;
 
         try {
@@ -79,7 +82,7 @@ public class AuthController {
             String password = credentials.get("password");
 
 
-            appUser = appUserService.create(username, password);
+            appUser = appUserService.createJobSeeker(username, password);
         } catch (ValidationException ex) {
             return new ResponseEntity<>(List.of(ex.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (DuplicateKeyException ex) {

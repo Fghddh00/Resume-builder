@@ -1,7 +1,9 @@
 package learn.resume.builder.data;
 
+import learn.resume.builder.data.mapper.AppRoleMapper;
 import learn.resume.builder.data.mapper.AppUserMapper;
 import learn.resume.builder.domain.Result;
+import learn.resume.builder.models.AppRole;
 import learn.resume.builder.models.AppUser;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -23,7 +25,7 @@ public class AppUserRepo {
     }
 
     public AppUser findByUsername(String username) {
-        List<String> roles = getRolesByUsername(username);
+        List<AppRole> roles = getRolesByUsername(username);
         final String sql = "select user_id, username, password_hash, disabled"
                 + " from app_user"
                 + " where username = ? ;";
@@ -78,12 +80,12 @@ public class AppUserRepo {
         }
     }
 
-    private List<String> getRolesByUsername(String username) {
-        final String sql = "select r.role_name"
+    private List<AppRole> getRolesByUsername(String username) {
+        final String sql = "select r.role_name, r.role_id"
                 + " from app_user_role ur"
                 + " inner join app_role r on ur.role_id = r.role_id"
                 + " inner join app_user au on ur.user_id = au.user_id"
                 + " where au.username = ?;";
-        return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("role_name"), username);
+        return jdbcTemplate.query(sql, new AppRoleMapper(), username);
     }
 }

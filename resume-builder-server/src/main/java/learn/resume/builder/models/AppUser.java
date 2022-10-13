@@ -17,14 +17,14 @@ public class AppUser extends User {
     private List<AppRole> userRoles;
 
     public AppUser(int userId, String username, String password,
-                   boolean disabled, List<String> roles) {
+                   boolean disabled, List<AppRole> roles) {
         super(username, password, !disabled,
                 true, true, true,
                 convertRolesToAuthorities(roles));
         this.userId = userId;
+        this.userRoles = roles;
     }
 
-    private List<String> roles = new ArrayList<>();
 
     public int getUserId() {
         return userId;
@@ -42,15 +42,15 @@ public class AppUser extends User {
         this.userRoles = userRoles;
     }
 
-    public static List<GrantedAuthority> convertRolesToAuthorities(List<String> roles) {
+    public static List<GrantedAuthority> convertRolesToAuthorities(List<AppRole> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>(roles.size());
-        for (String role : roles) {
-            Assert.isTrue(!role.startsWith(AUTHORITY_PREFIX),
+        for (AppRole role : roles) {
+            Assert.isTrue(!role.getRoleName().startsWith(AUTHORITY_PREFIX),
                     () ->
                             String.
                                     format("%s cannot start with %s (it is automatically added)",
                                             role, AUTHORITY_PREFIX));
-            authorities.add(new SimpleGrantedAuthority(AUTHORITY_PREFIX + role));
+            authorities.add(new SimpleGrantedAuthority(AUTHORITY_PREFIX + role.getRoleName()));
         }
         return authorities;
     }

@@ -15,7 +15,7 @@ function ViewResume() {
     } else {
         const userId = userData.claims.jti;
         const jwt = userData.jwt;
-      fetch( "http://localhost:8080/api/resume/" + 1,
+      fetch( "http://localhost:8080/api/resume/user",
       {headers: {
         Authorization: `Bearer ${jwt}`
       }
@@ -51,8 +51,10 @@ function ViewResume() {
         <tbody>
         {resumes.map((c) => (
           <Resume
-            resumeData={c}
-            // onResumeDeleted={onResumeDeleted}
+            key = {c.resumeId}
+            name={c.userInfo.firstName}
+            resumeId={c.resumeId}
+            //onResumeDeleted={onResumeDeleted}
           />
         ))}
         </tbody>

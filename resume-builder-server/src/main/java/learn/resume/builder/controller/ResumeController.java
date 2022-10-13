@@ -27,8 +27,8 @@ public class ResumeController {
         return service.findAll();
     }
 
-    @GetMapping("/resume/{userId}")
-    public ResponseEntity getResumeByUserId(@PathVariable int userId){
+    @GetMapping("/user")
+    public ResponseEntity getResumeByUserId(){
         AppUser currentUser = (AppUser) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
@@ -37,14 +37,11 @@ public class ResumeController {
         boolean jobSeeker = currentUser.getUserRoles()
                 .stream().anyMatch(r->r.getRoleName().equals("Job Seeker"));
 
-        if (currentUser.getUserId() != userId
-        && !jobSeeker){
-            return new ResponseEntity(HttpStatus.FORBIDDEN);
-        }
 
-        Result<List<Resume>> getResult = service.getResumeByUserId(userId);
+        Result<List<Resume>> getResult = service.getResumesByUser(currentUser.getUserId());
         if(getResult.isSuccess()){
             List<Resume> userResumes = getResult.getPayload();
+
             return ResponseEntity.ok(userResumes);
         } else{
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -53,15 +50,15 @@ public class ResumeController {
     }
 
 
-    @GetMapping("/{resumeId}")
-    public ResponseEntity<Resume> findById(@PathVariable int resumeId){
-        Resume resume = service.findById(resumeId);
-
-        if (resume == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return ResponseEntity.ok(resume);
-    }
+//    @GetMapping("/{resumeId}")
+//    public ResponseEntity<Resume> findById(@PathVariable int resumeId){
+//        Resume resume = service.findById(resumeId);
+//
+//        if (resume == null){
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return ResponseEntity.ok(resume);
+//    }
 
 
     @PostMapping
