@@ -44,7 +44,7 @@ class ResumeDbRepoTest {
         assertEquals(1, actual.getTemplateId());
     }
 
-<<<<<<< HEAD
+
 //    @Test
 //    void shouldAddResume(){
 //
@@ -72,7 +72,7 @@ class ResumeDbRepoTest {
 //        assertNotNull(actual);
 //        assertEquals(3, actual.getResumeId());
 //    }
-=======
+
     @Test
     void shouldGetResumeByUserId(){
         List<Resume> actual = resumeRepo.getResumesByUser(1);
@@ -108,6 +108,4 @@ class ResumeDbRepoTest {
         assertNotNull(actual);
         assertEquals(3, actual.getResumeId());
     }
->>>>>>> 2290732d79310d6f426680a88b0feb53950e670d
-
 }
