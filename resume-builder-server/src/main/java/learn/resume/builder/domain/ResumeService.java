@@ -6,6 +6,8 @@ import learn.resume.builder.data.SkillRepo;
 import learn.resume.builder.data.WorkHistoryRepository;
 import learn.resume.builder.models.Education;
 import learn.resume.builder.models.Resume;
+import learn.resume.builder.models.Skill;
+import learn.resume.builder.models.WorkHistory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,8 +35,20 @@ public class ResumeService {
         Resume toHydrate = resumeRepo.getById(resumeId);
 
         if (toHydrate != null){
-            List<Education> educationList = educationRepo.
+            List<Education> educationList = educationRepo.getEducationByResumeId(resumeId);
+            toHydrate.setEducations(educationList);
         }
 
+        if (toHydrate != null){
+            List<Skill> skillList = skillRepo.getSkillByResumeId(resumeId);
+            toHydrate.setSkills(skillList);
+        }
+
+        if (toHydrate != null) {
+            List<WorkHistory> workHistoryList = workHistoryRepository.getWorkHistoryByResumeId(resumeId);
+            toHydrate.setWorkHistories(workHistoryList);
+        }
+
+        return toHydrate;
     }
 }

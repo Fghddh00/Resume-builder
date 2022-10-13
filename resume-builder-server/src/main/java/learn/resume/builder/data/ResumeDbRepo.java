@@ -19,9 +19,9 @@ public class ResumeDbRepo implements ResumeRepo{
 
     @Override
     public List<Resume> findAll() {
-        final String sql =
-
-        return jdbcTemplate.query(sql, new ResumeMapper());
+//        final String sql =
+//
+//        return jdbcTemplate.query(sql, new ResumeMapper());
         return null;
     }
 
