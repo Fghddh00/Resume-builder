@@ -11,6 +11,15 @@ public class AppRole {
     private String roleName;
     private List<AppUser> roleUsers;
 
+    public AppRole(){
+
+    }
+
+    public AppRole(int roleId, String roleName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+    }
+
     public int getRoleId() {
         return roleId;
     }

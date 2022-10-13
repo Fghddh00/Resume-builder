@@ -62,9 +62,13 @@ create table resume_app (
 	resume_id 		int primary key auto_increment,
     template_id 	int not null,
 	info_id 		int not null,
+    user_id			int not null,
     constraint fk_resume_app_user_info
         foreign key (info_id)
-        references app_user_info(info_id)
+        references app_user_info(info_id),
+	constraint fk_resume_app_app_user
+        foreign key (uesr_id)
+        references app_user(user_id)
 );
 
 create table resume_education (
@@ -132,7 +136,10 @@ create table resume_skill (
 	delete from app_role;
     alter table app_role auto_increment = 1;
     
-    insert into app_role values (1, "Job Seeker");
+    insert into app_role values     
+    (1, "JOBSEEKER"),
+    (2, "EMPLOYER"),
+    (3, "ADMIN");
     
     insert into app_user values (1, "jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", 0);
     
@@ -156,7 +163,7 @@ create table resume_skill (
     
     insert into resume_app 
     values
-    (1, 1, 1);
+    (1, 1, 1, 1);
     
     insert into resume_education
     values

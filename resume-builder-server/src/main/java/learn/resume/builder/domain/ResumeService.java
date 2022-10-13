@@ -27,6 +27,7 @@ public class ResumeService {
         return resumeRepo.findAll();
     }
 
+
     public Resume findById(int resumeId) {
         Resume toHydrate = resumeRepo.getById(resumeId);
 
@@ -48,6 +49,7 @@ public class ResumeService {
         if (toHydrate != null){
             toHydrate.setUserInfo(infoRepo.findUserByResumeId(resumeId));
         }
+
 
         return toHydrate;
     }

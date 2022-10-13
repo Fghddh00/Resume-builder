@@ -138,7 +138,10 @@ begin
 	delete from app_role;
     alter table app_role auto_increment = 1;
     
-    insert into app_role values (1, "Job Seeker");
+    insert into app_role values 
+    (1, "JOBSEEKER"),
+    (2, "EMPLOYER"),
+    (3, "ADMIN");
     
     insert into app_user values (1, "jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", 0);
     
