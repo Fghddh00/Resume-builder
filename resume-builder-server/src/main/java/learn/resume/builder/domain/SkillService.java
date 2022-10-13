@@ -3,6 +3,7 @@ package learn.resume.builder.domain;
 import learn.resume.builder.data.SkillRepo;
 import learn.resume.builder.models.Education;
 import learn.resume.builder.models.Skill;
+import learn.resume.builder.models.WorkHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +28,21 @@ public class SkillService {
             return result;
         }
         if (skill.getSkillId() != 0) {
-            result.addMessage("skillId cannot be set for `add` operation", ResultType.INVALID);
+            result.addMessage("Skill Id cannot be set for `add` operation", ResultType.INVALID);
             return result;
         }
         skill = repository.add(skill);
         result.setPayload(skill);
+        return result;
+    }
+    public Result deleteById(int skillId) {
+        Result<Skill> result = new Result<>();
+        if (!repository.deleteById(skillId)) {
+            result.addMessage("Skill Id Id was not found", ResultType.NOT_FOUND);
+        }
+        if(result.isSuccess()){
+            repository.deleteById(skillId);
+        }
         return result;
     }
     private Result<Skill> validate(Skill skill) {

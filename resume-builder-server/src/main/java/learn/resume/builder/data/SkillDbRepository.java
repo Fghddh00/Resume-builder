@@ -57,4 +57,12 @@ public class SkillDbRepository implements SkillRepo {
         return skill;
     }
 
+    @Override
+    public boolean deleteById(int skillId) {
+        jdbcTemplate.update("delete from resume_skill where skill_id = ?;"
+            , skillId);
+        return jdbcTemplate.update("delete from skill where skill_id = ?; "
+                , skillId) > 0;
+    }
+
 }

@@ -1,6 +1,8 @@
 package learn.resume.builder.data;
 
+import learn.resume.builder.App;
 import learn.resume.builder.data.mapper.AppUserInfoMapper;
+import learn.resume.builder.data.mapper.EducationMapper;
 import learn.resume.builder.models.AppUserInfo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -21,7 +23,9 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
 
     @Override
     public List<AppUserInfo> findAll() {
-        throw new UnsupportedOperationException();
+        final String sql = "select info_id, email, first_name, last_name, address, phone_number\n" +
+                "from app_user_info;";
+        return jdbcTemplate.query(sql, new AppUserInfoMapper());
     }
 
     @Override
@@ -57,6 +61,12 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
         }
         appUserInfo.setInfoId(keyHolder.getKey().intValue());
         return appUserInfo;
+    }
+
+    @Override
+    public boolean deleteById(int appUserInfoId) {
+        //need help
+       throw new UnsupportedOperationException();
     }
 
 }

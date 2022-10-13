@@ -34,6 +34,16 @@ public class AppUserInfoService {
         result.setPayload(appUserInfo);
         return result;
     }
+    public Result deleteById(int appUserInfoId) {
+        Result<AppUserInfo> result = new Result<>();
+        if (!repository.deleteById(appUserInfoId)) {
+            result.addMessage("App User Info Id Id was not found", ResultType.NOT_FOUND);
+        }
+        if(result.isSuccess()){
+            repository.deleteById(appUserInfoId);
+        }
+        return result;
+    }
     private Result<AppUserInfo> validate(AppUserInfo appUserInfo) {
         Result<AppUserInfo> result = new Result<>();
         if (appUserInfo == null) {
