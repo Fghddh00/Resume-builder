@@ -64,7 +64,23 @@ class SkillDbRepositoryTest {
         List<Skill> actual = repository.getSkillByResumeId(1);
         assertEquals(actual.size(), skill.size());
     }
+    @Test
+    void shouldNotFindSkillByResumeId(){
+        List<Skill> skill = new ArrayList<>();
+        skill.add(new Skill(1, "sing"));
+        skill.add(new Skill(1, "dance"));
 
+        List<Skill> actual = repository.getSkillByResumeId(1);
+        assertNotEquals(actual.size(), skill.size());
+    }
+    @Test
+    void shouldAddSkill(){
+        Skill skill = new Skill();
+        skill.setSkillName("act");
+
+        Skill actual = repository.add(skill);
+        assertEquals(actual.getSkillName(), skill.getSkillName());
+    }
 
 
 }

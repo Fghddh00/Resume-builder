@@ -91,12 +91,12 @@ class ResumeServiceTest {
         roles.add(new AppRole(1, "Job Seeker"));
         roles.add(new AppRole(2, "Employer"));
 
-        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
+//        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
 
         Resume resume = new Resume();
         resume.setResumeId(1);
         resume.setTemplateId(1);
-        resume.setUser(user);
+//        resume.setUser(user);
         resume.setUserInfo(userInfo);
         resume.setSkills(skills);
         resume.setEducations(educations);

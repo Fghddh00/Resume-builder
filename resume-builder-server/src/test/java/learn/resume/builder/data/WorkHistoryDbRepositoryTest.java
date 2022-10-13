@@ -1,5 +1,6 @@
 package learn.resume.builder.data;
 
+import learn.resume.builder.domain.Result;
 import learn.resume.builder.models.Resume;
 import learn.resume.builder.models.WorkHistory;
 import org.junit.jupiter.api.BeforeEach;
@@ -63,6 +64,34 @@ public class WorkHistoryDbRepositoryTest {
 
         List<WorkHistory> actual = repository.getWorkHistoryByResumeId(1);
         assertEquals(actual.size(), workHistory.size());
+    }
+    @Test
+    void shouldNotFindWrongWorkHistoryByResumeId(){
+        List<WorkHistory> workHistory = new ArrayList<>();
+        workHistory.add(new WorkHistory(1, "Singer",
+                LocalDate.of(2010, 06,16),LocalDate.of(2010,10,16),
+                "I sing and won American Idol"));
+        workHistory.add(new WorkHistory(2, "Dancer",
+                LocalDate.of(2011, 06,16),LocalDate.of(2013,10,16),
+                "I dance and won Dancing w/ the Stars"));
+
+        List<WorkHistory> actual = repository.getWorkHistoryByResumeId(1);
+        assertNotEquals(actual.size(), workHistory.size());
+    }
+
+    @Test
+    void shouldAddWorkHistory() {
+        WorkHistory workHistory = new WorkHistory();
+        workHistory.setJobTitle("Title");
+        workHistory.setStartDate(LocalDate.of(2013, 7,19));
+        workHistory.setEndDate(LocalDate.of(2014, 9,19));
+        workHistory.setJobDescription("description");
+
+        WorkHistory actual = repository.add(workHistory);
+        assertEquals(actual.getJobTitle(), workHistory.getJobTitle());
+        assertEquals(actual.getStartDate(), workHistory.getStartDate());
+        assertEquals(actual.getEndDate(), workHistory.getEndDate());
+        assertEquals(actual.getJobDescription(), workHistory.getJobDescription());
     }
 
 }

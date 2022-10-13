@@ -3,8 +3,12 @@ package learn.resume.builder.data;
 import learn.resume.builder.data.mapper.EducationMapper;
 import learn.resume.builder.models.Education;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 @Repository
@@ -32,7 +36,21 @@ public class EducationDbRepository implements EducationRepo {
 
     @Override
     public Education add(Education education) {
-        throw new UnsupportedOperationException();
+        final String sql = "insert into education (school_name, education_level) values (?, ?);";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, education.getSchoolName());
+            ps.setString(2, education.getEducationLevel());
+            return ps;
+        }, keyHolder);
+
+        if (rowsAffected <= 0) {
+            return null;
+        }
+        education.setEducationId(keyHolder.getKey().intValue());
+        return education;
     }
 
 }
