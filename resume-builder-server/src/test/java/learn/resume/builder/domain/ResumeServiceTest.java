@@ -80,10 +80,16 @@ class ResumeServiceTest {
         List<WorkHistory> workHistories = new ArrayList<>();
         workHistories.add(new WorkHistory(1, "Singer", LocalDate.of(2010,6,16), LocalDate.of(2010,10,16), "I sing and won American Idol"));
 
+        List<String> roles = new ArrayList<>();
+        roles.add("Job Seeker");
+        roles.add("Employer");
+
+        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
 
         Resume resume = new Resume();
         resume.setResumeId(1);
         resume.setTemplateId(1);
+        resume.setUser(user);
         resume.setUserInfo(userInfo);
         resume.setSkills(skills);
         resume.setEducations(educations);

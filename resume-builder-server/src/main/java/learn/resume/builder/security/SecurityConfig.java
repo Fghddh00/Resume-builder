@@ -26,7 +26,11 @@ public class SecurityConfig {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/create_account").permitAll()
                 .antMatchers("/refresh_token").authenticated()
+<<<<<<< HEAD
+                .antMatchers(HttpMethod.GET, "/api/resume/*").hasRole("JOBSEEKER")
+=======
                 .antMatchers(HttpMethod.GET, "/api/resume","/api/resume/*" ).hasRole("Job Seeker")
+>>>>>>> ee0d3f6ebad7bbbe63404ae3a71b36e292fec85c
 
 
 
