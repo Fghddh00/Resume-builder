@@ -15,7 +15,7 @@ public class ResumeMapper implements RowMapper<Resume> {
         resume.setResumeId(rs.getInt("resume_id"));
         resume.setTemplateId(rs.getInt("template_id"));
 
-        AppUserMapper appUserMapper = new AppUserMapper();
+//        AppUserMapper appUserMapper = new AppUserMapper();
 
         AppUserInfoMapper appUserInfoMapper = new AppUserInfoMapper();
         resume.setUserInfo(appUserInfoMapper.mapRow(rs, rowNum));
