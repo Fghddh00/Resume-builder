@@ -59,7 +59,7 @@ public class WorkHistoryService {
         if (workHistory.getStartDate().isAfter(LocalDate.now())){
             result.addMessage("start date cannot be after today's date", ResultType.INVALID);
         }
-        if (workHistory.getEndDate().isBefore(LocalDate.now())){
+        if (workHistory.getEndDate().isAfter(LocalDate.now())){
             result.addMessage("end date cannot be before today's date", ResultType.INVALID);
         }
         if (workHistory.getJobDescription() == null || workHistory.getJobDescription().isBlank()){

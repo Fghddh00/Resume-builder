@@ -44,38 +44,7 @@ class ResumeDbRepoTest {
         assertEquals(1, actual.getTemplateId());
     }
 
-<<<<<<< HEAD
 
-//    @Test
-//    void shouldAddResume(){
-//
-//        AppUserInfo userInfo = new AppUserInfo();
-//        userInfo.setInfoId(2);
-//        userInfo.setEmail("test email");
-//        userInfo.setFirstName("testFirst");
-//        userInfo.setLastName("testLast");
-//        userInfo.setAddress("testaddress");
-//        userInfo.setPhoneNumber("123456");
-//
-//        List<String> roles = new ArrayList<>();
-//        roles.add("Job Seeker");
-//        roles.add("Employer");
-//
-//        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
-//
-//        Resume resumeToTest = new Resume();
-//        resumeToTest.setTemplateId(2);
-//        resumeToTest.setUserInfo(userInfo);
-//        resumeToTest.setUser(user);
-//
-//        Resume actual = resumeRepo.add(resumeToTest);
-//
-//        assertNotNull(actual);
-//        assertEquals(3, actual.getResumeId());
-//    }
-
-=======
->>>>>>> cc4f1616839397b033341a44840780ba1a6473b8
     @Test
     void shouldGetResumeByUserId(){
         List<Resume> actual = resumeRepo.getResumesByUser(1);
@@ -111,8 +80,4 @@ class ResumeDbRepoTest {
         assertNotNull(actual);
         assertEquals(3, actual.getResumeId());
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> cc4f1616839397b033341a44840780ba1a6473b8
 }

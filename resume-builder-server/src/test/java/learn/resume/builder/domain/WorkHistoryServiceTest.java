@@ -36,16 +36,16 @@ class WorkHistoryServiceTest {
         assertEquals(2, workHistory.size());
     }
 
-//    @Test
-//    void shouldAddWorkHistory(){
-//        WorkHistory workHistory = new WorkHistory();
-//        workHistory.setJobTitle("Actress");
-//        workHistory.setStartDate(LocalDate.of(2015, 7,19));
-//        workHistory.setEndDate(LocalDate.of(2016, 9,19));
-//        workHistory.setJobDescription("description");
-//
-//        Result<WorkHistory> result = service.addWorkHistory(workHistory);
-//        assertTrue(result.isSuccess());
-//    }
+    @Test
+    void shouldAddWorkHistory(){
+        WorkHistory workHistory = new WorkHistory();
+        workHistory.setJobTitle("Actress");
+        workHistory.setStartDate(LocalDate.of(2015, 7,19));
+        workHistory.setEndDate(LocalDate.of(2016, 9,19));
+        workHistory.setJobDescription("description");
+
+        Result<WorkHistory> result = service.addWorkHistory(workHistory);
+        assertTrue(result.isSuccess());
+    }
 
 }
