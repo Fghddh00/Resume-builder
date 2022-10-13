@@ -8,7 +8,15 @@ public class Education {
     private String educationLevel;
     List<Resume> resumes;
 
+    public Education(int educationId, String schoolName, String educationLevel) {
+        this.educationId = educationId;
+        this.schoolName = schoolName;
+        this.educationLevel = educationLevel;
+    }
 
+    public Education(){
+
+    }
     public int getEducationId() {
         return educationId;
     }

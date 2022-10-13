@@ -61,14 +61,10 @@ create table skill (
 create table resume_app (
 	resume_id 		int primary key auto_increment,
     template_id 	int not null,
-    user_id			int not null,
 	info_id 		int not null,
     constraint fk_resume_app_user_info
         foreign key (info_id)
-        references app_user_info(info_id),
-	constraint fk_resume_user_id
-		foreign key (user_id)
-		references app_user(user_id)
+        references app_user_info(info_id)
 );
 
 
@@ -148,10 +144,10 @@ begin
     
     insert into app_user_info 
 	values
-	( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845");
+	( 1, "jason@gmail.com", "jason", "oh", "testaddress", "123456789"),
+    ( 2, "test email", "testFirst", "testLast", "testAddress", "123456");
     
     insert into app_user_role values (1 , 1);
-    
     
     insert into education values (1, "College", "Bachelors");
     
@@ -166,7 +162,8 @@ begin
     
     insert into resume_app 
     values
-    (1, 1, 1, 1);
+    (1, 1, 1),
+    (2, 1, 1);
     
     insert into resume_education
     values
@@ -179,8 +176,7 @@ begin
     insert into resume_skill
     values
     (1,1);
-
+    
+    
 end //
 delimiter ;
-    
-CALL set_known_good_state();

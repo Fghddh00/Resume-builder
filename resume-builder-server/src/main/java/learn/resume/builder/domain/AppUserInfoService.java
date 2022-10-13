@@ -16,9 +16,11 @@ public class AppUserInfoService {
     public AppUserInfoService(AppUserInfoRepo repository) {
         this.repository = repository;
     }
+
     public List<AppUserInfo> findAll() {
         return repository.findAll();
     }
+
     public Result<AppUserInfo> add (AppUserInfo appUserInfo){
         Result<AppUserInfo> result = validate(appUserInfo);
         if (!result.isSuccess()) {
