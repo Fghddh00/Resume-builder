@@ -37,7 +37,10 @@ public class ResumeDbRepo implements ResumeRepo{
 
     @Override
     public List<Resume> getResumeByUserId(int userId) {
-        return null;
+        return jdbcTemplate.query("select *\n" +
+                "from resume_app\n" +
+                "inner join app_user on app_user.user_id = resume_app.user_id\n" +
+                "where app_user.user_id = ?;", new ResumeMapper(), userId);
     }
 
     @Override
