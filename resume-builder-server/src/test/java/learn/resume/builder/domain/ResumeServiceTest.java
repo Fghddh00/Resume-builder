@@ -46,6 +46,8 @@ class ResumeServiceTest {
 
     @Test
     void shouldFindListOfResumeByUserId(){
+        List<Resume> resumes = new ArrayList<>();
+
 
     }
 
