@@ -16,13 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class WorkHistoryDbRepositoryTest {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 
->>>>>>> 924b25ca88ffc4882f8845295f89712084644be2
->>>>>>> 7f7de94531c608c33275b5ab1d0cd8a54609294e
     @Autowired
     WorkHistoryDbRepository repository;
 
@@ -39,10 +33,7 @@ public class WorkHistoryDbRepositoryTest {
         List<WorkHistory> actual = repository.findAll();
 
         assertNotNull(actual);
-        assertTrue(actual.size() >= 2);
-<<<<<<< HEAD
 
-=======
         WorkHistory w1 = actual.stream()
                 .filter(workHistory -> workHistory.getWorkHistoryId() == 1 )
                 .findFirst().orElse(null);
@@ -72,7 +63,6 @@ public class WorkHistoryDbRepositoryTest {
 
         List<WorkHistory> actual = repository.getWorkHistoryByResumeId(1);
         assertEquals(actual, workHistory);
->>>>>>> 7f7de94531c608c33275b5ab1d0cd8a54609294e
     }
 
 }

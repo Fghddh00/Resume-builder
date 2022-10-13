@@ -1,5 +1,6 @@
 package learn.resume.builder.controller;
 
+import learn.resume.builder.domain.Result;
 import learn.resume.builder.domain.ResumeService;
 import learn.resume.builder.models.Resume;
 import org.springframework.http.HttpStatus;
@@ -34,5 +35,15 @@ public class ResumeController {
         return ResponseEntity.ok(resume);
     }
 
+    @PostMapping
+    public ResponseEntity<Object> addResume(@RequestBody Resume resumeToAdd){
 
+        Result<Resume> result = service.addResume(resumeToAdd);
+
+        if (result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+
+        return ErrorResponse.build(result);
+    }
 }

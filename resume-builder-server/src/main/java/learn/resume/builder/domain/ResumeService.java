@@ -51,4 +51,34 @@ public class ResumeService {
 
         return toHydrate;
     }
+
+    public Result<Resume> addResume(Resume resumeToAdd) {
+        Result<Resume> result = validate(resumeToAdd);
+
+        if (!result.isSuccess()){
+            return result;
+        }
+
+        resumeToAdd = resumeRepo.add(resumeToAdd);
+        result.setPayload(resumeToAdd);
+        return result;
+    }
+
+    private Result<Resume> validate(Resume resumeToAdd) {
+        Result<Resume> result = new Result<>();
+
+        if (resumeToAdd == null){
+            result.addMessage("Resume is null", ResultType.INVALID);
+            return result;
+        }
+
+        if (resumeToAdd.getResumeId() != 0){
+            result.addMessage("resultId cannot be set for add operation", ResultType.INVALID);
+        }
+
+        if (resumeToAdd.getTemplateId() < 1){
+            result.addMessage("Resume Template is required", ResultType.INVALID);
+        }
+        return result;
+    }
 }

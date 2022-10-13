@@ -8,4 +8,6 @@ public interface ResumeRepo {
     List<Resume> findAll();
 
     Resume getById(int resumeId);
+
+    Resume add(Resume resumeToAdd);
 }
