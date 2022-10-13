@@ -43,11 +43,6 @@ public class WorkHistoryDbRepository implements WorkHistoryRepository{
     @Override
     public WorkHistory add(WorkHistory workHistory) {
 
-//        job_title 			varchar(50) not null,
-//                start_date 			date not null,
-//                end_date			date null,
-//                job_description		varchar(2000) not null
-
         final String sql = "insert into work_history (job_title, start_date, end_date, job_description) "
                 + " values (?,?,?,?);";
 
@@ -57,7 +52,7 @@ public class WorkHistoryDbRepository implements WorkHistoryRepository{
             ps.setString(1, workHistory.getJobTitle());
             ps.setDate(2, Date.valueOf(workHistory.getStartDate()));
             ps.setDate(3, workHistory.getEndDate() == null ? null : Date.valueOf(workHistory.getEndDate()));
-            ps.setString(5, workHistory.getJobDescription());
+            ps.setString(4, workHistory.getJobDescription());
             return ps;
         }, keyHolder);
 

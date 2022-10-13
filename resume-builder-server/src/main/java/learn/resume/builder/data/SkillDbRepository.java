@@ -5,8 +5,13 @@ import learn.resume.builder.data.mapper.SkillMapper;
 import learn.resume.builder.models.Education;
 import learn.resume.builder.models.Skill;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 @Repository
@@ -35,7 +40,21 @@ public class SkillDbRepository implements SkillRepo {
 
     @Override
     public Skill add(Skill skill) {
-        throw new UnsupportedOperationException();
+
+        final String sql = "insert into skill (skill_name) values (?);";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, skill.getSkillName());
+            return ps;
+        }, keyHolder);
+
+        if (rowsAffected <= 0) {
+            return null;
+        }
+        skill.setSkillId(keyHolder.getKey().intValue());
+        return skill;
     }
 
 }

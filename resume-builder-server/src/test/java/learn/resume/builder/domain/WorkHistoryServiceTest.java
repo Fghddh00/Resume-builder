@@ -35,18 +35,6 @@ class WorkHistoryServiceTest {
         List<WorkHistory> result = service.findAll();
         assertEquals(2, workHistory.size());
     }
-//    @Test
-//    void shouldAddWorkHistory() {
-//        WorkHistory workHistory = new WorkHistory();
-//        workHistory.setWorkHistoryId(4);
-//        workHistory.setJobTitle("Title");
-//        workHistory.setStartDate(LocalDate.of(2013, 7,19));
-//        workHistory.setEndDate(LocalDate.of(2014, 9,19));
-//        workHistory.setJobDescription("description");
-//        Result<WorkHistory> result = service.addWorkHistory(workHistory);
-//
-//        assertTrue(result.isSuccess());
-        //failing
-//    }
+
 
 }

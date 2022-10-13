@@ -3,8 +3,12 @@ package learn.resume.builder.data;
 import learn.resume.builder.data.mapper.AppUserInfoMapper;
 import learn.resume.builder.models.AppUserInfo;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 @Repository
@@ -34,7 +38,25 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
 
     @Override
     public AppUserInfo add(AppUserInfo appUserInfo) {
-        throw new UnsupportedOperationException();
+        final String sql = "insert into app_user_info (email, first_name, last_name, address, phone_number)"
+        + " values (?, ?, ?, ?, ?);";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, appUserInfo.getEmail());
+            ps.setString(2, appUserInfo.getFirstName());
+            ps.setString(3, appUserInfo.getLastName());
+            ps.setString(4, appUserInfo.getAddress());
+            ps.setString(5, appUserInfo.getPhoneNumber());
+            return ps;
+        }, keyHolder);
+
+        if (rowsAffected <= 0) {
+            return null;
+        }
+        appUserInfo.setInfoId(keyHolder.getKey().intValue());
+        return appUserInfo;
     }
 
 }

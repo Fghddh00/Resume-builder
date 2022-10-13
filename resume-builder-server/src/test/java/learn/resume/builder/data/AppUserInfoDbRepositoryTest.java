@@ -70,4 +70,21 @@ class AppUserInfoDbRepositoryTest {
         assertEquals("123456789", actual.getPhoneNumber());
     }
 
+    @Test
+    void shouldAddUserInfo(){
+        AppUserInfo appUserInfo = new AppUserInfo();
+        appUserInfo.setEmail("email");
+        appUserInfo.setFirstName("fname");
+        appUserInfo.setLastName("lname");
+        appUserInfo.setAddress("address");
+        appUserInfo.setPhoneNumber("pn");
+
+        AppUserInfo actual = infoRepo.add(appUserInfo);
+        assertEquals(actual.getEmail(), appUserInfo.getEmail());
+        assertEquals(actual.getFirstName(), appUserInfo.getFirstName());
+        assertEquals(actual.getLastName(), appUserInfo.getLastName());
+        assertEquals(actual.getAddress(), appUserInfo.getAddress());
+        assertEquals(actual.getPhoneNumber(), appUserInfo.getPhoneNumber());
+    }
+
 }
