@@ -59,6 +59,7 @@ public class ResumeService {
 
         List<Resume> userResumes = resumeRepo.getResumesByUser( userId );
 
+
         getResult.setPayload(userResumes );
 
         return getResult;

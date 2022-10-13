@@ -39,26 +39,14 @@ function ViewResume() {
   return (
     
     <div className="ResumeTable">
-      <table>
-        <thead>
-          <tr>
-            <th width="200">Resume Id</th>
-            <th>Resume Description</th>
-            <th width="150">Public</th>
-            <th width="150"></th>
-          </tr>
-        </thead>
-        <tbody>
+     
         {resumes.map((c) => (
           <Resume
-            key = {c.resumeId}
-            name={c.userInfo.firstName}
-            resumeId={c.resumeId}
+            resumeId = {c.resumeId}
             //onResumeDeleted={onResumeDeleted}
           />
         ))}
-        </tbody>
-      </table>
+        
     </div>
     
    
