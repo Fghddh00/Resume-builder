@@ -32,6 +32,7 @@ public class AppUserRepo {
                 .stream().findFirst().orElse(null);
     }
 
+
     @Transactional
     public AppUser create(AppUser user) {
         final String sql = "insert into app_user (username, password_hash) values (?, ?);";

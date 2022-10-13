@@ -12,11 +12,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-<<<<<<< HEAD
 public class WorkHistoryDbRepositoryTest {
-=======
-class WorkHistoryDbRepositoryTest {
->>>>>>> 727fac340ffaba865cd682d548b8f9b20921243c
+
     @Autowired
     WorkHistoryDbRepository repository;
 
