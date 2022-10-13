@@ -142,7 +142,7 @@ create table resume_skill (
     
     insert into app_user_info 
 	values
-	( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845");
+	( 1, "jason@gmail.com", "jason", "oh", "testaddress", "123456789");
     
     insert into app_user_role values (1 , 1);
     
@@ -173,3 +173,4 @@ create table resume_skill (
     insert into resume_skill
     values
     (1,1);
+    

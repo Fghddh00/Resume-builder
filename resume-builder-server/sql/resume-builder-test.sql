@@ -148,7 +148,7 @@ begin
     
     insert into app_user_info 
 	values
-	( 1, "jason@gmail.com", "jason", "oh", "addressrandominfocitystate", "11100097845");
+	( 1, "jason@gmail.com", "jason", "oh", "testaddress", "123456789");
     
     insert into app_user_role values (1 , 1);
     
@@ -166,7 +166,8 @@ begin
     
     insert into resume_app 
     values
-    (1, 1, 1, 1);
+    (1, 1, 1, 1),
+    (2, 1, 1, 1);
     
     insert into resume_education
     values
@@ -179,8 +180,6 @@ begin
     insert into resume_skill
     values
     (1,1);
-
+    
 end //
 delimiter ;
-    
-CALL set_known_good_state();

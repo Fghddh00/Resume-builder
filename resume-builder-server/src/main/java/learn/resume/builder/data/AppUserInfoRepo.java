@@ -9,5 +9,8 @@ import java.util.List;
 public interface AppUserInfoRepo {
 
     List<AppUserInfo> findAll();
+
+    AppUserInfo findUserByResumeId(int resumeId);
+
     AppUserInfo add(AppUserInfo appUserInfo);
 }
