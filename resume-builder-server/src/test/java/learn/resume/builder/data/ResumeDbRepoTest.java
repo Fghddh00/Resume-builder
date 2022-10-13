@@ -45,6 +45,14 @@ class ResumeDbRepoTest {
     }
 
     @Test
+    void shouldGetResumeByUserId(){
+        List<Resume> actual = resumeRepo.getResumesByUser(1);
+
+        assertNotNull(actual);
+        assertEquals(2, actual.size());
+    }
+
+    @Test
     void shouldAddResume(){
 
         AppUserInfo userInfo = new AppUserInfo();
@@ -55,9 +63,9 @@ class ResumeDbRepoTest {
         userInfo.setAddress("testaddress");
         userInfo.setPhoneNumber("123456");
 
-        List<String> roles = new ArrayList<>();
-        roles.add("Job Seeker");
-        roles.add("Employer");
+        List<AppRole> roles = new ArrayList<>();
+        roles.add(new AppRole(1, "Job Seeker"));
+        roles.add(new AppRole(2, "Employer"));
 
         AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
 

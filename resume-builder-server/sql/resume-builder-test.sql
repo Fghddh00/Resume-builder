@@ -169,8 +169,8 @@ begin
     
     insert into resume_app 
     values
-    (1, 1, 1),
-    (2, 1, 1);
+    (1, 1, 1, 1),
+    (2, 1, 1, 1);
     
     insert into resume_education
     values

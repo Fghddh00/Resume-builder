@@ -45,6 +45,11 @@ class ResumeServiceTest {
     }
 
     @Test
+    void shouldFindListOfResumeByUserId(){
+
+    }
+
+    @Test
     void shouldAddResume(){
         Resume resume = new Resume();
         resume.setTemplateId(2);
@@ -80,9 +85,9 @@ class ResumeServiceTest {
         List<WorkHistory> workHistories = new ArrayList<>();
         workHistories.add(new WorkHistory(1, "Singer", LocalDate.of(2010,6,16), LocalDate.of(2010,10,16), "I sing and won American Idol"));
 
-        List<String> roles = new ArrayList<>();
-        roles.add("Job Seeker");
-        roles.add("Employer");
+        List<AppRole> roles = new ArrayList<>();
+        roles.add(new AppRole(1, "Job Seeker"));
+        roles.add(new AppRole(2, "Employer"));
 
         AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
 
