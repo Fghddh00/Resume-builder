@@ -2,9 +2,11 @@ package learn.resume.builder.controller;
 
 import learn.resume.builder.domain.Result;
 import learn.resume.builder.domain.ResumeService;
+import learn.resume.builder.models.AppUser;
 import learn.resume.builder.models.Resume;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +27,32 @@ public class ResumeController {
         return service.findAll();
     }
 
+    @GetMapping("/resume/{userId}")
+    public ResponseEntity getResumeByUserId(@PathVariable int userId){
+        AppUser currentUser = (AppUser) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        boolean jobSeeker = currentUser.getUserRoles()
+                .stream().anyMatch(r->r.getRoleName().equals("Job Seeker"));
+
+        if (currentUser.getUserId() != userId
+        && !jobSeeker){
+            return new ResponseEntity(HttpStatus.FORBIDDEN);
+        }
+
+        Result<List<Resume>> getResult = service.getResumeByUserId(userId);
+        if(getResult.isSuccess()){
+            List<Resume> userResumes = getResult.getPayload();
+            return ResponseEntity.ok(userResumes);
+        } else{
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+
     @GetMapping("/{resumeId}")
     public ResponseEntity<Resume> findById(@PathVariable int resumeId){
         Resume resume = service.findById(resumeId);
@@ -34,6 +62,7 @@ public class ResumeController {
         }
         return ResponseEntity.ok(resume);
     }
+
 
     @PostMapping
     public ResponseEntity<Object> addResume(@RequestBody Resume resumeToAdd){

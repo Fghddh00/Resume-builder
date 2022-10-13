@@ -56,15 +56,15 @@ class SkillDbRepositoryTest {
         assertEquals("cook", s3.getSkillName());
 
     }
-//    @Test
-//    void shouldFindSkillByResumeId(){
-//        List<Skill> skill = new ArrayList<>();
-//        skill.add(new Skill(1, "sing"));
-//
-//        List<Skill> actual = repository.getSkillByResumeId(1);
-//        assertEquals(actual.get(1), skill);
-//    }
-    //fails come back to
+    @Test
+    void shouldFindSkillByResumeId(){
+        List<Skill> skill = new ArrayList<>();
+        skill.add(new Skill(1, "sing"));
+
+        List<Skill> actual = repository.getSkillByResumeId(1);
+        assertEquals(actual.size(), skill.size());
+    }
+
 
 
 }

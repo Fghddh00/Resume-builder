@@ -10,4 +10,6 @@ public interface ResumeRepo {
     Resume getById(int resumeId);
 
     Resume add(Resume resumeToAdd);
+
+    List<Resume> getResumeByUserId(int userId);
 }

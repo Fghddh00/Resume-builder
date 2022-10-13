@@ -62,7 +62,7 @@ public class WorkHistoryDbRepositoryTest {
                 "I sing and won American Idol"));
 
         List<WorkHistory> actual = repository.getWorkHistoryByResumeId(1);
-        assertEquals(actual, workHistory);
+        assertEquals(actual.size(), workHistory.size());
     }
 
 }

@@ -36,6 +36,11 @@ public class ResumeDbRepo implements ResumeRepo{
     }
 
     @Override
+    public List<Resume> getResumeByUserId(int userId) {
+        return null;
+    }
+
+    @Override
     public Resume add(Resume resumeToAdd) {
         final String sql = "insert into resume_app (template_id, info_id) values (?,?);";
 
@@ -54,4 +59,5 @@ public class ResumeDbRepo implements ResumeRepo{
         resumeToAdd.setResumeId(keyHolder.getKey().intValue());
         return resumeToAdd;
     }
+
 }

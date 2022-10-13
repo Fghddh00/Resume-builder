@@ -14,6 +14,7 @@ public class AppUser extends User {
     private static final String AUTHORITY_PREFIX = "ROLE_";
 
     private int userId;
+    private List<AppRole> userRoles;
 
     public AppUser(int userId, String username, String password,
                    boolean disabled, List<String> roles) {
@@ -31,6 +32,14 @@ public class AppUser extends User {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public List<AppRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<AppRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     public static List<GrantedAuthority> convertRolesToAuthorities(List<String> roles) {

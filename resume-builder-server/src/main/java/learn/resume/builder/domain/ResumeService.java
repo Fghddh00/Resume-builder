@@ -52,6 +52,16 @@ public class ResumeService {
         return toHydrate;
     }
 
+    public Result<List<Resume>> getResumeByUserId(int userId) {
+        Result getResult = new Result();
+
+        List<Resume> userResumes = resumeRepo.getResumeByUserId( userId );
+
+        getResult.setPayload(userResumes );
+
+        return getResult;
+    }
+
     public Result<Resume> addResume(Resume resumeToAdd) {
         Result<Resume> result = validate(resumeToAdd);
 
@@ -81,4 +91,5 @@ public class ResumeService {
         }
         return result;
     }
+
 }
