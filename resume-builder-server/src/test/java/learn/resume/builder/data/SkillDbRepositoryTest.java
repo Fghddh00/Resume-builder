@@ -62,7 +62,7 @@ class SkillDbRepositoryTest {
 //        skill.add(new Skill(1, "sing"));
 //
 //        List<Skill> actual = repository.getSkillByResumeId(1);
-//        assertEquals(actual, skill);
+//        assertEquals(actual.get(1), skill);
 //    }
     //fails come back to
 

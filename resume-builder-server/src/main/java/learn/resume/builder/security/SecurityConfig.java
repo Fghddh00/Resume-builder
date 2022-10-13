@@ -26,6 +26,8 @@ public class SecurityConfig {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/create_account").permitAll()
                 .antMatchers("/refresh_token").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/resume").hasRole("JOBSEEKER")
+
 
 
                 //denying everything from here
