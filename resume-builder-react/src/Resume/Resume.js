@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Button, Colors } from "react-foundation";
+import { Link } from "react-router-dom";
 import './Resume.css'
 
 function Resume(props) {
@@ -49,11 +50,15 @@ function Resume(props) {
     // </tr>
   // );
       <div >
-        <motion.div onClick={() => setIsOpen(!isOpen)} className="card">
+        <motion.div onClick={() => setIsOpen(!isOpen)} className="card" style={{borderRadius: '3rem'}}>
           <motion.h2>Resume {props.resumeId}</motion.h2>
           {isOpen &&
           <motion.div>
             <p>some text goes here</p>
+            <div className="buttonGroup">
+            <Link  className="edit" color={Colors.PRIMARY}>Edit</Link> 
+            <Button  color={Colors.ALERT}>Delete</Button> 
+            </div>
           </motion.div>
           }
         </motion.div>
