@@ -30,7 +30,7 @@ function NavigationBar(props) {
 
            {loginInfo ? 
           <MenuItem >
-            <Link to="/viewResume">View Resume</Link>
+            <Link to="/api/resume/1">View Resume</Link>
           </MenuItem>
           : null
           }
