@@ -14,7 +14,7 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
     public AppUserInfoDbRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    
+
     @Override
     public List<AppUserInfo> findAll() {
         throw new UnsupportedOperationException();
