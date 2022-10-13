@@ -8,6 +8,14 @@ public class Skill {
     List<Resume> resumes;
 
 
+    public Skill(int skillId, String skillName) {
+        this.skillId = skillId;
+        this.skillName = skillName;
+    }
+    public Skill(){
+
+    }
+
     public int getSkillId() {
         return skillId;
     }
