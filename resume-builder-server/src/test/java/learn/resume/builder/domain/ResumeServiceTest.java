@@ -46,7 +46,35 @@ class ResumeServiceTest {
 
     @Test
     void shouldFindListOfResumeByUserId(){
-        List<Resume> resumes = new ArrayList<>();
+
+        List<AppRole> roles = new ArrayList<>();
+        roles.add(new AppRole(1, "Job Seeker"));
+        roles.add(new AppRole(2, "Employer"));
+
+        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
+
+        AppUserInfo userInfo = new AppUserInfo();
+        userInfo.setInfoId(1);
+        userInfo.setEmail("jason@gmail.com");
+        userInfo.setFirstName("jason");
+        userInfo.setLastName("oh");
+        userInfo.setAddress("testaddress");
+        userInfo.setPhoneNumber("123456789");
+
+        Resume toAddResume = new Resume();
+        toAddResume.setResumeId(1);
+        toAddResume.setTemplateId(1);
+        toAddResume.setUserInfo(userInfo);
+        toAddResume.setUser(user);
+
+        List<Resume> expectedResume = new ArrayList<>();
+        expectedResume.add(toAddResume);
+
+        when(resumeRepo.getResumesByUser(1)).thenReturn(expectedResume);
+
+        Result<List<Resume>> actualResume = service.getResumesByUser(1);
+
+        assertArrayEquals(expectedResume.toArray(), actualResume.getPayload().toArray());
 
 
     }
@@ -91,12 +119,12 @@ class ResumeServiceTest {
         roles.add(new AppRole(1, "Job Seeker"));
         roles.add(new AppRole(2, "Employer"));
 
-//        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
+        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
 
         Resume resume = new Resume();
         resume.setResumeId(1);
         resume.setTemplateId(1);
-//        resume.setUser(user);
+        resume.setUser(user);
         resume.setUserInfo(userInfo);
         resume.setSkills(skills);
         resume.setEducations(educations);
