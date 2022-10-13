@@ -42,8 +42,8 @@ function NavigationBar(props) {
       <TopBarRight className="my-top-bar-right">
       
         <Menu>
-        {loginInfo ? <Button onClick={logoutHandler} className="btn btn-outline-success my-2 my-sm-0">Log Out {loginInfo.claims.sub}</Button> :
-                    <Link className="login" to="/login" >Log In</Link>}
+        {loginInfo ? <Button className="login" onClick={logoutHandler} >Log Out {loginInfo.claims.sub}</Button> :
+                    <Link  className="login" to="/login" >Log In</Link>}
           
           <MenuItem>
             <a className="links" href="https://www.linkedin.com/company/genesis10/" >LinkedIn</a>

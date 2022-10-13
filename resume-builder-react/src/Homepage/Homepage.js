@@ -20,13 +20,9 @@ function Homepage() {
         <div className='createAccount'>
           <GridContainer>
             {!loginInfo ? 
-            <Link size={Sizes.LARGE} to="/create_account" >
-               <Button>Create Account </Button>
-              </Link>
+            <Link className="login" size={Sizes.LARGE} to="/create_account" >Create Account </Link>
               :
-              <Link size={Sizes.LARGE} to="/addResume" >
-               <Button>Add Resume </Button>
-              </Link>
+              <Link className="login" size={Sizes.LARGE} to="/addResume" >Add Resume </Link>
               }
           </GridContainer>
 
