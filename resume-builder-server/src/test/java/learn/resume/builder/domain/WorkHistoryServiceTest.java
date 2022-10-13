@@ -48,4 +48,99 @@ class WorkHistoryServiceTest {
         assertTrue(result.isSuccess());
     }
 
+    @Test
+    void shouldNotAddIfWorkHistoryIdIsNotZero(){
+        WorkHistory workHistory = new WorkHistory();
+        workHistory.setWorkHistoryId(3);
+        workHistory.setJobTitle("Actress");
+        workHistory.setStartDate(LocalDate.of(2015, 7,19));
+        workHistory.setEndDate(LocalDate.of(2016, 9,19));
+        workHistory.setJobDescription("description");
+
+        Result<WorkHistory> result = service.addWorkHistory(workHistory);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
+    void shouldNotAddNullWorkHistory(){
+        Result<WorkHistory> result = service.addWorkHistory(null);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
+    void shouldNotAddNullJobTitleInWorkHistory(){
+        WorkHistory workHistory = new WorkHistory();
+        workHistory.setJobTitle(null);
+        workHistory.setStartDate(LocalDate.of(2015, 7,19));
+        workHistory.setEndDate(LocalDate.of(2016, 9,19));
+        workHistory.setJobDescription("description");
+
+        Result<WorkHistory> result = service.addWorkHistory(workHistory);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+//    @Test
+//    void shouldAddNullStartDateInWorkHistory(){
+//        WorkHistory workHistory = new WorkHistory();
+//        workHistory.setJobTitle("Actress");
+//        workHistory.setStartDate(null);
+//        workHistory.setEndDate(LocalDate.of(2016, 9,19));
+//        workHistory.setJobDescription("description");
+//
+//        Result<WorkHistory> result = service.addWorkHistory(workHistory);
+//        assertFalse(result.isSuccess());
+//        assertEquals(result.getMessages().size(), 2);
+//    }
+    //null pointer exception
+
+    @Test
+    void shouldNotAddIfStartDateIsAfterEndDateInWorkHistory() {
+        WorkHistory workHistory = new WorkHistory();
+        workHistory.setJobTitle("actress");
+        workHistory.setStartDate(LocalDate.of(2019, 7, 19));
+        workHistory.setEndDate(LocalDate.of(2015, 9, 19));
+        workHistory.setJobDescription("description");
+
+        Result<WorkHistory> result = service.addWorkHistory(workHistory);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
+    void shouldNotAddIfStartDateIsAfterTodayInWorkHistory() {
+        WorkHistory workHistory = new WorkHistory();
+        workHistory.setJobTitle("actress");
+        workHistory.setStartDate(LocalDate.of(2024, 7, 19));
+        workHistory.setEndDate(LocalDate.of(2015, 9, 19));
+        workHistory.setJobDescription("description");
+
+        Result<WorkHistory> result = service.addWorkHistory(workHistory);
+        assertFalse(result.isSuccess());
+        // two error messages for start being after end date and today's date
+        assertEquals(result.getMessages().size(), 2);
+    }
+    @Test
+    void shouldNotAddIfEndDateIsAfterTodayInWorkHistory() {
+        WorkHistory workHistory = new WorkHistory();
+        workHistory.setJobTitle("actress");
+        workHistory.setStartDate(LocalDate.of(2015, 7, 19));
+        workHistory.setEndDate(LocalDate.of(2025, 9, 19));
+        workHistory.setJobDescription("description");
+
+        Result<WorkHistory> result = service.addWorkHistory(workHistory);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
+    void shouldNotAddNullJobDescriptionInWorkHistory() {
+        WorkHistory workHistory = new WorkHistory();
+        workHistory.setJobTitle("actress");
+        workHistory.setStartDate(LocalDate.of(2015, 7, 19));
+        workHistory.setEndDate(LocalDate.of(2020, 9, 19));
+        workHistory.setJobDescription(null);
+
+        Result<WorkHistory> result = service.addWorkHistory(workHistory);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+
 }

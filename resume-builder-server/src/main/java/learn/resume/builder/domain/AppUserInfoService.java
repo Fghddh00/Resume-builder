@@ -40,6 +40,18 @@ public class AppUserInfoService {
             result.addMessage("appUserInfo cannot be null", ResultType.INVALID);
             return result;
         }
+        if (appUserInfo.getEmail() == null || appUserInfo.getEmail().isBlank()){
+            result.addMessage("Email is required", ResultType.INVALID);
+        }
+        if (appUserInfo.getFirstName() == null || appUserInfo.getFirstName().isBlank()){
+            result.addMessage("First Name is required", ResultType.INVALID);
+        }
+        if (appUserInfo.getLastName() == null || appUserInfo.getLastName().isBlank()){
+            result.addMessage("Last Name is required", ResultType.INVALID);
+        }
+        if (appUserInfo.getPhoneNumber() == null || appUserInfo.getPhoneNumber().isBlank()){
+            result.addMessage("Phone Number is required", ResultType.INVALID);
+        }
 
         return result;
     }

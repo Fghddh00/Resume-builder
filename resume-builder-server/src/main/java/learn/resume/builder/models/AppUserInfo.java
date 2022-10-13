@@ -9,6 +9,18 @@ public class AppUserInfo {
     private String phoneNumber;
     private Resume resume;
 
+    public AppUserInfo(int infoId, String email, String firstName, String lastName, String address, String phoneNumber) {
+        this.infoId = infoId;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public AppUserInfo(){
+
+    }
     public int getInfoId() {
         return infoId;
     }

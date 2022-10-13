@@ -24,7 +24,7 @@ class EducationServiceTest {
     EducationService service;
 
     @Test
-    void shouldFindAllSkills() {
+    void shouldFindAllEducation() {
         List<Education> educations = new ArrayList<>();
         educations.add(new Education(1, "Education", "Education_level"));
         educations.add(new Education(1, "EducationTwo", "Education_level_two"));
@@ -32,6 +32,53 @@ class EducationServiceTest {
         when(repository.findAll()).thenReturn(educations);
         List<Education> result = service.findAll();
         assertEquals(2, educations.size());
+    }
+
+    @Test
+    void shouldAddEducation(){
+        Education education = new Education();
+        education.setSchoolName("name");
+        education.setEducationLevel("level");
+
+        Result<Education> result = service.add(education);
+        assertTrue(result.isSuccess());
+    }
+    @Test
+    void shouldNotAddEducationIfIdIsNotZero(){
+        Education education = new Education();
+        education.setEducationId(1);
+        education.setSchoolName("name");
+        education.setEducationLevel("level");
+
+        Result<Education> result = service.add(education);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
+    void shouldNotAddIfEducationIsNull(){
+        Result<Education> result = service.add(null);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
+    void shouldNotAddIfEducationNameIsNull(){
+        Education education = new Education();
+        education.setSchoolName(null);
+        education.setEducationLevel("level");
+
+        Result<Education> result = service.add(education);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
+    void shouldNotAddIfEducationLevelIsNull(){
+        Education education = new Education();
+        education.setSchoolName("name");
+        education.setEducationLevel(null);
+
+        Result<Education> result = service.add(education);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
     }
 
 }
