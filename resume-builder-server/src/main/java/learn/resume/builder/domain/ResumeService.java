@@ -70,6 +70,10 @@ public class ResumeService {
             return result;
         }
 
+        if (resumeToAdd.getResumeId() != 0){
+            result.addMessage("resultId cannot be set for add operation", ResultType.INVALID);
+        }
+
         resumeToAdd = resumeRepo.add(resumeToAdd);
         result.setPayload(resumeToAdd);
         return result;
@@ -81,22 +85,28 @@ public class ResumeService {
         if (!resumeRepo.deleteByResumeId(resumeId)) {
             result.addMessage("Resume Id was not found", ResultType.NOT_FOUND);
         }
+
         if(result.isSuccess()){
             resumeRepo.deleteByResumeId(resumeId);
         }
         return result;
     }
 
-    public Result updateResume(Resume resume) {
+    public Result<Resume> updateResume(Resume resume) {
 
-        Result result = validate(resume);
+        Result<Resume> result = validate(resume);
 
         if (!result.isSuccess()){
             return result;
         }
 
+        if (resume.getResumeId() <= 0) {
+            result.addMessage("Resume Id must be set for `update` operation", ResultType.INVALID);
+            return result;
+        }
+
         if(!resumeRepo.update(resume)){
-            result.addMessage("Resume could not be updated", ResultType.INVALID);
+            result.addMessage("Resume could not be found", ResultType.NOT_FOUND);
         }
 
         return result;
@@ -118,10 +128,6 @@ public class ResumeService {
         if (resume.getUserInfo() == null){
             result.addMessage("Resume has no User Info", ResultType.INVALID);
             return result;
-        }
-
-        if (resume.getResumeId() != 0){
-            result.addMessage("resultId cannot be set for add operation", ResultType.INVALID);
         }
 
         if (resume.getTemplateId() < 1){

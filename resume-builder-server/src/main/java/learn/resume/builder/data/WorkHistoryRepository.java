@@ -13,4 +13,6 @@ public interface WorkHistoryRepository {
     WorkHistory add(WorkHistory workHistory);
     @Transactional
     boolean deleteById(int workHistoryId);
+
+    boolean update(WorkHistory workHistory);
 }

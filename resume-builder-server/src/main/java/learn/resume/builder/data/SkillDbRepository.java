@@ -4,6 +4,7 @@ import learn.resume.builder.data.mapper.EducationMapper;
 import learn.resume.builder.data.mapper.SkillMapper;
 import learn.resume.builder.models.Education;
 import learn.resume.builder.models.Skill;
+import learn.resume.builder.models.WorkHistory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -63,6 +64,13 @@ public class SkillDbRepository implements SkillRepo {
             , skillId);
         return jdbcTemplate.update("delete from skill where skill_id = ?; "
                 , skillId) > 0;
+    }
+
+    @Override
+    public boolean update(Skill skill) {
+        final String sql = " update resume_skill set skill_name = ? where skill_id = ?;";
+
+        return jdbcTemplate.update(sql, skill.getSkillName(), skill.getSkillId()) > 0;
     }
 
 }

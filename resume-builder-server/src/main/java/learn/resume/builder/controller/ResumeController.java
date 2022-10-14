@@ -84,7 +84,7 @@ public class ResumeController {
         return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping
+    @PutMapping("/{resumeId}")
     public ResponseEntity editResume(@RequestBody Resume resume){
         Result result = service.updateResume(resume);
         if (result.isSuccess()){

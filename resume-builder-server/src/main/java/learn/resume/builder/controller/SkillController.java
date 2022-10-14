@@ -48,4 +48,18 @@ public class SkillController {
         return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
     }
 
+    @PutMapping("{skillId}")
+    public ResponseEntity updateById(@PathVariable int skillId, @RequestBody Skill skill){
+        if (skillId != skill.getSkillId()){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        Result<Skill> result = service.update(skill);
+
+        if(result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return ErrorResponse.build(result);
+    }
+
+
 }

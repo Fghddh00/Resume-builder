@@ -36,6 +36,19 @@ public class EducationController {
         }
         return ErrorResponse.build(result);
     }
+    @PutMapping("/{educationId}")
+    public ResponseEntity<Object> update
+            (@PathVariable int educationId, @RequestBody Education education) {
+        if (educationId != education.getEducationId()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
+        Result<Education> result = service.update(education);
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ErrorResponse.build(result);
+    }
     @DeleteMapping("/{educationId}")
     public ResponseEntity deleteById(@PathVariable int educationId) {
         Result<Education> result = service.deleteById(educationId);

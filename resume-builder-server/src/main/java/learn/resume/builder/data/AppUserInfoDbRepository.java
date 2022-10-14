@@ -65,10 +65,26 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
     }
 
     @Override
-
     public boolean update(AppUserInfo appUserInfo) {
-        return false;
+        final String sql = "update app_user_info set\n" +
+                "email = ?,\n" +
+                "first_name = ?,\n" +
+                "last_name = ?,\n" +
+                "address = ?,\n" +
+                "phone_number = ?\n" +
+                "where info_id = ?;";
+
+        int rowsUpdates = jdbcTemplate.update(sql,
+                appUserInfo.getEmail(),
+                appUserInfo.getFirstName(),
+                appUserInfo.getLastName(),
+                appUserInfo.getAddress(),
+                appUserInfo.getPhoneNumber(),
+                appUserInfo.getInfoId());
+
+        return rowsUpdates > 0;
     }
+
 
     @Override
     @Transactional
@@ -78,7 +94,7 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
         jdbcTemplate.update("delete from resume_work_history where resume_id = ?;", resumeId);
         jdbcTemplate.update("delete from resume_education where resume_id = ?;", resumeId);
         jdbcTemplate.update("delete from resume_app where info_id = ?;", appUserInfoId);
-        return jdbcTemplate.update("delete from resume_app where info_id = ?;", appUserInfoId) > 0;
-    }
+        return jdbcTemplate.update("delete from app_user_info where info_id = ?;", appUserInfoId) > 0;
 
+    }
 }

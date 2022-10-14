@@ -1,21 +1,18 @@
-.UnderConstruction {
-    background: url("https://images.pexels.com/photos/8821015/pexels-photo-8821015.jpeg?cs=srgb&dl=pexels-ron-lach-8821015.jpg&fm=jpg") no-repeat center center fixed;
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  
+.form{
+    padding: 3rem;
+    margin: 0 0 20px;
 }
 
-.UCText {
-    width: 200px;
-    height: 883px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: aliceblue;
-    text-align: center;
-    transform: rotate(-45deg);
-    margin-right: -100rem;
+.textarea{
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+  word-break: break-word;
+  
 }
 

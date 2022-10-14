@@ -51,6 +51,22 @@ public class WorkHistoryService {
         return result;
     }
 
+    public Result<WorkHistory> update(WorkHistory workHistory) {
+        Result<WorkHistory> result = validate(workHistory);
+
+        if(!result.isSuccess()){
+            return result;
+        }
+        if (workHistory.getWorkHistoryId() <= 0){
+            result.addMessage("This Work History needs an Id", ResultType.INVALID);
+        }
+        if(!repository.update(workHistory)){
+            result.addMessage("Work History could not be found", ResultType.NOT_FOUND);
+        }
+
+        return result;
+    }
+
     private Result<WorkHistory> validate(WorkHistory workHistory) {
         Result<WorkHistory> result = new Result<>();
 
@@ -78,4 +94,5 @@ public class WorkHistoryService {
         }
         return result;
     }
+
 }

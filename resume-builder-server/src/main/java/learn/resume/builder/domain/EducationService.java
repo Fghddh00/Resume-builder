@@ -32,6 +32,25 @@ public class EducationService {
         result.setPayload(education);
         return result;
     }
+
+    public Result<Education> update(Education education) {
+        Result<Education> result = validate(education);
+        if(result.getType() != ResultType.SUCCESS){
+            return result;
+        }
+        if (education.getEducationId() <= 0){
+            result.addMessage("Education Id is required", ResultType.INVALID);
+        }
+        if(result.isSuccess()){
+            if(repository.update(education)){
+                result.setPayload(education);
+            } else {
+                result.addMessage("Education Id was not found", ResultType.NOT_FOUND);
+            }
+        }
+        return result;
+    }
+
     public Result deleteById(int educationId) {
         Result<Education> result = new Result<>();
         if (!repository.deleteById(educationId)) {

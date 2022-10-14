@@ -14,4 +14,5 @@ public interface SkillRepo {
     @Transactional
     boolean deleteById(int skillId);
 
+    boolean update(Skill skill);
 }
