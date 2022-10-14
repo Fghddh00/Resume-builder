@@ -1,6 +1,7 @@
 package learn.resume.builder.controller;
 
 import learn.resume.builder.domain.Result;
+import learn.resume.builder.domain.ResultType;
 import learn.resume.builder.domain.ResumeService;
 import learn.resume.builder.models.AppUser;
 import learn.resume.builder.models.Resume;
@@ -71,11 +72,16 @@ public class ResumeController {
     }
 
     @DeleteMapping("/{resumeId}")
-    public ResponseEntity<Void> deleteById(@PathVariable int resumeId){
-        if (service.deleteByResumeId(resumeId)){
+    public ResponseEntity deleteById(@PathVariable int resumeId){
+        Result<Resume> result = service.deleteByResumeId(resumeId);
+
+        if (result.isSuccess()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (result.getType() == ResultType.NOT_FOUND) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping
