@@ -22,10 +22,7 @@ public class ResumeController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<Resume> findAll(){
-        return service.findAll();
-    }
+
 
     @GetMapping("/user")
     public ResponseEntity getResumeByUserId(){
@@ -50,15 +47,15 @@ public class ResumeController {
     }
 
 
-//    @GetMapping("/{resumeId}")
-//    public ResponseEntity<Resume> findById(@PathVariable int resumeId){
-//        Resume resume = service.findById(resumeId);
-//
-//        if (resume == null){
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        return ResponseEntity.ok(resume);
-//    }
+    @GetMapping("/{resumeId}")
+    public ResponseEntity<Resume> findByResumeId(@PathVariable int resumeId){
+        Resume resume = service.findByResumeId(resumeId);
+
+        if (resume == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(resume);
+    }
 
 
     @PostMapping
@@ -71,5 +68,24 @@ public class ResumeController {
         }
 
         return ErrorResponse.build(result);
+    }
+
+    @DeleteMapping("/{resumeId}")
+    public ResponseEntity<Void> deleteById(@PathVariable int resumeId){
+        if (service.deleteByResumeId(resumeId)){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping
+    public ResponseEntity editResume(@RequestBody Resume resume){
+        Result result = service.updateResume(resume);
+        if (result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return ErrorResponse.build(result);
+        }
+
     }
 }

@@ -31,57 +31,41 @@ class ResumeDbRepoTest {
 
     @Test
     void shouldNotGetTemplateIdByNonExistingResumeId() {
-        Resume actual = resumeRepo.getById(100);
+        Resume actual = resumeRepo.getByResumeId(100);
 
         assertNull(actual);
     }
 
     @Test
     void shouldGetTemplateIdByResumeId() {
-        Resume actual = resumeRepo.getById(1);
+        Resume actual = makeResume();
+        actual = resumeRepo.getByResumeId(2);
 
         assertNotNull(actual);
         assertEquals(1, actual.getTemplateId());
     }
 
-<<<<<<< HEAD
-
-//    @Test
-//    void shouldAddResume(){
-//
-//        AppUserInfo userInfo = new AppUserInfo();
-//        userInfo.setInfoId(2);
-//        userInfo.setEmail("test email");
-//        userInfo.setFirstName("testFirst");
-//        userInfo.setLastName("testLast");
-//        userInfo.setAddress("testaddress");
-//        userInfo.setPhoneNumber("123456");
-//
-//        List<String> roles = new ArrayList<>();
-//        roles.add("Job Seeker");
-//        roles.add("Employer");
-//
-//        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
-//
-//        Resume resumeToTest = new Resume();
-//        resumeToTest.setTemplateId(2);
-//        resumeToTest.setUserInfo(userInfo);
-//        resumeToTest.setUser(user);
-//
-//        Resume actual = resumeRepo.add(resumeToTest);
-//
-//        assertNotNull(actual);
-//        assertEquals(3, actual.getResumeId());
-//    }
-
-=======
->>>>>>> cc4f1616839397b033341a44840780ba1a6473b8
     @Test
-    void shouldGetResumeByUserId(){
+    void shouldGetUserEmailByResumeId(){
+        Resume actual = makeResume();
+        actual = resumeRepo.getByResumeId(2);
+
+        assertNotNull(actual);
+        assertEquals("test email", actual.getUserInfo().getEmail());
+    }
+
+    @Test
+    void shouldGetListOfResumeByUserId(){
         List<Resume> actual = resumeRepo.getResumesByUser(1);
 
         assertNotNull(actual);
         assertEquals(2, actual.size());
+    }
+
+    @Test
+    void shouldNotGetListOfResumeByNonExistingUserId(){
+        List<Resume> actual = resumeRepo.getResumesByUser(100);
+        assertNull(actual);
     }
 
     @Test
@@ -111,8 +95,127 @@ class ResumeDbRepoTest {
         assertNotNull(actual);
         assertEquals(3, actual.getResumeId());
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> cc4f1616839397b033341a44840780ba1a6473b8
+    @Test
+    void shouldNotAddResumeWithNoUserInfo(){
+
+        List<AppRole> roles = new ArrayList<>();
+        roles.add(new AppRole(1, "Job Seeker"));
+        roles.add(new AppRole(2, "Employer"));
+
+        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
+
+        Resume resumeToTest = new Resume();
+        resumeToTest.setTemplateId(2);
+        resumeToTest.setUserInfo(null);
+        resumeToTest.setUser(user);
+
+        Resume actual = resumeRepo.add(resumeToTest);
+
+        assertNull(actual);
+    }
+
+    @Test
+    void shouldNotAddResumeWithNoUser(){
+
+        AppUserInfo userInfo = new AppUserInfo();
+        userInfo.setInfoId(2);
+        userInfo.setEmail("test email");
+        userInfo.setFirstName("testFirst");
+        userInfo.setLastName("testLast");
+        userInfo.setAddress("testaddress");
+        userInfo.setPhoneNumber("123456");
+
+        List<AppRole> roles = new ArrayList<>();
+        roles.add(new AppRole(1, "Job Seeker"));
+        roles.add(new AppRole(2, "Employer"));
+
+        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
+
+        Resume resumeToTest = new Resume();
+        resumeToTest.setTemplateId(2);
+        resumeToTest.setUserInfo(userInfo);
+        resumeToTest.setUser(null);
+
+        Resume actual = resumeRepo.add(resumeToTest);
+
+        assertNull(actual);
+    }
+
+    @Test
+    void shouldAddResumeWithNullEducation(){
+
+        Resume resumeToTest = makeResume();
+        resumeToTest.setEducations(null);
+
+        Resume actual = resumeRepo.add(resumeToTest);
+
+        assertNotNull(actual);
+        assertEquals(3, actual.getResumeId());
+    }
+
+    @Test
+    void shouldAddResumeWithNullSkill(){
+
+        Resume resumeToTest = makeResume();
+        resumeToTest.setSkills(null);
+
+        Resume actual = resumeRepo.add(resumeToTest);
+
+        assertNotNull(actual);
+        assertEquals(3, actual.getResumeId());
+    }
+
+    @Test
+    void shouldAddResumeWithNullWorkHistories(){
+
+        Resume resumeToTest = makeResume();
+        resumeToTest.setWorkHistories(null);
+
+        Resume actual = resumeRepo.add(resumeToTest);
+
+        assertNotNull(actual);
+        assertEquals(3, actual.getResumeId());
+    }
+
+    @Test
+    void shouldDeleteByResumeId(){
+        assertTrue(resumeRepo.deleteByResumeId(1));
+        assertFalse(resumeRepo.deleteByResumeId(1));
+
+        assertTrue(resumeRepo.deleteByResumeId(2));
+        assertFalse(resumeRepo.deleteByResumeId(2));
+    }
+
+    @Test
+    void shouldNotDeleteNonExistingResumeId(){
+        assertFalse(resumeRepo.deleteByResumeId(100));
+    }
+
+
+
+
+    Resume makeResume(){
+        AppUserInfo userInfo = new AppUserInfo();
+        userInfo.setInfoId(2);
+        userInfo.setEmail("test email");
+        userInfo.setFirstName("testFirst");
+        userInfo.setLastName("testLast");
+        userInfo.setAddress("testaddress");
+        userInfo.setPhoneNumber("123456");
+
+        List<AppRole> roles = new ArrayList<>();
+        roles.add(new AppRole(1, "Job Seeker"));
+        roles.add(new AppRole(2, "Employer"));
+
+        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
+
+        Resume resumeToTest = new Resume();
+        resumeToTest.setTemplateId(2);
+        resumeToTest.setUserInfo(userInfo);
+        resumeToTest.setUser(user);
+
+        return resumeToTest;
+    }
+
 }

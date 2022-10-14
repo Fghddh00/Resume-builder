@@ -5,11 +5,14 @@ import learn.resume.builder.models.Resume;
 import java.util.List;
 
 public interface ResumeRepo {
-    List<Resume> findAll();
 
-    Resume getById(int resumeId);
+    Resume getByResumeId(int resumeId);
 
     Resume add(Resume resumeToAdd);
 
     List<Resume> getResumesByUser(int userId);
+
+    boolean deleteByResumeId(int resumeId);
+
+    boolean update(Resume resume);
 }

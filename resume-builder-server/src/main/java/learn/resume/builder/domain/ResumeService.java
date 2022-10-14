@@ -23,13 +23,10 @@ public class ResumeService {
         this.resumeRepo = resumeRepo;
     }
 
-    public List<Resume> findAll() {
-        return resumeRepo.findAll();
-    }
 
 
-    public Resume findById(int resumeId) {
-        Resume toHydrate = resumeRepo.getById(resumeId);
+    public Resume findByResumeId(int resumeId) {
+        Resume toHydrate = resumeRepo.getByResumeId(resumeId);
 
         if (toHydrate != null){
             List<Education> educationList = educationRepo.getEducationByResumeId(resumeId);
@@ -46,10 +43,6 @@ public class ResumeService {
             toHydrate.setWorkHistories(workHistoryList);
         }
 
-        if (toHydrate != null){
-            toHydrate.setUserInfo(infoRepo.findUserByResumeId(resumeId));
-        }
-
 
         return toHydrate;
     }
@@ -58,6 +51,11 @@ public class ResumeService {
         Result getResult = new Result();
 
         List<Resume> userResumes = resumeRepo.getResumesByUser( userId );
+
+        if (userResumes == null){
+            getResult.addMessage("Resume List not Found", ResultType.NOT_FOUND);
+            return getResult;
+        }
 
 
         getResult.setPayload(userResumes );
@@ -77,21 +75,52 @@ public class ResumeService {
         return result;
     }
 
-    private Result<Resume> validate(Resume resumeToAdd) {
+
+    public boolean deleteByResumeId(int resumeId) {
+        return resumeRepo.deleteByResumeId(resumeId);
+    }
+
+    public Result updateResume(Resume resume) {
+
+        Result result = validate(resume);
+
+        if (!result.isSuccess()){
+            return result;
+        }
+
+        if(!resumeRepo.update(resume)){
+            result.addMessage("Resume could not be updated", ResultType.INVALID);
+        }
+
+        return result;
+    }
+
+    private Result<Resume> validate(Resume resume) {
         Result<Resume> result = new Result<>();
 
-        if (resumeToAdd == null){
+        if (resume == null){
             result.addMessage("Resume is null", ResultType.INVALID);
             return result;
         }
 
-        if (resumeToAdd.getResumeId() != 0){
+        if (resume.getUser() == null){
+            result.addMessage("Resume has no User", ResultType.INVALID);
+            return result;
+        }
+
+        if (resume.getUserInfo() == null){
+            result.addMessage("Resume has no User Info", ResultType.INVALID);
+            return result;
+        }
+
+        if (resume.getResumeId() != 0){
             result.addMessage("resultId cannot be set for add operation", ResultType.INVALID);
         }
 
-        if (resumeToAdd.getTemplateId() < 1){
+        if (resume.getTemplateId() < 1){
             result.addMessage("Resume Template is required", ResultType.INVALID);
         }
+
         return result;
     }
 

@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -29,9 +30,9 @@ class ResumeServiceTest {
     void shouldFindExpectedResumeByResumeId() {
         Resume expected = makeResume();
 
-        when(resumeRepo.getById(1)).thenReturn(expected);
+        when(resumeRepo.getByResumeId(1)).thenReturn(expected);
 
-        Resume actual = service.findById(1);
+        Resume actual = service.findByResumeId(1);
         assertEquals(expected, actual);
     }
 
@@ -39,8 +40,8 @@ class ResumeServiceTest {
     void shouldNotFindResumeCuzOfNonExistingResume(){
         Resume expected = makeResume();
 
-        when(resumeRepo.getById(1)).thenReturn(expected);
-        Resume actual = service.findById(100);
+        when(resumeRepo.getByResumeId(1)).thenReturn(expected);
+        Resume actual = service.findByResumeId(100);
         assertNull(actual);
     }
 
@@ -81,20 +82,121 @@ class ResumeServiceTest {
 
     @Test
     void shouldAddResume(){
-        Resume resume = new Resume();
+        Resume resume = makeResume();
         resume.setTemplateId(2);
-        resume.setUserInfo(makeResume().getUserInfo());
 
         Resume mockOut = makeResume();
-        resume.setTemplateId(1);
-        resume.setUserInfo(makeResume().getUserInfo());
+        resume.setTemplateId(2);
 
         when(resumeRepo.add(resume)).thenReturn(mockOut);
 
         Result<Resume> actual = service.addResume(resume);
         assertEquals(mockOut, actual.getPayload());
+    }
+
+    @Test
+    void shouldNotAddWhenUserInfoIsNull(){
+        Resume resume = makeResume();
+        resume.setTemplateId(2);
+        resume.setUserInfo(null);
+
+        Resume mockOut = makeResume();
+        resume.setTemplateId(1);
+
+        when(resumeRepo.add(resume)).thenReturn(mockOut);
+
+        Result<Resume> actual = service.addResume(resume);
+        assertEquals(ResultType.INVALID, actual.getType());
 
     }
+
+    @Test
+    void shouldNotAddWhenUserIsNull(){
+        Resume resume = makeResume();
+        resume.setTemplateId(2);
+        resume.setUser(null);
+
+        Resume mockOut = makeResume();
+        resume.setTemplateId(1);
+
+        when(resumeRepo.add(resume)).thenReturn(mockOut);
+
+        Result<Resume> actual = service.addResume(resume);
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+    @Test
+    void shouldAddWhenEducationIsNull(){
+        Resume resume = makeResume();
+        resume.setTemplateId(2);
+        resume.setEducations(null);
+
+        Resume mockOut = makeResume();
+        resume.setTemplateId(1);
+
+        when(resumeRepo.add(resume)).thenReturn(mockOut);
+
+        Result<Resume> actual = service.addResume(resume);
+        assertEquals(ResultType.SUCCESS, actual.getType());
+    }
+
+    @Test
+    void shouldAddWhenSkillIsNull(){
+        Resume resume = makeResume();
+        resume.setTemplateId(2);
+        resume.setSkills(null);
+
+        Resume mockOut = makeResume();
+        resume.setTemplateId(1);
+
+        when(resumeRepo.add(resume)).thenReturn(mockOut);
+
+        Result<Resume> actual = service.addResume(resume);
+        assertEquals(ResultType.SUCCESS, actual.getType());
+    }
+
+    @Test
+    void shouldAddWhenWorkHistoryIsNull(){
+        Resume resume = makeResume();
+        resume.setTemplateId(2);
+        resume.setWorkHistories(null);
+
+        Resume mockOut = makeResume();
+        resume.setTemplateId(1);
+
+        when(resumeRepo.add(resume)).thenReturn(mockOut);
+
+        Result<Resume> actual = service.addResume(resume);
+        assertEquals(ResultType.SUCCESS, actual.getType());
+    }
+
+    @Test
+    void shouldDeleteResumeByResumeId(){
+        Resume resume = makeResume();
+        resume.setResumeId(1);
+        when(resumeRepo.getByResumeId(1)).thenReturn(resume).thenReturn(null);
+        when(resumeRepo.deleteByResumeId(1)).thenReturn(true);
+
+        Resume found = service.findByResumeId(1);
+        boolean deletedResume = service.deleteByResumeId(1);
+        Resume nulLResume = service.findByResumeId(1);
+
+        assertNotNull(found);
+        assertTrue(deletedResume);
+        assertNull(nulLResume);
+    }
+
+    @Test
+    void shouldNotDeleteResumeByNonExistingResumeId(){
+
+        when(resumeRepo.deleteByResumeId(100)).thenReturn(false);
+
+        boolean deletedResult = service.deleteByResumeId(100);
+
+        assertFalse(deletedResult);
+    }
+
+
 
     Resume makeResume(){
 
@@ -122,7 +224,6 @@ class ResumeServiceTest {
         AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
 
         Resume resume = new Resume();
-        resume.setResumeId(1);
         resume.setTemplateId(1);
         resume.setUser(user);
         resume.setUserInfo(userInfo);
