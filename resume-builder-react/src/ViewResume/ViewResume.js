@@ -44,6 +44,7 @@ function ViewResume() {
     <div className="ResumeTable">
         {resumes.map((c) => (
           <Resume
+            key ={c.resumeId}
             resumeId = {c.resumeId}
             templateId = {c.templateId}
           />

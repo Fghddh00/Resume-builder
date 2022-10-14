@@ -7,18 +7,48 @@ import "../ErrorMessages/ErrorMessages.js"
 import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
 
 function AddResume(props) {
+
     const [addFormValues, setAddFormValues] = useState([ { }]);
     const [errors, setErrors] = useState([]);
 
     const history = useHistory();
 
-    function AddForm(){
+    const [addEdFormValues, setAddEdFormValues] = useState([ { }]);
+    const [addWorkFormValues, setAddWorkFormValues] = useState([ { }]);
+
+
+    function AddEducationForm(){
         let newfield = {  }
 
-        setAddFormValues([...addFormValues, newfield])
+        setAddEdFormValues([...addEdFormValues, newfield])
     }
-    function AddWorkHistoryForm(){
+    function AddWorkForm(){
+        let newfield = {  }
 
+        setAddWorkFormValues([...addWorkFormValues, newfield])
+    }
+    function skillsChecker(){
+        fetch('https://auth.emsicloud.com/connect/token',{
+        method: 'POST',
+        body: JSON.stringify({
+         client_id: '2aqt1ywgapewgs3p',
+         client_secret: 'Q6PsRFbE',
+         grant_type: 'client_credentials',
+         scope : 'emsi_open'
+      }),
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded',
+     },
+    })
+    .then(async response => {
+        if( response.status === 200 ){
+            return response.json();
+        } else if(response.status === 400){
+            console.log("fail")
+            return await response.json();
+        
+        } else (console.log( await response.json()))
+    } )
     }
     function AddEducationForm(){
 
@@ -53,8 +83,8 @@ function AddResume(props) {
         </nav>
         <div id="Education">
         <h2>Education</h2>
-        <Button onClick={AddForm}>Add Education</Button>
-        {addFormValues.map((input, index) => {
+        <Button onClick={AddEducationForm}>Add Education</Button>
+        {addEdFormValues.map((input, index) => {
           return (
             <div key={index} className="form">
               <FormInput
@@ -75,8 +105,8 @@ function AddResume(props) {
         </div>
         <div id="WorkHistory">
         <h2>Work History</h2>
-        <Button onClick={AddForm}>Add Work History</Button>
-        {addFormValues.map((input, index) => {
+        <Button onClick={AddWorkForm}>Add Work History</Button>
+        {addWorkFormValues.map((input, index) => {
           return (
             <div key={index} className="form">
               <FormInput
@@ -100,13 +130,18 @@ function AddResume(props) {
                 <label> Job Description
                 <textarea className="textarea" id={"jobDescription"  + index} name={"jobDescription"  + index}/>
                 </label>
+                <Button onClick={skillsChecker}> load skills</Button>
+                <div> 
+
+                </div>
+                
             </div>
           )
         })}
         </div>
         <div id="UserInfo">
         <h2>User Info</h2>
-        <Button onClick={AddForm}>Add User Info</Button>
+        <Button onClick={AddUserInfoForm}>Add User Info</Button>
         {addFormValues.map((input, index) => {
           return (
             <div key={index} className="form">
