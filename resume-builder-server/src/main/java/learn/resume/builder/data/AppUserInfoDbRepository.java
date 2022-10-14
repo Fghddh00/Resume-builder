@@ -65,16 +65,11 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
     }
 
     @Override
-<<<<<<< HEAD
     public boolean update(AppUserInfo appUserInfo) {
         return false;
     }
 
-    @Override
-    public boolean deleteById(int appUserInfoId) {
-        //need help
-       throw new UnsupportedOperationException();
-=======
+
     @Transactional
     public boolean deleteById(int appUserInfoId, int resumeId) {
 
@@ -82,8 +77,7 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
         jdbcTemplate.update("delete from resume_work_history where resume_id = ?;", resumeId);
         jdbcTemplate.update("delete from resume_education where resume_id = ?;", resumeId);
         jdbcTemplate.update("delete from resume_app where info_id = ?;", appUserInfoId);
-        return jdbcTemplate.update("delete from resume_app where info_id = ?;", appUserInfoId) > 0;
->>>>>>> 98961294dee6c074f3c2dfb2df5c04b9ac9e93c2
+        return jdbcTemplate.update("delete from app_user_info where info_id = ?;", appUserInfoId) > 0;
     }
 
 }

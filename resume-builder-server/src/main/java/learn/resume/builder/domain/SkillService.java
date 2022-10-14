@@ -45,6 +45,24 @@ public class SkillService {
         }
         return result;
     }
+
+    public Result<Skill> update(Skill skill) {
+        Result<Skill> result = validate(skill);
+
+        if(!result.isSuccess()){
+            return result;
+        }
+        if (skill.getSkillId() <= 0){
+            result.addMessage("This Work History needs an Id", ResultType.INVALID);
+        }
+        if(!repository.update(skill)){
+            result.addMessage("Work History could not be found", ResultType.NOT_FOUND);
+        }
+
+        return result;
+    }
+
+
     private Result<Skill> validate(Skill skill) {
         Result<Skill> result = new Result<>();
         if (skill == null) {

@@ -47,4 +47,17 @@ public class WorkHistoryController {
         }
         return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
     }
+    @PutMapping("{workHistoryId}")
+    public ResponseEntity updateById(@PathVariable int workHistoryId, @RequestBody WorkHistory workHistory){
+        if (workHistoryId != workHistory.getWorkHistoryId()){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        Result<WorkHistory> result = service.update(workHistory);
+
+        if(result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return ErrorResponse.build(result);
+    }
+
 }

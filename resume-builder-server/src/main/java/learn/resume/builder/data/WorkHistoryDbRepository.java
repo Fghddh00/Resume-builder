@@ -73,4 +73,13 @@ public class WorkHistoryDbRepository implements WorkHistoryRepository{
         return jdbcTemplate.update("delete from work_history where work_history_id = ?; "
                 , workHistoryId) > 0;
     }
+
+    @Override
+    public boolean update(WorkHistory workHistory) {
+       final String sql = " update work_history set job_title = ?, start_date = ?, end_date = ?, job_description = ? where work_history_id = ?;";
+
+       return jdbcTemplate.update(sql, workHistory.getJobTitle(),
+               workHistory.getStartDate(), workHistory.getEndDate(),
+               workHistory.getJobDescription(), workHistory.getWorkHistoryId()) > 0;
+    }
 }
