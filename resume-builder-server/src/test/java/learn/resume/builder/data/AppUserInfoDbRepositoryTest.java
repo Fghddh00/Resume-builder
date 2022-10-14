@@ -108,4 +108,15 @@ class AppUserInfoDbRepositoryTest {
         assertEquals(actual.getPhoneNumber(), appUserInfo.getPhoneNumber());
     }
 
+    //TODO: write repo method
+//    @Test
+//    void shouldDeleteExitingId(){
+//        assertTrue(infoRepo.deleteById(1));
+//    }
+//
+//    @Test
+//    void shouldNotDeleteByNonExistingId(){
+//        assertFalse(infoRepo.deleteById(10));
+//    }
+
 }

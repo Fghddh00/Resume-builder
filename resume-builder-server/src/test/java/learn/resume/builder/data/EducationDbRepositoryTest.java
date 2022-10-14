@@ -69,4 +69,15 @@ class EducationDbRepositoryTest {
         assertEquals(actual.getSchoolName(), education.getSchoolName());
         assertEquals(actual.getEducationLevel(), education.getEducationLevel());
     }
+
+    @Test
+    void shouldDeleteExitingId(){
+        assertTrue(repository.deleteById(1));
+    }
+
+    @Test
+    void shouldNotDeleteByNonExistingId(){
+        assertFalse(repository.deleteById(10));
+    }
+
 }

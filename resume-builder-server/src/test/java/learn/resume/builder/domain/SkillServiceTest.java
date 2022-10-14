@@ -66,4 +66,18 @@ class SkillServiceTest {
         assertFalse(result.isSuccess());
         assertEquals(result.getMessages().size(), 1);
     }
+    @Test
+    void shouldNotDeleteNonExistentId() {
+        when(repository.deleteById(11)).thenReturn(false);
+
+        Result<Skill> result = service.deleteById(1);
+        assertFalse(result.isSuccess());
+    }
+    @Test
+    void shouldDeleteId(){
+        when(repository.deleteById(1)).thenReturn(true);
+
+        Result<Skill> result = service.deleteById(1);
+        assertTrue(result.isSuccess());
+    }
 }
