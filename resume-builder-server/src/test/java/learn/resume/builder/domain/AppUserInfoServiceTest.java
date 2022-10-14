@@ -121,6 +121,19 @@ class AppUserInfoServiceTest {
         assertEquals(result.getMessages().size(), 1);
     }
     @Test
+    void shouldNotAddAppUserInfoIfPhoneNumberIsBlank(){
+        AppUserInfo appUserInfo = new AppUserInfo();
+        appUserInfo.setEmail("email");
+        appUserInfo.setFirstName("fname");
+        appUserInfo.setLastName("lname");
+        appUserInfo.setAddress("address");
+        appUserInfo.setPhoneNumber("");
+
+        Result<AppUserInfo> result = service.add(appUserInfo);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
     void shouldAddAppUserInfoIfAddressIsNull(){
         AppUserInfo appUserInfo = new AppUserInfo();
         appUserInfo.setEmail("email");

@@ -1,63 +1,89 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Colors } from "react-foundation";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import AuthContext from "../AuthContext";
 import './Resume.css'
 
 function Resume(props) {
 
   const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory();
+  const [template, setTemplate] = useState("");
+  const userData = useContext(AuthContext);
+  
+  function chooseTemplate(){
+  switch(props.templateId){
+    case 1: {
+      setTemplate("Basic Resume Template");
+      break;
+    }
+    case 2: {
+      setTemplate("Fancy Resume Template");
+      break;
+    }
+    case 3: {
+      setTemplate("Professional Resume Template");
+      break;
+    }
+  }
+}
 
   function deleteClicked() {
     if (
       window.confirm(
-        "Are you sure you want to delete " + props.resumeData.resumeId + "?"
+        "Are you sure you want to delete resume " + props.resumeId + "?"
       )
     ) {
-      fetch("http://localhost:8080/resume" + props.resumeData.resumeId, {
+      const userId = userData.claims.jti;
+      const jwt = userData.jwt;
+      fetch("http://localhost:8080/api/resume/" + props.resumeId, {
         method: "DELETE",
-      }).then((response) => {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+      }).then(async (response) => {
         if (response.status === 204) {
-          props.onResumeDeleted();
+          // props.onResumeDeleted();
         } else {
-          console.log(response.json());
+          console.log(props.resumeId)
+          console.log(await response.json());
         }
       });
     }
   }
 
-  return (
-    // <tr>
-    //   <td>{1}</td>
-    //   <td>
-    //   {"data"}
-    //   </td>
-    //   <td className="publicButton">
-    //     <div className="switch">
-    //       <input
-    //         className="switch-input"
-    //         id="exampleSwitch"
-    //         type="checkbox"
-    //         name="exampleSwitch"
-    //       />
-    //       <label className="switch-paddle" htmlFor="exampleSwitch">
-    //         <span className="show-for-sr">Download Kittens</span>
-    //       </label>
-    //     </div>
-    //   </td>
+  const handleClick = event => {
+    console.log(event.detail);
+    chooseTemplate();
+    switch (event.detail) {
+      case 1: {
+        console.log('single click');
+        setIsOpen(!isOpen)
+        break;
+      }
+      case 2: {
+        console.log('double click');
+        history.push("/"); //placeholder
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  };
 
-    //   <td><Button color={Colors.ALERT}>Delete</Button> </td>
-    // </tr>
-  // );
+  return (
+
       <div >
-        <motion.div onClick={() => setIsOpen(!isOpen)} className="card" style={{borderRadius: '3rem'}}>
+        <motion.div onClick={handleClick} className="card" style={{borderRadius: '3rem'}}>
           <motion.h2>Resume {props.resumeId}</motion.h2>
           {isOpen &&
           <motion.div>
-            <p>some text goes here</p>
+            <p>{template}</p>
             <div className="buttonGroup">
-            <Link  className="edit" color={Colors.PRIMARY}>Edit</Link> 
-            <Button  color={Colors.ALERT}>Delete</Button> 
+            <Link  to={"/edit"} className="edit" color={Colors.PRIMARY}>Edit</Link> 
+            <Button onClick={deleteClicked} color={Colors.ALERT}>Delete</Button> 
             </div>
           </motion.div>
           }

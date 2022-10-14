@@ -8,6 +8,7 @@ function ViewResume() {
   const [resumes, setResumes] = useState([]);
   const userData = useContext(AuthContext);
   const history = useHistory();
+  const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect( () => {
     if( userData === null ){
@@ -23,13 +24,17 @@ function ViewResume() {
       .then(async response => {
           if( response.status === 200 ){
               return response.json();
+          } else if(response.status === 400){
+              setIsEmpty(true);
+              return response.json();
+          
           } else (console.log( await response.json()))
       } )
       .then( resumeList => {
           setResumes( resumeList );
       });
   }
-}, []);
+});
   
 
   // function onResumeDeleted() {
@@ -38,16 +43,19 @@ function ViewResume() {
 
   return (
     <div className="page">
-    <Link className="addBtn"> Add Resume</Link>
+    <Link to="/api/addResume" className="addBtn"> Add Resume</Link>
+    {!isEmpty ?
     <div className="ResumeTable">
         {resumes.map((c) => (
           <Resume
             resumeId = {c.resumeId}
+            templateId = {c.templateId}
             //onResumeDeleted={onResumeDeleted}
           />
-        ))}
+        ))} 
         
     </div>
+    : <div className="container"> No Resumes Found</div>}
     </div> 
     
    

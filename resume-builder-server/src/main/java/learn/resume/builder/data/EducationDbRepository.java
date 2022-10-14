@@ -54,6 +54,21 @@ public class EducationDbRepository implements EducationRepo {
     }
 
     @Override
+    public boolean update(Education education) {
+        final String sql = "update education set\n" +
+                "school_name = ?,\n" +
+                "education_level = ?\n" +
+                "where education_id = ?;";
+
+        int rowsUpdated = jdbcTemplate.update(sql,
+                education.getSchoolName(),
+                education.getEducationLevel(),
+                education.getEducationId());
+
+        return rowsUpdated > 0;
+    }
+
+    @Override
     public boolean deleteById(int educationId) {
         jdbcTemplate.update("delete from resume_education where education_id = ?;"
         , educationId);

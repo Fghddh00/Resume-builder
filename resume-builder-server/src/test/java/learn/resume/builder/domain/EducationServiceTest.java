@@ -71,10 +71,30 @@ class EducationServiceTest {
         assertEquals(result.getMessages().size(), 1);
     }
     @Test
+    void shouldNotAddIfEducationNameIsBlank(){
+        Education education = new Education();
+        education.setSchoolName("");
+        education.setEducationLevel("level");
+
+        Result<Education> result = service.add(education);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
     void shouldNotAddIfEducationLevelIsNull(){
         Education education = new Education();
         education.setSchoolName("name");
         education.setEducationLevel(null);
+
+        Result<Education> result = service.add(education);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
+    void shouldNotAddIfEducationLevelIsBlank(){
+        Education education = new Education();
+        education.setSchoolName("name");
+        education.setEducationLevel("");
 
         Result<Education> result = service.add(education);
         assertFalse(result.isSuccess());
@@ -93,6 +113,54 @@ class EducationServiceTest {
 
         Result<Education> result = service.deleteById(1);
         assertTrue(result.isSuccess());
+    }
+    @Test
+    void shouldUpdate() {
+        Education education = new Education(1, "school_name", "level");
+        when(repository.update(education)).thenReturn(true);
+
+        Result<Education> result = service.update(education);
+        assertTrue(result.isSuccess());
+    }
+    @Test
+    void shouldNotUpdateNullSchoolName() {
+        Education education = new Education(1, null, "level");
+        when(repository.update(education)).thenReturn(false);
+
+        Result<Education> result = service.update(education);
+        assertFalse(result.isSuccess());
+    }
+    @Test
+    void shouldNotUpdateBlankSchoolName() {
+        Education education = new Education(1, "", "level");
+        when(repository.update(education)).thenReturn(false);
+
+        Result<Education> result = service.update(education);
+        assertFalse(result.isSuccess());
+    }
+    @Test
+    void shouldNotUpdateBlankEducationLevel() {
+        Education education = new Education(1, "school_name", "");
+        when(repository.update(education)).thenReturn(false);
+
+        Result<Education> result = service.update(education);
+        assertFalse(result.isSuccess());
+    }
+    @Test
+    void shouldNotUpdateNullEducationLevel() {
+        Education education = new Education(1, "school_name", null);
+        when(repository.update(education)).thenReturn(false);
+
+        Result<Education> result = service.update(education);
+        assertFalse(result.isSuccess());
+    }
+    @Test
+    void shouldNotUpdate() {
+        Education education = new Education(111, "school_name", "level");
+        when(repository.update(education)).thenReturn(false);
+
+        Result<Education> result = service.update(education);
+        assertFalse(result.isSuccess());
     }
 
 
