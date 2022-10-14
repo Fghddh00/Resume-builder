@@ -79,6 +79,7 @@ public class WorkHistoryService {
         }
         if (workHistory.getStartDate() == null){
             result.addMessage("start date is required", ResultType.INVALID);
+            return result;
         }
         if (workHistory.getStartDate().isAfter(workHistory.getEndDate())){
             result.addMessage("start date cannot be after end date", ResultType.INVALID);

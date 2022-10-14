@@ -84,8 +84,17 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
 
         return rowsUpdates > 0;
     }
+<<<<<<< HEAD
 
 
+=======
+<<<<<<< HEAD
+=======
+
+
+    @Override
+>>>>>>> 3bb511d62e8fbb4fc9088c37ab773f825bff9c6c
+>>>>>>> b9b870cf45b5559ed35e4396a2c13b6dfc32798c
     @Transactional
     public boolean deleteById(int appUserInfoId, int resumeId) {
 
@@ -94,5 +103,6 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
         jdbcTemplate.update("delete from resume_education where resume_id = ?;", resumeId);
         jdbcTemplate.update("delete from resume_app where info_id = ?;", appUserInfoId);
         return jdbcTemplate.update("delete from app_user_info where info_id = ?;", appUserInfoId) > 0;
+
     }
 }

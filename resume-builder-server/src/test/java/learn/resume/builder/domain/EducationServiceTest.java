@@ -1,9 +1,7 @@
 package learn.resume.builder.domain;
 
 import learn.resume.builder.data.EducationRepo;
-import learn.resume.builder.data.WorkHistoryRepository;
 import learn.resume.builder.models.Education;
-import learn.resume.builder.models.Skill;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

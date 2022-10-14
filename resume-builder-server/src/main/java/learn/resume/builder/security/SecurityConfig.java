@@ -31,12 +31,10 @@ public class SecurityConfig {
                 .antMatchers("/auth/create").permitAll()
                 .antMatchers("/auth/refresh_token").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/resume/user" ).hasRole("Job Seeker")
+                .antMatchers(HttpMethod.GET, "/api/resume/*" ).hasRole("Job Seeker")
                 .antMatchers(HttpMethod.POST, "/api/resume" ).hasRole("Job Seeker")
-                .antMatchers(HttpMethod.PUT, "/api/resume" ).hasRole("Job Seeker")
+                .antMatchers(HttpMethod.PUT, "/api/resume/*" ).hasRole("Job Seeker")
                 .antMatchers(HttpMethod.DELETE, "/api/resume/*" ).hasRole("Job Seeker")
-
-
-
 
                 //denying everything from here
                 .antMatchers("/**").denyAll()
