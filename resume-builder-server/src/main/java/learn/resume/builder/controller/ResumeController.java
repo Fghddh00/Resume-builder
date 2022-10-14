@@ -85,7 +85,10 @@ public class ResumeController {
     }
 
     @PutMapping("/{resumeId}")
-    public ResponseEntity editResume(@RequestBody Resume resume){
+    public ResponseEntity editResume(@PathVariable int resumeId, @RequestBody Resume resume){
+        if (resumeId != resume.getResumeId()){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
         Result result = service.updateResume(resume);
         if (result.isSuccess()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

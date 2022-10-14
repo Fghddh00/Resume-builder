@@ -92,5 +92,16 @@ class SkillDbRepositoryTest {
         assertFalse(repository.deleteById(10));
     }
 
+    @Test
+    void shouldUpdate(){
+        Skill skill = new Skill(2, "jumping");
+        assertTrue(repository.update(skill));
+    }
+
+    @Test
+    void shouldNotUpdateNonExistingId(){
+        Skill skill = new Skill(1000, "jumping");
+        assertFalse(repository.update(skill));
+    }
 
 }

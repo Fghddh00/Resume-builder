@@ -196,6 +196,66 @@ class ResumeServiceTest {
         assertFalse(deletedResult.isSuccess());
     }
 
+    @Test
+    void shouldUpdateTemplateId(){
+        Resume resume = makeResume();
+        resume.setResumeId(1);
+        resume.setTemplateId(20);
+
+        when(resumeRepo.update(resume)).thenReturn(true);
+
+        Result<Resume> actual = service.updateResume(resume);
+        assertEquals(ResultType.SUCCESS, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateWithBlankTemplateId(){
+        Resume resume = makeResume();
+        resume.setResumeId(1);
+        resume.setTemplateId(0);
+
+        when(resumeRepo.update(resume)).thenReturn(false);
+
+        Result<Resume> actual = service.updateResume(resume);
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateWithNullUser(){
+        Resume resume = makeResume();
+        resume.setResumeId(1);
+        resume.setUser(null);
+
+        when(resumeRepo.update(resume)).thenReturn(false);
+
+        Result<Resume> actual = service.updateResume(resume);
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateWithNullUserInfo(){
+        Resume resume = makeResume();
+        resume.setResumeId(1);
+        resume.setUserInfo(null);
+
+        when(resumeRepo.update(resume)).thenReturn(false);
+
+        Result<Resume> actual = service.updateResume(resume);
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateWithNonExistingId(){
+        Resume resume = makeResume();
+        resume.setResumeId(200);
+
+        when(resumeRepo.update(resume)).thenReturn(false);
+
+        Result<Resume> actual = service.updateResume(resume);
+        assertEquals(ResultType.NOT_FOUND, actual.getType());
+    }
+
+
 
 
     Resume makeResume(){

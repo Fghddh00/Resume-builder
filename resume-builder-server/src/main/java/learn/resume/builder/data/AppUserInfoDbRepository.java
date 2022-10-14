@@ -85,10 +85,7 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
         return rowsUpdates > 0;
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 928f8b04adccfc5a3defad43e93b0c6f01b102e7
     @Transactional
     public boolean deleteById(int appUserInfoId, int resumeId) {
 

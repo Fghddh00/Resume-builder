@@ -66,6 +66,17 @@ class SkillServiceTest {
         assertFalse(result.isSuccess());
         assertEquals(result.getMessages().size(), 1);
     }
+
+    @Test
+    void shouldNotAddSkillIfNameIsBlank(){
+        Skill skill = new Skill();
+        skill.setSkillName("");
+
+        Result<Skill> result = service.add(skill);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+
     @Test
     void shouldNotDeleteNonExistentId() {
         when(repository.deleteById(11)).thenReturn(false);
@@ -80,4 +91,46 @@ class SkillServiceTest {
         Result<Skill> result = service.deleteById(1);
         assertTrue(result.isSuccess());
     }
+
+    @Test
+    void shouldUpdate(){
+        Skill skill = new Skill(1, "soup eating");
+
+        when(repository.update(skill)).thenReturn(true);
+        Result<Skill> actual = service.update(skill);
+
+        assertEquals(ResultType.SUCCESS, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateForNonExistingSkillId(){
+        Skill skill = new Skill(100, "soup eating");
+
+        when(repository.update(skill)).thenReturn(false);
+        Result<Skill> actual = service.update(skill);
+
+        assertEquals(ResultType.NOT_FOUND, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateForNullName(){
+        Skill skill = new Skill(100, null);
+
+        when(repository.update(skill)).thenReturn(false);
+        Result<Skill> actual = service.update(skill);
+
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateForBlankName(){
+        Skill skill = new Skill(100, "");
+
+        when(repository.update(skill)).thenReturn(false);
+        Result<Skill> actual = service.update(skill);
+
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+
 }

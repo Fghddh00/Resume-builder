@@ -68,7 +68,7 @@ public class SkillDbRepository implements SkillRepo {
 
     @Override
     public boolean update(Skill skill) {
-        final String sql = " update resume_skill set skill_name = ? where skill_id = ?;";
+        final String sql = " update skill set skill_name = ? where skill_id = ?;";
 
         return jdbcTemplate.update(sql, skill.getSkillName(), skill.getSkillId()) > 0;
     }
