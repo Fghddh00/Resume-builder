@@ -64,6 +64,11 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
     }
 
     @Override
+    public boolean update(AppUserInfo appUserInfo) {
+        return false;
+    }
+
+    @Override
     public boolean deleteById(int appUserInfoId) {
         //need help
        throw new UnsupportedOperationException();
