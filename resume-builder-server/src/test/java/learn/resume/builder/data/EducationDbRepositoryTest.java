@@ -1,7 +1,6 @@
 package learn.resume.builder.data;
 
 import learn.resume.builder.models.Education;
-import learn.resume.builder.models.Skill;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
