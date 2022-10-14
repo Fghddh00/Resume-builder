@@ -34,8 +34,8 @@ public class AppUserInfoController {
         return ErrorResponse.build(result);
     }
     @DeleteMapping("/{educationId}")
-    public ResponseEntity deleteById(@PathVariable int appUserInfoId) {
-        Result<AppUserInfo> result = service.deleteById(appUserInfoId);
+    public ResponseEntity deleteById(@PathVariable int appUserInfoId, @PathVariable int resumeId) {
+        Result<AppUserInfo> result = service.deleteById(appUserInfoId, resumeId);
         if(result.isSuccess()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

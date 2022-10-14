@@ -75,7 +75,7 @@ public class ResumeService {
         return result;
     }
 
-
+    //TODO: Update as Result
     public boolean deleteByResumeId(int resumeId) {
         return resumeRepo.deleteByResumeId(resumeId);
     }
