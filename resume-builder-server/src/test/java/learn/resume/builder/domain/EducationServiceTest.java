@@ -160,6 +160,4 @@ class EducationServiceTest {
         Result<Education> result = service.update(education);
         assertFalse(result.isSuccess());
     }
-
-
 }

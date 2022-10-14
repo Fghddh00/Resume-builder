@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class WorkHistoryServiceTest {
     @MockBean
     WorkHistoryRepository repository;
-
     @Autowired
     WorkHistoryService service;
     @Test
@@ -35,7 +34,6 @@ class WorkHistoryServiceTest {
         List<WorkHistory> result = service.findAll();
         assertEquals(2, workHistory.size());
     }
-
     @Test
     void shouldAddWorkHistory(){
         WorkHistory workHistory = new WorkHistory();
@@ -47,7 +45,6 @@ class WorkHistoryServiceTest {
         Result<WorkHistory> result = service.addWorkHistory(workHistory);
         assertTrue(result.isSuccess());
     }
-
     @Test
     void shouldNotAddIfWorkHistoryIdIsNotZero(){
         WorkHistory workHistory = new WorkHistory();
@@ -272,5 +269,4 @@ class WorkHistoryServiceTest {
         Result<WorkHistory> result = service.update(workHistory);
         assertFalse(result.isSuccess());
     }
-
 }

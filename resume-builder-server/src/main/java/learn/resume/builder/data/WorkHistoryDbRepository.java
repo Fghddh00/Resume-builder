@@ -1,6 +1,5 @@
 package learn.resume.builder.data;
 
-import learn.resume.builder.data.mapper.SkillMapper;
 import learn.resume.builder.data.mapper.WorkHistoryMapper;
 import learn.resume.builder.models.WorkHistory;
 import org.springframework.beans.factory.annotation.Autowired;

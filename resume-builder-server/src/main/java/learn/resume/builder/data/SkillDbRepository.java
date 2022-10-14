@@ -1,16 +1,12 @@
 package learn.resume.builder.data;
 
-import learn.resume.builder.data.mapper.EducationMapper;
 import learn.resume.builder.data.mapper.SkillMapper;
-import learn.resume.builder.models.Education;
 import learn.resume.builder.models.Skill;
-import learn.resume.builder.models.WorkHistory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;

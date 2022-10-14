@@ -2,8 +2,6 @@ package learn.resume.builder.domain;
 
 import learn.resume.builder.data.AppUserInfoRepo;
 import learn.resume.builder.models.AppUserInfo;
-import learn.resume.builder.models.Education;
-import learn.resume.builder.models.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

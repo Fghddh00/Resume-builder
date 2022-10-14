@@ -11,10 +11,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -254,10 +252,6 @@ class ResumeServiceTest {
         Result<Resume> actual = service.updateResume(resume);
         assertEquals(ResultType.NOT_FOUND, actual.getType());
     }
-
-
-
-
     Resume makeResume(){
 
         AppUserInfo userInfo = new AppUserInfo();

@@ -76,7 +76,6 @@ public class WorkHistoryDbRepositoryTest {
         List<WorkHistory> actual = repository.getWorkHistoryByResumeId(1);
         assertNotEquals(actual.size(), workHistory.size());
     }
-
     @Test
     void shouldAddWorkHistory() {
         WorkHistory workHistory = new WorkHistory();
@@ -91,12 +90,10 @@ public class WorkHistoryDbRepositoryTest {
         assertEquals(actual.getEndDate(), workHistory.getEndDate());
         assertEquals(actual.getJobDescription(), workHistory.getJobDescription());
     }
-
     @Test
     void shouldDeleteExitingId(){
         assertTrue(repository.deleteById(1));
     }
-
     @Test
     void shouldNotDeleteByNonExistingId(){
         assertFalse(repository.deleteById(10));

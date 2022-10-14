@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 public class JwtRequestFilter extends BasicAuthenticationFilter {
     private final JwtConverter converter;
-
-
     private AppUserService service;
 
     public JwtRequestFilter(AuthenticationManager authenticationManager, JwtConverter converter, AppUserService service) {

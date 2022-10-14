@@ -57,7 +57,6 @@ class EducationDbRepositoryTest {
         List<Education> actual = repository.getEducationByResumeId(1);
         assertNotEquals(actual.size(), education.size());
     }
-
     @Test
     void shouldAddEducation(){
         Education education = new Education();
@@ -68,7 +67,6 @@ class EducationDbRepositoryTest {
         assertEquals(actual.getSchoolName(), education.getSchoolName());
         assertEquals(actual.getEducationLevel(), education.getEducationLevel());
     }
-
     @Test
     void shouldDeleteExitingId(){
         assertTrue(repository.deleteById(1));
@@ -78,5 +76,4 @@ class EducationDbRepositoryTest {
     void shouldNotDeleteByNonExistingId(){
         assertFalse(repository.deleteById(10));
     }
-
 }

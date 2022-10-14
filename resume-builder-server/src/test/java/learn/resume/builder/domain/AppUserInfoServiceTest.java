@@ -1,6 +1,5 @@
 package learn.resume.builder.domain;
 
-
 import learn.resume.builder.data.AppUserInfoRepo;
 import learn.resume.builder.models.AppUserInfo;
 import org.junit.jupiter.api.Test;
