@@ -178,11 +178,11 @@ class ResumeServiceTest {
         when(resumeRepo.deleteByResumeId(1)).thenReturn(true);
 
         Resume found = service.findByResumeId(1);
-        boolean deletedResume = service.deleteByResumeId(1);
+        Result<Resume> deletedResume = service.deleteByResumeId(1);
         Resume nulLResume = service.findByResumeId(1);
 
         assertNotNull(found);
-        assertTrue(deletedResume);
+        assertTrue(deletedResume.isSuccess());
         assertNull(nulLResume);
     }
 
@@ -191,9 +191,9 @@ class ResumeServiceTest {
 
         when(resumeRepo.deleteByResumeId(100)).thenReturn(false);
 
-        boolean deletedResult = service.deleteByResumeId(100);
+        Result<Resume> deletedResult = service.deleteByResumeId(100);
 
-        assertFalse(deletedResult);
+        assertFalse(deletedResult.isSuccess());
     }
 
 

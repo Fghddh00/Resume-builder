@@ -14,6 +14,7 @@ public interface AppUserInfoRepo {
     AppUserInfo findUserByResumeId(int resumeId);
 
     AppUserInfo add(AppUserInfo appUserInfo);
+    boolean update(AppUserInfo appUserInfo);
     @Transactional
     boolean deleteById(int appUserInfoId, int resumeId);
 }
