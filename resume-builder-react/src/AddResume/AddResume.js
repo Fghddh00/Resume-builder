@@ -5,10 +5,10 @@ import FormInput from "../FormInput/FormInput";
 import "./AddResume.css";
 
 function AddResume(props) {
-    const [addFormValues, setAddFormValues] = useState([ { name: '', age: '' }]);
+    const [addFormValues, setAddFormValues] = useState([ { }]);
 
-    function AddEducationForm(){
-        let newfield = { name: '', age: '' }
+    function AddForm(){
+        let newfield = {  }
 
         setAddFormValues([...addFormValues, newfield])
     }
@@ -34,26 +34,20 @@ function AddResume(props) {
         </nav>
         <div id="Education">
         <h2>Education</h2>
-        <Button onClick={AddEducationForm}>Add Education</Button>
+        <Button onClick={AddForm}>Add Education</Button>
         {addFormValues.map((input, index) => {
           return (
-            <div key={index}>
+            <div key={index} className="form">
               <FormInput
               inputType={"text"} 
-              identifier={"schoolName"} 
+              identifier={"schoolName " + index} 
               labelText={"School Name"} 
               currVal={""} 
                 />
              <FormInput
               inputType={"text"} 
-              identifier={"educationLevel"} 
+              identifier={"educationLevel " + index} 
               labelText={"Education Level"} 
-              currVal={""} 
-                />
-                <FormInput
-              inputType={"text"} 
-              identifier={"location"} 
-              labelText={"Location"} 
               currVal={""} 
                 />
             </div>
@@ -62,7 +56,34 @@ function AddResume(props) {
         </div>
         <div id="WorkHistory">
         <h2>Work History</h2>
-        <Button>Add Work History</Button>
+        <Button onClick={AddForm}>Add Work History</Button>
+        {addFormValues.map((input, index) => {
+          return (
+            <div key={index} className="form">
+              <FormInput
+              inputType={"text"} 
+              identifier={"jobTitle " + index} 
+              labelText={"Job Title"} 
+              currVal={""} 
+                />
+             <FormInput
+              inputType={"date"} 
+              identifier={"startDate " + index} 
+              labelText={"Start Date"} 
+              currVal={""} 
+                />
+                <FormInput
+              inputType={"date"} 
+              identifier={"endDate " + index} 
+              labelText={"End Date"} 
+              currVal={""} 
+                />
+                <label> Job Description
+                <textarea className="textarea" id={"jobDescription"  + index} name={"jobDescription"  + index}/>
+                </label>
+            </div>
+          )
+        })}
         </div>
       </div>
     </div>
