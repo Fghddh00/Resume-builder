@@ -1,5 +1,6 @@
 package learn.resume.builder.controller;
 
+import learn.resume.builder.App;
 import learn.resume.builder.domain.AppUserInfoService;
 import learn.resume.builder.domain.Result;
 import learn.resume.builder.domain.ResultType;
@@ -33,7 +34,20 @@ public class AppUserInfoController {
         }
         return ErrorResponse.build(result);
     }
-    @DeleteMapping("/{educationId}")
+    @PutMapping("/{appUserInfoId}")
+    public ResponseEntity<Object> update
+            (@PathVariable int appUserInfoId, @RequestBody AppUserInfo appUserInfo) {
+        if (appUserInfoId != appUserInfo.getInfoId()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
+        Result<AppUserInfo> result = service.update(appUserInfo);
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ErrorResponse.build(result);
+    }
+    @DeleteMapping("/{appUserInfoId}")
     public ResponseEntity deleteById(@PathVariable int appUserInfoId, @PathVariable int resumeId) {
         Result<AppUserInfo> result = service.deleteById(appUserInfoId, resumeId);
         if(result.isSuccess()){

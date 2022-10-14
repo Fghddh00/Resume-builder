@@ -108,15 +108,37 @@ class AppUserInfoDbRepositoryTest {
         assertEquals(actual.getPhoneNumber(), appUserInfo.getPhoneNumber());
     }
 
-    //TODO: write repo method
-//    @Test
-//    void shouldDeleteExitingId(){
-//        assertTrue(infoRepo.deleteById(1));
-//    }
-//
-//    @Test
-//    void shouldNotDeleteByNonExistingId(){
-//        assertFalse(infoRepo.deleteById(10));
-//    }
+    @Test
+    void shouldUpdateExistingAppUserInfo(){
+        AppUserInfo appUserInfo = new AppUserInfo();
+        appUserInfo.setInfoId(1);
+        appUserInfo.setEmail("email");
+        appUserInfo.setFirstName("fname");
+        appUserInfo.setLastName("lname");
+        appUserInfo.setAddress("address");
+        appUserInfo.setPhoneNumber("pn");
+
+        assertTrue(infoRepo.update(appUserInfo));
+    }
+    @Test
+    void shouldNotUpdateNonExistingAppUserInfo(){
+        AppUserInfo appUserInfo = new AppUserInfo();
+        appUserInfo.setInfoId(111);
+        appUserInfo.setEmail("email");
+        appUserInfo.setFirstName("fname");
+        appUserInfo.setLastName("lname");
+        appUserInfo.setAddress("address");
+        appUserInfo.setPhoneNumber("pn");
+
+        assertFalse(infoRepo.update(appUserInfo));
+    }
+    @Test
+    void shouldDeleteExistingId(){
+        assertTrue(infoRepo.deleteById(2, 2));
+    }
+    @Test
+    void shouldNotDeleteByNonExistingId(){
+        assertFalse(infoRepo.deleteById(10, 1));
+    }
 
 }

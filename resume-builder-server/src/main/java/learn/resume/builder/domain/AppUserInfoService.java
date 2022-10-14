@@ -2,6 +2,7 @@ package learn.resume.builder.domain;
 
 import learn.resume.builder.data.AppUserInfoRepo;
 import learn.resume.builder.models.AppUserInfo;
+import learn.resume.builder.models.Education;
 import learn.resume.builder.models.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,23 @@ public class AppUserInfoService {
         }
         appUserInfo = repository.add(appUserInfo);
         result.setPayload(appUserInfo);
+        return result;
+    }
+    public Result<AppUserInfo> update(AppUserInfo appUserInfo) {
+        Result<AppUserInfo> result = validate(appUserInfo);
+        if(result.getType() != ResultType.SUCCESS){
+            return result;
+        }
+        if (appUserInfo.getInfoId() <= 0){
+            result.addMessage("Info Id is required", ResultType.INVALID);
+        }
+        if(result.isSuccess()){
+            if(repository.update(appUserInfo)){
+                result.setPayload(appUserInfo);
+            } else {
+                result.addMessage("Info Id was not found", ResultType.NOT_FOUND);
+            }
+        }
         return result;
     }
     public Result deleteById(int appUserInfoId, int resumeId) {
