@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Button } from "react-foundation";
 import FormInput from "../FormInput/FormInput";
 import "./AddResume.css";
+import "../ErrorMessages/ErrorMessages.js"
+import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
 
 function AddResume(props) {
   const [addEdFormValues, setAddEdFormValues] = useState([{}]);
@@ -180,6 +182,7 @@ function AddResume(props) {
         </div>
       </div>
     </div>
+    
   );
 }
 
