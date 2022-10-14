@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -64,6 +65,7 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
     }
 
     @Override
+<<<<<<< HEAD
     public boolean update(AppUserInfo appUserInfo) {
         return false;
     }
@@ -72,6 +74,16 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
     public boolean deleteById(int appUserInfoId) {
         //need help
        throw new UnsupportedOperationException();
+=======
+    @Transactional
+    public boolean deleteById(int appUserInfoId, int resumeId) {
+
+        jdbcTemplate.update("delete from resume_skill where resume_id = ?;", resumeId);
+        jdbcTemplate.update("delete from resume_work_history where resume_id = ?;", resumeId);
+        jdbcTemplate.update("delete from resume_education where resume_id = ?;", resumeId);
+        jdbcTemplate.update("delete from resume_app where info_id = ?;", appUserInfoId);
+        return jdbcTemplate.update("delete from resume_app where info_id = ?;", appUserInfoId) > 0;
+>>>>>>> 98961294dee6c074f3c2dfb2df5c04b9ac9e93c2
     }
 
 }

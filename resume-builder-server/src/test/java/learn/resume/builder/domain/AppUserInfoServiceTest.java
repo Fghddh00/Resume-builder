@@ -134,16 +134,16 @@ class AppUserInfoServiceTest {
     }
     @Test
     void shouldNotDeleteNonExistentId() {
-        when(repository.deleteById(11)).thenReturn(false);
+        when(repository.deleteById(11, 100)).thenReturn(false);
 
-        Result<AppUserInfo> result = service.deleteById(1);
+        Result<AppUserInfo> result = service.deleteById(1,100);
         assertFalse(result.isSuccess());
     }
     @Test
     void shouldDeleteId(){
-        when(repository.deleteById(1)).thenReturn(true);
+        when(repository.deleteById(1,1)).thenReturn(true);
 
-        Result<AppUserInfo> result = service.deleteById(1);
+        Result<AppUserInfo> result = service.deleteById(1,1);
         assertTrue(result.isSuccess());
     }
 

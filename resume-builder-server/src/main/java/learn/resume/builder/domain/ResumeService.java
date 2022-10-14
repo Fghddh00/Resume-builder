@@ -76,8 +76,15 @@ public class ResumeService {
     }
 
 
-    public boolean deleteByResumeId(int resumeId) {
-        return resumeRepo.deleteByResumeId(resumeId);
+    public Result deleteByResumeId(int resumeId) {
+        Result<Skill> result = new Result<>();
+        if (!resumeRepo.deleteByResumeId(resumeId)) {
+            result.addMessage("Resume Id was not found", ResultType.NOT_FOUND);
+        }
+        if(result.isSuccess()){
+            resumeRepo.deleteByResumeId(resumeId);
+        }
+        return result;
     }
 
     public Result updateResume(Resume resume) {

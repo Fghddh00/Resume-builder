@@ -72,8 +72,8 @@ public class ResumeDbRepo implements ResumeRepo{
         return resumeToAdd;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public boolean deleteByResumeId(int resumeId) {
         jdbcTemplate.update("delete from resume_skill where resume_id = ?;", resumeId);
         jdbcTemplate.update("delete from resume_work_history where resume_id = ?;", resumeId);
