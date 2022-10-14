@@ -45,10 +45,6 @@ class ResumeDbRepoTest {
         assertEquals(1, actual.getTemplateId());
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7e75bee4e58eee8cc4cc24cd86b5f9f25623bad7
     @Test
     void shouldGetUserEmailByResumeId(){
         Resume actual = makeResume();
@@ -99,7 +95,6 @@ class ResumeDbRepoTest {
         assertNotNull(actual);
         assertEquals(3, actual.getResumeId());
     }
-<<<<<<< HEAD
 
     @Test
     void shouldNotAddResumeWithNoUserInfo(){
@@ -197,9 +192,6 @@ class ResumeDbRepoTest {
         assertFalse(resumeRepo.deleteByResumeId(100));
     }
 
-
-
-
     Resume makeResume(){
         AppUserInfo userInfo = new AppUserInfo();
         userInfo.setInfoId(2);
@@ -222,7 +214,4 @@ class ResumeDbRepoTest {
 
         return resumeToTest;
     }
-
-=======
->>>>>>> 7e75bee4e58eee8cc4cc24cd86b5f9f25623bad7
 }

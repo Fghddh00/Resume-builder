@@ -40,7 +40,6 @@ public class WorkHistoryDbRepository implements WorkHistoryRepository{
                 "inner join resume_work_history on work_history.work_history_id = resume_work_history.work_history_id\n" +
                 "where resume_id = ?;", new WorkHistoryMapper(), resumeId);
     }
-
     @Override
     public WorkHistory add(WorkHistory workHistory) {
 
@@ -74,5 +73,4 @@ public class WorkHistoryDbRepository implements WorkHistoryRepository{
         return jdbcTemplate.update("delete from work_history where work_history_id = ?; "
                 , workHistoryId) > 0;
     }
-
 }
