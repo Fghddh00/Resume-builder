@@ -74,8 +74,7 @@ function Resume(props) {
   };
 
   return (
-
-      <div >
+    <div>
         <motion.div onClick={handleClick} className="card" style={{borderRadius: '3rem'}}>
           <motion.h2>Resume {props.resumeId}</motion.h2>
           {isOpen &&

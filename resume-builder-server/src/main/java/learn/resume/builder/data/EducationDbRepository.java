@@ -33,7 +33,6 @@ public class EducationDbRepository implements EducationRepo {
                 "inner join resume_education on education.education_id = resume_education.education_id\n" +
                 "where resume_id = ?;", new EducationMapper(), resumeId);
     }
-
     @Override
     public Education add(Education education) {
         final String sql = "insert into education (school_name, education_level) values (?, ?);";
@@ -52,7 +51,6 @@ public class EducationDbRepository implements EducationRepo {
         education.setEducationId(keyHolder.getKey().intValue());
         return education;
     }
-
     @Override
     public boolean update(Education education) {
         final String sql = "update education set\n" +
@@ -67,7 +65,6 @@ public class EducationDbRepository implements EducationRepo {
 
         return rowsUpdated > 0;
     }
-
     @Override
     public boolean deleteById(int educationId) {
         jdbcTemplate.update("delete from resume_education where education_id = ?;"
@@ -75,5 +72,4 @@ public class EducationDbRepository implements EducationRepo {
         return jdbcTemplate.update("delete from education where education_id = ?;"
         , educationId) > 0;
     }
-
 }

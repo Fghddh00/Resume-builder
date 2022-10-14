@@ -37,10 +37,6 @@ function ViewResume() {
 });
   
 
-  // function onResumeDeleted() {
-  //   loadAllResumes();
-  // }
-
   return (
     <div className="page">
     <Link to="/api/addResume" className="addBtn"> Add Resume</Link>
@@ -51,7 +47,6 @@ function ViewResume() {
             key ={c.resumeId}
             resumeId = {c.resumeId}
             templateId = {c.templateId}
-            //onResumeDeleted={onResumeDeleted}
           />
         ))} 
         

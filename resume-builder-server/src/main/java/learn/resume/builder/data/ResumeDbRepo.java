@@ -32,13 +32,10 @@ public class ResumeDbRepo implements ResumeRepo{
     public List<Resume> getResumesByUser(int userId) {
 
         String sql = "select * from resume_app inner join app_user on app_user.user_id = resume_app.user_id inner join app_user_info on app_user_info.info_id = resume_app.info_id where app_user.user_id = ?;";
-
         List<Resume> resumeList = jdbcTemplate.query(sql, new ResumeMapper(), userId);
-
         if (resumeList.size() < 1){
             return null;
         }
-
         return resumeList;
     }
 
@@ -48,13 +45,11 @@ public class ResumeDbRepo implements ResumeRepo{
         if(resumeToAdd.getTemplateId()<1){
             return null;
         }
-
         if(resumeToAdd.getUserInfo() == null || resumeToAdd.getUser() == null){
             return null;
         }
 
         final String sql = "insert into resume_app (template_id, info_id, user_id) values (?,?, ?);";
-
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -63,11 +58,9 @@ public class ResumeDbRepo implements ResumeRepo{
             ps.setInt(3,resumeToAdd.getUser().getUserId());
             return ps;
         }, keyHolder);
-
         if (rowsAffected <= 0){
             return null;
         }
-
         resumeToAdd.setResumeId(keyHolder.getKey().intValue());
         return resumeToAdd;
     }

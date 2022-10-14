@@ -1,7 +1,6 @@
 package learn.resume.builder.data;
 
 import learn.resume.builder.models.Education;
-import learn.resume.builder.models.Skill;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +57,6 @@ class EducationDbRepositoryTest {
         List<Education> actual = repository.getEducationByResumeId(1);
         assertNotEquals(actual.size(), education.size());
     }
-
     @Test
     void shouldAddEducation(){
         Education education = new Education();
@@ -69,7 +67,6 @@ class EducationDbRepositoryTest {
         assertEquals(actual.getSchoolName(), education.getSchoolName());
         assertEquals(actual.getEducationLevel(), education.getEducationLevel());
     }
-
     @Test
     void shouldDeleteExitingId(){
         assertTrue(repository.deleteById(1));
@@ -79,5 +76,4 @@ class EducationDbRepositoryTest {
     void shouldNotDeleteByNonExistingId(){
         assertFalse(repository.deleteById(10));
     }
-
 }

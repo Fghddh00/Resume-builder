@@ -1,7 +1,6 @@
 package learn.resume.builder.domain;
 
 import learn.resume.builder.data.WorkHistoryRepository;
-import learn.resume.builder.models.Skill;
 import learn.resume.builder.models.WorkHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +78,7 @@ public class WorkHistoryService {
         }
         if (workHistory.getStartDate() == null){
             result.addMessage("start date is required", ResultType.INVALID);
+            return result;
         }
         if (workHistory.getStartDate().isAfter(workHistory.getEndDate())){
             result.addMessage("start date cannot be after end date", ResultType.INVALID);

@@ -11,10 +11,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -196,8 +194,64 @@ class ResumeServiceTest {
         assertFalse(deletedResult.isSuccess());
     }
 
+    @Test
+    void shouldUpdateTemplateId(){
+        Resume resume = makeResume();
+        resume.setResumeId(1);
+        resume.setTemplateId(20);
 
+        when(resumeRepo.update(resume)).thenReturn(true);
 
+        Result<Resume> actual = service.updateResume(resume);
+        assertEquals(ResultType.SUCCESS, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateWithBlankTemplateId(){
+        Resume resume = makeResume();
+        resume.setResumeId(1);
+        resume.setTemplateId(0);
+
+        when(resumeRepo.update(resume)).thenReturn(false);
+
+        Result<Resume> actual = service.updateResume(resume);
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateWithNullUser(){
+        Resume resume = makeResume();
+        resume.setResumeId(1);
+        resume.setUser(null);
+
+        when(resumeRepo.update(resume)).thenReturn(false);
+
+        Result<Resume> actual = service.updateResume(resume);
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateWithNullUserInfo(){
+        Resume resume = makeResume();
+        resume.setResumeId(1);
+        resume.setUserInfo(null);
+
+        when(resumeRepo.update(resume)).thenReturn(false);
+
+        Result<Resume> actual = service.updateResume(resume);
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateWithNonExistingId(){
+        Resume resume = makeResume();
+        resume.setResumeId(200);
+
+        when(resumeRepo.update(resume)).thenReturn(false);
+
+        Result<Resume> actual = service.updateResume(resume);
+        assertEquals(ResultType.NOT_FOUND, actual.getType());
+    }
     Resume makeResume(){
 
         AppUserInfo userInfo = new AppUserInfo();

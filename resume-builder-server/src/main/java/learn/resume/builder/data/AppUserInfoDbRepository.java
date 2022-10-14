@@ -1,8 +1,6 @@
 package learn.resume.builder.data;
 
-import learn.resume.builder.App;
 import learn.resume.builder.data.mapper.AppUserInfoMapper;
-import learn.resume.builder.data.mapper.EducationMapper;
 import learn.resume.builder.models.AppUserInfo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -84,8 +82,6 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
 
         return rowsUpdates > 0;
     }
-
-
     @Override
     @Transactional
     public boolean deleteById(int appUserInfoId, int resumeId) {

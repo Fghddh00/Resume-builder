@@ -2,7 +2,6 @@ package learn.resume.builder.data;
 
 import learn.resume.builder.data.mapper.AppRoleMapper;
 import learn.resume.builder.data.mapper.AppUserMapper;
-import learn.resume.builder.domain.Result;
 import learn.resume.builder.models.AppRole;
 import learn.resume.builder.models.AppUser;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,8 +32,6 @@ public class AppUserRepo {
         return jdbcTemplate.query(sql, new AppUserMapper(roles), username)
                 .stream().findFirst().orElse(null);
     }
-
-
     @Transactional
     public AppUser create(AppUser user) {
         final String sql = "insert into app_user (username, password_hash) values (?, ?);";
@@ -55,7 +52,6 @@ public class AppUserRepo {
 
         return user;
     }
-
     @Transactional
     public void update(AppUser user) {
         final String sql = "update app_user set"
