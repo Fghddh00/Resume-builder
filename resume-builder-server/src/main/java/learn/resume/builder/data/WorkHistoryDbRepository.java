@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -63,4 +64,15 @@ public class WorkHistoryDbRepository implements WorkHistoryRepository{
         workHistory.setWorkHistoryId(keyHolder.getKey().intValue());
         return workHistory;
     }
+
+    @Override
+    @Transactional
+    public boolean deleteById(int workHistoryId) {
+        // first delete from bridge table then work_history
+        jdbcTemplate.update("delete from resume_work_history where work_history_id = ?; "
+                , workHistoryId);
+        return jdbcTemplate.update("delete from work_history where work_history_id = ?; "
+                , workHistoryId) > 0;
+    }
+
 }

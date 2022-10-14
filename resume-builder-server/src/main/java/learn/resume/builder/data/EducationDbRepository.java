@@ -53,4 +53,12 @@ public class EducationDbRepository implements EducationRepo {
         return education;
     }
 
+    @Override
+    public boolean deleteById(int educationId) {
+        jdbcTemplate.update("delete from resume_education where education_id = ?;"
+        , educationId);
+        return jdbcTemplate.update("delete from education where education_id = ?;"
+        , educationId) > 0;
+    }
+
 }

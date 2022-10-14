@@ -33,14 +33,51 @@ class SkillServiceTest {
         List<Skill> result = service.findAll();
         assertEquals(2, skills.size());
     }
-//    @Test
-//    void shouldAddSkill(){
-//        Skill skill = new Skill();
-//        skill.setSkillId(1);
-//        skill.setSkillName("Name");
-//
-//        Result<Skill> result = service.add(skill);
-//
-//        assertTrue(result.isSuccess());
-//    }
+    @Test
+    void shouldAddSkill(){
+        Skill skill = new Skill();
+        skill.setSkillName("Name");
+
+        Result<Skill> result = service.add(skill);
+        assertTrue(result.isSuccess());
+    }
+    @Test
+    void shouldNotAddSkillIfIdIsNotZero(){
+        Skill skill = new Skill();
+        skill.setSkillId(1);
+        skill.setSkillName("Name");
+
+        Result<Skill> result = service.add(skill);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
+    void shouldNotAddNullSkill(){
+        Result<Skill> result = service.add(null);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
+    void shouldNotAddSkillIfNameIsNull(){
+        Skill skill = new Skill();
+        skill.setSkillName(null);
+
+        Result<Skill> result = service.add(skill);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+    @Test
+    void shouldNotDeleteNonExistentId() {
+        when(repository.deleteById(11)).thenReturn(false);
+
+        Result<Skill> result = service.deleteById(1);
+        assertFalse(result.isSuccess());
+    }
+    @Test
+    void shouldDeleteId(){
+        when(repository.deleteById(1)).thenReturn(true);
+
+        Result<Skill> result = service.deleteById(1);
+        assertTrue(result.isSuccess());
+    }
 }

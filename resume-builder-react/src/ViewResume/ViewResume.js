@@ -2,7 +2,7 @@ import AuthContext from "../AuthContext";
 import { useContext, useState, useEffect } from "react";
 import "./ViewResume.css";
 import Resume from "../Resume/Resume";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function ViewResume() {
   const [resumes, setResumes] = useState([]);
@@ -37,9 +37,9 @@ function ViewResume() {
   // }
 
   return (
-    
+    <div className="page">
+    <Link className="addBtn"> Add Resume</Link>
     <div className="ResumeTable">
-     
         {resumes.map((c) => (
           <Resume
             resumeId = {c.resumeId}
@@ -48,6 +48,7 @@ function ViewResume() {
         ))}
         
     </div>
+    </div> 
     
    
   );

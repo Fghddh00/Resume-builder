@@ -82,5 +82,15 @@ class SkillDbRepositoryTest {
         assertEquals(actual.getSkillName(), skill.getSkillName());
     }
 
+    @Test
+    void shouldDeleteExitingId(){
+        assertTrue(repository.deleteById(1));
+    }
+
+    @Test
+    void shouldNotDeleteByNonExistingId(){
+        assertFalse(repository.deleteById(10));
+    }
+
 
 }

@@ -1,7 +1,5 @@
 package learn.resume.builder.data;
 
-import learn.resume.builder.domain.Result;
-import learn.resume.builder.models.Resume;
 import learn.resume.builder.models.WorkHistory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -92,6 +90,16 @@ public class WorkHistoryDbRepositoryTest {
         assertEquals(actual.getStartDate(), workHistory.getStartDate());
         assertEquals(actual.getEndDate(), workHistory.getEndDate());
         assertEquals(actual.getJobDescription(), workHistory.getJobDescription());
+    }
+
+    @Test
+    void shouldDeleteExitingId(){
+        assertTrue(repository.deleteById(1));
+    }
+
+    @Test
+    void shouldNotDeleteByNonExistingId(){
+        assertFalse(repository.deleteById(10));
     }
 
 }

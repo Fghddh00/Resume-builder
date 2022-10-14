@@ -34,11 +34,33 @@ public class AppUserInfoService {
         result.setPayload(appUserInfo);
         return result;
     }
+    public Result deleteById(int appUserInfoId) {
+        Result<AppUserInfo> result = new Result<>();
+        if (!repository.deleteById(appUserInfoId)) {
+            result.addMessage("App User Info Id Id was not found", ResultType.NOT_FOUND);
+        }
+        if(result.isSuccess()){
+            repository.deleteById(appUserInfoId);
+        }
+        return result;
+    }
     private Result<AppUserInfo> validate(AppUserInfo appUserInfo) {
         Result<AppUserInfo> result = new Result<>();
         if (appUserInfo == null) {
             result.addMessage("appUserInfo cannot be null", ResultType.INVALID);
             return result;
+        }
+        if (appUserInfo.getEmail() == null || appUserInfo.getEmail().isBlank()){
+            result.addMessage("Email is required", ResultType.INVALID);
+        }
+        if (appUserInfo.getFirstName() == null || appUserInfo.getFirstName().isBlank()){
+            result.addMessage("First Name is required", ResultType.INVALID);
+        }
+        if (appUserInfo.getLastName() == null || appUserInfo.getLastName().isBlank()){
+            result.addMessage("Last Name is required", ResultType.INVALID);
+        }
+        if (appUserInfo.getPhoneNumber() == null || appUserInfo.getPhoneNumber().isBlank()){
+            result.addMessage("Phone Number is required", ResultType.INVALID);
         }
 
         return result;

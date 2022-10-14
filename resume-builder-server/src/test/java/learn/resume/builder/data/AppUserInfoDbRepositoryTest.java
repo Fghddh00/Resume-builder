@@ -1,11 +1,14 @@
 package learn.resume.builder.data;
 
 import learn.resume.builder.models.AppUserInfo;
+import learn.resume.builder.models.Education;
 import learn.resume.builder.models.Resume;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +25,24 @@ class AppUserInfoDbRepositoryTest {
     @BeforeEach
     void setup() {
         knownGoodState.set();
+    }
+
+    @Test
+    void findAll() {
+        List<AppUserInfo> actual = infoRepo.findAll();
+
+        assertNotNull(actual);
+        assertTrue(actual.size() >= 1);
+        AppUserInfo aui = actual.stream()
+                .filter(appUserInfo -> appUserInfo.getInfoId() == 1)
+                .findFirst().orElse(null);
+
+        assertEquals(1, aui.getInfoId());
+        assertEquals("jason@gmail.com", aui.getEmail());
+        assertEquals("jason", aui.getFirstName());
+        assertEquals("oh", aui.getLastName());
+        assertEquals("testaddress", aui.getAddress());
+        assertEquals("123456789", aui.getPhoneNumber());
     }
 
     @Test
@@ -86,5 +107,16 @@ class AppUserInfoDbRepositoryTest {
         assertEquals(actual.getAddress(), appUserInfo.getAddress());
         assertEquals(actual.getPhoneNumber(), appUserInfo.getPhoneNumber());
     }
+
+    //TODO: write repo method
+//    @Test
+//    void shouldDeleteExitingId(){
+//        assertTrue(infoRepo.deleteById(1));
+//    }
+//
+//    @Test
+//    void shouldNotDeleteByNonExistingId(){
+//        assertFalse(infoRepo.deleteById(10));
+//    }
 
 }

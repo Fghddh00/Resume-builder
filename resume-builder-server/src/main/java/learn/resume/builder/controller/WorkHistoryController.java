@@ -1,6 +1,7 @@
 package learn.resume.builder.controller;
 
 import learn.resume.builder.domain.Result;
+import learn.resume.builder.domain.ResultType;
 import learn.resume.builder.domain.WorkHistoryService;
 import learn.resume.builder.models.Skill;
 import learn.resume.builder.models.WorkHistory;
@@ -34,5 +35,16 @@ public class WorkHistoryController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return ErrorResponse.build(result);
+    }
+    @DeleteMapping("/{workHistoryId}")
+    public ResponseEntity deleteById(@PathVariable int workHistoryId) {
+        Result<WorkHistory> result = service.deleteById(workHistoryId);
+        if(result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        if(result.getType() == ResultType.NOT_FOUND){
+            return new ResponseEntity<>(result.getMessages(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
     }
 }

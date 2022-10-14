@@ -2,6 +2,7 @@ package learn.resume.builder.domain;
 
 import learn.resume.builder.data.EducationRepo;
 import learn.resume.builder.models.Education;
+import learn.resume.builder.models.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,16 @@ public class EducationService {
         }
         education = repository.add(education);
         result.setPayload(education);
+        return result;
+    }
+    public Result deleteById(int educationId) {
+        Result<Education> result = new Result<>();
+        if (!repository.deleteById(educationId)) {
+            result.addMessage("Education Id Id was not found", ResultType.NOT_FOUND);
+        }
+        if(result.isSuccess()){
+            repository.deleteById(educationId);
+        }
         return result;
     }
     private Result<Education> validate(Education education) {

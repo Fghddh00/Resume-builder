@@ -45,6 +45,10 @@ class ResumeDbRepoTest {
         assertEquals(1, actual.getTemplateId());
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7e75bee4e58eee8cc4cc24cd86b5f9f25623bad7
     @Test
     void shouldGetUserEmailByResumeId(){
         Resume actual = makeResume();
@@ -95,6 +99,7 @@ class ResumeDbRepoTest {
         assertNotNull(actual);
         assertEquals(3, actual.getResumeId());
     }
+<<<<<<< HEAD
 
     @Test
     void shouldNotAddResumeWithNoUserInfo(){
@@ -218,4 +223,6 @@ class ResumeDbRepoTest {
         return resumeToTest;
     }
 
+=======
+>>>>>>> 7e75bee4e58eee8cc4cc24cd86b5f9f25623bad7
 }

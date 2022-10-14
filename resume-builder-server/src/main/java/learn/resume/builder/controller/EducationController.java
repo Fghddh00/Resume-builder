@@ -1,7 +1,13 @@
 package learn.resume.builder.controller;
 
 import learn.resume.builder.domain.EducationService;
+import learn.resume.builder.domain.Result;
+import learn.resume.builder.domain.ResultType;
 import learn.resume.builder.models.Education;
+import learn.resume.builder.models.Skill;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +17,7 @@ import java.util.List;
 @RequestMapping("/api/education")
 public class EducationController {
 
+    @Autowired
     private final EducationService service;
 
     public EducationController(EducationService service) {
@@ -20,6 +27,25 @@ public class EducationController {
     @GetMapping
     public List<Education> findAll() {
         return service.findAll();
+    }
+    @PostMapping
+    public ResponseEntity<Object> add(@RequestBody Education education){
+        Result<Education> result = service.add(education);
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        return ErrorResponse.build(result);
+    }
+    @DeleteMapping("/{educationId}")
+    public ResponseEntity deleteById(@PathVariable int educationId) {
+        Result<Education> result = service.deleteById(educationId);
+        if(result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        if(result.getType() == ResultType.NOT_FOUND){
+            return new ResponseEntity<>(result.getMessages(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
     }
 
 }

@@ -31,12 +31,23 @@ public class WorkHistoryService {
         }
 
         if (workHistory.getWorkHistoryId() != 0){
-            result.addMessage("workHistoryId cannot be set for 'add' operation", ResultType.INVALID);
+            result.addMessage("Work History Id cannot be set for 'add' operation", ResultType.INVALID);
             return result;
         }
 
         workHistory = repository.add(workHistory);
         result.setPayload(workHistory);
+        return result;
+    }
+
+    public Result deleteById(int workHistoryId) {
+        Result<WorkHistory> result = new Result<>();
+        if (!repository.deleteById(workHistoryId)) {
+            result.addMessage("Work History Id Id was not found", ResultType.NOT_FOUND);
+        }
+        if(result.isSuccess()){
+            repository.deleteById(workHistoryId);
+        }
         return result;
     }
 
@@ -59,7 +70,7 @@ public class WorkHistoryService {
         if (workHistory.getStartDate().isAfter(LocalDate.now())){
             result.addMessage("start date cannot be after today's date", ResultType.INVALID);
         }
-        if (workHistory.getEndDate().isBefore(LocalDate.now())){
+        if (workHistory.getEndDate().isAfter(LocalDate.now())){
             result.addMessage("end date cannot be before today's date", ResultType.INVALID);
         }
         if (workHistory.getJobDescription() == null || workHistory.getJobDescription().isBlank()){
