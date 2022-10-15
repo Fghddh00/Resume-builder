@@ -1,6 +1,7 @@
 package learn.resume.builder.domain;
 
 import learn.resume.builder.data.WorkHistoryRepository;
+import learn.resume.builder.models.Resume;
 import learn.resume.builder.models.WorkHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,21 @@ public class WorkHistoryService {
             result.addMessage("Work History could not be found", ResultType.NOT_FOUND);
         }
 
+        return result;
+    }
+
+    public Result<Resume> addWorkHistoryFromResume(Resume resumeToAdd) {
+        Result<Resume> result = new Result<>();
+
+        for(WorkHistory workHistory : resumeToAdd.getWorkHistories()){
+            Result<WorkHistory> workResult = validate(workHistory);
+            if (!workResult.isSuccess()){
+                result.addMessage("Work history could not be added", workResult.getType());
+                return result;
+            }
+            repository.add(workHistory);
+        }
+        result.setPayload(resumeToAdd);
         return result;
     }
 

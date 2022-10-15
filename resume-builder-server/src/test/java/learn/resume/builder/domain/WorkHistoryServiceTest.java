@@ -1,7 +1,7 @@
 package learn.resume.builder.domain;
 
 import learn.resume.builder.data.WorkHistoryRepository;
-import learn.resume.builder.models.WorkHistory;
+import learn.resume.builder.models.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -268,5 +268,50 @@ class WorkHistoryServiceTest {
 
         Result<WorkHistory> result = service.update(workHistory);
         assertFalse(result.isSuccess());
+    }
+
+    @Test
+    void shouldAddWorkHistoryFromResume(){
+        Resume resume = makeResume();
+
+        Result<Resume> result = service.addWorkHistoryFromResume(resume);
+        assertTrue(result.isSuccess());
+    }
+
+    Resume makeResume(){
+
+        AppUserInfo userInfo = new AppUserInfo();
+        userInfo.setInfoId(1);
+        userInfo.setEmail("jason@gmail.com");
+        userInfo.setFirstName("jason");
+        userInfo.setLastName("oh");
+        userInfo.setAddress("testaddress");
+        userInfo.setPhoneNumber("123456789");
+
+        List<Skill> skills = new ArrayList<>();
+        skills.add(new Skill(10, "sing"));
+
+        List<Education> educations = new ArrayList<>();
+        educations.add(new Education(10,"College","Bachelors"));
+
+        List<WorkHistory> workHistories = new ArrayList<>();
+        workHistories.add(new WorkHistory(10, "Fighter", LocalDate.of(2010,6,16), LocalDate.of(2010,10,16), "I fight"));
+        workHistories.add(new WorkHistory(11, "Pilot", LocalDate.of(2011,6,16), LocalDate.of(2011,10,16), "I fly a plane "));
+
+        List<AppRole> roles = new ArrayList<>();
+        roles.add(new AppRole(1, "Job Seeker"));
+        roles.add(new AppRole(2, "Employer"));
+
+        AppUser user = new AppUser(1,"jasonniv", "$2y$10$Gk9DNFuQNRhSYSDZ.xk3CO65dJ6wz3snAd2rdrVUTWcfUzrxHr5hq", false, roles);
+
+        Resume resume = new Resume();
+        resume.setTemplateId(1);
+        resume.setUser(user);
+        resume.setUserInfo(userInfo);
+        resume.setSkills(skills);
+        resume.setEducations(educations);
+        resume.setWorkHistories(workHistories);
+
+        return resume;
     }
 }
