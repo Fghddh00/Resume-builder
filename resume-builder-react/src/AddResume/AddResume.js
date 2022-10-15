@@ -164,7 +164,7 @@ function AddResume(props) {
                   labelText={"End Date"}
                   currVal={""}
                 />
-<<<<<<< HEAD
+
              <FormInput
               inputType={"text"} 
               identifier={"address" + index} 
@@ -180,7 +180,8 @@ function AddResume(props) {
             </div>
           )
         })}
-=======
+        
+
                 <label htmlFor="description">
                   {" "}
                   Job Description
@@ -197,7 +198,7 @@ function AddResume(props) {
             );
           })}
         </div>
->>>>>>> cf4be2f45adb879f91ba6e3c9cc3beca3489ff39
+
       </div>
     </div>
     
