@@ -178,7 +178,6 @@ function AddResume(props) {
             </div>
           )
         })}
-
       </div>
     </div>
     </div>
