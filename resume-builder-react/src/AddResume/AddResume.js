@@ -164,7 +164,6 @@ function AddResume(props) {
                   labelText={"End Date"}
                   currVal={""}
                 />
-<<<<<<< HEAD
              <FormInput
               inputType={"text"} 
               identifier={"address" + index} 
@@ -180,25 +179,8 @@ function AddResume(props) {
             </div>
           )
         })}
-=======
-                <label htmlFor="description">
-                  {" "}
-                  Job Description
-                  <textarea
-                    className="textarea"
-                    id={"jobDescription" + index}
-                    name={"jobDescription" + index}
-                    //onChange={skillsChecker} would be nice but cant because of montly limit
-                  />
-                </label>
-                <Button onClick={handleClick}> load skills</Button>
-                <div></div>
-              </div>
-            );
-          })}
-        </div>
->>>>>>> cf4be2f45adb879f91ba6e3c9cc3beca3489ff39
       </div>
+    </div>
     </div>
     
   );
