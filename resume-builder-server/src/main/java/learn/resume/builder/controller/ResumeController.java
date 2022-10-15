@@ -1,11 +1,7 @@
 package learn.resume.builder.controller;
 
-import learn.resume.builder.domain.Result;
-import learn.resume.builder.domain.ResultType;
-import learn.resume.builder.domain.ResumeService;
-import learn.resume.builder.domain.WorkHistoryService;
-import learn.resume.builder.models.AppUser;
-import learn.resume.builder.models.Resume;
+import learn.resume.builder.domain.*;
+import learn.resume.builder.models.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,10 +16,16 @@ public class ResumeController {
 
     private final ResumeService resumeService;
     private final WorkHistoryService workHistoryService;
+    private final EducationService educationService;
+    private final SkillService skillService;
+    private final AppUserInfoService appUserInfoService;
 
-    public ResumeController(ResumeService service, WorkHistoryService workHistoryService) {
+    public ResumeController(ResumeService service, WorkHistoryService workHistoryService, EducationService educationService, SkillService skillService, AppUserInfoService appUserInfoService) {
         this.resumeService = service;
         this.workHistoryService = workHistoryService;
+        this.educationService = educationService;
+        this.skillService = skillService;
+        this.appUserInfoService = appUserInfoService;
     }
 
 
@@ -65,14 +67,36 @@ public class ResumeController {
     @PostMapping
     public ResponseEntity<Object> addResume(@RequestBody Resume resumeToAdd){
 
-        Result<Resume> result = resumeService.addResume(resumeToAdd);
-        result = workHistoryService.addWorkHistoryFromResume(resumeToAdd);
-
-        if (result.isSuccess()){
-            return new ResponseEntity<>(HttpStatus.CREATED);
+        if (resumeToAdd == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return ErrorResponse.build(result);
+        Result<List<WorkHistory>> workHistoriesResult = workHistoryService.addWorkHistoryFromResume(resumeToAdd);
+        if(!workHistoriesResult.isSuccess()){
+            return ErrorResponse.build(workHistoriesResult);
+        }
+
+        Result<List<Education>> educationsResult = educationService.addEducationFromResume(resumeToAdd);
+        if(!educationsResult.isSuccess()){
+            return ErrorResponse.build(educationsResult);
+        }
+
+        Result<List<Skill>> skillsResult = skillService.addSkillFromResume(resumeToAdd);
+        if(!skillsResult.isSuccess()){
+            return ErrorResponse.build(skillsResult);
+        }
+
+        Result<AppUserInfo> appUserInfoResult = appUserInfoService.add(resumeToAdd.getUserInfo());
+        if(!appUserInfoResult.isSuccess()){
+            return ErrorResponse.build(appUserInfoResult);
+        }
+
+        Result<Resume> resumeResult = resumeService.addResume(resumeToAdd);
+        if (!resumeResult.isSuccess()) {
+            return ErrorResponse.build(resumeResult);
+        }
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{resumeId}")
@@ -91,14 +115,35 @@ public class ResumeController {
     @PutMapping("/{resumeId}")
     public ResponseEntity editResume(@PathVariable int resumeId, @RequestBody Resume resume){
         if (resumeId != resume.getResumeId()){
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        Result result = resumeService.updateResume(resume);
-        if (result.isSuccess()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return ErrorResponse.build(result);
+
+        Result<List<WorkHistory>> workHistoriesResult = workHistoryService.updateWorkHistoryFromResume(resume);
+        if(!workHistoriesResult.isSuccess()){
+            return ErrorResponse.build(workHistoriesResult);
         }
+
+        Result<List<Education>> educationsResult = educationService.updateEducationFromResume(resume);
+        if(!educationsResult.isSuccess()){
+            return ErrorResponse.build(educationsResult);
+        }
+
+        Result<List<Skill>> skillsResult = skillService.updateSkillFromResume(resume);
+        if(!skillsResult.isSuccess()){
+            return ErrorResponse.build(skillsResult);
+        }
+
+        Result<AppUserInfo> appUserInfoResult = appUserInfoService.update(resume.getUserInfo());
+        if(!appUserInfoResult.isSuccess()){
+            return ErrorResponse.build(appUserInfoResult);
+        }
+
+        Result<Resume> resumeResult = resumeService.updateResume(resume);
+        if(!resumeResult.isSuccess()) {
+            return ErrorResponse.build(resumeResult);
+        }
+
+        return ErrorResponse.build(resumeResult);
 
     }
 }

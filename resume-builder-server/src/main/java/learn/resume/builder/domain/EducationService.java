@@ -2,6 +2,8 @@ package learn.resume.builder.domain;
 
 import learn.resume.builder.data.EducationRepo;
 import learn.resume.builder.models.Education;
+import learn.resume.builder.models.Resume;
+import learn.resume.builder.models.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +62,57 @@ public class EducationService {
         }
         return result;
     }
+
+    public Result<List<Education>> addEducationFromResume(Resume resume) {
+        Result<List<Education>> result = new Result<>();
+        List<Education> educations = resume.getEducations();
+
+        if(resume == null){
+            result.addMessage("Resume is null", ResultType.INVALID);
+            return result;
+        }
+
+        if(educations == null){
+            return result;
+        }
+
+        for(Education education : educations){
+            Result<Education> educationResult = validate(education);
+            if (!educationResult.isSuccess()){
+                result.addMessage("Education could not be added", educationResult.getType());
+                return result;
+            }
+            repository.add(education);
+        }
+        result.setPayload(educations);
+        return result;
+    }
+
+    public Result<List<Education>> updateEducationFromResume(Resume resume) {
+        Result<List<Education>> result = new Result<>();
+        List<Education> educations = resume.getEducations();
+
+        if(resume == null){
+            result.addMessage("Resume is null", ResultType.INVALID);
+            return result;
+        }
+
+        if (educations == null){
+            return result;
+        }
+
+        for(Education education : educations){
+            Result<Education> educationResult = validate(education);
+            if (!educationResult.isSuccess()){
+                result.addMessage("Skills could not be updated", educationResult.getType());
+                return result;
+            }
+            repository.update(education);
+        }
+        result.setPayload(educations);
+        return result;
+    }
+
     private Result<Education> validate(Education education) {
         Result<Education> result = new Result<>();
         if (education == null) {
@@ -74,5 +127,6 @@ public class EducationService {
         }
         return result;
     }
+
 
 }
