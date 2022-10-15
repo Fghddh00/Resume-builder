@@ -11,7 +11,7 @@ function AddResume(props) {
   const [token, setToken] = useState(null);
   const [skills, setSkills] = useState([]);
   const [description, setDescription] = useState(null)
-  
+
 
   function AddEducationForm() {
     let newfield = {};
@@ -24,11 +24,11 @@ function AddResume(props) {
     setAddWorkFormValues([...addWorkFormValues, newfield]);
   }
 
-  useEffect( 
+  useEffect(
     () => {
-        getToken();
+      getToken();
     },
-[]);
+    []);
 
   function getToken() {
     const data = {
@@ -54,7 +54,7 @@ function AddResume(props) {
     })
       .then(async (response) => {
         if (response.status === 200) {
-            console.log("pass");
+          console.log("pass");
           return response.json();
         } else if (response.status === 400) {
           console.log(await response.json());
@@ -68,12 +68,12 @@ function AddResume(props) {
 
   function skillsChecker() {
 
-    
+
     fetch(
       "https://emsiservices.com/skills/versions/latest/extract?language=en",
       {
-        method:"POST",
-        body:JSON.stringify(description),
+        method: "POST",
+        body: JSON.stringify(description),
         headers: {
           Authorization: `Bearer ${token.access_token}`,
           "Content-Type": "application/json",
@@ -88,10 +88,10 @@ function AddResume(props) {
         console.log(await response.json());
       } else console.log(await response.json());
     }).then((skillList) => {
-        setSkills(skillList.data.map(s=> s.skill.name))
-        
-      })
-    ;
+      setSkills(skillList.data.map(s => s.skill.name))
+
+    })
+      ;
     console.log(skills);
   }
 
@@ -164,23 +164,47 @@ function AddResume(props) {
                   labelText={"End Date"}
                   currVal={""}
                 />
-             <FormInput
-              inputType={"text"} 
-              identifier={"address" + index} 
-              labelText={"Address"} 
-              currVal={""} 
+                <FormInput
+                  inputType={"text"}
+                  identifier={"address" + index}
+                  labelText={"Address"}
+                  currVal={""}
                 />
-              <FormInput
-              inputType={"text"} 
-              identifier={"phoneNumber" + index} 
-              labelText={"Phone Number"} 
-              currVal={""} 
+                <FormInput
+                  inputType={"text"}
+                  identifier={"phoneNumber" + index}
+                  labelText={"Phone Number"}
+                  currVal={""}
                 />
-            </div>
-          )
-        })}
+                <label htmlFor="description">
+
+                  {" "}
+
+                  Job Description
+
+                  <textarea
+
+                    className="textarea"
+
+                    id={"jobDescription" + index}
+
+                    name={"jobDescription" + index}
+
+                  //onChange={skillsChecker} would be nice but cant because of montly limit
+
+                  />
+
+                </label>
+
+                <Button onClick={handleClick}> load skills</Button>
+
+              </div>
+
+            );
+
+          })}
+        </div>
       </div>
-    </div>
     </div>
     
   );
