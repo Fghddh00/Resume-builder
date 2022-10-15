@@ -164,20 +164,12 @@ function AddResume(props) {
                   labelText={"End Date"}
                   currVal={""}
                 />
-<<<<<<< HEAD
 
              <FormInput
               inputType={"text"} 
               identifier={"address" + index} 
               labelText={"Address"} 
               currVal={""} 
-=======
-                <FormInput
-                  inputType={"text"}
-                  identifier={"address" + index}
-                  labelText={"Address"}
-                  currVal={""}
->>>>>>> adc745bb3656b22a8230177d21bb8a4e7b94bec2
                 />
                 <FormInput
                   inputType={"text"}
@@ -185,14 +177,11 @@ function AddResume(props) {
                   labelText={"Phone Number"}
                   currVal={""}
                 />
-<<<<<<< HEAD
             </div>
           )
         })}
         
 
-=======
->>>>>>> adc745bb3656b22a8230177d21bb8a4e7b94bec2
                 <label htmlFor="description">
 
                   {" "}
@@ -217,16 +206,8 @@ function AddResume(props) {
 
               </div>
 
-            );
-
-          })}
         </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> adc745bb3656b22a8230177d21bb8a4e7b94bec2
       </div>
-    </div>
     
   );
 }
