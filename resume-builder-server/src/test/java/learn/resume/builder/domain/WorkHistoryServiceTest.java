@@ -274,7 +274,7 @@ class WorkHistoryServiceTest {
     void shouldAddWorkHistoryFromResume(){
         Resume resume = makeResume();
 
-        Result<Resume> result = service.addWorkHistoryFromResume(resume);
+        Result<List<WorkHistory>> result = service.addWorkHistoryFromResume(resume);
         assertTrue(result.isSuccess());
     }
 

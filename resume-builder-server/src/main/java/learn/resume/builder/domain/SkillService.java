@@ -1,7 +1,9 @@
 package learn.resume.builder.domain;
 
 import learn.resume.builder.data.SkillRepo;
+import learn.resume.builder.models.Resume;
 import learn.resume.builder.models.Skill;
+import learn.resume.builder.models.WorkHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,12 +53,63 @@ public class SkillService {
             return result;
         }
         if (skill.getSkillId() <= 0){
-            result.addMessage("This Work History needs an Id", ResultType.INVALID);
+            result.addMessage("This SKill needs an Id", ResultType.INVALID);
         }
         if(!repository.update(skill)){
-            result.addMessage("Work History could not be found", ResultType.NOT_FOUND);
+            result.addMessage("Skill could not be found", ResultType.NOT_FOUND);
         }
 
+        result.setPayload(skill);
+        return result;
+    }
+
+    public Result<List<Skill>> updateSkillFromResume(Resume resume) {
+        Result<List<Skill>> result = new Result<>();
+        List<Skill> skills = resume.getSkills();
+
+        if(resume == null){
+            result.addMessage("Resume is null", ResultType.INVALID);
+            return result;
+        }
+
+        if (skills == null){
+            return result;
+        }
+
+        for(Skill skill : skills){
+            Result<Skill> skillResult = validate(skill);
+            if (!skillResult.isSuccess()){
+                result.addMessage("Skills could not be updated", skillResult.getType());
+                return result;
+            }
+            repository.update(skill);
+        }
+        result.setPayload(skills);
+        return result;
+    }
+
+    public Result<List<Skill>> addSkillFromResume(Resume resume) {
+        Result<List<Skill>> result = new Result<>();
+        List<Skill> skills = resume.getSkills();
+
+        if(resume == null){
+            result.addMessage("Resume is null", ResultType.INVALID);
+            return result;
+        }
+
+        if(skills == null){
+            return result;
+        }
+
+        for(Skill skill : skills){
+            Result<Skill> skillResult = validate(skill);
+            if (!skillResult.isSuccess()){
+                result.addMessage("Skill  could not be added", skillResult.getType());
+                return result;
+            }
+            repository.add(skill);
+        }
+        result.setPayload(skills);
         return result;
     }
 

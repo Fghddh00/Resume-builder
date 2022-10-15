@@ -1,7 +1,9 @@
 package learn.resume.builder.domain;
 
 import learn.resume.builder.data.WorkHistoryRepository;
+import learn.resume.builder.models.Education;
 import learn.resume.builder.models.Resume;
+import learn.resume.builder.models.Skill;
 import learn.resume.builder.models.WorkHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,19 +69,55 @@ public class WorkHistoryService {
         return result;
     }
 
-    public Result<Resume> addWorkHistoryFromResume(Resume resumeToAdd) {
-        Result<Resume> result = new Result<>();
+    public Result<List<WorkHistory>> addWorkHistoryFromResume(Resume resume) {
+        Result<List<WorkHistory>> result = new Result<>();
+        List<WorkHistory> workHistories = resume.getWorkHistories();
 
-        for(WorkHistory workHistory : resumeToAdd.getWorkHistories()){
+        if(resume == null){
+            result.addMessage("Resume is null", ResultType.INVALID);
+            return result;
+        }
+
+        if(workHistories == null){
+            return result;
+        }
+
+        for(WorkHistory workHistory : workHistories){
             Result<WorkHistory> workResult = validate(workHistory);
             if (!workResult.isSuccess()){
                 result.addMessage("Work history could not be added", workResult.getType());
                 return result;
             }
-            repository.add(workHistory);
+            repository.update(workHistory);
         }
-        result.setPayload(resumeToAdd);
+        result.setPayload(workHistories);
         return result;
+    }
+
+    public Result<List<WorkHistory>> updateWorkHistoryFromResume(Resume resume) {
+        Result<List<WorkHistory>> result = new Result<>();
+        List<WorkHistory> workHistories = resume.getWorkHistories();
+
+        if(resume == null){
+            result.addMessage("Resume is null", ResultType.INVALID);
+            return result;
+        }
+
+        if (workHistories == null){
+            return result;
+        }
+
+        for(WorkHistory workHistory : workHistories){
+            Result<WorkHistory> workHistoryResult = validate(workHistory);
+            if (!workHistoryResult.isSuccess()){
+                result.addMessage("Work History could not be updated", workHistoryResult.getType());
+                return result;
+            }
+            repository.update(workHistory);
+        }
+        result.setPayload(workHistories);
+        return result;
+
     }
 
     private Result<WorkHistory> validate(WorkHistory workHistory) {
