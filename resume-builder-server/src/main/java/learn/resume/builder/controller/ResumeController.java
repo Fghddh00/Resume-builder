@@ -3,6 +3,7 @@ package learn.resume.builder.controller;
 import learn.resume.builder.domain.Result;
 import learn.resume.builder.domain.ResultType;
 import learn.resume.builder.domain.ResumeService;
+import learn.resume.builder.domain.WorkHistoryService;
 import learn.resume.builder.models.AppUser;
 import learn.resume.builder.models.Resume;
 import org.springframework.http.HttpStatus;
@@ -17,10 +18,12 @@ import java.util.List;
 @RequestMapping("/api/resume")
 public class ResumeController {
 
-    private final ResumeService service;
+    private final ResumeService resumeService;
+    private final WorkHistoryService workHistoryService;
 
-    public ResumeController(ResumeService service) {
-        this.service = service;
+    public ResumeController(ResumeService service, WorkHistoryService workHistoryService) {
+        this.resumeService = service;
+        this.workHistoryService = workHistoryService;
     }
 
 
@@ -36,7 +39,7 @@ public class ResumeController {
                 .stream().anyMatch(r->r.getRoleName().equals("Job Seeker"));
 
 
-        Result<List<Resume>> getResult = service.getResumesByUser(currentUser.getUserId());
+        Result<List<Resume>> getResult = resumeService.getResumesByUser(currentUser.getUserId());
         if(getResult.isSuccess()){
             List<Resume> userResumes = getResult.getPayload();
 
@@ -50,7 +53,7 @@ public class ResumeController {
 
     @GetMapping("/{resumeId}")
     public ResponseEntity<Resume> findByResumeId(@PathVariable int resumeId){
-        Resume resume = service.findByResumeId(resumeId);
+        Resume resume = resumeService.findByResumeId(resumeId);
 
         if (resume == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -62,7 +65,8 @@ public class ResumeController {
     @PostMapping
     public ResponseEntity<Object> addResume(@RequestBody Resume resumeToAdd){
 
-        Result<Resume> result = service.addResume(resumeToAdd);
+        Result<Resume> result = resumeService.addResume(resumeToAdd);
+        result = workHistoryService.addWorkHistoryFromResume(resumeToAdd);
 
         if (result.isSuccess()){
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -73,7 +77,7 @@ public class ResumeController {
 
     @DeleteMapping("/{resumeId}")
     public ResponseEntity deleteById(@PathVariable int resumeId){
-        Result<Resume> result = service.deleteByResumeId(resumeId);
+        Result<Resume> result = resumeService.deleteByResumeId(resumeId);
 
         if (result.isSuccess()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -89,7 +93,7 @@ public class ResumeController {
         if (resumeId != resume.getResumeId()){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        Result result = service.updateResume(resume);
+        Result result = resumeService.updateResume(resume);
         if (result.isSuccess()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {

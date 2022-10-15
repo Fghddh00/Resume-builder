@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Button } from "react-foundation";
 import FormInput from "../FormInput/FormInput";
 import "./AddResume.css";
@@ -7,162 +6,165 @@ import "../ErrorMessages/ErrorMessages.js"
 import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
 
 function AddResume(props) {
+  const [addEdFormValues, setAddEdFormValues] = useState([{}]);
+  const [addWorkFormValues, setAddWorkFormValues] = useState([{}]);
+  const [token, setToken] = useState(null);
+  const [skills, setSkills] = useState([]);
+  const [description, setDescription] = useState(null)
+  
 
-    const [addFormValues, setAddFormValues] = useState([ { }]);
-    const [errors, setErrors] = useState([]);
+  function AddEducationForm() {
+    let newfield = {};
 
-    const history = useHistory();
+    setAddEdFormValues([...addEdFormValues, newfield]);
+  }
+  function AddWorkForm() {
+    let newfield = {};
 
-    const [addEdFormValues, setAddEdFormValues] = useState([ { }]);
-    const [addWorkFormValues, setAddWorkFormValues] = useState([ { }]);
+    setAddWorkFormValues([...addWorkFormValues, newfield]);
+  }
 
+  useEffect( 
+    () => {
+        getToken();
+    },
+[]);
 
-    function AddEducationForm(){
-        let newfield = {  }
-
-        setAddEdFormValues([...addEdFormValues, newfield])
+  function getToken() {
+    const data = {
+      client_id: "hg1ia7ve82cicywk",
+      client_secret: "szCLH5LE",
+      grant_type: "client_credentials",
+      scope: "emsi_open",
+    };
+    var formBody = [];
+    for (var property in data) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(data[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
     }
-    function AddWorkForm(){
-        let newfield = {  }
+    formBody = formBody.join("&");
 
-        setAddWorkFormValues([...addWorkFormValues, newfield])
-    }
-    function skillsChecker(){
-        fetch('https://auth.emsicloud.com/connect/token',{
-        method: 'POST',
-        body: JSON.stringify({
-         client_id: '2aqt1ywgapewgs3p',
-         client_secret: 'Q6PsRFbE',
-         grant_type: 'client_credentials',
-         scope : 'emsi_open'
-      }),
+    fetch("https://auth.emsicloud.com/connect/token", {
+      method: "POST",
+      body: formBody,
       headers: {
-        'Content-type': 'application/x-www-form-urlencoded',
-     },
+        "Content-type": "application/x-www-form-urlencoded",
+      },
     })
-    .then(async response => {
-        if( response.status === 200 ){
-            return response.json();
-        } else if(response.status === 400){
-            console.log("fail")
-            return await response.json();
+      .then(async (response) => {
+        if (response.status === 200) {
+            console.log("pass");
+          return response.json();
+        } else if (response.status === 400) {
+          console.log(await response.json());
+        } else console.log(await response.json());
+      })
+      .then(async (tokenObj) => {
+        setToken(await tokenObj);
+        console.log(token);
+      });
+  }
+
+  function skillsChecker() {
+
+    
+    fetch(
+      "https://emsiservices.com/skills/versions/latest/extract?language=en",
+      {
+        method:"POST",
+        body:JSON.stringify(description),
+        headers: {
+          Authorization: `Bearer ${token.access_token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then(async (response) => {
+      if (response.status === 200) {
+
+        console.log("Success");
+        return response.json();
+      } else if (response.status === 400) {
+        console.log(await response.json());
+      } else console.log(await response.json());
+    }).then((skillList) => {
+        setSkills(skillList.data.map(s=> s.skill.name))
         
-        } else (console.log( await response.json()))
-    } )
-    }
-    function AddEducationForm(){
+      })
+    ;
+    console.log(skills);
+  }
 
-    }
+  function handleClick(event) {
+    console.log(event.target.value)
+    // setDescription({ text: event.target.value, confidenceThreshold: 0.6 });
+  }
 
-    function AddUserInfoForm(){
 
-    }
 
   return (
     <div className="container">
-      <div>
-        {errors.length > 0 ? <ErrorMessages errors={errors} /> : null}
-      </div>
-
-    <div className="form-group">
+      <div className="form-group">
         <nav aria-label="You are here:" role="navigation">
           <ul className="breadcrumbs">
             <li>
-              <a href="#Education" >Education</a>
+              <a href="#Education">Education</a>
             </li>
             <li>
               <a href="#WorkHistory">Work history</a>
             </li>
             <li>
-              <a href="#UserInfo">User Info</a>
-            </li>
-            <li>
-            <a href="" >Template</a>
+              <a href="">Template</a>
             </li>
           </ul>
         </nav>
         <div id="Education">
-        <h2>Education</h2>
-        <Button onClick={AddEducationForm}>Add Education</Button>
-        {addEdFormValues.map((input, index) => {
-          return (
-            <div key={index} className="form">
-              <FormInput
-              inputType={"text"} 
-              identifier={"schoolName " + index} 
-              labelText={"School Name"} 
-              currVal={""} 
-                />
-             <FormInput
-              inputType={"text"} 
-              identifier={"educationLevel " + index} 
-              labelText={"Education Level"} 
-              currVal={""} 
-                />
-            </div>
-          )
-        })}
-        </div>
-        <div id="WorkHistory">
-        <h2>Work History</h2>
-        <Button onClick={AddWorkForm}>Add Work History</Button>
-        {addWorkFormValues.map((input, index) => {
-          return (
-            <div key={index} className="form">
-              <FormInput
-              inputType={"text"} 
-              identifier={"jobTitle " + index} 
-              labelText={"Job Title"} 
-              currVal={""} 
-                />
-             <FormInput
-              inputType={"date"} 
-              identifier={"startDate " + index} 
-              labelText={"Start Date"} 
-              currVal={""} 
+          <h2>Education</h2>
+          <Button onClick={AddEducationForm}>Add Education</Button>
+          {addEdFormValues.map((input, index) => {
+            return (
+              <div key={index} className="form">
+                <FormInput
+                  inputType={"text"}
+                  identifier={"schoolName " + index}
+                  labelText={"School Name"}
+                  currVal={""}
                 />
                 <FormInput
-              inputType={"date"} 
-              identifier={"endDate " + index} 
-              labelText={"End Date"} 
-              currVal={""} 
+                  inputType={"text"}
+                  identifier={"educationLevel " + index}
+                  labelText={"Education Level"}
+                  currVal={""}
                 />
-                <label> Job Description
-                <textarea className="textarea" id={"jobDescription"  + index} name={"jobDescription"  + index}/>
-                </label>
-                <Button onClick={skillsChecker}> load skills</Button>
-                <div> 
-
-                </div>
-                
-            </div>
-          )
-        })}
+              </div>
+            );
+          })}
         </div>
-        <div id="UserInfo">
-        <h2>User Info</h2>
-        <Button onClick={AddUserInfoForm}>Add User Info</Button>
-        {addFormValues.map((input, index) => {
-          return (
-            <div key={index} className="form">
-              <FormInput
-              inputType={"text"} 
-              identifier={"email " + index} 
-              labelText={"Email"} 
-              currVal={""} 
+        <div id="WorkHistory">
+          <h2>Work History</h2>
+          <Button onClick={AddWorkForm}>Add Work History</Button>
+          {addWorkFormValues.map((input, index) => {
+            return (
+              <div key={index} className="form">
+                <FormInput
+                  inputType={"text"}
+                  identifier={"jobTitle " + index}
+                  labelText={"Job Title"}
+                  currVal={""}
                 />
-              <FormInput
-              inputType={"text"} 
-              identifier={"firstName " + index} 
-              labelText={"First Name"} 
-              currVal={""} 
+                <FormInput
+                  inputType={"date"}
+                  identifier={"startDate " + index}
+                  labelText={"Start Date"}
+                  currVal={""}
                 />
-             <FormInput
-              inputType={"text"} 
-              identifier={"lastName" + index} 
-              labelText={"Last Name"} 
-              currVal={""} 
+                <FormInput
+                  inputType={"date"}
+                  identifier={"endDate " + index}
+                  labelText={"End Date"}
+                  currVal={""}
                 />
+<<<<<<< HEAD
              <FormInput
               inputType={"text"} 
               identifier={"address" + index} 
@@ -178,9 +180,27 @@ function AddResume(props) {
             </div>
           )
         })}
+=======
+                <label htmlFor="description">
+                  {" "}
+                  Job Description
+                  <textarea
+                    className="textarea"
+                    id={"jobDescription" + index}
+                    name={"jobDescription" + index}
+                    //onChange={skillsChecker} would be nice but cant because of montly limit
+                  />
+                </label>
+                <Button onClick={handleClick}> load skills</Button>
+                <div></div>
+              </div>
+            );
+          })}
+        </div>
+>>>>>>> cf4be2f45adb879f91ba6e3c9cc3beca3489ff39
       </div>
     </div>
-    </div>
+    
   );
 }
 
