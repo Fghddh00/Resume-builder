@@ -4,21 +4,22 @@ import FormInput from "../FormInput/FormInput";
 import "./AddResume.css";
 import "../ErrorMessages/ErrorMessages.js"
 import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
+import AddEducationForm from "../AddEducationForm/AddEducationForm";
 
 function AddResume(props) {
-  const [addEdFormValues, setAddEdFormValues] = useState([{}]);
-  const [addWorkFormValues, setAddWorkFormValues] = useState([{}]);
+  const [addEdFormValues, setAddEdFormValues] = useState([]);
+  const [addWorkFormValues, setAddWorkFormValues] = useState([]);
   const [token, setToken] = useState(null);
   const [skills, setSkills] = useState([]);
-  const [description, setDescription] = useState(null)
   const [Education, setEducation] = useState([]);
   
 
 
-  function AddEducationForm() {
-    let newfield = {};
+  function insertEducationForm() {
+    let newfield = {schoolName:"" ,educationLevel:""};
 
     setAddEdFormValues([...addEdFormValues, newfield]);
+  
   }
   function AddWorkForm() {
     let newfield = {};
@@ -68,7 +69,7 @@ function AddResume(props) {
       });
   }
 
-  function skillsChecker() {
+  function skillsChecker(description) {
 
 
     fetch(
@@ -91,24 +92,28 @@ function AddResume(props) {
       } else console.log(await response.json());
     }).then((skillList) => {
       setSkills(skillList.data.map(s => s.skill.name))
-
+      console.log(skillList);
     })
       ;
-    console.log(skills);
+    
   }
 
   function handleClick(event) {
     const descriptionText = document.getElementById('jobDescription');
     
-    setDescription({ text: descriptionText.value, confidenceThreshold: 0.6 });
-    skillsChecker();
-    console.log(skills);
+    const description = { text: descriptionText.value, confidenceThreshold: 0.6 };
+    skillsChecker(description);
   }
 
+  function educationUpdateHandler(education,index){
+    const copy = [...addEdFormValues];
+
+    copy[index] = education;
+    setAddEdFormValues(copy);
+  }
+
+
   
-
-
-
   return (
     <div className="container">
       <div className="form-group">
@@ -127,25 +132,15 @@ function AddResume(props) {
         </nav>
         <div id="Education">
           <h2>Education</h2>
-          <Button onClick={AddEducationForm}>Add Education</Button>
-          {addEdFormValues.map((input, index) => {
-            return (
-              <div key={index} className="form">
-                <FormInput
-                  inputType={"text"}
-                  identifier={"schoolName "}
-                  labelText={"School Name"}
-                  currVal={""}
-                />
-                <FormInput
-                  inputType={"text"}
-                  identifier={"educationLevel "}
-                  labelText={"Education Level"}
-                  currVal={""}
-                />
-              </div>
-            );
-          })}
+          <Button onClick={insertEducationForm}>Add Education</Button>
+          {
+          addEdFormValues.map((input, index) => 
+            <AddEducationForm 
+            education={input}
+            index={index}
+            onEducationUpdated={educationUpdateHandler}
+            />
+          )}
         </div>
         <div id="WorkHistory">
           <h2>Work History</h2>
