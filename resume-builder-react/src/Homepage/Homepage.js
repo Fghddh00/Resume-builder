@@ -22,7 +22,7 @@ function Homepage() {
             {!loginInfo ? 
             <Link className="login" size={Sizes.LARGE} to="/create_account" >Create Account </Link>
               :
-              <Link className="login" size={Sizes.LARGE} to="/addResume" >Add Resume </Link>
+              <Link className="login" size={Sizes.LARGE} to="api/addResume" >Add Resume </Link>
               }
           </GridContainer>
 
