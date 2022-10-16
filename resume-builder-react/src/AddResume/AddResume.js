@@ -11,6 +11,8 @@ function AddResume(props) {
   const [token, setToken] = useState(null);
   const [skills, setSkills] = useState([]);
   const [description, setDescription] = useState(null)
+  const [Education, setEducation] = useState([]);
+  
 
 
   function AddEducationForm() {
@@ -76,14 +78,14 @@ function AddResume(props) {
         body: JSON.stringify(description),
         headers: {
           Authorization: `Bearer ${token.access_token}`,
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
       }
     ).then(async (response) => {
       if (response.status === 200) {
 
         console.log("Success");
-        return response.json();
+        return await response.json();
       } else if (response.status === 400) {
         console.log(await response.json());
       } else console.log(await response.json());
@@ -96,9 +98,14 @@ function AddResume(props) {
   }
 
   function handleClick(event) {
-    console.log(event.target.value)
-    // setDescription({ text: event.target.value, confidenceThreshold: 0.6 });
+    const descriptionText = document.getElementById('jobDescription');
+    
+    setDescription({ text: descriptionText.value, confidenceThreshold: 0.6 });
+    skillsChecker();
+    console.log(skills);
   }
+
+  
 
 
 
@@ -126,13 +133,13 @@ function AddResume(props) {
               <div key={index} className="form">
                 <FormInput
                   inputType={"text"}
-                  identifier={"schoolName " + index}
+                  identifier={"schoolName "}
                   labelText={"School Name"}
                   currVal={""}
                 />
                 <FormInput
                   inputType={"text"}
-                  identifier={"educationLevel " + index}
+                  identifier={"educationLevel "}
                   labelText={"Education Level"}
                   currVal={""}
                 />
@@ -148,31 +155,31 @@ function AddResume(props) {
               <div key={index} className="form">
                 <FormInput
                   inputType={"text"}
-                  identifier={"jobTitle " + index}
+                  identifier={"jobTitle "}
                   labelText={"Job Title"}
                   currVal={""}
                 />
                 <FormInput
                   inputType={"date"}
-                  identifier={"startDate " + index}
+                  identifier={"startDate "}
                   labelText={"Start Date"}
                   currVal={""}
                 />
                 <FormInput
                   inputType={"date"}
-                  identifier={"endDate " + index}
+                  identifier={"endDate "}
                   labelText={"End Date"}
                   currVal={""}
                 />
                 <FormInput
                   inputType={"text"}
-                  identifier={"address" + index}
+                  identifier={"address"}
                   labelText={"Address"}
                   currVal={""}
                 />
                 <FormInput
                   inputType={"text"}
-                  identifier={"phoneNumber" + index}
+                  identifier={"phoneNumber"}
                   labelText={"Phone Number"}
                   currVal={""}
                 />
@@ -181,12 +188,15 @@ function AddResume(props) {
                   Job Description
                   <textarea
                     className="textarea"
-                    id={"jobDescription" + index}
-                    name={"jobDescription" + index}
+                    id={"jobDescription"}
+                    name={"jobDescription" }
+                    
+                    // + index
                   //onChange={skillsChecker} would be nice but cant because of montly limit
                   />
                 </label>
                 <Button onClick={handleClick}> load skills</Button>
+                {skills.map(s=> <h1 className="card"> {s}</h1>)}
               </div>
             );
           })}
