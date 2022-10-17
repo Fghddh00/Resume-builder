@@ -99,7 +99,8 @@ function AddResume(props) {
         console.log(await response.json());
       } else console.log(await response.json());
     }).then((skillList) => {
-      setSkills(skillList.data.map(s =>  s.skill.name))
+      const tempList = skillsList.concat(skillList.data.map(s =>  s.skill.name))
+      setSkills(tempList)
       console.log(skillList);
     });
     
