@@ -89,7 +89,7 @@ function EditResume(props) {
                     setAddedWorkHistory(resumeInfo.workHistories)
                     setAddedSkills(resumeInfo.skills)
                     setSkills(resumeInfo.skills.map(s => s.skillName))
-                    console.log([...resumeInfo.userInfo])
+                    console.log(resumeInfo.userInfo)
                     setAddedAppUserInfo(resumeInfo.userInfo)
                     //just to see what we get
                 });
@@ -257,15 +257,11 @@ function EditResume(props) {
                 </div>
                 <div id="AppUSerInfo">
                     <h2>User Info</h2>
-                    <Button onClick={insertAppUserInfoFrom}>Add User Info</Button>
-                    {
-                        addedAppUserInfo.map((input, index) =>
                             <AddAppUserInfoForm
-                                appUserInfo={input}
-                                index={index}
+                                appUserInfo={addedAppUserInfo}
                                 onAppUserInfoUpdated={appUserInfoUpdateHandler}
                             />
-                        )}
+                        
                 </div>
                 <Button onClick={onSubmit}>Submit</Button>
             </div>
