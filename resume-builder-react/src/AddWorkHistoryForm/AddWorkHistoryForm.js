@@ -1,6 +1,7 @@
+import { Button } from "react-foundation";
 import FormInput from "../FormInput/FormInput";
 
-function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index}){
+function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChecker}){
     function updateWorkHistory(evt){
         const target = evt.target;
         const name = target.name;
@@ -11,6 +12,15 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index}){
 
         onWorkHistoryUpdated(copy,index);
     }
+
+    function handleClick() {
+      const descriptionText = document.getElementById('jobDescription');
+      
+      const description = { text: descriptionText.value, confidenceThreshold: 0.6 };
+      skillsChecker(description);
+    }
+
+    
 
     return(
         
@@ -37,12 +47,13 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index}){
                 onChangeHandler={updateWorkHistory}
               />
                 <textarea
-                inputType={"text"}
-                identifier={"jobDescription"}
-                labelText={"Job Description"}
-                currVal={workHistory.jobDescription}
-                onChangeHandler={updateWorkHistory}
+                className="textarea"
+                id={"jobDescription"}
+                name={"jobDescription" }
+                onChange={updateWorkHistory}
               />
+              <Button onClick={handleClick}> load skills</Button>
+                
             </div>
           );
 }

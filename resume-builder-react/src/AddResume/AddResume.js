@@ -5,6 +5,7 @@ import "./AddResume.css";
 import "../ErrorMessages/ErrorMessages.js"
 import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
 import AddEducationForm from "../AddEducationForm/AddEducationForm";
+import AddWorkHistoryForm from "../AddWorkHistoryForm/AddWorkHistoryForm";
 
 function AddResume(props) {
   const [addedEducation, setAddedEducation] = useState([]);
@@ -98,12 +99,7 @@ function AddResume(props) {
     
   }
 
-  function handleClick(event) {
-    const descriptionText = document.getElementById('jobDescription');
-    
-    const description = { text: descriptionText.value, confidenceThreshold: 0.6 };
-    skillsChecker(description);
-  }
+  
 
   function educationUpdateHandler(education,index){
     const copy = [...addedEducation];
@@ -153,56 +149,16 @@ function AddResume(props) {
         <div id="WorkHistory">
           <h2>Work History</h2>
           <Button onClick={AddWorkForm}>Add Work History</Button>
-          {addedWorkHistory.map((input, index) => {
-            return (
-              <div key={index} className="form">
-                <FormInput
-                  inputType={"text"}
-                  identifier={"jobTitle "}
-                  labelText={"Job Title"}
-                  currVal={""}
-                />
-                <FormInput
-                  inputType={"date"}
-                  identifier={"startDate "}
-                  labelText={"Start Date"}
-                  currVal={""}
-                />
-                <FormInput
-                  inputType={"date"}
-                  identifier={"endDate "}
-                  labelText={"End Date"}
-                  currVal={""}
-                />
-                <FormInput
-                  inputType={"text"}
-                  identifier={"address"}
-                  labelText={"Address"}
-                  currVal={""}
-                />
-                <FormInput
-                  inputType={"text"}
-                  identifier={"phoneNumber"}
-                  labelText={"Phone Number"}
-                  currVal={""}
-                />
-                <label htmlFor="description">
-                  {" "}
-                  Job Description
-                  <textarea
-                    className="textarea"
-                    id={"jobDescription"}
-                    name={"jobDescription" }
-                    
-                    // + index
-                  //onChange={skillsChecker} would be nice but cant because of montly limit
-                  />
-                </label>
-                <Button onClick={handleClick}> load skills</Button>
-                {skills.map(s=> <h1 className="card"> {s}</h1>)}
-              </div>
-            );
-          })}
+          {addedWorkHistory.map((input, index) => 
+             <AddWorkHistoryForm 
+             workHistory={input}
+             index={index}
+             onWorkHistoryUpdated={workHistoryUpdateHandler}
+             skillsChecker = {skillsChecker}
+             />
+             
+           )}
+           {skills.map(s=> <h1 className="card"> {s}</h1>)}
         </div>
       </div>
     </div>
