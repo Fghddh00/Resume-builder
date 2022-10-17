@@ -59,5 +59,6 @@ function AddAppUserInfoForm({appUserInfo, onAppUserInfoUpdated, index}){
       </div>
 
     );
+}
 
 export default AddAppUserInfoForm;
