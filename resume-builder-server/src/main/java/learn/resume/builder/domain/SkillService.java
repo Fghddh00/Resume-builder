@@ -3,7 +3,6 @@ package learn.resume.builder.domain;
 import learn.resume.builder.data.SkillRepo;
 import learn.resume.builder.models.Resume;
 import learn.resume.builder.models.Skill;
-import learn.resume.builder.models.WorkHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +21,19 @@ public class SkillService {
         return repository.findAll();
     }
 
-    public Result<Skill> add (Skill skill){
-        Result<Skill> result = validate(skill);
-        if (!result.isSuccess()) {
-            return result;
-        }
-        if (skill.getSkillId() != 0) {
-            result.addMessage("Skill Id cannot be set for `add` operation", ResultType.INVALID);
-            return result;
-        }
-        skill = repository.add(skill);
-        result.setPayload(skill);
-        return result;
-    }
+//    public Result<Skill> add (Skill skill){
+//        Result<Skill> result = validate(skill);
+//        if (!result.isSuccess()) {
+//            return result;
+//        }
+//        if (skill.getSkillId() != 0) {
+//            result.addMessage("Skill Id cannot be set for `add` operation", ResultType.INVALID);
+//            return result;
+//        }
+//        skill = repository.add(skill);
+//        result.setPayload(skill);
+//        return result;
+//    }
     public Result deleteById(int skillId) {
         Result<Skill> result = new Result<>();
         if (!repository.deleteById(skillId)) {
@@ -108,7 +107,7 @@ public class SkillService {
                 result.addMessage("Skill  could not be added", skillResult.getType());
                 return result;
             }
-            repository.add(skill);
+            repository.add(skill, resume);
         }
         result.setPayload(skills);
         return result;

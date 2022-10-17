@@ -67,10 +67,16 @@ public class ResumeController {
     @PostMapping
     public ResponseEntity<Object> addResume(@RequestBody Resume resumeToAdd){
 
+        AppUser currentUser = (AppUser) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
 
+        boolean jobSeeker = currentUser.getUserRoles()
+                .stream().anyMatch(r->r.getRoleName().equals("Job Seeker"));
 
-        if (resumeToAdd == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (jobSeeker) {
+            resumeToAdd.setUser(currentUser);
         }
 
         Result<List<WorkHistory>> workHistoriesResult = workHistoryService.addWorkHistoryFromResume(resumeToAdd);
@@ -92,11 +98,16 @@ public class ResumeController {
         if(!appUserInfoResult.isSuccess()){
             return ErrorResponse.build(appUserInfoResult);
         }
+        resumeToAdd.setWorkHistories(workHistoriesResult.getPayload());
+        resumeToAdd.setEducations(educationsResult.getPayload());
+        resumeToAdd.setSkills(skillsResult.getPayload());
+        resumeToAdd.setUserInfo(appUserInfoResult.getPayload());
 
         Result<Resume> resumeResult = resumeService.addResume(resumeToAdd);
         if (!resumeResult.isSuccess()) {
             return ErrorResponse.build(resumeResult);
         }
+
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

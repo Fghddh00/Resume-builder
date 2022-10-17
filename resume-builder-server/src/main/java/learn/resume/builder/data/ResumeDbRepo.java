@@ -3,6 +3,7 @@ package learn.resume.builder.data;
 
 import learn.resume.builder.data.mapper.ResumeMapper;
 import learn.resume.builder.models.Resume;
+import learn.resume.builder.models.Skill;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -62,7 +63,14 @@ public class ResumeDbRepo implements ResumeRepo{
             return null;
         }
         resumeToAdd.setResumeId(keyHolder.getKey().intValue());
+        setResumeSkill(resumeToAdd);
         return resumeToAdd;
+    }
+
+    private void setResumeSkill(Resume resumeToAdd) {
+        jdbcTemplate.update("delete from resume_skill where resume_id = ? ", resumeToAdd.getResumeId());
+        for(Skill skill : resumeToAdd.getSkills());
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package learn.resume.builder.data;
 
 import learn.resume.builder.data.mapper.SkillMapper;
+import learn.resume.builder.models.Resume;
 import learn.resume.builder.models.Skill;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -36,7 +37,7 @@ public class SkillDbRepository implements SkillRepo {
     }
 
     @Override
-    public Skill add(Skill skill) {
+    public Skill add(Skill skill, Resume resume) {
 
         final String sql = "insert into skill (skill_name) values (?);";
 
@@ -51,6 +52,7 @@ public class SkillDbRepository implements SkillRepo {
             return null;
         }
         skill.setSkillId(keyHolder.getKey().intValue());
+
         return skill;
     }
 
