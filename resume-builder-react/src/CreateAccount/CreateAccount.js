@@ -60,7 +60,7 @@ function CreateAccount() {
       <GridContainer className="form-group">
         
        <form onSubmit={handleSubmit}>
-        <Grid >
+        {/* <Grid >
           <Cell medium={5}>  
             <label htmlFor="firstName" >First Name 
               <input  type="text" placeholder="name"  name="firstName" onChange={inputChangeHandler}/>
@@ -151,7 +151,7 @@ function CreateAccount() {
               <input type="text" placeholder="Email" name="email" onChange={inputChangeHandler}/>
             </label>
           </Cell>
-        </Grid>
+        </Grid> */}
         <Grid >
             <Cell medium={6}>
             <label> Username

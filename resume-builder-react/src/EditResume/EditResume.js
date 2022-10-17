@@ -1,18 +1,21 @@
 import { useContext, useState, useEffect } from "react";
 import { Button } from "react-foundation";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import AddEducationForm from "../AddEducationForm/AddEducationForm";
 import AuthContext from "../AuthContext";
 import "./EditResume.css";
 import AddWorkHistoryForm from "../AddWorkHistoryForm/AddWorkHistoryForm";
+import AddAppUserInfoForm from "../AddAppUserInfoForm/AddAppUserInfoForm";
 
 function EditResume(props) {
     const [addedEducation, setAddedEducation] = useState([]);
     const [addedWorkHistory, setAddedWorkHistory] = useState([]);
+    const [addedAppUserInfo, setAddedAppUserInfo] = useState([]);
     const [token, setToken] = useState(null);
     const [addedSkills, setAddedSkills] = useState([]);
     const [skillsList, setSkills] = useState([]);
     const [isEmpty, setIsEmpty] = useState(false);
+    const { id } = useParams();
 
     function insertEducationForm() {
         let newfield = { schoolName: "", educationLevel: "" };
@@ -37,7 +40,17 @@ function EditResume(props) {
         copy[index] = workHistory;
         setAddedWorkHistory(copy);
     }
+    function insertAppUserInfoFrom() {
+        let newfield = { email: "", firstName: "", lastName: "", address: "", phoneNumber: "" };
 
+        setAddedAppUserInfo([...addedAppUserInfo, newfield]);
+    }
+    function appUserInfoUpdateHandler(appUserInfo, index) {
+        const copy = [...addedAppUserInfo];
+
+        copy[index] = appUserInfo;
+        setAddedAppUserInfo(copy);
+    }
     function handleClick(event) {
         const descriptionText = document.getElementById('jobDescription');
 
@@ -46,22 +59,22 @@ function EditResume(props) {
     }
     useEffect(() => {
         getToken();
-        
+
         if (userData === null) {
             history.push("/login");
         } else {
-            
+
             const userId = userData.claims.jti;
             const jwt = userData.jwt;
-            fetch("http://localhost:8080/api/resume/" + 1,
-                //{props.id} when in actual use
+            console.log(id);
+            fetch("http://localhost:8080/api/resume/" + id ,
                 {
                     headers: {
                         Authorization: `Bearer ${jwt}`
                     }
                 })
                 .then(async response => {
-                    
+
                     if (response.status === 200) {
                         return response.json();
                     } else if (response.status === 400) {
@@ -71,15 +84,18 @@ function EditResume(props) {
                     } else (console.log(await response.json()))
                 })
                 .then(resumeInfo => {
+                    console.log(resumeInfo)
                     setAddedEducation(resumeInfo.educations)
                     setAddedWorkHistory(resumeInfo.workHistories)
                     setAddedSkills(resumeInfo.skills)
-                    setSkills(resumeInfo.skills.map(s=> s.skillName))
-                     //just to see what we get
+                    setSkills(resumeInfo.skills.map(s => s.skillName))
+                    console.log([...resumeInfo.userInfo])
+                    setAddedAppUserInfo(resumeInfo.userInfo)
+                    //just to see what we get
                 });
         }
-    },[]);
-    
+    }, [id]);
+
 
     function getToken() {
         const data = {
@@ -164,14 +180,16 @@ function EditResume(props) {
     const userData = useContext(AuthContext);
     const history = useHistory();
 
-   
+
     function onSubmit(event) {
         event.preventDefault();
 
         const resume = {
             workHistories: addedWorkHistory,
             educations: addedEducation,
-            skills: addedSkills
+            skills: addedSkills,
+            userInfo: addedAppUserInfo[0],
+            templateId: 1
         };
         const userId = userData.claims.jti;
         const jwt = userData.jwt;
@@ -195,7 +213,7 @@ function EditResume(props) {
             }
         });
     }
-
+    console.log(addedAppUserInfo);
     return (
         <div className="container">
             <div className="form-group">
@@ -237,7 +255,18 @@ function EditResume(props) {
                     )}
                     {skillsList.map(s => <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
                 </div>
-                {/* need to update fetch req? */}
+                <div id="AppUSerInfo">
+                    <h2>User Info</h2>
+                    <Button onClick={insertAppUserInfoFrom}>Add User Info</Button>
+                    {
+                        addedAppUserInfo.map((input, index) =>
+                            <AddAppUserInfoForm
+                                appUserInfo={input}
+                                index={index}
+                                onAppUserInfoUpdated={appUserInfoUpdateHandler}
+                            />
+                        )}
+                </div>
                 <Button onClick={onSubmit}>Submit</Button>
             </div>
         </div>

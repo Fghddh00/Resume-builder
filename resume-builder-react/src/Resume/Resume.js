@@ -81,7 +81,7 @@ function Resume(props) {
           <motion.div>
             <p>{template}</p>
             <div className="buttonGroup">
-            <Link  to={"/edit"} className="edit" color={Colors.PRIMARY}>Edit</Link> 
+            <Link  to={"/edit/" + props.resumeId} className="edit" color={Colors.PRIMARY}>Edit</Link> 
             <Button onClick={deleteClicked} color={Colors.ALERT}>Delete</Button> 
             </div>
           </motion.div>
