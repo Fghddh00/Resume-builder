@@ -37,7 +37,7 @@ public class GlobalErrorHandling {
     public ResponseEntity<ErrorResponse> handleException(DataIntegrityViolationException ex) {
 
         return new ResponseEntity<ErrorResponse>(
-                new ErrorResponse("Something went wrong on our end. Your request failed. :("),
+                new ErrorResponse("Something went wrong with the data. Your request failed. :("),
                 HttpStatus.CONFLICT);
     }
 

@@ -154,8 +154,12 @@ function AddResume(props) {
     
     const resume = {workHistories : addedWorkHistory,
                     educations : addedEducation,
-                    skills : addedSkills
+                    skills : addedSkills,
+                    userInfo : {addedAppUserInfo}
                     };
+    console.log(resume.skills);
+    console.log(resume.educations)
+    console.log(resume.userInfo)
     const userId = userData.claims.jti;
     const jwt = userData.jwt;
 
