@@ -155,7 +155,7 @@ function AddResume(props) {
     const resume = {workHistories : addedWorkHistory,
                     educations : addedEducation,
                     skills : addedSkills,
-                    userInfo : {addedAppUserInfo}
+                    userInfo : {...addedAppUserInfo}
                     };
     console.log(resume.skills);
     console.log(resume.educations)
