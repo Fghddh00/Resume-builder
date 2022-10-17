@@ -127,6 +127,18 @@ public class ResumeController {
 
     @PutMapping("/{resumeId}")
     public ResponseEntity editResume(@PathVariable int resumeId, @RequestBody Resume resume){
+        AppUser currentUser = (AppUser) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        boolean jobSeeker = currentUser.getUserRoles()
+                .stream().anyMatch(r->r.getRoleName().equals("Job Seeker"));
+
+        if (jobSeeker) {
+            resume.setUser(currentUser);
+        }
+
 
 
         if (resumeId != resume.getResumeId()){
