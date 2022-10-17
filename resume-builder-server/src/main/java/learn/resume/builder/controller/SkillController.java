@@ -28,14 +28,14 @@ public class SkillController {
     public List<Skill> findAll() {
         return service.findAll();
     }
-    @PostMapping
-    public ResponseEntity<Object> add(@RequestBody Skill skill){
-        Result<Skill> result = service.add(skill);
-        if (result.isSuccess()) {
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-        return ErrorResponse.build(result);
-    }
+//    @PostMapping
+//    public ResponseEntity<Object> add(@RequestBody Skill skill){
+//        Result<Skill> result = service.add(skill);
+//        if (result.isSuccess()) {
+//            return new ResponseEntity<>(HttpStatus.CREATED);
+//        }
+//        return ErrorResponse.build(result);
+//    }
     @DeleteMapping("/{skillId}")
     public ResponseEntity deleteById(@PathVariable int skillId) {
         Result<Skill> result = service.deleteById(skillId);
