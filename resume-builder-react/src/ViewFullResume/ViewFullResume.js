@@ -3,6 +3,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import EducationsFromResume from "../EducationsFromResume/EducationsFromResume";
 import SkillsFromResume from "../SkillsFromResume/SkillsFromResume";
+import Template1 from "../TemplateFolder/Template1";
 import UserInfoFromResume from "../UserInfoFromResume/UserInfoFromResume";
 import WorkHistoriesFromResume from "../WorkHistoriesFromResume/WorkHistoriesFromResume";
 import "./ViewFullResume.css";
@@ -53,6 +54,17 @@ function ViewFullResume(props) {
         }
     }, [id]);
 
+    function loadResume(){
+        switch (resume.templateId) {
+            case 1:
+                <Template1 key={resume.resumeId} resumeInfo={resume}/>
+                break;
+        
+            default:
+                break;
+        }
+    }
+
 
     return (
 
@@ -61,7 +73,8 @@ function ViewFullResume(props) {
             {!isEmpty ?
                 <div className="container">
                     <h2>Template Id {resume.templateId}</h2>
-                    <table>
+                    {loadResume}
+                    {/* <table>
                         <thead>
                             <tr>
                                 <th>FirstName</th>
@@ -108,7 +121,7 @@ function ViewFullResume(props) {
                         <tbody>
                             {skills.map(s => <SkillsFromResume key={s.skillId} skillData={s} />)}
                         </tbody>
-                    </table>
+                    </table> */}
                 </div>
                 : <div className="container"> No Resume Found</div>}
 
