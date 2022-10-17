@@ -106,7 +106,7 @@ public class ResumeDbRepo implements ResumeRepo{
         updateResumeWorkHistory(resume);
         updateResumeSkill(resume);
         updateResumeEducation(resume);
-        return jdbcTemplate.update("updated resume_app set template_id = ? where resume_id = ?", resume.getTemplateId(), resume.getResumeId()) > 0;
+        return jdbcTemplate.update("update resume_app set template_id = ? where resume_id = ?", resume.getTemplateId(), resume.getResumeId()) > 0;
     }
 
     private void updateResumeEducation(Resume resume) {
