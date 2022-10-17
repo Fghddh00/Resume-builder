@@ -64,7 +64,7 @@ function Resume(props) {
       }
       case 2: {
         console.log('double click');
-        history.push("/"); //placeholder
+        history.push("/api/resume/10"); //placeholder
         break;
       }
       default: {
