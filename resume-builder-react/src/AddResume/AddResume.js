@@ -7,24 +7,24 @@ import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
 import AddEducationForm from "../AddEducationForm/AddEducationForm";
 
 function AddResume(props) {
-  const [addEdFormValues, setAddEdFormValues] = useState([]);
-  const [addWorkFormValues, setAddWorkFormValues] = useState([]);
+  const [addedEducation, setAddedEducation] = useState([]);
+  const [addedWorkHistory, setAddedWorkHistory] = useState([]);
   const [token, setToken] = useState(null);
   const [skills, setSkills] = useState([]);
-  const [Education, setEducation] = useState([]);
+
   
 
 
   function insertEducationForm() {
     let newfield = {schoolName:"" ,educationLevel:""};
 
-    setAddEdFormValues([...addEdFormValues, newfield]);
+    setAddedEducation([...addedEducation, newfield]);
   
   }
   function AddWorkForm() {
     let newfield = {};
 
-    setAddWorkFormValues([...addWorkFormValues, newfield]);
+    setAddedWorkHistory([...addedWorkHistory, newfield]);
   }
 
   useEffect(
@@ -106,11 +106,19 @@ function AddResume(props) {
   }
 
   function educationUpdateHandler(education,index){
-    const copy = [...addEdFormValues];
+    const copy = [...addedEducation];
 
     copy[index] = education;
-    setAddEdFormValues(copy);
+    setAddedEducation(copy);
   }
+
+  function workHistoryUpdateHandler(workHistory,index){
+    const copy = [...addedWorkHistory];
+
+    copy[index] = workHistory;
+    setAddedWorkHistory(copy);
+  }
+
 
 
   
@@ -134,7 +142,7 @@ function AddResume(props) {
           <h2>Education</h2>
           <Button onClick={insertEducationForm}>Add Education</Button>
           {
-          addEdFormValues.map((input, index) => 
+          addedEducation.map((input, index) => 
             <AddEducationForm 
             education={input}
             index={index}
@@ -145,7 +153,7 @@ function AddResume(props) {
         <div id="WorkHistory">
           <h2>Work History</h2>
           <Button onClick={AddWorkForm}>Add Work History</Button>
-          {addWorkFormValues.map((input, index) => {
+          {addedWorkHistory.map((input, index) => {
             return (
               <div key={index} className="form">
                 <FormInput

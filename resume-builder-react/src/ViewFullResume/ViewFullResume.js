@@ -1,11 +1,15 @@
-import { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import AuthContext from "../AuthContext";
+import "./ViewFullResume.css";
 
-function viewFullResume(props) {
 
+function ViewFullResume(props) {
+
+    const [resume, setResume] = useState({});
     const userData = useContext(AuthContext);
     const history = useHistory();
+    const [isEmpty, setIsEmpty] = useState(false);
 
     useEffect( () => {
         if( userData === null ){
@@ -30,11 +34,25 @@ function viewFullResume(props) {
           } )
           .then( resumeInfo => {
               console.log(resumeInfo); //just to see what we get
+              setResume(resumeInfo);
           });
       }
     });
 
+    return(
+        <div className="page">
+        <Link to="/api/addResume" className="addBtn"> Add Resume</Link>
+        {!isEmpty ?
+        <div className="container">
+            
+        </div>
+        : <div className="container"> No Resume Found</div>}
+    
+        
+        </div> 
+        
+       
+      );
+    }
 
-}
-
-export default viewFullResume;
+export default ViewFullResume;
