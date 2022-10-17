@@ -20,8 +20,6 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChe
       skillsChecker(description);
     }
 
-    
-
     return(
         
             <div key={index} className="form">
