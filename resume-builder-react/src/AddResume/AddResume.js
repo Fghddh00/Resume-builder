@@ -173,7 +173,7 @@ function AddResume(props) {
 }
 
 
-  console.log(addedSkills)
+
  
 
   return (
