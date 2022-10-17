@@ -57,8 +57,15 @@ function ViewFullResume(props) {
     function loadResume(){
         switch (resume.templateId) {
             case 1:
-                <Template1 key={resume.resumeId} resumeInfo={resume}/>
-                break;
+                return(
+                <Template1 
+                key={resume.resumeId} 
+                educations={educations} 
+                skills={skills}
+                workHistories={workHistories} 
+                userInfo={userInfo}/>
+                )
+                
         
             default:
                 break;
@@ -73,7 +80,7 @@ function ViewFullResume(props) {
             {!isEmpty ?
                 <div className="container">
                     <h2>Template Id {resume.templateId}</h2>
-                    {loadResume}
+                    {loadResume()}
                     {/* <table>
                         <thead>
                             <tr>

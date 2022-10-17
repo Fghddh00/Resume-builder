@@ -1,13 +1,12 @@
-function Template1(props){
+function Template1({educations,skills, workHistories, userInfo }){
 
-    const educations = props.resumeInfo.resumeId;
-    const skills = props.resumeInfo.skills;
+    
     console.log(educations)
 
 
     return(
         <div>
-            {console.log(educations)}
+            {educations.map(s=> s.schoolName)}
         </div>
     );
 }

@@ -12,6 +12,7 @@ function Resume(props) {
   const [template, setTemplate] = useState("");
   const userData = useContext(AuthContext);
   
+  
   function chooseTemplate(){
   switch(props.templateId){
     case 1: {
