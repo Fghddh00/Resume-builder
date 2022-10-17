@@ -40,9 +40,10 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
     }
 
     @Override
+    @Transactional
     public AppUserInfo add(AppUserInfo appUserInfo) {
         final String sql = "insert into app_user_info (email, first_name, last_name, address, phone_number)"
-        + " values (?, ?, ?, ?, ?);";
+        + " values (?, ?, ?, ?, ?); ";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -59,6 +60,7 @@ public class AppUserInfoDbRepository implements AppUserInfoRepo {
             return null;
         }
         appUserInfo.setInfoId(keyHolder.getKey().intValue());
+
         return appUserInfo;
     }
 
