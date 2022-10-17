@@ -14,7 +14,8 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChe
     }
 
     function handleClick() {
-      const descriptionText = document.getElementById('jobDescription');
+      const descriptionText = document.getElementById("jobDescription"+index);
+      
       
       const description = { text: descriptionText.value, confidenceThreshold: 0.6 };
       skillsChecker(description);
@@ -46,9 +47,10 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChe
               />
                 <textarea
                 className="textarea"
-                id={"jobDescription"}
-                name={"jobDescription" }
+                id={"jobDescription"+index}
+                name={"jobDescription"+index }
                 onChange={updateWorkHistory}
+               
               />
               <Button onClick={handleClick}> load skills</Button>
                 
