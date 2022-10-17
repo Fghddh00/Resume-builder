@@ -10,7 +10,7 @@ import AddAppUserInfoForm from "../AddAppUserInfoForm/AddAppUserInfoForm";
 function EditResume(props) {
     const [addedEducation, setAddedEducation] = useState([]);
     const [addedWorkHistory, setAddedWorkHistory] = useState([]);
-    const [addedAppUserInfo, setAddedAppUserInfo] = useState(null);
+    const [addedAppUserInfo, setAddedAppUserInfo] = useState([]);
     const [token, setToken] = useState(null);
     const [addedSkills, setAddedSkills] = useState([]);
     const [skillsList, setSkills] = useState([]);
@@ -89,7 +89,6 @@ function EditResume(props) {
                     setAddedWorkHistory(resumeInfo.workHistories)
                     setAddedSkills(resumeInfo.skills)
                     setSkills(resumeInfo.skills.map(s => s.skillName))
-                    console.log(resumeInfo.userInfo)
                     setAddedAppUserInfo(resumeInfo.userInfo)
                     //just to see what we get
                 });
@@ -214,7 +213,6 @@ function EditResume(props) {
         });
     }
     console.log(addedAppUserInfo);
-
     return (
         <div className="container">
             <div className="form-group">
@@ -256,7 +254,7 @@ function EditResume(props) {
                     )}
                     {skillsList.map(s => <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
                 </div>
-                <div id="AppUSerInfo">
+                <div id="AppUserInfo">
                     <h2>User Info</h2>
                             <AddAppUserInfoForm
                                 appUserInfo={addedAppUserInfo}
