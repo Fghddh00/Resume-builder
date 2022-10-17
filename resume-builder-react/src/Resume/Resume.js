@@ -64,7 +64,7 @@ function Resume(props) {
       }
       case 2: {
         console.log('double click');
-        history.push("/api/resume/10"); //placeholder
+        history.push("/api/resume/" + props.resumeId); //placeholder
         break;
       }
       default: {

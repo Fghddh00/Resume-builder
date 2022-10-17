@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import EducationsFromResume from "../EducationsFromResume/EducationsFromResume";
 import SkillsFromResume from "../SkillsFromResume/SkillsFromResume";
@@ -18,6 +18,7 @@ function ViewFullResume(props) {
     const [userInfo, setUserInfo] = useState([])
     const [skills, setSkills] = useState([])
     const [workHistories, setWorkHistories] = useState([])
+    const {id} = useParams();
 
     useEffect(() => {
 
@@ -26,7 +27,7 @@ function ViewFullResume(props) {
         } else {
             const userId = userData.claims.jti;
             const jwt = userData.jwt;
-            fetch("http://localhost:8080/api/resume/" + 1,
+            fetch("http://localhost:8080/api/resume/" + id,
                 //props.id
                 {
                     headers: {
@@ -50,7 +51,7 @@ function ViewFullResume(props) {
                     setWorkHistories(resumeInfo.workHistories)
                 });
         }
-    }, []);
+    }, [id]);
 
 
     return (

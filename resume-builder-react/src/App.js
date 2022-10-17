@@ -83,7 +83,7 @@ function App() {
             <Route exact path="/login">
               {!loginInfo ? <Login setLoginInfo={setLoginInfo} /> : <Redirect to="viewResume"/>}
             </Route>
-            <Route exact path="/api/resume/1">
+            <Route exact path="/api/resume">
               {loginInfo ? <ViewResume/> : <Redirect to="/login"/>}
             </Route>
             <Route exact path="/api/addResume">
@@ -92,7 +92,7 @@ function App() {
             <Route exact path="/edit">
               {loginInfo ? <EditResume/> : <Redirect to="/login"/>}
             </Route>
-            <Route exact path="/api/resume/10">
+            <Route exact path="/api/resume/:id">
               {loginInfo ? <ViewFullResume/> : <Redirect to="/api/resume/1"/>}
             </Route>
             <Route >
