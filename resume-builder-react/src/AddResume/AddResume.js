@@ -1,16 +1,22 @@
-import { useEffect, useState } from "react";
-import { Button } from "react-foundation";
+import { useContext, useEffect, useState } from "react";
+import { Badge, Button } from "react-foundation";
 import FormInput from "../FormInput/FormInput";
 import "./AddResume.css";
 import "../ErrorMessages/ErrorMessages.js"
 import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
 import AddEducationForm from "../AddEducationForm/AddEducationForm";
+import AddWorkHistoryForm from "../AddWorkHistoryForm/AddWorkHistoryForm";
+import AuthContext from "../AuthContext";
+import { useHistory } from "react-router-dom";
 
 function AddResume(props) {
   const [addedEducation, setAddedEducation] = useState([]);
   const [addedWorkHistory, setAddedWorkHistory] = useState([]);
+  const [addedSkills, setAddedSkills] = useState([]);
   const [token, setToken] = useState(null);
-  const [skills, setSkills] = useState([]);
+  const [skillsList, setSkills] = useState([]);
+  const userData = useContext(AuthContext);
+  const history = useHistory();
 
   
 
@@ -70,7 +76,9 @@ function AddResume(props) {
   }
 
   function skillsChecker(description) {
-
+    setAddedSkills([])
+    
+    
 
     fetch(
       "https://emsiservices.com/skills/versions/latest/extract?language=en",
@@ -91,19 +99,13 @@ function AddResume(props) {
         console.log(await response.json());
       } else console.log(await response.json());
     }).then((skillList) => {
-      setSkills(skillList.data.map(s => s.skill.name))
+      setSkills(skillList.data.map(s =>  s.skill.name))
       console.log(skillList);
-    })
-      ;
+    });
     
   }
 
-  function handleClick(event) {
-    const descriptionText = document.getElementById('jobDescription');
-    
-    const description = { text: descriptionText.value, confidenceThreshold: 0.6 };
-    skillsChecker(description);
-  }
+  
 
   function educationUpdateHandler(education,index){
     const copy = [...addedEducation];
@@ -119,9 +121,61 @@ function AddResume(props) {
     setAddedWorkHistory(copy);
   }
 
+  function addSkillClick(evt){
+    const btn = document.getElementById(evt.target.value);
 
+    
+    console.log(btn.style.backgroundColor)
+    if(btn.style.backgroundColor != 'green'){
+      btn.style.backgroundColor = 'green'
+      const newSkillsList = addedSkills.concat({skillName : evt.target.value})
+      setAddedSkills(newSkillsList)
+    }
+    else{
+      btn.style.backgroundColor = ''
+      const newSkillsList = addedSkills.filter(s => s.skillName != evt.target.value)
+      setAddedSkills(newSkillsList)
+    }
+    
+  }
 
   
+
+
+  function onSubmit(event){
+    event.preventDefault();
+    
+    const resume = {workHistories : addedWorkHistory,
+                    educations : addedEducation,
+                    skills : addedSkills
+                    };
+    const userId = userData.claims.jti;
+    const jwt = userData.jwt;
+
+    fetch( "http://localhost:8080/api/resume", {
+        method: "POST",
+        body: JSON.stringify(resume),
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "application/json"          
+        }
+    }).then(async response => {
+        if( response.status === 201 ){
+            
+            history.push( "/api/resume/1" );
+           
+            
+        } else {
+            console.log(await response.json());
+            //Display error messages
+        }
+    });
+}
+
+
+  console.log(addedSkills)
+ 
+
   return (
     <div className="container">
       <div className="form-group">
@@ -153,57 +207,19 @@ function AddResume(props) {
         <div id="WorkHistory">
           <h2>Work History</h2>
           <Button onClick={AddWorkForm}>Add Work History</Button>
-          {addedWorkHistory.map((input, index) => {
-            return (
-              <div key={index} className="form">
-                <FormInput
-                  inputType={"text"}
-                  identifier={"jobTitle "}
-                  labelText={"Job Title"}
-                  currVal={""}
-                />
-                <FormInput
-                  inputType={"date"}
-                  identifier={"startDate "}
-                  labelText={"Start Date"}
-                  currVal={""}
-                />
-                <FormInput
-                  inputType={"date"}
-                  identifier={"endDate "}
-                  labelText={"End Date"}
-                  currVal={""}
-                />
-                <FormInput
-                  inputType={"text"}
-                  identifier={"address"}
-                  labelText={"Address"}
-                  currVal={""}
-                />
-                <FormInput
-                  inputType={"text"}
-                  identifier={"phoneNumber"}
-                  labelText={"Phone Number"}
-                  currVal={""}
-                />
-                <label htmlFor="description">
-                  {" "}
-                  Job Description
-                  <textarea
-                    className="textarea"
-                    id={"jobDescription"}
-                    name={"jobDescription" }
-                    
-                    // + index
-                  //onChange={skillsChecker} would be nice but cant because of montly limit
-                  />
-                </label>
-                <Button onClick={handleClick}> load skills</Button>
-                {skills.map(s=> <h1 className="card"> {s}</h1>)}
-              </div>
-            );
-          })}
+          {addedWorkHistory.map((input, index) => 
+             <AddWorkHistoryForm 
+             workHistory={input}
+             index={index}
+             onWorkHistoryUpdated={workHistoryUpdateHandler}
+             skillsChecker = {skillsChecker}
+             />
+             
+           )}
+           {skillsList.map(s=> <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
+           
         </div>
+        <Button onClick={onSubmit}>Submit</Button>
       </div>
     </div>
   );

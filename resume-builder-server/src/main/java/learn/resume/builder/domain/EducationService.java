@@ -73,6 +73,7 @@ public class EducationService {
         }
 
         if(educations == null){
+            result.addMessage("Education is null", ResultType.INVALID);
             return result;
         }
 

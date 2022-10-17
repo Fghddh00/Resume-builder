@@ -88,6 +88,9 @@ function App() {
             <Route exact path="/api/addResume">
               {loginInfo ? <AddResume/> : <Redirect to="/login"/>}
             </Route>
+            <Route exact path="/edit">
+              {loginInfo ? <AddResume/> : <Redirect to="/login"/>}
+            </Route>
             <Route exact path="/api/resume/10">
               {loginInfo ? <ViewFullResume/> : <Redirect to="/api/resume/1"/>}
             </Route>
