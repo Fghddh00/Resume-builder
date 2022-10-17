@@ -4,6 +4,8 @@ import AuthContext from "../AuthContext";
 import EducationsFromResume from "../EducationsFromResume/EducationsFromResume";
 import SkillsFromResume from "../SkillsFromResume/SkillsFromResume";
 import Template1 from "../TemplateFolder/Template1";
+import Template2 from "../TemplateFolder/Template2";
+import Template3 from "../TemplateFolder/Template3";
 import UserInfoFromResume from "../UserInfoFromResume/UserInfoFromResume";
 import WorkHistoriesFromResume from "../WorkHistoriesFromResume/WorkHistoriesFromResume";
 import "./ViewFullResume.css";
@@ -65,7 +67,24 @@ function ViewFullResume(props) {
                 workHistories={workHistories} 
                 userInfo={userInfo}/>
                 )
-                
+            case 2:
+                return(
+                    <Template2 
+                    key={resume.resumeId} 
+                    educations={educations} 
+                    skills={skills}
+                    workHistories={workHistories} 
+                    userInfo={userInfo}/>
+                    )
+            case 3:
+                return(
+                    <Template3 
+                    key={resume.resumeId} 
+                    educations={educations} 
+                    skills={skills}
+                    workHistories={workHistories} 
+                    userInfo={userInfo}/>
+                    )
         
             default:
                 break;
@@ -78,8 +97,7 @@ function ViewFullResume(props) {
         <div className="page">
             <Link to="/api/addResume" className="addBtn"> Add Resume</Link>
             {!isEmpty ?
-                <div className="container">
-                    <h2>Template Id {resume.templateId}</h2>
+                <div >
                     {loadResume()}
                     {/* <table>
                         <thead>

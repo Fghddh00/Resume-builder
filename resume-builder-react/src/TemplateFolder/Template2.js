@@ -1,7 +1,7 @@
 import { Grid, GridContainer } from "react-foundation";
-import "./template1.css";
+import "./template2.css";
 
-function Template1({educations,skills, workHistories, userInfo }){
+function Template2({educations,skills, workHistories, userInfo }){
 
     
     console.log(educations)
@@ -16,4 +16,4 @@ function Template1({educations,skills, workHistories, userInfo }){
     );
 }
 
-export default Template1;
+export default Template2;

@@ -1,0 +1,9 @@
+.template1 {
+    background-color: white !important;
+    min-height: 200vh !important;
+}
+
+.nameHeader{
+    text-align: center !important;
+    align-items: center !important;
+}
