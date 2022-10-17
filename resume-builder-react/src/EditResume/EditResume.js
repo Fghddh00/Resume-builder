@@ -7,8 +7,8 @@ import "./EditResume.css";
 import AddWorkHistoryForm from "../AddWorkHistoryForm/AddWorkHistoryForm";
 
 function EditResume(props) {
-    const [addEdFormValues, setAddEdFormValues] = useState([]);
-    const [addWorkFormValues, setAddWorkFormValues] = useState([]);
+    const [addedEducation, setAddedEducation] = useState([]);
+    const [addedWorkHistory, setAddedWorkHistory] = useState([]);
     const [token, setToken] = useState(null);
     const [addedSkills, setAddedSkills] = useState([]);
     const [skillsList, setSkills] = useState([]);
@@ -17,25 +17,25 @@ function EditResume(props) {
     function insertEducationForm() {
         let newfield = { schoolName: "", educationLevel: "" };
 
-        setAddEdFormValues([...addEdFormValues, newfield]);
+        setAddedEducation([...addedEducation, newfield]);
 
     }
     function educationUpdateHandler(education, index) {
-        const copy = [...addEdFormValues];
+        const copy = [...addedEducation];
 
         copy[index] = education;
-        setAddEdFormValues(copy);
+        setAddedEducation(copy);
     }
     function AddWorkForm() {
         let newfield = { jobTitle: "", startDate: "", endDate: "", jobDescription: "" };
 
-        setAddWorkFormValues([...addWorkFormValues, newfield]);
+        setAddedWorkHistory([...addedWorkHistory, newfield]);
     }
     function workHistoryUpdateHandler(workHistory, index) {
-        const copy = [...addWorkFormValues];
+        const copy = [...addedWorkHistory];
 
         copy[index] = workHistory;
-        setAddWorkFormValues(copy);
+        setAddedWorkHistory(copy);
     }
 
     function handleClick(event) {
@@ -44,12 +44,42 @@ function EditResume(props) {
         const description = { text: descriptionText.value, confidenceThreshold: 0.6 };
         skillsChecker(description);
     }
+    useEffect(() => {
+        getToken();
+        
+        if (userData === null) {
+            history.push("/login");
+        } else {
+            
+            const userId = userData.claims.jti;
+            const jwt = userData.jwt;
+            fetch("http://localhost:8080/api/resume/" + 1,
+                //{props.id} when in actual use
+                {
+                    headers: {
+                        Authorization: `Bearer ${jwt}`
+                    }
+                })
+                .then(async response => {
+                    
+                    if (response.status === 200) {
+                        return response.json();
+                    } else if (response.status === 400) {
+                        setIsEmpty(true);
+                        return response.json();
 
-    useEffect(
-        () => {
-            getToken();
-        },
-        []);
+                    } else (console.log(await response.json()))
+                })
+                .then(resumeInfo => {
+                    setAddedEducation(resumeInfo.educations)
+                    setAddedWorkHistory(resumeInfo.workHistories)
+                    setAddedSkills(resumeInfo.skills)
+                    setSkills(resumeInfo.skills.map(s=> s.skillName))
+                     //just to see what we get
+                });
+        }
+    },[]);
+    
 
     function getToken() {
         const data = {
@@ -134,33 +164,7 @@ function EditResume(props) {
     const userData = useContext(AuthContext);
     const history = useHistory();
 
-    useEffect(() => {
-        if (userData === null) {
-            history.push("/login");
-        } else {
-            const userId = userData.claims.jti;
-            const jwt = userData.jwt;
-            fetch("http://localhost:8080/api/resume/" + 1,
-                //{props.id} when in actual use
-                {
-                    headers: {
-                        Authorization: `Bearer ${jwt}`
-                    }
-                })
-                .then(async response => {
-                    if (response.status === 200) {
-                        return response.json();
-                    } else if (response.status === 400) {
-                        setIsEmpty(true);
-                        return response.json();
-
-                    } else (console.log(await response.json()))
-                })
-                .then(resumeInfo => {
-                    console.log(resumeInfo); //just to see what we get
-                });
-        }
-    });
+   
     function onSubmit(event) {
         event.preventDefault();
 

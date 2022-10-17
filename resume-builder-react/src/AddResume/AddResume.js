@@ -76,6 +76,9 @@ function AddResume(props) {
   }
 
   function skillsChecker(description) {
+    // const tempSkillsList = skillsList
+    // const tempAddedSkills = addedSkills
+    //would like to figure out a way to limit duplicate skills being added
     setAddedSkills([])
     
     

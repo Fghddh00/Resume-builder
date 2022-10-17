@@ -11,6 +11,7 @@ import jwtDecode from "jwt-decode";
 import NotFound from "./NotFound/NotFound";
 import AddResume from "./AddResume/AddResume";
 import ViewFullResume from "./ViewFullResume/ViewFullResume";
+import EditResume from "./EditResume/EditResume";
 
 const LOCAL_STORAGE_TOKEN_KEY = "resumeToken";
 
@@ -89,7 +90,7 @@ function App() {
               {loginInfo ? <AddResume/> : <Redirect to="/login"/>}
             </Route>
             <Route exact path="/edit">
-              {loginInfo ? <AddResume/> : <Redirect to="/login"/>}
+              {loginInfo ? <EditResume/> : <Redirect to="/login"/>}
             </Route>
             <Route exact path="/api/resume/10">
               {loginInfo ? <ViewFullResume/> : <Redirect to="/api/resume/1"/>}
