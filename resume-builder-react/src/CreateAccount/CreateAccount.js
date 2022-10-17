@@ -9,6 +9,8 @@ function CreateAccount() {
     const [account, setAccount] = useState({});
     const [errors, setErrors] = useState([]);
 
+    //add second fetch request to seperate user info and login info
+
     function handleSubmit( event ){
         event.preventDefault();
 

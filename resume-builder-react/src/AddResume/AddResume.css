@@ -16,3 +16,17 @@
   
 }
 
+.pill {
+  
+  padding: 20px 40px !important;;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 16px !important;
+  
+  
+}
+
+
+
+
