@@ -205,10 +205,9 @@ function EditResume(props) {
                 "Content-Type": "application/json"
             }
         }).then(async response => {
-            if (response.status === 201) {
+            if (response.status === 204) {
 
-                history.push("/api/resume/1");
-
+                history.push("/api/resume/" + id);
 
             } else {
                 console.log(await response.json());
@@ -216,7 +215,7 @@ function EditResume(props) {
             }
         });
     }
-    console.log(addedAppUserInfo);
+
     return (
         <div className="container">
             <div className="form-group">
