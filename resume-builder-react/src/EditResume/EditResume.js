@@ -134,33 +134,35 @@ function EditResume(props) {
     const userData = useContext(AuthContext);
     const history = useHistory();
 
-    useEffect(() => {
-        if (userData === null) {
-            history.push("/login");
-        } else {
-            const userId = userData.claims.jti;
-            const jwt = userData.jwt;
-            fetch("http://localhost:8080/api/resume/" + 1,
-                //{props.id} when in actual use
-                {
-                    headers: {
-                        Authorization: `Bearer ${jwt}`
-                    }
-                })
-                .then(async response => {
-                    if (response.status === 200) {
-                        return response.json();
-                    } else if (response.status === 400) {
-                        setIsEmpty(true);
-                        return response.json();
-
-                    } else (console.log(await response.json()))
-                })
-                .then(resumeInfo => {
-                    console.log(resumeInfo); //just to see what we get
-                });
-        }
-    });
+    function onSubmit(event){
+        event.preventDefault();
+        
+        const resume = {workHistories : addedWorkHistory,
+                        educations : addedEducation,
+                        skills : addedSkills
+                        };
+        const userId = userData.claims.jti;
+        const jwt = userData.jwt;
+    
+        fetch( "http://localhost:8080/api/resume", {
+            method: "PUT",
+            body: JSON.stringify(resume),
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+              "Content-Type": "application/json"          
+            }
+        }).then(async response => {
+            if( response.status === 201 ){
+                
+                history.push( "/api/resume/1" );
+               
+                
+            } else {
+                console.log(await response.json());
+                //Display error messages
+            }
+        });
+    }
 
     return (
         <div className="container">
