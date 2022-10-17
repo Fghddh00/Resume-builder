@@ -174,7 +174,7 @@ function AddResume(props) {
 
 
   console.log(addedSkills)
-  console.log(skillsList)
+ 
 
   return (
     <div className="container">
