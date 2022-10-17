@@ -11,11 +11,13 @@ function EditResume(props) {
     const [addedEducation, setAddedEducation] = useState([]);
     const [addedWorkHistory, setAddedWorkHistory] = useState([]);
     const [addedAppUserInfo, setAddedAppUserInfo] = useState([]);
+    const [resumeId,setResumeId] = useState(null);
     const [token, setToken] = useState(null);
     const [addedSkills, setAddedSkills] = useState([]);
     const [skillsList, setSkills] = useState([]);
     const [isEmpty, setIsEmpty] = useState(false);
     const { id } = useParams();
+    
 
     function insertEducationForm() {
         let newfield = { schoolName: "", educationLevel: "" };
@@ -90,6 +92,7 @@ function EditResume(props) {
                     setAddedSkills(resumeInfo.skills)
                     setSkills(resumeInfo.skills.map(s => s.skillName))
                     setAddedAppUserInfo(resumeInfo.userInfo)
+                    setResumeId(resumeInfo.resumeId)
                     //just to see what we get
                 });
         }
@@ -187,13 +190,14 @@ function EditResume(props) {
             workHistories: addedWorkHistory,
             educations: addedEducation,
             skills: addedSkills,
-            userInfo: addedAppUserInfo[0],
-            templateId: 1
+            userInfo: addedAppUserInfo,
+            templateId: 1,
+            resumeId: resumeId
         };
         const userId = userData.claims.jti;
         const jwt = userData.jwt;
 
-        fetch("http://localhost:8080/api/resume", {
+        fetch("http://localhost:8080/api/resume/" + id, {
             method: "PUT",
             body: JSON.stringify(resume),
             headers: {
