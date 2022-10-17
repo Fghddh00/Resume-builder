@@ -1,25 +1,22 @@
 import { useContext, useEffect, useState } from "react";
 import { Badge, Button } from "react-foundation";
-import FormInput from "../FormInput/FormInput";
 import "./AddResume.css";
 import "../ErrorMessages/ErrorMessages.js"
-import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
 import AddEducationForm from "../AddEducationForm/AddEducationForm";
 import AddWorkHistoryForm from "../AddWorkHistoryForm/AddWorkHistoryForm";
 import AuthContext from "../AuthContext";
 import { useHistory } from "react-router-dom";
+import AddAppUserInfoForm from "../AddAppUserInfoForm/AddAppUserInfoForm";
 
 function AddResume(props) {
   const [addedEducation, setAddedEducation] = useState([]);
   const [addedWorkHistory, setAddedWorkHistory] = useState([]);
+  const [addedAppUserInfo, setAddedAppUserInfo] = useState([]);
   const [addedSkills, setAddedSkills] = useState([]);
   const [token, setToken] = useState(null);
   const [skillsList, setSkills] = useState([]);
   const userData = useContext(AuthContext);
   const history = useHistory();
-
-  
-
 
   function insertEducationForm() {
     let newfield = {schoolName:"" ,educationLevel:""};
@@ -32,7 +29,11 @@ function AddResume(props) {
 
     setAddedWorkHistory([...addedWorkHistory, newfield]);
   }
+  function insertAppUserInfoFrom() {
+    let newfield = {email: "", firstName: "", lastName: "", address: "", phoneNumber: ""};
 
+    setAddedAppUserInfo([...addedAppUserInfo, newfield]);
+  }
   useEffect(
     () => {
       getToken();
@@ -109,7 +110,6 @@ function AddResume(props) {
     
   }
 
-  
 
   function educationUpdateHandler(education,index){
     const copy = [...addedEducation];
@@ -123,6 +123,12 @@ function AddResume(props) {
 
     copy[index] = workHistory;
     setAddedWorkHistory(copy);
+  }
+  function appUserInfoUpdateHandler(appUserInfo,index){
+    const copy = [...addedAppUserInfo];
+
+    copy[index] = appUserInfo;
+    setAddedAppUserInfo(copy);
   }
 
   function addSkillClick(evt){
@@ -142,9 +148,6 @@ function AddResume(props) {
     }
     
   }
-
-  
-
 
   function onSubmit(event){
     event.preventDefault();
@@ -176,10 +179,6 @@ function AddResume(props) {
     });
 }
 
-
-
- 
-
   return (
     <div className="container">
       <div className="form-group">
@@ -190,6 +189,9 @@ function AddResume(props) {
             </li>
             <li>
               <a href="#WorkHistory">Work history</a>
+            </li>
+            <li>
+              <a href="#AppUserInfo">User Info</a>
             </li>
             <li>
               <a href="">Template</a>
@@ -221,7 +223,18 @@ function AddResume(props) {
              
            )}
            {skillsList.map(s=> <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
-           
+        </div>
+        <div id="AppUSerInfo">
+          <h2>User Info</h2>
+          <Button onClick={insertAppUserInfoFrom}>Add User Info</Button>
+          {
+          addedAppUserInfo.map((input, index) => 
+            <AddAppUserInfoForm 
+            appUserInfo={input}
+            index={index}
+            onAppUserInfoUpdated={appUserInfoUpdateHandler}
+            />
+          )}
         </div>
         <Button onClick={onSubmit}>Submit</Button>
       </div>
