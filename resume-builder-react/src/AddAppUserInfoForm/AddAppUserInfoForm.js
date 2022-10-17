@@ -1,7 +1,7 @@
 import FormInput from "../FormInput/FormInput";
 
 
-function AddAppUserInfo({appUserInfo, onAppUserInfoUpdated, index}){
+function AddAppUserInfoForm({appUserInfo, onAppUserInfoUpdated, index}){
     function updateAppUserInfo(evt){
         const target = evt.target;
         const name = target.name;
@@ -60,4 +60,4 @@ function AddAppUserInfo({appUserInfo, onAppUserInfoUpdated, index}){
 
     );
 
-export default AddAppUserInfo;
+export default AddAppUserInfoForm;
