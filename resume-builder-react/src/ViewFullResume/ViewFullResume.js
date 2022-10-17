@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { Button } from "react-foundation";
 import { Link, useHistory, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import EducationsFromResume from "../EducationsFromResume/EducationsFromResume";
