@@ -73,6 +73,7 @@ public class SkillService {
         }
 
         if (skills == null){
+            result.addMessage("Skills is null", ResultType.INVALID);
             return result;
         }
 

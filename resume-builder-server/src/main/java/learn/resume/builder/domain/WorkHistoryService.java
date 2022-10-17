@@ -79,6 +79,7 @@ public class WorkHistoryService {
         }
 
         if(workHistories == null){
+            result.addMessage("Work History is null", ResultType.INVALID);
             return result;
         }
 

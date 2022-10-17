@@ -5,6 +5,7 @@ import AddEducationForm from "../AddEducationForm/AddEducationForm";
 import FormInput from "../FormInput/FormInput";
 import AuthContext from "../AuthContext";
 import "./EditResume.css";
+import AddWorkHistoryForm from "../AddWorkHistoryForm/AddWorkHistoryForm";
 
 function EditResume(props) {
     const [addEdFormValues, setAddEdFormValues] = useState([]);
@@ -27,9 +28,15 @@ function EditResume(props) {
         setAddEdFormValues(copy);
     }
     function AddWorkForm() {
-        let newfield = {};
+        let newfield = {jobTitle: "", startDate: "", endDate: "", jobDescription: ""};
 
         setAddWorkFormValues([...addWorkFormValues, newfield]);
+    }
+    function workHistoryUpdateHandler(workHistory, index) {
+        const copy = [...addWorkFormValues];
+
+        copy[index] = workHistory;
+        setAddWorkFormValues(copy);
     }
 
     function handleClick(event) {
@@ -129,38 +136,13 @@ function EditResume(props) {
             <div id="WorkHistory">
                 <h2>Work History</h2>
                 <Button onClick={AddWorkForm}>Add Work History</Button>
-                {addWorkFormValues.map((input, index) => {
-                    return (
+                {
+                addWorkFormValues.map((input, index) => {
                         <div key={index} className="form">
-                            <FormInput
-                                inputType={"text"}
-                                identifier={"jobTitle "}
-                                labelText={"Job Title"}
-                                currVal={""}
-                            />
-                            <FormInput
-                                inputType={"date"}
-                                identifier={"startDate "}
-                                labelText={"Start Date"}
-                                currVal={""}
-                            />
-                            <FormInput
-                                inputType={"date"}
-                                identifier={"endDate "}
-                                labelText={"End Date"}
-                                currVal={""}
-                            />
-                            <FormInput
-                                inputType={"text"}
-                                identifier={"address"}
-                                labelText={"Address"}
-                                currVal={""}
-                            />
-                            <FormInput
-                                inputType={"text"}
-                                identifier={"phoneNumber"}
-                                labelText={"Phone Number"}
-                                currVal={""}
+                            <AddWorkHistoryForm
+                            workHistory={input}
+                            index={index}
+                            onWorkHistoryUpdated={workHistoryUpdateHandler}
                             />
                             <label htmlFor="description">
                                 {" "}
@@ -174,7 +156,7 @@ function EditResume(props) {
                             <Button onClick={handleClick}> load skills</Button>
                             {skills.map(s => <h1 className="card"> {s}</h1>)}
                         </div>
-                    );
+                  
                 })}
             </div>
         </div>
