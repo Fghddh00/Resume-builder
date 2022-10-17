@@ -2,8 +2,10 @@ package learn.resume.builder.data;
 
 
 import learn.resume.builder.data.mapper.ResumeMapper;
+import learn.resume.builder.models.Education;
 import learn.resume.builder.models.Resume;
 import learn.resume.builder.models.Skill;
+import learn.resume.builder.models.WorkHistory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -41,6 +43,7 @@ public class ResumeDbRepo implements ResumeRepo{
     }
 
     @Override
+    @Transactional
     public Resume add(Resume resumeToAdd) {
 
         if(resumeToAdd.getTemplateId()<1){
@@ -64,14 +67,28 @@ public class ResumeDbRepo implements ResumeRepo{
         }
         resumeToAdd.setResumeId(keyHolder.getKey().intValue());
         setResumeSkill(resumeToAdd);
+        setResumeEducation(resumeToAdd);
+        setResumeWorkHistory(resumeToAdd);
         return resumeToAdd;
     }
 
+    private void setResumeWorkHistory(Resume resumeToAdd) {
+        for(WorkHistory workHistory : resumeToAdd.getWorkHistories()){
+            jdbcTemplate.update("insert into resume_work_history (resume_id, work_history_id) values (?,?)", resumeToAdd.getResumeId(), workHistory.getWorkHistoryId());
+        }
+    }
+
+    private void setResumeEducation(Resume resumeToAdd) {
+        for(Education education : resumeToAdd.getEducations()){
+            jdbcTemplate.update("insert into resume_education (resume_id, education_id) values (?,?)", resumeToAdd.getResumeId(), education.getEducationId());
+        }
+
+    }
+
     private void setResumeSkill(Resume resumeToAdd) {
-//        jdbcTemplate.update("delete from resume_skill where resume_id = ? ", resumeToAdd.getResumeId());
-//        for(Skill skill : resumeToAdd.getSkills()){
-//            jdbcTemplate.update()
-//        }
+        for(Skill skill : resumeToAdd.getSkills()){
+            jdbcTemplate.update("insert into resume_skill (resume_id, skill_id) values (?,?)", resumeToAdd.getResumeId(), skill.getSkillId());
+        }
 
     }
 
