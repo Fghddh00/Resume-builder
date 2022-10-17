@@ -68,8 +68,10 @@ public class ResumeDbRepo implements ResumeRepo{
     }
 
     private void setResumeSkill(Resume resumeToAdd) {
-        jdbcTemplate.update("delete from resume_skill where resume_id = ? ", resumeToAdd.getResumeId());
-        for(Skill skill : resumeToAdd.getSkills());
+//        jdbcTemplate.update("delete from resume_skill where resume_id = ? ", resumeToAdd.getResumeId());
+//        for(Skill skill : resumeToAdd.getSkills()){
+//            jdbcTemplate.update()
+//        }
 
     }
 
