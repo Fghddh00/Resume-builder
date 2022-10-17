@@ -48,7 +48,7 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChe
                 <textarea
                 className="textarea"
                 id={"jobDescription"+index}
-                name={"jobDescription"+index }
+                name={"jobDescription" }
                 onChange={updateWorkHistory}
                
               />

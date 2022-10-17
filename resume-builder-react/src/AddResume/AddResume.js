@@ -148,14 +148,15 @@ function AddResume(props) {
 
   function onSubmit(event){
     event.preventDefault();
-    
+    console.log(addedAppUserInfo);
     const resume = {workHistories : addedWorkHistory,
                     educations : addedEducation,
-                    skills : addedSkills
+                    skills : addedSkills,
+                    userInfo : addedAppUserInfo
                     };
     const userId = userData.claims.jti;
     const jwt = userData.jwt;
-
+    console.log(resume.workHistories);
     fetch( "http://localhost:8080/api/resume", {
         method: "POST",
         body: JSON.stringify(resume),

@@ -89,7 +89,7 @@ public class WorkHistoryService {
                 result.addMessage("Work history could not be added", workResult.getType());
                 return result;
             }
-            repository.update(workHistory);
+            repository.add(workHistory);
         }
         result.setPayload(workHistories);
         return result;
