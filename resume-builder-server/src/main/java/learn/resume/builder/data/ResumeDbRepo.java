@@ -103,7 +103,33 @@ public class ResumeDbRepo implements ResumeRepo{
 
     @Override
     public boolean update(Resume resume) {
+        updateResumeWorkHistory(resume);
+        updateResumeSkill(resume);
+        updateResumeEducation(resume);
         return jdbcTemplate.update("updated resume_app set template_id = ? where resume_id = ?", resume.getTemplateId(), resume.getResumeId()) > 0;
+    }
+
+    private void updateResumeEducation(Resume resume) {
+        jdbcTemplate.update("delete from resume_education where resume_id = ?;", resume.getResumeId());
+        for(Education education : resume.getEducations()){
+            jdbcTemplate.update("insert into resume_education (resume_id, education_id) values (?,?)", resume.getResumeId(), education.getEducationId());
+        }
+    }
+
+    private void updateResumeSkill(Resume resume) {
+        jdbcTemplate.update("delete from resume_skill where resume_id = ?;", resume.getResumeId());
+
+        for(Skill skill : resume.getSkills()){
+            jdbcTemplate.update("insert into resume_skill (resume_id, skill_id) values (?,?)", resume.getResumeId(), skill.getSkillId());
+        }
+    }
+
+    private void updateResumeWorkHistory(Resume resume) {
+        jdbcTemplate.update("delete from resume_work_history where resume_id = ?;", resume.getResumeId());
+
+        for(WorkHistory workHistory : resume.getWorkHistories()){
+            jdbcTemplate.update("insert into resume_work_history (resume_id, work_history_id) values (?,?)", resume.getResumeId(), workHistory.getWorkHistoryId());
+        }
     }
 
 

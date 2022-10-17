@@ -127,6 +127,8 @@ public class ResumeController {
 
     @PutMapping("/{resumeId}")
     public ResponseEntity editResume(@PathVariable int resumeId, @RequestBody Resume resume){
+
+
         if (resumeId != resume.getResumeId()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -150,6 +152,11 @@ public class ResumeController {
         if(!appUserInfoResult.isSuccess()){
             return ErrorResponse.build(appUserInfoResult);
         }
+
+        resume.setWorkHistories(workHistoriesResult.getPayload());
+        resume.setEducations(educationsResult.getPayload());
+        resume.setSkills(skillsResult.getPayload());
+        resume.setUserInfo(appUserInfoResult.getPayload());
 
         Result<Resume> resumeResult = resumeService.updateResume(resume);
         if(!resumeResult.isSuccess()) {
