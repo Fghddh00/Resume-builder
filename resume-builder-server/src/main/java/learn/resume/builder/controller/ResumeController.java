@@ -175,7 +175,7 @@ public class ResumeController {
             return ErrorResponse.build(resumeResult);
         }
 
-        return ErrorResponse.build(resumeResult);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
 }
