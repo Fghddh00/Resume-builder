@@ -2,8 +2,8 @@ function Education({schoolName, educationLevel}){
 
     return(
            <div className="education">
-                <h5>{schoolName}</h5>
-                <h5>{educationLevel}</h5>
+                <h5 className="schoolName">{schoolName}</h5>
+                <h5 className="educationLevel">{educationLevel}</h5>
            </div> 
     );
 

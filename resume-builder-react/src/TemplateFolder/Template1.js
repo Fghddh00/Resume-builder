@@ -11,6 +11,8 @@ function Template1({educations,skills, workHistories, userInfo }){
     console.log(workHistories)
     console.log(skills)
     console.log(userInfo)
+    
+    
 
 
     return(
@@ -21,7 +23,7 @@ function Template1({educations,skills, workHistories, userInfo }){
             <ul id="userInformation">{userInfo.email}</ul>
             <ul id="userInformationMargin">{userInfo.address}</ul>
             <ul id="userInformationMargin">{userInfo.phoneNumber}</ul>
-            <ul id="educationHeader">Educations</ul>
+            <ul id="educationHeader">Education</ul>
             <ul id="educationInfo">{educations.map(e =>
                        <Education 
                        schoolName={e.schoolName}
@@ -34,8 +36,8 @@ function Template1({educations,skills, workHistories, userInfo }){
             <h5 id="workHistoryHeader">Work History</h5>
             <ul id="workHistoryInfo">{workHistories.map(w =>
                 <WorkHistory 
-                company={w.company}
-                jobtitle={w.jobtitle}
+                company={w.company} 
+                jobTitle={w.jobTitle}
                 startDate={w.startDate}
                 endDate={w.endDate}
                 jobDescription={w.jobDescription}
@@ -45,8 +47,8 @@ function Template1({educations,skills, workHistories, userInfo }){
 
             <hr></hr>
             
-            <h5 id="skillHeader">Skills</h5>
-            <ul id="skillInfo">{skills.map(s =>
+            <h5 id="skillHeader">Skill:</h5>
+            <ul>{skills.map(s =>
                 <Skill 
                 skillName={s.skillName}
                 />

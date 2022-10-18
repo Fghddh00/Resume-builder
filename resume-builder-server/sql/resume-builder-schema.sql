@@ -40,7 +40,7 @@ create table app_user_role (
 
 create table education (
     education_id 	int primary key auto_increment,
-    school_name 	varchar(50) not null,
+    school_name 	varchar(100) not null,
     education_level varchar(50) not null
 );
 
@@ -150,7 +150,8 @@ create table resume_skill (
     
     insert into app_user_role values (1 , 1);
     
-    insert into education values (1, "OHIO STATE UNIVERSITY", "Bachelor’s Degree in Computer Science");
+    insert into education values (1, "OHIO STATE UNIVERSITY", "Bachelor’s Degree in Computer Science"),
+    (2, "Institute for the Certification of Computing Professional", "Certified Computer Professional");
     
     insert into work_history values 
     (1, "Laurel Barrie Financial", "Java Programmer", '2010-06-16', '2017-10-16', "Developed 10+ native Java applications per year with integrated BI tools. Beat deadlines for jobs by 15% on average.
@@ -159,14 +160,18 @@ create table resume_skill (
 	Onboarded and trained 12 Java programmers. Retrained 3 lagging new hires through regular coaching, raising their KPIs 50%."),
 	(2, "BadCode Software", "Junior Java Programmer", '2017-11-16', '2021-12-16', "Assisted with development of 3 native Java applications.
 	Collaborated to help slash security risk by 30% through automation.
-	Worked with senior Java programmers to complete jobs 15% ahead of schedule with 98% client satisfaction scores.");
-    
+	Worked with senior Java programmers to complete jobs 15% ahead of schedule with 98% client satisfaction scores."),
+    (3, "LARSEN & TOUBRO INFOTECH LTD", "Junior Programmer",'2021-12-22', '2022-08-16', "Built database objects (T-SQL, SSIS, triggers, stored procedures, functions, and jobs) to support responsive data access.
+	Ensured fulfillment of business data-extraction requirements developing custom reports.
+	Developed and optimized programs performance using ASP.NET, C#.NET, and MS SQL, which streamlined processes, saving $170k costs.
+	Implemented office management applications that saved $90K yearly.");
     insert into skill values 
     (1, "Java"),
     (2, "RESTful"),
     (3, " JSP"),
 	(4, " Javascript"),
-	(5, " HTML5");
+	(5, " HTML5"),
+    (6, "SQL");
     
     insert into resume_app 
     values
@@ -175,11 +180,11 @@ create table resume_skill (
     
     insert into resume_education
     values
-    (1,1);
+    (1,1), (2,1);
     
 	insert into resume_work_history
     values
-    (1,1), (1,2);
+    (1,1), (1,2), (1,3);
     
     insert into resume_skill
     values
@@ -187,5 +192,6 @@ create table resume_skill (
     (1,2),
     (1,3),
     (1,4),
-    (1,5);
+    (1,5),
+    (1,6);
     
