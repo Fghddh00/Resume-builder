@@ -42,7 +42,7 @@ public class WorkHistoryDbRepository implements WorkHistoryRepository{
     @Override
     public WorkHistory add(WorkHistory workHistory) {
 
-        final String sql = "insert into work_history (company, job_title, start_date, end_date, job_description) "
+        final String sql = "insert into work_history (work_history_company, job_title, start_date, end_date, job_description) "
                 + " values (?,?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
