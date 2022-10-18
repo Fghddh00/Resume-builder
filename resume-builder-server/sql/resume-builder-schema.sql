@@ -175,7 +175,7 @@ create table resume_skill (
     
     insert into resume_app 
     values
-    (1, 1, 1, 1);
+    (1, 3, 1, 1);
     
     
     insert into resume_education
