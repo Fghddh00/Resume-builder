@@ -1,0 +1,19 @@
+.template2 {
+    background-color: white !important;
+    min-height: 200vh !important;
+    
+}
+
+.nameHeader{
+    justify-content: center !important;
+    text-align: center;
+    
+}
+
+.education2{
+    margin-left: 20vh;
+}
+.education2 ul{
+    margin-left: 1rem;
+  margin-right: 1rem;
+}
