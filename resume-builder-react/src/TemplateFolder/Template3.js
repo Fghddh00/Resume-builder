@@ -1,121 +1,51 @@
 import { Grid, GridContainer } from "react-foundation";
+import Education3 from "../Template3Components/Education3/Education3";
+import WorkHistory3 from "../Template3Components/WorkHistory3/WorkHistory3";
 import "./template3.css";
 
 function Template3({ educations, skills, workHistories, userInfo }) {
 
     return (
-
-        <div class="wrapper">
-            <div class="resume">
-            <div class="skills_wrap pb">
-                    <div class="title">
-                        Contact
-                    </div>
-                    <div class="skills">
-                        <ul>
-                            <li>
-                                <div class="li_wrap">
-                                    <div class="icon"><i class="fas fa-mobile-alt" aria-hidden="true"></i></div>
-                                    <div class="text">OtherStuff</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="li_wrap">
-                                    <div class="icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
-                                    <div class="text">{userInfo.email}</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="li_wrap">
-                                    <div class="icon"><i class="fab fa-weebly" aria-hidden="true"></i></div>
-                                    <div class="text">{userInfo.phoneNumber}</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="li_wrap">
-                                    <div class="icon"><i class="fas fa-map-signs" aria-hidden="true"></i></div>
-                                    <div class="text">{userInfo.address}</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="skills_wrap pb">
-                    <div class="title">
-                        Skills
-                    </div>
-                    <div class="skills">
-                        <ul>
-                            <li>
-                                <div class="li_wrap">
-                                    <div class="icon"><i class="fab fa-html5"></i></div>
-                                    <div class="text">{skills.map(s => s.skillName)}</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="right">
-                <div class="header">
-                    <div class="name_role">
-                        <div class="name">
-                            {userInfo.firstName} {userInfo.lastName}
-                        </div>
-                        <div class="role">
-                            {workHistories.map(w => w.jobTitle)}
+        <div className="container">
+            <div className="template3">
+                {/* Header */}
+                <div className="row">
+                    <div className="col-xs-12">
+                        <div id="text-header" className="text-center">
+                            <div id="photo">
+                                <img src="https://www.lafd.org/profiles/lafd/themes/lafd_org/logo.png" alt="lafd" />
+                            </div>
+                            <h1>{userInfo.firstName} {userInfo.lastName}</h1>
                         </div>
                     </div>
                 </div>
-                <div class="right_inner" color="white">
-                    <div class="exp">
-                        <div class="title">
-                            experience
-                        </div>
-                        <div class="exp_wrap">
-                            <ul>
-                                <li>
-                                    <div class="li_wrap">
-                                        <div class="date">
-                                            {workHistories.map(w => w.startDate)} - {workHistories.map(w => w.endDate)}
-                                        </div>
-                                        <div class="info">
-                                            <p class="info_title">
-                                                {workHistories.map(w => w.jobTitle)}                                            </p>
-
-                                            <p class="info_cont">
-                                                {workHistories.map(w => w.jobDescription)}                                            </p>
-                                        </div>
+                <div className="row">
+                    <div className="col-xs-12 col-sm-7">
+                        <div className="box">
+                            <h2><img src="https://cdn-icons-png.flaticon.com/512/732/732952.png" width="25" height="5" alt="suitcase" /> Work Experience</h2>
+                            <div class="job clearfix">
+                                <div class="row">
+                                    <div class="details">
+                                        {<WorkHistory3 key={userInfo.userInfoId} workHistories={workHistories} skills={skills} />}
                                     </div>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="education">
-                        <div class="title">
-                            Education
-                        </div>
-                        <div class="education_wrap">
-                            <ul>
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="box">
+                        <h2><img src="https://cdn-icons-png.flaticon.com/512/46/46955.png" width="25" height="5" alt="cap" /> Education</h2>
+                            <ul id="education" class="clearfix">
                                 <li>
-                                    <div class="li_wrap">
-                                        <div class="date">
-
-                                        </div>
-                                        <div class="info">
-                                            <p class="info_title">
-                                            {educations.map(e => e.schoolName)}
-                                            </p>
-                                            <p class="info_com">
-                                                {educations.map(e => e.educationLevel)}
-                                            </p>
-                                        </div>
+                                    <div class="description pull-right">
+                                        {educations.map(e=> <Education3 key={e.educationId} educationData={e}/>)}
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     );
