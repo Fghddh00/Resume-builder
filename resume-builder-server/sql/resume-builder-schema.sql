@@ -151,7 +151,7 @@ create table resume_skill (
     insert into app_user_role values (1 , 1);
     
     
-    insert into education values (1, "College", "Bachelors");
+    insert into education values (1, "College", "Bachelors"), (2, "New College", "Associates");
     
     insert into work_history values 
     (1, "Dev10", "Singer", '2010-06-16', '2010-10-16', "I sing and won American Idol"),
@@ -164,15 +164,15 @@ create table resume_skill (
     
     insert into resume_app 
     values
-    (1, 3, 1, 1);
+    (1, 1, 1, 1);
     
     insert into resume_education
     values
-    (1,1);
+    (1,1), (2,1);
     
 	insert into resume_work_history
     values
-    (1,1);
+    (1,1), (1,2);
     
     insert into resume_skill
     values
