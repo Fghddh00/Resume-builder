@@ -4,13 +4,14 @@ import FormInput from "../FormInput/FormInput";
 function AddAppUserInfoForm({appUserInfo, onAppUserInfoUpdated, index}){
     function updateAppUserInfo(evt){
         const target = evt.target;
+        const propertyName = evt.target.name
         const name = target.name;
         const value = target.value;
 
         const copy = {...appUserInfo};
-        copy[name] = value;
+        // copy[name] = value;
 
-        onAppUserInfoUpdated(copy,index);
+        onAppUserInfoUpdated(value,propertyName);
     }
 
     return(

@@ -38,6 +38,13 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChe
                 currVal={workHistory.jobTitle}
                 onChangeHandler={updateWorkHistory}
               />
+              <FormInput
+                inputType={"date"}
+                identifier={"startDate"}
+                labelText={"Start Date"}
+                currVal={workHistory.startDate}
+                onChangeHandler={updateWorkHistory}
+              />
                 <FormInput
                 inputType={"date"}
                 identifier={"endDate"}

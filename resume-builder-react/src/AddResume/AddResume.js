@@ -11,7 +11,7 @@ import AddAppUserInfoForm from "../AddAppUserInfoForm/AddAppUserInfoForm";
 function AddResume(props) {
   const [addedEducation, setAddedEducation] = useState([]);
   const [addedWorkHistory, setAddedWorkHistory] = useState([]);
-  const [addedAppUserInfo, setAddedAppUserInfo] = useState([]);
+  const [addedAppUserInfo, setAddedAppUserInfo] = useState({});
   const [addedSkills, setAddedSkills] = useState([]);
   const [token, setToken] = useState(null);
   const [skillsList, setSkills] = useState([]);
@@ -124,10 +124,10 @@ function AddResume(props) {
     copy[index] = workHistory;
     setAddedWorkHistory(copy);
   }
-  function appUserInfoUpdateHandler(appUserInfo, index) {
-    const copy = [...addedAppUserInfo];
+  function appUserInfoUpdateHandler(newValue, propertyName) {
+    const copy = {...addedAppUserInfo};
 
-    copy[index] = appUserInfo;
+    copy[propertyName] = newValue;
     setAddedAppUserInfo(copy);
   }
 
@@ -154,7 +154,7 @@ function AddResume(props) {
       workHistories: addedWorkHistory,
       educations: addedEducation,
       skills: addedSkills,
-      userInfo: addedAppUserInfo[0],
+      userInfo: addedAppUserInfo,
       templateId: 2
 
     };
@@ -181,7 +181,7 @@ function AddResume(props) {
       }
     });
   }
-
+  
   return (
     <div className="container">
       <div className="addForm">
