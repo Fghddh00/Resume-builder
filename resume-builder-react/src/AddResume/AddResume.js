@@ -184,7 +184,7 @@ function AddResume(props) {
 
   return (
     <div className="container">
-      <div className="form-group">
+      <div className="addForm">
         <nav aria-label="You are here:" role="navigation">
           <ul className="breadcrumbs">
             <li>
@@ -227,9 +227,8 @@ function AddResume(props) {
           )}
           {skillsList.map(s => <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
         </div>
-        <div id="AppUSerInfo">
-          <h2>User Info</h2>
-          <Button onClick={insertAppUserInfoFrom}>Add User Info</Button>
+        <div id="AppUserInfo">
+          
           <h2>User Info</h2>
           <AddAppUserInfoForm
             appUserInfo={addedAppUserInfo}

@@ -218,7 +218,7 @@ function EditResume(props) {
 
     return (
         <div className="container">
-            <div className="form-group">
+            <div className="editForm">
                 <nav aria-label="You are here:" role="navigation">
                     <ul className="breadcrumbs">
                         <li>
