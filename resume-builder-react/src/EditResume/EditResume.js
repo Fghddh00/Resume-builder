@@ -47,12 +47,12 @@ function EditResume(props) {
 
         setAddedAppUserInfo([...addedAppUserInfo, newfield]);
     }
-    function appUserInfoUpdateHandler(appUserInfo, index) {
-        const copy = [...addedAppUserInfo];
-
-        copy[index] = appUserInfo;
+    function appUserInfoUpdateHandler(newValue, propertyName) {
+        const copy = {...addedAppUserInfo};
+    
+        copy[propertyName] = newValue;
         setAddedAppUserInfo(copy);
-    }
+      }
     function handleClick(event) {
         const descriptionText = document.getElementById('jobDescription');
 
