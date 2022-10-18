@@ -42,8 +42,8 @@ function AddResume(props) {
 
   function getToken() {
     const data = {
-      client_id: "bdorv9di1ub0oxyy",
-      client_secret: "4qajWwcO",
+      client_id: "r07k7k37dvf4k0id",
+      client_secret: "M49XXMSS",
       grant_type: "client_credentials",
       scope: "emsi_open",
     };
@@ -134,8 +134,6 @@ function AddResume(props) {
   function addSkillClick(evt){
     const btn = document.getElementById(evt.target.value);
 
-    
-    console.log(btn.style.backgroundColor)
     if(btn.style.backgroundColor != 'green'){
       btn.style.backgroundColor = 'green'
       const newSkillsList = addedSkills.concat({skillName : evt.target.value})
