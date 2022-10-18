@@ -76,10 +76,10 @@ public class WorkHistoryDbRepository implements WorkHistoryRepository{
 
     @Override
     public boolean update(WorkHistory workHistory) {
-       final String sql = " update work_history set job_title = ?, start_date = ?, end_date = ?, job_description = ? where work_history_id = ?;";
+       final String sql = " update work_history set job_title = ?, work_history_company = ?, start_date = ?, end_date = ?, job_description = ? where work_history_id = ?;";
 
        return jdbcTemplate.update(sql, workHistory.getJobTitle(),
-               workHistory.getStartDate(), workHistory.getEndDate(),
+               workHistory.getCompany(), workHistory.getStartDate(), workHistory.getEndDate(),
                workHistory.getJobDescription(), workHistory.getWorkHistoryId()) > 0;
     }
 }

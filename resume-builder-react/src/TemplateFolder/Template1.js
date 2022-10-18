@@ -33,9 +33,9 @@ function Template1({educations,skills, workHistories, userInfo }){
             <hr></hr>
             
             <h5 id="workHistoryHeader">Work History</h5>
-            <ul id="workHistoryInfo">{workHistories.map(w =>
+            <ul id="workHistoryInfo">v{workHistories.map(w =>
                 <WorkHistory 
-                
+                company={w.company}
                 jobtitle={w.jobtitle}
                 startDate={w.startDate}
                 endDate={w.endDate}
