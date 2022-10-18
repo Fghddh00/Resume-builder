@@ -21,19 +21,19 @@ public class SkillService {
         return repository.findAll();
     }
 
-//    public Result<Skill> add (Skill skill){
-//        Result<Skill> result = validate(skill);
-//        if (!result.isSuccess()) {
-//            return result;
-//        }
-//        if (skill.getSkillId() != 0) {
-//            result.addMessage("Skill Id cannot be set for `add` operation", ResultType.INVALID);
-//            return result;
-//        }
-//        skill = repository.add(skill);
-//        result.setPayload(skill);
-//        return result;
-//    }
+    public Result<Skill> add (Skill skill){
+        Result<Skill> result = validate(skill);
+        if (!result.isSuccess()) {
+            return result;
+        }
+        if (skill.getSkillId() != 0) {
+            result.addMessage("Skill Id cannot be set for `add` operation", ResultType.INVALID);
+            return result;
+        }
+        skill = repository.add(skill);
+        result.setPayload(skill);
+        return result;
+    }
     public Result deleteById(int skillId) {
         Result<Skill> result = new Result<>();
         if (!repository.deleteById(skillId)) {
@@ -107,7 +107,7 @@ public class SkillService {
                 result.addMessage("Skill  could not be added", skillResult.getType());
                 return result;
             }
-            repository.add(skill, resume);
+            repository.add(skill);
         }
         result.setPayload(skills);
         return result;

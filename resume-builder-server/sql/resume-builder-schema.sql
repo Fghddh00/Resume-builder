@@ -45,11 +45,12 @@ create table education (
 );
 
 create table work_history (
-    work_history_id 	int primary key auto_increment,
-    job_title 			varchar(50) not null,
-    start_date 			date not null,
-    end_date			date null,
-    job_description		varchar(2000) not null
+    work_history_id 		int primary key auto_increment,
+    work_history_company	varchar(150) not null,
+    job_title 				varchar(50) not null,
+    start_date 				date not null,
+    end_date				date null,
+    job_description			varchar(2000) not null
 );
 
 create table skill (
@@ -154,8 +155,8 @@ create table resume_skill (
     (2, "High School", "High School Degree");
     
     insert into work_history values 
-    (1, "Singer", '2010-06-16', '2010-10-16', "I sing and won American Idol"),
-	(2, "Dancer", '2010-11-16', '2010-12-16', "I dance and I am a ballerina");
+    (1, "Dev10", "Singer", '2010-06-16', '2010-10-16', "I sing and won American Idol"),
+	(2, "NFL", "Dancer", '2010-11-16', '2010-12-16', "I dance and I am a ballerina");
     
     insert into skill values 
     (1, "sing"),
@@ -164,7 +165,7 @@ create table resume_skill (
     
     insert into resume_app 
     values
-    (1, 1, 1, 1);
+    (1, 3, 1, 1);
     
     
     insert into resume_education

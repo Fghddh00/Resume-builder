@@ -7,6 +7,7 @@ import java.util.Objects;
 public class WorkHistory {
 
     private int workHistoryId;
+    private String company;
     private String jobTitle;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -14,8 +15,9 @@ public class WorkHistory {
     List<Resume> resumes;
 
 
-    public WorkHistory(int workHistoryId, String jobTitle, LocalDate startDate, LocalDate endDate, String jobDescription) {
+    public WorkHistory(int workHistoryId, String company, String jobTitle, LocalDate startDate, LocalDate endDate, String jobDescription) {
         this.workHistoryId = workHistoryId;
+        this.company = company;
         this.jobTitle = jobTitle;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -24,6 +26,14 @@ public class WorkHistory {
 
     public WorkHistory(){
 
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public List<Resume> getResumes() {
