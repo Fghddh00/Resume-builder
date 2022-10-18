@@ -15,14 +15,16 @@
     margin-top: 3em !important;
     margin-bottom: -3em !important;
     width: 200vh !important;
+    margin-left: 0.5vh !important;
     
 }
 
 .template1 .page .nameHeader {
     margin-top: 7vh !important;
+    margin-bottom: 8vh;
     text-align: center;
     font-family: "Georgia", Gadget, sans-serif !important;
-    font-size: 30px !important;
+    font-size: 35px !important;
     letter-spacing: 0.8px !important;
     word-spacing: 2px !important;
     color: #000000 !important;
@@ -33,33 +35,38 @@
     text-transform: uppercase !important;
 }
 #userInformationMargin {
-    margin-top: -3vh !important;
+    margin-top: -4vh !important;
     margin-left: 10vh !important;
     text-align: right !important;
     font-family: Georgia, serif !important;
+    color: #000000 !important;
 }
 #userInformation {
     text-align: right !important;
     font-family: Georgia, serif !important;
+    color: #000000 !important;
 }
 hr {
-    width: 155vh !important;
+    width: 190vh !important;
     background-color: #b7b7b7 !important;
+    margin-top: -6vh !important;
 }
 
 #educationHeader{
-    margin-top: -14.5vh !important;
-    font-style: italic !important;
+    margin-top: -17vh !important;
     font-family: Georgia, serif !important;
     font-weight: 550 !important;
-    font-size: 15px !important;
+    font-size: 20px !important;
     margin-left: 0.2vh !important;
+    color: #000000 !important;
 
 }
 #workHistoryHeader{
-    margin-top: 7vh !important;
+    margin-top: -1vh !important;
+    margin-left: 0.2vh !important;
     text-align: left !important;
     font-family: Georgia, serif !important;
+    font-style: italic !important;
     font-size: 20px !important;
     letter-spacing: 0.8px !important;
     word-spacing: 2px !important;
@@ -67,11 +74,71 @@ hr {
     font-weight: 550 !important;
     font-style: normal !important;
     font-variant: normal !important;
+}
+
+.schoolName {
+    font-family: Georgia, serif !important;
+    font-size: 3vh !important;
+    margin-left: -3vh !important;
+    margin-top: -4vh !important;
+    font-weight: 200 !important;
+    color: #000000 !important;
+
+}
+.educationLevel {
+    font-family: Georgia, serif !important;
+    font-size: 3vh !important;
+    margin-left: -3vh !important;
+    margin-top: -2vh !important;
+    font-style: italic !important;
+    margin-bottom: 6vh;
+}
+.workHistoryCompany{
+    font-family: Georgia, serif !important;
+    font-weight: 360 !important;
+    font-size: 3.5vh !important;
+    color: #000000 !important;
+    margin-left: -2.5vh !important;
+
+}
+.workHistoryJobTitle{
+    font-family: Georgia, serif !important;
+    font-weight: 300 !important;
+    font-size: 2.7vh !important;
+    margin-top: -2vh;
+    margin-left: -2vh !important;
+}
+.workHistoryStartDate{
+    margin-top: -9.5vh !important;
+    margin-left: 1vh !important;
+    text-align: right !important;
+    font-family: Georgia, serif !important;
+    color: #000000 !important;
+}
+.workHistoryendDate{
+    margin-top: -2vh !important;
+    margin-left: 1vh !important;
+    text-align: right !important;
+    font-family: Georgia, serif !important;
+    color: #000000 !important;
+    margin-right: 2.5vh !important;
+}
+.workHistoryJobDescription{
+    font-family: Georgia, serif !important;
+    font-weight: 300 !important;
+    font-size: 2.7vh !important;
+    margin-top: 2vh;
+    line-height: 4vh !important;
+    margin-inline-start: 3vh !important;
+    margin-bottom: 4vh !important;
 }
 #skillHeader{
-    margin-top: 7vh !important; 
+    margin-top: -1vh !important;
+    margin-bottom: 0.5vh !important;
+    margin-right: -3vh !important;
     text-align: left !important;
     font-family: Georgia, serif !important;
+    font-style: italic !important;
     font-size: 20px !important;
     letter-spacing: 0.8px !important;
     word-spacing: 2px !important;
@@ -80,9 +147,10 @@ hr {
     font-style: normal !important;
     font-variant: normal !important;
 }
-
-.education{
-    margin: 10vh !important;
+.skillName{
+    font-family: Georgia, serif !important;
+    font-weight: 300 !important;
+    font-size: 3vh !important;
+    margin-top: -1.5vh !important;
 }
-
 
