@@ -51,8 +51,6 @@ function Template1({educations,skills, workHistories, userInfo }){
                 skillName={s.skillName}
                 />
             )}</ul>
-            not getting skills
-            
              </div>
         
 

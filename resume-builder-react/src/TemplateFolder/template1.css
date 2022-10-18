@@ -81,8 +81,12 @@ hr {
     font-variant: normal !important;
 }
 
-.education{
-    margin: 10vh !important;
+.education {
+    margin-left: 1vh !important;
+    margin-top: -3.5vh !important;
+    font-family: Georgia, serif !important;
+    font-size: 11px !important;
+
 }
 
 

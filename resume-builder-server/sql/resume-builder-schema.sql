@@ -21,7 +21,7 @@ create table app_user_info (
     first_name 		varchar(100) not null,
     last_name 		varchar(100) not null,
     address 		varchar(200) null,
-    phone_number 	varchar(11) not null
+    phone_number 	varchar(20) not null
 );
 
 
@@ -146,7 +146,7 @@ create table resume_skill (
     
     insert into app_user_info 
 	values
-	( 1, "jason@gmail.com", "jason", "oh", "testaddress", "123456789");
+	( 1, "jason@gmail.com", "jason", "oh", "Seattle, WA", "352-895-7805");
     
     insert into app_user_role values (1 , 1);
     
