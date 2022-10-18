@@ -37,7 +37,7 @@ public class SkillDbRepository implements SkillRepo {
     }
 
     @Override
-    public Skill add(Skill skill, Resume resume) {
+    public Skill add(Skill skill) {
 
         final String sql = "insert into skill (skill_name) values (?);";
 

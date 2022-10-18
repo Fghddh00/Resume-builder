@@ -128,6 +128,9 @@ public class WorkHistoryService {
             result.addMessage("workhistory is null", ResultType.INVALID);
             return result;
         }
+        if (workHistory.getCompany() == null || workHistory.getCompany().isBlank()){
+            result.addMessage("Company is required", ResultType.INVALID);
+        }
         if (workHistory.getJobTitle() == null || workHistory.getJobTitle().isBlank()){
             result.addMessage("job title is required", ResultType.INVALID);
         }

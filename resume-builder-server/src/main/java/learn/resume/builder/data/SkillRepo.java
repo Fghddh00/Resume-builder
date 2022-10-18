@@ -10,7 +10,7 @@ public interface SkillRepo {
 
     List<Skill> findAll();
     List<Skill> getSkillByResumeId(int resumeId);
-    Skill add(Skill skill, Resume resume);
+    Skill add(Skill skill);
     @Transactional
     boolean deleteById(int skillId);
 

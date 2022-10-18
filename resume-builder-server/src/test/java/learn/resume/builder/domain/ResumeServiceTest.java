@@ -269,7 +269,7 @@ class ResumeServiceTest {
         educations.add(new Education(10,"College","Bachelors"));
 
         List<WorkHistory> workHistories = new ArrayList<>();
-        workHistories.add(new WorkHistory(10, "Fighter", LocalDate.of(2010,6,16), LocalDate.of(2010,10,16), "I sing and won American Idol"));
+        workHistories.add(new WorkHistory(10,"Dev10", "Fighter", LocalDate.of(2010,6,16), LocalDate.of(2010,10,16), "I sing and won American Idol"));
 
         List<AppRole> roles = new ArrayList<>();
         roles.add(new AppRole(1, "Job Seeker"));

@@ -42,16 +42,17 @@ public class WorkHistoryDbRepository implements WorkHistoryRepository{
     @Override
     public WorkHistory add(WorkHistory workHistory) {
 
-        final String sql = "insert into work_history (job_title, start_date, end_date, job_description) "
-                + " values (?,?,?,?);";
+        final String sql = "insert into work_history (company, job_title, start_date, end_date, job_description) "
+                + " values (?,?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, workHistory.getJobTitle());
-            ps.setDate(2, Date.valueOf(workHistory.getStartDate()));
-            ps.setDate(3, workHistory.getEndDate() == null ? null : Date.valueOf(workHistory.getEndDate()));
-            ps.setString(4, workHistory.getJobDescription());
+            ps.setString(1, workHistory.getCompany());
+            ps.setString(2, workHistory.getJobTitle());
+            ps.setDate(3, Date.valueOf(workHistory.getStartDate()));
+            ps.setDate(4, workHistory.getEndDate() == null ? null : Date.valueOf(workHistory.getEndDate()));
+            ps.setString(5, workHistory.getJobDescription());
             return ps;
         }, keyHolder);
 

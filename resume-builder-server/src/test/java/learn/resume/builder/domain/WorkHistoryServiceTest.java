@@ -23,10 +23,10 @@ class WorkHistoryServiceTest {
     @Test
     void shouldFindAllWorkHistory() {
         List<WorkHistory> workHistory = new ArrayList<>();
-        workHistory.add(new WorkHistory(1, "Singer",
+        workHistory.add(new WorkHistory(1,"Dev10", "Singer",
                 LocalDate.of(2010, 06,16),LocalDate.of(2010,10,16),
                "I sing and won American Idol"));
-        workHistory.add(new WorkHistory(1, "Dancer",
+        workHistory.add(new WorkHistory(1,"Dev10", "Dancer",
                 LocalDate.of(2013, 06,16),LocalDate.of(2011,10,16),
                 "I Dance"));
 
@@ -178,7 +178,7 @@ class WorkHistoryServiceTest {
     }
     @Test
     void shouldUpdate() {
-        WorkHistory workHistory = new WorkHistory(1, "title", LocalDate.of(2020, 1, 10)
+        WorkHistory workHistory = new WorkHistory(1,"Dev10", "title", LocalDate.of(2020, 1, 10)
                 , LocalDate.of(2020, 4, 18), "description");
         when(repository.update(workHistory)).thenReturn(true);
 
@@ -188,7 +188,7 @@ class WorkHistoryServiceTest {
 
     @Test
     void shouldNotUpdate() {
-        WorkHistory workHistory = new WorkHistory(1, "title", LocalDate.of(2020, 1, 10)
+        WorkHistory workHistory = new WorkHistory(1,"Dev10", "title", LocalDate.of(2020, 1, 10)
                 , LocalDate.of(2020, 4, 18), "description");
         when(repository.update(workHistory)).thenReturn(false);
 
@@ -198,7 +198,7 @@ class WorkHistoryServiceTest {
 
     @Test
     void shouldNotUpdateNullJobTitle() {
-        WorkHistory workHistory = new WorkHistory(1, null, LocalDate.of(2020, 1, 10)
+        WorkHistory workHistory = new WorkHistory(1,"Dev10", null, LocalDate.of(2020, 1, 10)
                 , LocalDate.of(2020, 4, 18), "description");
         when(repository.update(workHistory)).thenReturn(false);
 
@@ -207,7 +207,7 @@ class WorkHistoryServiceTest {
     }
     @Test
     void shouldNotUpdateBlankJobTitle() {
-        WorkHistory workHistory = new WorkHistory(1, "", LocalDate.of(2020, 1, 10)
+        WorkHistory workHistory = new WorkHistory(1,"Dev10", "", LocalDate.of(2020, 1, 10)
                 , LocalDate.of(2020, 4, 18), "description");
         when(repository.update(workHistory)).thenReturn(false);
 
@@ -217,7 +217,7 @@ class WorkHistoryServiceTest {
 
     @Test
     void shouldNotUpdateNullStartDate() {
-        WorkHistory workHistory = new WorkHistory(1, "title", null
+        WorkHistory workHistory = new WorkHistory(1,"Dev10", "title", null
                 , LocalDate.of(2020, 4, 18), "description");
         when(repository.update(workHistory)).thenReturn(false);
 
@@ -226,7 +226,7 @@ class WorkHistoryServiceTest {
     }
     @Test
     void shouldNotUpdateStartDateThatIsAfterEndDate() {
-        WorkHistory workHistory = new WorkHistory(1, "title", LocalDate.of(2021, 1, 10)
+        WorkHistory workHistory = new WorkHistory(1,"Dev10", "title", LocalDate.of(2021, 1, 10)
                 , LocalDate.of(2020, 4, 18), "description");
         when(repository.update(workHistory)).thenReturn(false);
 
@@ -235,7 +235,7 @@ class WorkHistoryServiceTest {
     }
     @Test
     void shouldNotUpdateStartDateThatIsAfterLocalDateNow() {
-        WorkHistory workHistory = new WorkHistory(1, "title", LocalDate.of(2023, 1, 10)
+        WorkHistory workHistory = new WorkHistory(1,"Dev10", "title", LocalDate.of(2023, 1, 10)
                 , LocalDate.of(2020, 4, 18), "description");
         when(repository.update(workHistory)).thenReturn(false);
 
@@ -244,7 +244,7 @@ class WorkHistoryServiceTest {
     }
     @Test
     void shouldNotUpdateEndDateThatIsAfterLocalDateNow() {
-        WorkHistory workHistory = new WorkHistory(1, "title", LocalDate.of(2021, 1, 10)
+        WorkHistory workHistory = new WorkHistory(1,"Dev10", "title", LocalDate.of(2021, 1, 10)
                 , LocalDate.of(2024, 4, 18), "description");
         when(repository.update(workHistory)).thenReturn(false);
 
@@ -253,7 +253,7 @@ class WorkHistoryServiceTest {
     }
     @Test
     void shouldNotUpdateNullJobDescription() {
-        WorkHistory workHistory = new WorkHistory(1, "title", LocalDate.of(2020, 1, 10)
+        WorkHistory workHistory = new WorkHistory(1,"Dev10", "title", LocalDate.of(2020, 1, 10)
                 , LocalDate.of(2020, 4, 18), null);
         when(repository.update(workHistory)).thenReturn(false);
 
@@ -262,7 +262,7 @@ class WorkHistoryServiceTest {
     }
     @Test
     void shouldNotUpdateBlankJobDescription() {
-        WorkHistory workHistory = new WorkHistory(1, "title", LocalDate.of(2020, 1, 10)
+        WorkHistory workHistory = new WorkHistory(1,"Dev10", "title", LocalDate.of(2020, 1, 10)
                 , LocalDate.of(2020, 4, 18), "");
         when(repository.update(workHistory)).thenReturn(false);
 
@@ -295,8 +295,8 @@ class WorkHistoryServiceTest {
         educations.add(new Education(10,"College","Bachelors"));
 
         List<WorkHistory> workHistories = new ArrayList<>();
-        workHistories.add(new WorkHistory(10, "Fighter", LocalDate.of(2010,6,16), LocalDate.of(2010,10,16), "I fight"));
-        workHistories.add(new WorkHistory(11, "Pilot", LocalDate.of(2011,6,16), LocalDate.of(2011,10,16), "I fly a plane "));
+        workHistories.add(new WorkHistory(10,"Dev10", "Fighter", LocalDate.of(2010,6,16), LocalDate.of(2010,10,16), "I fight"));
+        workHistories.add(new WorkHistory(11,"Dev10", "Pilot", LocalDate.of(2011,6,16), LocalDate.of(2011,10,16), "I fly a plane "));
 
         List<AppRole> roles = new ArrayList<>();
         roles.add(new AppRole(1, "Job Seeker"));

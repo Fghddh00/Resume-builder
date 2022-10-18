@@ -56,7 +56,7 @@ public class WorkHistoryDbRepositoryTest {
     @Test
     void shouldFindWorkHistoryByResumeId(){
         List<WorkHistory> workHistory = new ArrayList<>();
-        workHistory.add(new WorkHistory(1, "Singer",
+        workHistory.add(new WorkHistory(1,"Dev10", "Singer",
                 LocalDate.of(2010, 06,16),LocalDate.of(2010,10,16),
                 "I sing and won American Idol"));
 
@@ -66,10 +66,10 @@ public class WorkHistoryDbRepositoryTest {
     @Test
     void shouldNotFindWrongWorkHistoryByResumeId(){
         List<WorkHistory> workHistory = new ArrayList<>();
-        workHistory.add(new WorkHistory(1, "Singer",
+        workHistory.add(new WorkHistory(1,"Dev10", "Singer",
                 LocalDate.of(2010, 06,16),LocalDate.of(2010,10,16),
                 "I sing and won American Idol"));
-        workHistory.add(new WorkHistory(2, "Dancer",
+        workHistory.add(new WorkHistory(2,"Dev10", "Dancer",
                 LocalDate.of(2011, 06,16),LocalDate.of(2013,10,16),
                 "I dance and won Dancing w/ the Stars"));
 

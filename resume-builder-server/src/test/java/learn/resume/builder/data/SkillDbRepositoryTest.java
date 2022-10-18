@@ -76,7 +76,7 @@ class SkillDbRepositoryTest {
         Skill skill = new Skill();
         skill.setSkillName("act");
 
-        Skill actual = repository.add(skill, resume);
+        Skill actual = repository.add(skill);
         assertEquals(actual.getSkillName(), skill.getSkillName());
     }
     @Test
