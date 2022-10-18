@@ -3,8 +3,22 @@
     min-height: 200vh !important;
 } */
 
+.template1 .page {
+    background: hsl(0deg 0% 100%) !important;
+    box-shadow: 0 0 2em hsl(231deg 62% 94%) !important;
+    padding: 1em !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5em !important;
+    border-radius: 20px !important;
+    color: hsl(0deg 0% 30%) !important;
+    margin-top: 3em !important;
+    margin-bottom: -3em !important;
+    width: 200vh !important;
+    
+}
 
-.template1 .nameHeader {
+.template1 .page .nameHeader {
     margin-top: 7vh !important;
     text-align: center;
     font-family: "Georgia", Gadget, sans-serif !important;
@@ -20,6 +34,7 @@
 }
 #userInformationMargin {
     margin-top: -3vh !important;
+    margin-left: 10vh !important;
     text-align: right !important;
     font-family: Georgia, serif !important;
 }

@@ -150,17 +150,23 @@ create table resume_skill (
     
     insert into app_user_role values (1 , 1);
     
-    insert into education values (1, "College", "Bachelors"),
-    (2, "High School", "High School Degree");
+    insert into education values (1, "OHIO STATE UNIVERSITY", "Bachelor’s Degree in Computer Science");
     
     insert into work_history values 
-    (1, "Dev10", "Singer", '2010-06-16', '2010-10-16', "I sing and won American Idol"),
-	(2, "NFL", "Dancer", '2010-11-16', '2010-12-16', "I dance and I am a ballerina");
+    (1, "Laurel Barrie Financial", "Java Programmer", '2010-06-16', '2017-10-16', "Developed 10+ native Java applications per year with integrated BI tools. Beat deadlines for jobs by 15% on average.
+	Led team of 2 Java programmers in project to improve product testing efficiency. Slashed time to test by 20%.
+	Collaborated with 10 Java programmers to exceed KPIs by 10%.
+	Onboarded and trained 12 Java programmers. Retrained 3 lagging new hires through regular coaching, raising their KPIs 50%."),
+	(2, "BadCode Software", "Junior Java Programmer", '2017-11-16', '2021-12-16', "Assisted with development of 3 native Java applications.
+	Collaborated to help slash security risk by 30% through automation.
+	Worked with senior Java programmers to complete jobs 15% ahead of schedule with 98% client satisfaction scores.");
     
     insert into skill values 
-    (1, "sing"),
-    (2, "dance"),
-    (3, "cook");
+    (1, "Java"),
+    (2, "RESTful"),
+    (3, " JSP"),
+	(4, " Javascript"),
+	(5, " HTML5");
     
     insert into resume_app 
     values
@@ -169,7 +175,7 @@ create table resume_skill (
     
     insert into resume_education
     values
-    (1,1), (2,1);
+    (1,1);
     
 	insert into resume_work_history
     values
@@ -177,5 +183,9 @@ create table resume_skill (
     
     insert into resume_skill
     values
-    (1,1);
+    (1,1),
+    (1,2),
+    (1,3),
+    (1,4),
+    (1,5);
     
