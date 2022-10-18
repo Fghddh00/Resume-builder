@@ -1,9 +1,73 @@
-.template1 {
+/* .template1 {
     background-color: white !important;
     min-height: 200vh !important;
+} */
+
+
+.template1 .nameHeader {
+    margin-top: 7vh !important;
+    text-align: center;
+    font-family: "Georgia", Gadget, sans-serif !important;
+    font-size: 30px !important;
+    letter-spacing: 0.8px !important;
+    word-spacing: 2px !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    text-decoration: none solid rgb(68, 68, 68) !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+    text-transform: uppercase !important;
+}
+#userInformationMargin {
+    margin-top: -3vh !important;
+    text-align: right !important;
+    font-family: Georgia, serif !important;
+}
+#userInformation {
+    text-align: right !important;
+    font-family: Georgia, serif !important;
+}
+hr {
+    width: 155vh !important;
+    background-color: #b7b7b7 !important;
 }
 
-.nameHeader{
-    text-align: center !important;
-    align-items: center !important;
+#educationHeader{
+    margin-top: -14.5vh !important;
+    font-style: italic !important;
+    font-family: Georgia, serif !important;
+    font-weight: 550 !important;
+    font-size: 15px !important;
+    margin-left: 0.2vh !important;
+
 }
+#workHistoryHeader{
+    margin-top: 7vh !important;
+    text-align: left !important;
+    font-family: Georgia, serif !important;
+    font-size: 20px !important;
+    letter-spacing: 0.8px !important;
+    word-spacing: 2px !important;
+    color: #000000 !important;
+    font-weight: 550 !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+}
+#skillHeader{
+    margin-top: 7vh !important; 
+    text-align: left !important;
+    font-family: Georgia, serif !important;
+    font-size: 20px !important;
+    letter-spacing: 0.8px !important;
+    word-spacing: 2px !important;
+    color: #000000 !important;
+    font-weight: 550 !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+}
+
+.education{
+    margin: 10vh !important;
+}
+
+
