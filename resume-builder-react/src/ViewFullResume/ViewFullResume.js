@@ -96,7 +96,7 @@ function ViewFullResume(props) {
     return (
 
         <div className="page">
-            <Link to="/api/addResume" className="addBtn"> Add Resume</Link>
+        
             {!isEmpty ?
                 <div >
                     {loadResume()}
