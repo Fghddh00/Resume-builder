@@ -19,10 +19,10 @@ function AddResume(props) {
   const history = useHistory();
 
   function insertEducationForm() {
-    let newfield = {schoolName:"" ,educationLevel:""};
+    let newfield = { schoolName: "", educationLevel: "" };
 
     setAddedEducation([...addedEducation, newfield]);
-  
+
   }
   function AddWorkForm() {
     let newfield = {};
@@ -30,7 +30,7 @@ function AddResume(props) {
     setAddedWorkHistory([...addedWorkHistory, newfield]);
   }
   function insertAppUserInfoFrom() {
-    let newfield = {email: "", firstName: "", lastName: "", address: "", phoneNumber: ""};
+    let newfield = { email: "", firstName: "", lastName: "", address: "", phoneNumber: "" };
 
     setAddedAppUserInfo([...addedAppUserInfo, newfield]);
   }
@@ -81,8 +81,8 @@ function AddResume(props) {
     // const tempAddedSkills = addedSkills
     //would like to figure out a way to limit duplicate skills being added
     setAddedSkills([])
-    
-    
+
+
 
     fetch(
       "https://emsiservices.com/skills/versions/latest/extract?language=en",
@@ -103,83 +103,84 @@ function AddResume(props) {
         console.log(await response.json());
       } else console.log(await response.json());
     }).then((skillList) => {
-      const tempList = skillsList.concat(skillList.data.map(s =>  s.skill.name))
+      const tempList = skillsList.concat(skillList.data.map(s => s.skill.name))
       setSkills(tempList)
       console.log(skillList);
     });
-    
+
   }
 
 
-  function educationUpdateHandler(education,index){
+  function educationUpdateHandler(education, index) {
     const copy = [...addedEducation];
 
     copy[index] = education;
     setAddedEducation(copy);
   }
 
-  function workHistoryUpdateHandler(workHistory,index){
+  function workHistoryUpdateHandler(workHistory, index) {
     const copy = [...addedWorkHistory];
 
     copy[index] = workHistory;
     setAddedWorkHistory(copy);
   }
-  function appUserInfoUpdateHandler(appUserInfo,index){
+  function appUserInfoUpdateHandler(appUserInfo, index) {
     const copy = [...addedAppUserInfo];
 
     copy[index] = appUserInfo;
     setAddedAppUserInfo(copy);
   }
 
-  function addSkillClick(evt){
+  function addSkillClick(evt) {
     const btn = document.getElementById(evt.target.value);
 
-    if(btn.style.backgroundColor != 'green'){
+    if (btn.style.backgroundColor != 'green') {
       btn.style.backgroundColor = 'green'
-      const newSkillsList = addedSkills.concat({skillName : evt.target.value})
+      const newSkillsList = addedSkills.concat({ skillName: evt.target.value })
       setAddedSkills(newSkillsList)
     }
-    else{
+    else {
       btn.style.backgroundColor = ''
       const newSkillsList = addedSkills.filter(s => s.skillName != evt.target.value)
       setAddedSkills(newSkillsList)
     }
-    
+
   }
 
-  function onSubmit(event){
+  function onSubmit(event) {
     event.preventDefault();
     console.log(addedAppUserInfo);
-    const resume = {workHistories : addedWorkHistory,
-                    educations : addedEducation,
-                    skills : addedSkills,
-                    userInfo : addedAppUserInfo[0],
-                    templateId : 1
+    const resume = {
+      workHistories: addedWorkHistory,
+      educations: addedEducation,
+      skills: addedSkills,
+      userInfo: addedAppUserInfo[0],
+      templateId: 2
 
-                    };
-    
+    };
+
     console.log(resume.userInfo)
     const userId = userData.claims.jti;
     const jwt = userData.jwt;
-    fetch( "http://localhost:8080/api/resume", {
-        method: "POST",
-        body: JSON.stringify(resume),
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-          "Content-Type": "application/json"          
-        }
+    fetch("http://localhost:8080/api/resume", {
+      method: "POST",
+      body: JSON.stringify(resume),
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json"
+      }
     }).then(async response => {
-        if( response.status === 201 ){
-            
-            history.push( "/api/resume/1" );
-           
-            
-        } else {
-            console.log(await response.json());
-            //Display error messages
-        }
+      if (response.status === 201) {
+
+        history.push("/api/resume/1");
+
+
+      } else {
+        console.log(await response.json());
+        //Display error messages
+      }
     });
-}
+  }
 
   return (
     <div className="container">
@@ -204,39 +205,36 @@ function AddResume(props) {
           <h2>Education</h2>
           <Button onClick={insertEducationForm}>Add Education</Button>
           {
-          addedEducation.map((input, index) => 
-            <AddEducationForm 
-            education={input}
-            index={index}
-            onEducationUpdated={educationUpdateHandler}
-            />
-          )}
+            addedEducation.map((input, index) =>
+              <AddEducationForm
+                education={input}
+                index={index}
+                onEducationUpdated={educationUpdateHandler}
+              />
+            )}
         </div>
         <div id="WorkHistory">
           <h2>Work History</h2>
           <Button onClick={AddWorkForm}>Add Work History</Button>
-          {addedWorkHistory.map((input, index) => 
-             <AddWorkHistoryForm 
-             workHistory={input}
-             index={index}
-             onWorkHistoryUpdated={workHistoryUpdateHandler}
-             skillsChecker = {skillsChecker}
-             />
-             
-           )}
-           {skillsList.map(s=> <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
+          {addedWorkHistory.map((input, index) =>
+            <AddWorkHistoryForm
+              workHistory={input}
+              index={index}
+              onWorkHistoryUpdated={workHistoryUpdateHandler}
+              skillsChecker={skillsChecker}
+            />
+
+          )}
+          {skillsList.map(s => <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
         </div>
         <div id="AppUSerInfo">
           <h2>User Info</h2>
           <Button onClick={insertAppUserInfoFrom}>Add User Info</Button>
-          {
-          addedAppUserInfo.map((input, index) => 
-            <AddAppUserInfoForm 
-            appUserInfo={input}
-            index={index}
+          <h2>User Info</h2>
+          <AddAppUserInfoForm
+            appUserInfo={addedAppUserInfo}
             onAppUserInfoUpdated={appUserInfoUpdateHandler}
-            />
-          )}
+          />
         </div>
         <Button onClick={onSubmit}>Submit</Button>
       </div>

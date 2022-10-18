@@ -24,18 +24,18 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChe
     return(
         
             <div key={index} className="form">
+                <FormInput
+                inputType={"text"}
+                identifier={"company"}
+                labelText={"Company"}
+                currVal={workHistory.company}
+                onChangeHandler={updateWorkHistory}
+              />
               <FormInput
                 inputType={"text"}
                 identifier={"jobTitle"}
                 labelText={"Job Title"}
                 currVal={workHistory.jobTitle}
-                onChangeHandler={updateWorkHistory}
-              />
-              <FormInput
-                inputType={"date"}
-                identifier={"startDate"}
-                labelText={"Start Date"}
-                currVal={workHistory.startDate}
                 onChangeHandler={updateWorkHistory}
               />
                 <FormInput

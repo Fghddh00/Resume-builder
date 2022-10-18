@@ -9,8 +9,8 @@ function Template2({educations,skills, workHistories, userInfo }){
 
     return(
         <GridContainer>
-        <Grid className="template1">
-            <h1 className="nameHeader">{userInfo.firstName} {userInfo.lastName}</h1>
+        <Grid className="template2">
+            <h1 className="nameHeader">{userInfo.lastName}</h1>
         </Grid>
         </GridContainer>
     );
