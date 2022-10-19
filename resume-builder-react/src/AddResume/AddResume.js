@@ -7,6 +7,8 @@ import AddWorkHistoryForm from "../AddWorkHistoryForm/AddWorkHistoryForm";
 import AuthContext from "../AuthContext";
 import { useHistory } from "react-router-dom";
 import AddAppUserInfoForm from "../AddAppUserInfoForm/AddAppUserInfoForm";
+import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
+
 
 function AddResume(props) {
   const [addedEducation, setAddedEducation] = useState([]);
@@ -15,6 +17,7 @@ function AddResume(props) {
   const [addedSkills, setAddedSkills] = useState([]);
   const [token, setToken] = useState(null);
   const [skillsList, setSkills] = useState([]);
+  const [errors, setErrors] = useState([]);
   const userData = useContext(AuthContext);
   const history = useHistory();
 
@@ -175,15 +178,24 @@ function AddResume(props) {
         history.push("/api/resume/1");
 
 
-      } else {
-        console.log(await response.json());
-        //Display error messages
+      } else if (response.status === 400) {
+        return Promise.reject(await response.json());
       }
-    });
+    })
+    .catch(error => {
+      if (error instanceof TypeError) {
+          setErrors(["Could not connect to api ☹"])
+      } else {
+          setErrors(error);
+      }
+  });
   }
   
   return (
+    
+    
     <div className="container">
+
       <div className="addForm">
         <nav aria-label="You are here:" role="navigation">
           <ul className="breadcrumbs">
