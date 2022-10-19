@@ -12,6 +12,7 @@ function EditResume(props) {
     const [addedEducation, setAddedEducation] = useState([]);
     const [addedWorkHistory, setAddedWorkHistory] = useState([]);
     const [addedAppUserInfo, setAddedAppUserInfo] = useState([]);
+    const [template, setTemplate] = useState(0);
     const [resumeId,setResumeId] = useState(null);
     const [token, setToken] = useState(null);
     const [errors, setErrors] = useState([]);
@@ -55,6 +56,10 @@ function EditResume(props) {
         copy[propertyName] = newValue;
         setAddedAppUserInfo(copy);
       }
+      function templateUpdateHandler(evt) {
+        console.log(evt.target.value)
+        setTemplate(evt.target.value);
+      }
     function handleClick(event) {
         const descriptionText = document.getElementById('jobDescription');
 
@@ -95,7 +100,8 @@ function EditResume(props) {
                     setSkills(resumeInfo.skills.map(s => s.skillName))
                     setAddedAppUserInfo(resumeInfo.userInfo)
                     setResumeId(resumeInfo.resumeId)
-                    //just to see what we get
+                    setTemplate(resumeInfo.templateId)
+                    
                 });
         }
     }, [id]);
@@ -225,64 +231,79 @@ function EditResume(props) {
             } else {
                 setErrors( errorList );
             }
-        });
-
-    return (
-        <div className="container">
-            <div className="editForm">
+        });}
+    
+       
+        return (
+    
+    
+            <div className="container">
+        
+              <div className="addForm">
                 <nav aria-label="You are here:" role="navigation">
-                    <ul className="breadcrumbs">
-                        <li>
-                            <a href="#Education">Education</a>
-                        </li>
-                        <li>
-                            <a href="#WorkHistory">Work history</a>
-                        </li>
-                        <li>
-                            <a href="">Template</a>
-                        </li>
-                    </ul>
+                  <ul className="breadcrumbs">
+                    <li>
+                      <a href="#Education">Education</a>
+                    </li>
+                    <li>
+                      <a href="#WorkHistory">Work history</a>
+                    </li>
+                    <li>
+                      <a href="#AppUserInfo">User Info</a>
+                    </li>
+                    <li>
+                      <a href="">Template</a>
+                    </li>
+                  </ul>
                 </nav>
                 <div id="Education">
-                    <h2>Education</h2>
-                    <Button onClick={insertEducationForm}>Add Education</Button>
-                    {
-                        addedEducation.map((input, index) =>
-                            <AddEducationForm
-                                education={input}
-                                index={index}
-                                onEducationUpdated={educationUpdateHandler}
-                            />
-                        )}
+                  <h2>Education</h2>
+                  <Button onClick={insertEducationForm}>Add Education</Button>
+                  {
+                    addedEducation.map((input, index) =>
+                      <AddEducationForm
+                        education={input}
+                        index={index}
+                        onEducationUpdated={educationUpdateHandler}
+                      />
+                    )}
                 </div>
                 <div id="WorkHistory">
-                    <h2>Work History</h2>
-                    <Button onClick={AddWorkForm}>Add Work History</Button>
-                    {addedWorkHistory.map((input, index) =>
-                        <AddWorkHistoryForm
-                            workHistory={input}
-                            index={index}
-                            onWorkHistoryUpdated={workHistoryUpdateHandler}
-                            skillsChecker={skillsChecker}
-                        />
-                    )}
-                    {skillsList.map(s => <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
+                  <h2>Work History</h2>
+                  <Button onClick={AddWorkForm}>Add Work History</Button>
+                  {addedWorkHistory.map((input, index) =>
+                    <AddWorkHistoryForm
+                      workHistory={input}
+                      index={index}
+                      onWorkHistoryUpdated={workHistoryUpdateHandler}
+                      skillsChecker={skillsChecker}
+                    />
+        
+                  )}
+                  {skillsList.map(s => <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
                 </div>
                 <div id="AppUserInfo">
-                    <h2>User Info</h2>
-                            <AddAppUserInfoForm
-                                appUserInfo={addedAppUserInfo}
-                                onAppUserInfoUpdated={appUserInfoUpdateHandler}
-                            />
-                        
+                  
+                  <h2>User Info</h2>
+                  <AddAppUserInfoForm
+                    appUserInfo={addedAppUserInfo}
+                    onAppUserInfoUpdated={appUserInfoUpdateHandler}
+                  />
+                </div>
+                <div>
+                  <fieldset onChange={templateUpdateHandler}>
+                  <legend>Choose a template</legend>
+                  <input type="radio" name="template" value={1} id="template1" required/><label for="template1">Template 1</label>
+                  <input type="radio" name="template" value={2} id="template2" required/><label for="template2">Template 2</label>
+                  <input type="radio" name="template" value={3} id="template3" required/><label for="template3">Template 3</label>
+                  </fieldset>
                 </div>
                 <Button onClick={onSubmit}>Submit</Button>
+              </div>
+              <ErrorMessages errorList={errors} />
             </div>
-            <ErrorMessages errorList={errors} />
-        </div>
-    );
+          );
 
-}
 }
 
 export default EditResume;
