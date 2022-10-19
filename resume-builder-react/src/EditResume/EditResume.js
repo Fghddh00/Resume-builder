@@ -209,12 +209,21 @@ function EditResume(props) {
 
                 history.push("/api/resume/" + id);
 
+            } else if( response.status === 409 ){
+                return Promise.reject( ["Id mismatch between url and sent resume ☹"] );
+            } else if( response.status === 404 ){
+                return Promise.reject( ["Resume not found ☹"]);
+            } else if( response.status === 400 ){
+                return Promise.reject( await response.json());
+            }
+        })
+        .catch( errorList => {
+            if( errorList instanceof TypeError ){
+                setErrors( [ "Could not connect to api ☹"] );
             } else {
-                console.log(await response.json());
-                //Display error messages
+                setErrors( errorList );
             }
         });
-    }
 
     return (
         <div className="container">
@@ -267,6 +276,7 @@ function EditResume(props) {
                 </div>
                 <Button onClick={onSubmit}>Submit</Button>
             </div>
+            <ErrorMessages errorList={errors} />
         </div>
     );
 
