@@ -21,6 +21,8 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChe
       skillsChecker(description);
     }
 
+    
+
     return(
         
             <div key={index} className="form">
@@ -56,6 +58,7 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChe
                 className="textarea"
                 id={"jobDescription"+index}
                 name={"jobDescription" }
+                value={workHistory.jobDescription}
                 onChange={updateWorkHistory}
                
               />
