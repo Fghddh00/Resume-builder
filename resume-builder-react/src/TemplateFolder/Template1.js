@@ -24,7 +24,7 @@ function Template1({ educations, skills, workHistories, userInfo }) {
             downloadFileName="resume.pdf" 
             rootElementId="templateId" 
             />
-            <Grid id ="templateId" className="template1">
+            <Grid  className="template1">
             
                 <div className="page">
                     <h1 className="nameHeader">{userInfo.firstName} {userInfo.lastName}</h1>
