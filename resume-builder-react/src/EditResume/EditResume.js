@@ -161,8 +161,8 @@ function EditResume(props) {
                 console.log("Success");
                 return await response.json();
             } else if (response.status === 400) {
-                console.log(await response.json());
-            } else console.log(await response.json());
+                setErrors(await response.json());
+            } else setErrors(await response.json());
         }).then((skillList) => {
             const tempList = skillList.data.map(s => s.skill.name).filter(s=> !skillsList.includes(s))
             console.log(tempList)

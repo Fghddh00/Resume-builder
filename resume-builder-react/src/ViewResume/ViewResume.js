@@ -30,7 +30,7 @@ function ViewResume() {
               setIsEmpty(true);
               return response.json();
           
-          } else (console.log( await response.json()))
+          } else (setErrors( await response.json()))
       } )
       .then( resumeList => {
           setResumes( resumeList );
@@ -40,6 +40,7 @@ function ViewResume() {
   
 
   return (
+    
     <div className="page">
     <Link to="/api/addResume" className="addBtn"> Add Resume</Link>
     {!isEmpty ?
@@ -55,7 +56,7 @@ function ViewResume() {
     </div>
     : <div className="container"> No Resumes Found</div>}
 
-    
+    <ErrorMessages errorList={errors} />  
     </div> 
     
    
