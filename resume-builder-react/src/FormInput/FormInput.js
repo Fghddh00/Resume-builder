@@ -1,3 +1,6 @@
+import { Button } from "react-foundation";
+
+
 function FormInput(props){
 
     return (
