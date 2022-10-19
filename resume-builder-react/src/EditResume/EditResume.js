@@ -143,7 +143,7 @@ function EditResume(props) {
             });
     }
     function skillsChecker(description) {
-        setAddedSkills([])
+        // setAddedSkills([])
 
         fetch(
             "https://emsiservices.com/skills/versions/latest/extract?language=en",
@@ -164,8 +164,10 @@ function EditResume(props) {
                 console.log(await response.json());
             } else console.log(await response.json());
         }).then((skillList) => {
-            setSkills(skillList.data.map(s => s.skill.name))
-            console.log(skillList);
+            const tempList = skillList.data.map(s => s.skill.name).filter(s=> !skillsList.includes(s))
+            console.log(tempList)
+            setSkills([...skillsList , ...tempList])
+            // console.log(skillList);
         });
 
     }
