@@ -249,6 +249,7 @@ function AddResume(props) {
         </div>
         <Button onClick={onSubmit}>Submit</Button>
       </div>
+      <ErrorMessages errorList={errors} />
     </div>
   );
 }

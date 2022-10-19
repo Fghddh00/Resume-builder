@@ -3,11 +3,13 @@ import { useContext, useState, useEffect } from "react";
 import "./ViewResume.css";
 import Resume from "../Resume/Resume";
 import { Link, useHistory } from "react-router-dom";
+import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
 
 function ViewResume() {
   const [resumes, setResumes] = useState([]);
   const userData = useContext(AuthContext);
   const history = useHistory();
+  const [errors, setErrors] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect( () => {
