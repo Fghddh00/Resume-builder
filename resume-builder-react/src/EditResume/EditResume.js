@@ -6,6 +6,7 @@ import AuthContext from "../AuthContext";
 import "./EditResume.css";
 import AddWorkHistoryForm from "../AddWorkHistoryForm/AddWorkHistoryForm";
 import AddAppUserInfoForm from "../AddAppUserInfoForm/AddAppUserInfoForm";
+import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
 
 function EditResume(props) {
     const [addedEducation, setAddedEducation] = useState([]);
@@ -13,6 +14,7 @@ function EditResume(props) {
     const [addedAppUserInfo, setAddedAppUserInfo] = useState([]);
     const [resumeId,setResumeId] = useState(null);
     const [token, setToken] = useState(null);
+    const [errors, setErrors] = useState([]);
     const [addedSkills, setAddedSkills] = useState([]);
     const [skillsList, setSkills] = useState([]);
     const [isEmpty, setIsEmpty] = useState(false);

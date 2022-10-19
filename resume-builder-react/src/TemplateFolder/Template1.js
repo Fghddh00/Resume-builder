@@ -63,7 +63,6 @@ function Template1({ educations, skills, workHistories, userInfo }) {
                     )}</ul>
                 </div>
 
-
             </Grid>
         </GridContainer>
     );

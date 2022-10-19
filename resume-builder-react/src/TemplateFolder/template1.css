@@ -1,7 +1,4 @@
-.template1 {
-    background-color: white !important;
-    min-height: 200vh !important;
-}
+
 
 .template1 .page {
     background: hsl(0deg 0% 100%) !important;
@@ -17,7 +14,7 @@
     width: 200vh !important;
     margin-left: 0.5vh !important;
     
-<<<<<<< HEAD
+
 }
 
 .template1 .page .nameHeader {
@@ -155,6 +152,4 @@ hr {
     margin-top: -1.5vh !important;
 }
 
-=======
-}
->>>>>>> 36441367cb6f67cfe6f9499ce457d8cb29670afa
+
