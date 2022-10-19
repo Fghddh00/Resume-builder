@@ -56,8 +56,10 @@ function Login(props){
     }
 
     return (
+
       <div className='body'>
         <div className="container">
+       
             <form onSubmit={loginHandler} className="form-group">
 
                 <div >
@@ -80,9 +82,9 @@ function Login(props){
                 <Link to="/create_account"> Create an account</Link>
             
             </form>
-            <ErrorMessages errorList= {errors} />
-            
+             <ErrorMessages errorList={errors} />
         </div>
+        
         </div>
     );
 }

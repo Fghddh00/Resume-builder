@@ -1,11 +1,15 @@
-/* .template1 {
+.template1 {
     background-color: white !important;
     min-height: 200vh !important;
-} */
+}
 
+<<<<<<< HEAD
+.nameHeader{
+    text-align: center !important;
+=======
 .template1 .page {
     background: hsl(0deg 0% 100%) !important;
-    box-shadow: 0 0 2em hsl(231deg 62% 94%) !important;
+
     padding: 1em !important;
     display: flex !important;
     flex-direction: column !important;
@@ -16,7 +20,9 @@
     margin-bottom: -3em !important;
     width: 200vh !important;
     margin-left: 0.5vh !important;
+>>>>>>> 277ee5241e03b973a75a25b2e8eccf02aa301a29
     
+<<<<<<< HEAD
 }
 
 .template1 .page .nameHeader {
@@ -96,7 +102,7 @@ hr {
 .workHistoryCompany{
     font-family: Georgia, serif !important;
     font-weight: 360 !important;
-    font-size: 3.5vh !important;
+    font-size: 3.3vh !important;
     color: #000000 !important;
     margin-left: -2.5vh !important;
 
@@ -154,3 +160,6 @@ hr {
     margin-top: -1.5vh !important;
 }
 
+=======
+}
+>>>>>>> 36441367cb6f67cfe6f9499ce457d8cb29670afa

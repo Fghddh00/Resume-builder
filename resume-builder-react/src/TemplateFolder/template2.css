@@ -4,16 +4,23 @@
     
 }
 
-.nameHeader{
+.nameHeader2{
     justify-content: center !important;
     text-align: center;
     
 }
 
-.education2{
+.resumeInfo{
     margin-left: 20vh;
 }
-.education2 ul{
-    margin-left: 1rem;
-  margin-right: 1rem;
+
+
+::marker{
+    color: aliceblue;
+}
+
+
+
+.skill2{
+    margin-top: 20vh !important;
 }
