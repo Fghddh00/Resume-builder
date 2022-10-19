@@ -169,7 +169,7 @@ begin
     
     insert into resume_app 
     values
-    (1, 1, 1, 1),
+    (1, 3, 1, 1),
     (2, 1, 2, 1);
     
     insert into resume_education
@@ -183,6 +183,8 @@ begin
     insert into resume_skill
     values
     (1,1);
+		
+	select * from work_history;
     
 end //
 delimiter ;
