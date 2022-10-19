@@ -15,6 +15,7 @@ function AddResume(props) {
   const [addedWorkHistory, setAddedWorkHistory] = useState([]);
   const [addedAppUserInfo, setAddedAppUserInfo] = useState({});
   const [addedSkills, setAddedSkills] = useState([]);
+  const [template, setTemplate] = useState(0);
   const [token, setToken] = useState(null);
   const [skillsList, setSkills] = useState([]);
   const [errors, setErrors] = useState([]);
@@ -133,6 +134,10 @@ function AddResume(props) {
     copy[propertyName] = newValue;
     setAddedAppUserInfo(copy);
   }
+  function templateUpdateHandler(evt) {
+    console.log(evt.target.value)
+    setTemplate(evt.target.value);
+  }
 
   function addSkillClick(evt) {
     const btn = document.getElementById(evt.target.value);
@@ -158,7 +163,7 @@ function AddResume(props) {
       educations: addedEducation,
       skills: addedSkills,
       userInfo: addedAppUserInfo,
-      templateId: 2
+      templateId: template
 
     };
 
@@ -246,6 +251,14 @@ function AddResume(props) {
             appUserInfo={addedAppUserInfo}
             onAppUserInfoUpdated={appUserInfoUpdateHandler}
           />
+        </div>
+        <div>
+          <fieldset onChange={templateUpdateHandler}>
+          <legend>Choose a template</legend>
+          <input type="radio" name="template" value={1} id="template1" required/><label for="template1">Template 1</label>
+          <input type="radio" name="template" value={2} id="template2" required/><label for="template2">Template 2</label>
+          <input type="radio" name="template" value={3} id="template3" required/><label for="template3">Template 3</label>
+          </fieldset>
         </div>
         <Button onClick={onSubmit}>Submit</Button>
       </div>
