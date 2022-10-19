@@ -3,6 +3,7 @@ import { Button } from "react-foundation";
 import { Link, useHistory, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
 import GenericPdfDownloader from "../Download/Download";
+import Dummy from "../Dummy";
 import EducationsFromResume from "../EducationsFromResume/EducationsFromResume";
 import SkillsFromResume from "../SkillsFromResume/SkillsFromResume";
 import Template1 from "../TemplateFolder/Template1";
@@ -80,14 +81,16 @@ function ViewFullResume(props) {
                     )
             case 3:
                 return(
-                    <Template3 
-                    key={resume.resumeId} 
-                    educations={educations} 
-                    skills={skills}
-                    workHistories={workHistories} 
-                    userInfo={userInfo}/>
+                    // <Template3 
+                    // key={resume.resumeId} 
+                    // educations={educations} 
+                    // skills={skills}
+                    // workHistories={workHistories} 
+                    // userInfo={userInfo}/>
+                    <Dummy/>
                     )
         
+            
             default:
                 break;
         }
