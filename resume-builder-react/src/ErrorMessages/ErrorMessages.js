@@ -1,4 +1,3 @@
-import './ErrorMessages.css';
 
 function ErrorMessages({ errorList }) {
     return (
@@ -9,14 +8,15 @@ function ErrorMessages({ errorList }) {
         //     </ul>
         //     </div>
         // </div>
+        
         <div className="errors">
             <ul>
                 {errorList.map(e => (
                     <li key={e}>{e}</li>
                 ))}
-
             </ul>
         </div>
-    )
+        
+);
 }
 export default ErrorMessages;
