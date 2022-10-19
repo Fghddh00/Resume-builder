@@ -201,7 +201,7 @@ function EditResume(props) {
             educations: addedEducation,
             skills: addedSkills,
             userInfo: addedAppUserInfo,
-            templateId: 2,
+            templateId: template,
             resumeId: resumeId
         };
         const userId = userData.claims.jti;
