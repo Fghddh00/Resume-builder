@@ -81,13 +81,12 @@ function ViewFullResume(props) {
                     )
             case 3:
                 return(
-                    // <Template3 
-                    // key={resume.resumeId} 
-                    // educations={educations} 
-                    // skills={skills}
-                    // workHistories={workHistories} 
-                    // userInfo={userInfo}/>
-                    <Dummy/>
+                    <Template3 
+                    key={resume.resumeId} 
+                    educations={educations} 
+                    skills={skills}
+                    workHistories={workHistories} 
+                    userInfo={userInfo}/>
                     )
         
             
