@@ -281,5 +281,6 @@ function EditResume(props) {
     );
 
 }
+}
 
 export default EditResume;
