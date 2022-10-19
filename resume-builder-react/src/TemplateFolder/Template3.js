@@ -13,27 +13,27 @@ function Template3({ educations, skills, workHistories, userInfo }) {
                 </div>
                 <h1>{userInfo.firstName} {userInfo.lastName}</h1>
             </header>
-            <hr/>
-            <hr/>
+                    <hr />
+                    <hr />
             <main>
                 <article id="mainLeft">
                     <section className="p">
                         <h2><i className="fa-regular fa-address-book"></i>CONTACT</h2>
                         <div className="move-right">
-                        <i className="fa fa-envelope"></i>
-                            {userInfo.email}
+                            <i className="fa fa-envelope"></i>
+                            <b>{userInfo.email}</b>
                         </div>
                         <div>
-                        <i className="fa-solid fa-phone"></i>
-                            {userInfo.phoneNumber}
+                            <i className="fa-solid fa-phone"></i>
+                            <b>{userInfo.phoneNumber}</b>
                         </div>
                         <div>
-                        <i className="fa-solid fa-location-pin"></i>
-                            {userInfo.address}
+                            <i className="fa-solid fa-location-pin"></i>
+                            <b> {userInfo.address}</b>
                         </div>
                     </section>
                     <section>
-                        <h2><i class="fa-solid fa-graduation-cap"></i>EDUCATION</h2>
+                        <h2><i className="fa-solid fa-graduation-cap"></i>EDUCATION</h2>
                         {educations.map(e =>
                             <div>
                                 <h4>{e.schoolName}</h4>
@@ -44,7 +44,7 @@ function Template3({ educations, skills, workHistories, userInfo }) {
                 </article>
                 <article id="mainRight">
                     <section>
-                        <h2><i class="fa-solid fa-briefcase"></i>WORK EXPERIENCE</h2>
+                        <h2><i className="fa-solid fa-briefcase"></i>WORK EXPERIENCE</h2>
                         <div>
                             {workHistories.map(w =>
                                 <div>

@@ -2,15 +2,18 @@ import { useContext, useState, useEffect } from "react";
 import { Button } from "react-foundation";
 import { Link, useHistory, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
+<<<<<<< HEAD
+=======
 import GenericPdfDownloader from "../Download/Download";
 import Dummy from "../Dummy";
 import EducationsFromResume from "../EducationsFromResume/EducationsFromResume";
 import SkillsFromResume from "../SkillsFromResume/SkillsFromResume";
+>>>>>>> b2f3b20f8b6efa002a3fe4a680b91e50b45ab0f5
 import Template1 from "../TemplateFolder/Template1";
 import Template2 from "../TemplateFolder/Template2";
 import Template3 from "../TemplateFolder/Template3";
-import UserInfoFromResume from "../UserInfoFromResume/UserInfoFromResume";
-import WorkHistoriesFromResume from "../WorkHistoriesFromResume/WorkHistoriesFromResume";
+import Template5 from "../TemplateFolder/Template5";
+import Template4 from "../TemplateFolder/Template4";
 import "./ViewFullResume.css";
 
 
@@ -24,7 +27,7 @@ function ViewFullResume(props) {
     const [userInfo, setUserInfo] = useState([])
     const [skills, setSkills] = useState([])
     const [workHistories, setWorkHistories] = useState([])
-    const {id} = useParams();
+    const { id } = useParams();
 
     useEffect(() => {
 
@@ -59,25 +62,63 @@ function ViewFullResume(props) {
         }
     }, [id]);
 
-    function loadResume(){
+    function loadResume() {
         switch (resume.templateId) {
             case 1:
-                return(
-                <Template1 
-                key={resume.resumeId} 
-                educations={educations} 
-                skills={skills}
-                workHistories={workHistories} 
-                userInfo={userInfo}/>
+                return (
+                    <Template1
+                        key={resume.resumeId}
+                        educations={educations}
+                        skills={skills}
+                        workHistories={workHistories}
+                        userInfo={userInfo} />
                 )
             case 2:
+                return (
+                    <Template2
+                        key={resume.resumeId}
+                        educations={educations}
+                        skills={skills}
+                        workHistories={workHistories}
+                        userInfo={userInfo} />
+                )
+            case 3:
+<<<<<<< HEAD
+                return (
+                    <Template3
+                        key={resume.resumeId}
+                        educations={educations}
+                        skills={skills}
+                        workHistories={workHistories}
+                        userInfo={userInfo} />
+                )
+            case 4:
+                return (
+                    <Template4
+                        key={resume.resumeId}
+                        educations={educations}
+                        skills={skills}
+                        workHistories={workHistories}
+                        userInfo={userInfo} />
+                )
+            case 5:
+                return (
+                    <Template5
+                        key={resume.resumeId}
+                        educations={educations}
+                        skills={skills}
+                        workHistories={workHistories}
+                        userInfo={userInfo} />
+                )
+=======
                 return(
-                    <Template2 
+                    <Template3 
                     key={resume.resumeId} 
                     educations={educations} 
                     skills={skills}
                     workHistories={workHistories} 
                     userInfo={userInfo}/>
+<<<<<<< HEAD
                     )
             case 3:
                 return(
@@ -87,9 +128,13 @@ function ViewFullResume(props) {
                     skills={skills}
                     workHistories={workHistories} 
                     userInfo={userInfo}/>
+=======
+                    
+>>>>>>> 0386be2fc06e28d8454c8e0fb19e11628f0973d3
                     )
         
             
+>>>>>>> b2f3b20f8b6efa002a3fe4a680b91e50b45ab0f5
             default:
                 break;
         }
@@ -99,11 +144,15 @@ function ViewFullResume(props) {
     return (
 
         <div className="page">
+<<<<<<< HEAD
+
+=======
             <GenericPdfDownloader
             downloadFileName="resume.pdf" 
             rootElementId="Resume" 
             />
         
+>>>>>>> b2f3b20f8b6efa002a3fe4a680b91e50b45ab0f5
             {!isEmpty ?
                 <div id="Resume">
                     {loadResume()}
