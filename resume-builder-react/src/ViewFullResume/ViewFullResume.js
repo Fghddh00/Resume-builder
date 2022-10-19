@@ -2,13 +2,13 @@ import { useContext, useState, useEffect } from "react";
 import { Button } from "react-foundation";
 import { Link, useHistory, useParams } from "react-router-dom";
 import AuthContext from "../AuthContext";
-import GenericPdfDownloader from "../Download/Download";
 import Template1 from "../TemplateFolder/Template1";
 import Template2 from "../TemplateFolder/Template2";
 import Template3 from "../TemplateFolder/Template3";
 import Template5 from "../TemplateFolder/Template5";
 import Template4 from "../TemplateFolder/Template4";
 import "./ViewFullResume.css";
+import GenericPdfDownloader from "../Download/Download";
 
 
 function ViewFullResume(props) {
@@ -105,8 +105,7 @@ function ViewFullResume(props) {
                         userInfo={userInfo} />
                 )
         
-            
-
+        
             default:
                 break;
         }
@@ -116,7 +115,6 @@ function ViewFullResume(props) {
     return (
 
         <div className="page">
-
             <GenericPdfDownloader
             downloadFileName="resume.pdf" 
             rootElementId="Resume" 
