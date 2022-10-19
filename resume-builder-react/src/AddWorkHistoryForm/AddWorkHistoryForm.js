@@ -1,7 +1,7 @@
-import { Button } from "react-foundation";
+import { Button, Colors } from "react-foundation";
 import FormInput from "../FormInput/FormInput";
 
-function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChecker}){
+function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChecker, onDelete}){
     function updateWorkHistory(evt){
         const target = evt.target;
         const name = target.name;
@@ -19,6 +19,11 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChe
       
       const description = { text: descriptionText.value, confidenceThreshold: 0.6 };
       skillsChecker(description);
+    }
+
+    function deleteClick(){
+      console.log(index)
+      onDelete(index)
     }
 
     
@@ -62,8 +67,9 @@ function AddWorkHistoryForm({workHistory, onWorkHistoryUpdated, index, skillsChe
                 onChange={updateWorkHistory}
                
               />
+              <Button color={Colors.ALERT} onClick={deleteClick}>Cancel</Button>
               <Button onClick={handleClick}> load skills</Button>
-                
+              
             </div>
           );
 }

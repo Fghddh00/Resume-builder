@@ -33,11 +33,17 @@ function AddResume(props) {
 
     setAddedWorkHistory([...addedWorkHistory, newfield]);
   }
-  function insertAppUserInfoFrom() {
-    let newfield = { email: "", firstName: "", lastName: "", address: "", phoneNumber: "" };
-
-    setAddedAppUserInfo([...addedAppUserInfo, newfield]);
+  function deleteEducation(index){
+    
+    const newList = addedEducation.filter(s=> s !== addedEducation[index])
+    setAddedEducation(newList)
   }
+  function deleteWorkHistory(index){
+    
+    const newList = addedWorkHistory.filter(s=> s !== addedWorkHistory[index])
+    setAddedWorkHistory(newList)
+  }
+  
   useEffect(
     () => {
       getToken();
@@ -153,6 +159,9 @@ function AddResume(props) {
     setTemplate(evt.target.value);
   }
 
+  
+
+
   function addSkillClick(evt) {
     const btn = document.getElementById(evt.target.value);
 
@@ -241,7 +250,9 @@ function AddResume(props) {
                 education={input}
                 index={index}
                 onEducationUpdated={educationUpdateHandler}
+                onDelete={deleteEducation}
               />
+              
             )}
         </div>
         <div id="WorkHistory">
@@ -253,6 +264,7 @@ function AddResume(props) {
               index={index}
               onWorkHistoryUpdated={workHistoryUpdateHandler}
               skillsChecker={skillsChecker}
+              onDelete={deleteWorkHistory}
             />
 
           )}

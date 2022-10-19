@@ -60,6 +60,16 @@ function EditResume(props) {
         console.log(evt.target.value)
         setTemplate(evt.target.value);
       }
+      function deleteEducation(index){
+    
+        const newList = addedEducation.filter(s=> s !== addedEducation[index])
+        setAddedEducation(newList)
+      }
+      function deleteWorkHistory(index){
+        
+        const newList = addedWorkHistory.filter(s=> s !== addedWorkHistory[index])
+        setAddedWorkHistory(newList)
+      }
     function handleClick(event) {
         const descriptionText = document.getElementById('jobDescription');
 
@@ -267,6 +277,7 @@ function EditResume(props) {
                         education={input}
                         index={index}
                         onEducationUpdated={educationUpdateHandler}
+                        onDelete={deleteEducation}
                       />
                     )}
                 </div>
@@ -279,6 +290,7 @@ function EditResume(props) {
                       index={index}
                       onWorkHistoryUpdated={workHistoryUpdateHandler}
                       skillsChecker={skillsChecker}
+                      onDelete={deleteWorkHistory}
                     />
         
                   )}
