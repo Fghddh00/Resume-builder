@@ -109,8 +109,8 @@ function EditResume(props) {
 
     function getToken() {
         const data = {
-            client_id: "r07k7k37dvf4k0id",
-            client_secret: "M49XXMSS",
+            client_id: "ba200t98i66anfvg",
+            client_secret: "9x9a7EYe",
             grant_type: "client_credentials",
             scope: "emsi_open",
         };

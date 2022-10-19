@@ -46,8 +46,8 @@ function AddResume(props) {
 
   function getToken() {
     const data = {
-      client_id: "r07k7k37dvf4k0id",
-      client_secret: "M49XXMSS",
+      client_id: "ba200t98i66anfvg",
+      client_secret: "9x9a7EYe",
       grant_type: "client_credentials",
       scope: "emsi_open",
     };
@@ -81,36 +81,50 @@ function AddResume(props) {
   }
 
   function skillsChecker(description) {
-    // const tempSkillsList = skillsList
-    // const tempAddedSkills = addedSkills
-    //would like to figure out a way to limit duplicate skills being added
-    setAddedSkills([])
+     // setAddedSkills([])
 
-
-
-    fetch(
+     fetch(
       "https://emsiservices.com/skills/versions/latest/extract?language=en",
       {
-        method: "POST",
-        body: JSON.stringify(description),
-        headers: {
-          Authorization: `Bearer ${token.access_token}`,
-          "Content-Type": "application/json"
-        },
+          method: "POST",
+          body: JSON.stringify(description),
+          headers: {
+              Authorization: `Bearer ${token.access_token}`,
+              "Content-Type": "application/json"
+          },
       }
-    ).then(async (response) => {
+  ).then(async (response) => {
       if (response.status === 200) {
 
-        console.log("Success");
-        return await response.json();
+          console.log("Success");
+          return await response.json();
       } else if (response.status === 400) {
-        console.log(await response.json());
-      } else console.log(await response.json());
-    }).then((skillList) => {
-      const tempList = skillsList.concat(skillList.data.map(s => s.skill.name))
-      setSkills(tempList)
-      console.log(skillList);
-    });
+          setErrors(await response.json());
+      } else setErrors(await response.json());
+  }).then((skillList) => {
+      const tempList = skillList.data.map(s => s.skill.name).filter(s=> !skillsList.includes(s))
+      console.log(tempList)
+      setSkills([...skillsList , ...tempList])
+      // console.log(skillList);
+  });
+
+    }
+    function addSkillClick(evt) {
+        const btn = document.getElementById(evt.target.value);
+
+
+        console.log(btn.style.backgroundColor)
+        if (btn.style.backgroundColor != 'green') {
+            btn.style.backgroundColor = 'green'
+            const newSkillsList = addedSkills.concat({ skillName: evt.target.value })
+            setAddedSkills(newSkillsList)
+        }
+        else {
+            btn.style.backgroundColor = ''
+            const newSkillsList = addedSkills.filter(s => s.skillName != evt.target.value)
+            setAddedSkills(newSkillsList)
+        }
+
 
   }
 
