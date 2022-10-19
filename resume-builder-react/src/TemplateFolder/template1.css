@@ -3,10 +3,6 @@
     min-height: 200vh !important;
 }
 
-<<<<<<< HEAD
-.nameHeader{
-    text-align: center !important;
-=======
 .template1 .page {
     background: hsl(0deg 0% 100%) !important;
     box-shadow: 0 0 2em hsl(231deg 62% 94%) !important;
@@ -20,6 +16,5 @@
     margin-bottom: -3em !important;
     width: 200vh !important;
     margin-left: 0.5vh !important;
->>>>>>> 277ee5241e03b973a75a25b2e8eccf02aa301a29
     
 }
