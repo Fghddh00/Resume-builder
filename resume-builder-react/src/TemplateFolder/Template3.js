@@ -6,47 +6,66 @@ import "./template3.css";
 function Template3({ educations, skills, workHistories, userInfo }) {
 
     return (
-        <div className="container">
-            <div className="template3">
-                {/* Header */}
-                <div className="row">
-                    <div className="col-xs-12">
-                        <div id="text-header" className="text-center">
-                            <div id="photo">
-                                <img src="https://www.lafd.org/profiles/lafd/themes/lafd_org/logo.png" alt="lafd" />
-                            </div>
-                            <h1>{userInfo.firstName} {userInfo.lastName}</h1>
-                        </div>
-                    </div>
+        <div className="resumePage">
+            <header className="header">
+                <div id="photo">
+                    <img src="https://www.lafd.org/profiles/lafd/themes/lafd_org/logo.png" alt="lafd" />
                 </div>
-                <div className="row">
-                    <div className="col-xs-12 col-sm-7">
-                        <div className="box">
-                            <h2><img src="https://cdn-icons-png.flaticon.com/512/732/732952.png" width="25" height="5" alt="suitcase" /> Work Experience</h2>
-                            <div class="job clearfix">
-                                <div class="row">
-                                    <div class="details">
-                                        {<WorkHistory3 key={userInfo.userInfoId} workHistories={workHistories} skills={skills} />}
+                <h1>{userInfo.firstName} {userInfo.lastName}</h1>
+            </header>
+            <hr/>
+            <hr/>
+            <main>
+                <article id="mainLeft">
+                    <section className="p">
+                        <h2><i className="fa-regular fa-address-book"></i>CONTACT</h2>
+                        <div className="move-right">
+                        <i className="fa fa-envelope"></i>
+                            {userInfo.email}
+                        </div>
+                        <div>
+                        <i className="fa-solid fa-phone"></i>
+                            {userInfo.phoneNumber}
+                        </div>
+                        <div>
+                        <i className="fa-solid fa-location-pin"></i>
+                            {userInfo.address}
+                        </div>
+                    </section>
+                    <section>
+                        <h2><i class="fa-solid fa-graduation-cap"></i>EDUCATION</h2>
+                        {educations.map(e =>
+                            <div>
+                                <h4>{e.schoolName}</h4>
+                                <h5>{e.educationLevel}</h5>
+                            </div>
+                        )}
+                    </section>
+                </article>
+                <article id="mainRight">
+                    <section>
+                        <h2><i class="fa-solid fa-briefcase"></i>WORK EXPERIENCE</h2>
+                        <div>
+                            {workHistories.map(w =>
+                                <div>
+                                    <h3>{w.company}</h3>
+                                    <div>From:  {w.startDate}</div> <div>To: {w.endDate}</div>
+                                    <b>{w.jobTitle}</b>
+                                    <div>
+                                        {w.jobDescription}
+                                        <div>Skills:</div>
+                                        <ul>
+                                            {skills.map(s =>
+                                                <li>{s.skillName}</li>
+                                            )}
+                                        </ul>
                                     </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-5">
-                        <div class="box">
-                        <h2><img src="https://cdn-icons-png.flaticon.com/512/46/46955.png" width="25" height="5" alt="cap" /> Education</h2>
-                            <ul id="education" class="clearfix">
-                                <li>
-                                    <div class="description pull-right">
-                                        {educations.map(e=> <Education3 key={e.educationId} educationData={e}/>)}
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+                    </section>
+                </article>
+            </main>
         </div>
     );
 }
