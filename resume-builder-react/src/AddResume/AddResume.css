@@ -30,8 +30,11 @@
   text-decoration: none;
   cursor: pointer;
   border-radius: 16px !important;
-  
-  
+}
+.errors{
+  margin-top: 60px !important;
+  margin-bottom: -12px!important;
+  margin-left: 30px !important;
 }
 
 

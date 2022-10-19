@@ -3,11 +3,13 @@ import { useContext, useState, useEffect } from "react";
 import "./ViewResume.css";
 import Resume from "../Resume/Resume";
 import { Link, useHistory } from "react-router-dom";
+import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
 
 function ViewResume() {
   const [resumes, setResumes] = useState([]);
   const userData = useContext(AuthContext);
   const history = useHistory();
+  const [errors, setErrors] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect( () => {
@@ -28,7 +30,7 @@ function ViewResume() {
               setIsEmpty(true);
               return response.json();
           
-          } else (console.log( await response.json()))
+          } else (setErrors( await response.json()))
       } )
       .then( resumeList => {
           setResumes( resumeList );
@@ -38,6 +40,7 @@ function ViewResume() {
   
 
   return (
+    
     <div className="page">
     <Link to="/api/addResume" className="addBtn"> Add Resume</Link>
     {!isEmpty ?
@@ -53,7 +56,7 @@ function ViewResume() {
     </div>
     : <div className="container"> No Resumes Found</div>}
 
-    
+    <ErrorMessages errorList={errors} />  
     </div> 
     
    

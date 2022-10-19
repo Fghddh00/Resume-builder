@@ -1,7 +1,8 @@
+import { Button, Colors } from "react-foundation";
 import FormInput from "../FormInput/FormInput";
 
 
-function AddEducationForm({education, onEducationUpdated, index}){
+function AddEducationForm({education, onEducationUpdated, index, onDelete}){
     function updateEducation(evt){
         const target = evt.target;
         const name = target.name;
@@ -11,6 +12,10 @@ function AddEducationForm({education, onEducationUpdated, index}){
         copy[name] = value;
 
         onEducationUpdated(copy,index);
+    }
+    function deleteClick(){
+      console.log(index)
+      onDelete(index)
     }
 
     return(
@@ -31,6 +36,7 @@ function AddEducationForm({education, onEducationUpdated, index}){
                 currVal={education.educationLevel}
                 onChangeHandler={updateEducation}
               />
+              <Button color={Colors.ALERT} onClick={deleteClick}>Cancel</Button>
             </div>
           );
           

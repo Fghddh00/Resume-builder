@@ -6,13 +6,16 @@ import AuthContext from "../AuthContext";
 import "./EditResume.css";
 import AddWorkHistoryForm from "../AddWorkHistoryForm/AddWorkHistoryForm";
 import AddAppUserInfoForm from "../AddAppUserInfoForm/AddAppUserInfoForm";
+import ErrorMessages from "../ErrorMessages/ErrorMessages.js";
 
 function EditResume(props) {
     const [addedEducation, setAddedEducation] = useState([]);
     const [addedWorkHistory, setAddedWorkHistory] = useState([]);
     const [addedAppUserInfo, setAddedAppUserInfo] = useState([]);
+    const [template, setTemplate] = useState(0);
     const [resumeId,setResumeId] = useState(null);
     const [token, setToken] = useState(null);
+    const [errors, setErrors] = useState([]);
     const [addedSkills, setAddedSkills] = useState([]);
     const [skillsList, setSkills] = useState([]);
     const [isEmpty, setIsEmpty] = useState(false);
@@ -52,6 +55,20 @@ function EditResume(props) {
     
         copy[propertyName] = newValue;
         setAddedAppUserInfo(copy);
+      }
+      function templateUpdateHandler(evt) {
+        console.log(evt.target.value)
+        setTemplate(evt.target.value);
+      }
+      function deleteEducation(index){
+    
+        const newList = addedEducation.filter(s=> s !== addedEducation[index])
+        setAddedEducation(newList)
+      }
+      function deleteWorkHistory(index){
+        
+        const newList = addedWorkHistory.filter(s=> s !== addedWorkHistory[index])
+        setAddedWorkHistory(newList)
       }
     function handleClick(event) {
         const descriptionText = document.getElementById('jobDescription');
@@ -93,7 +110,8 @@ function EditResume(props) {
                     setSkills(resumeInfo.skills.map(s => s.skillName))
                     setAddedAppUserInfo(resumeInfo.userInfo)
                     setResumeId(resumeInfo.resumeId)
-                    //just to see what we get
+                    setTemplate(resumeInfo.templateId)
+                    
                 });
         }
     }, [id]);
@@ -101,8 +119,8 @@ function EditResume(props) {
 
     function getToken() {
         const data = {
-            client_id: "r07k7k37dvf4k0id",
-            client_secret: "M49XXMSS",
+            client_id: "ba200t98i66anfvg",
+            client_secret: "9x9a7EYe",
             grant_type: "client_credentials",
             scope: "emsi_open",
         };
@@ -135,7 +153,7 @@ function EditResume(props) {
             });
     }
     function skillsChecker(description) {
-        setAddedSkills([])
+        // setAddedSkills([])
 
         fetch(
             "https://emsiservices.com/skills/versions/latest/extract?language=en",
@@ -153,11 +171,13 @@ function EditResume(props) {
                 console.log("Success");
                 return await response.json();
             } else if (response.status === 400) {
-                console.log(await response.json());
-            } else console.log(await response.json());
+                setErrors(await response.json());
+            } else setErrors(await response.json());
         }).then((skillList) => {
-            setSkills(skillList.data.map(s => s.skill.name))
-            console.log(skillList);
+            const tempList = skillList.data.map(s => s.skill.name).filter(s=> !skillsList.includes(s))
+            console.log(tempList)
+            setSkills([...skillsList , ...tempList])
+            // console.log(skillList);
         });
 
     }
@@ -191,7 +211,7 @@ function EditResume(props) {
             educations: addedEducation,
             skills: addedSkills,
             userInfo: addedAppUserInfo,
-            templateId: 2,
+            templateId: template,
             resumeId: resumeId
         };
         const userId = userData.claims.jti;
@@ -209,66 +229,94 @@ function EditResume(props) {
 
                 history.push("/api/resume/" + id);
 
-            } else {
-                console.log(await response.json());
-                //Display error messages
+            } else if( response.status === 409 ){
+                return Promise.reject( ["Id mismatch between url and sent resume ☹"] );
+            } else if( response.status === 404 ){
+                return Promise.reject( ["Resume not found ☹"]);
+            } else if( response.status === 400 ){
+                return Promise.reject( await response.json());
             }
-        });
-    }
-
-    return (
-        <div className="container">
-            <div className="editForm">
+        })
+        .catch( errorList => {
+            if( errorList instanceof TypeError ){
+                setErrors( [ "Could not connect to api ☹"] );
+            } else {
+                setErrors( errorList );
+            }
+        });}
+    
+       
+        return (
+    
+    
+            <div className="container">
+        
+              <div className="addForm">
                 <nav aria-label="You are here:" role="navigation">
-                    <ul className="breadcrumbs">
-                        <li>
-                            <a href="#Education">Education</a>
-                        </li>
-                        <li>
-                            <a href="#WorkHistory">Work history</a>
-                        </li>
-                        <li>
-                            <a href="">Template</a>
-                        </li>
-                    </ul>
+                  <ul className="breadcrumbs">
+                    <li>
+                      <a href="#Education">Education</a>
+                    </li>
+                    <li>
+                      <a href="#WorkHistory">Work history</a>
+                    </li>
+                    <li>
+                      <a href="#AppUserInfo">User Info</a>
+                    </li>
+                    <li>
+                      <a href="">Template</a>
+                    </li>
+                  </ul>
                 </nav>
                 <div id="Education">
-                    <h2>Education</h2>
-                    <Button onClick={insertEducationForm}>Add Education</Button>
-                    {
-                        addedEducation.map((input, index) =>
-                            <AddEducationForm
-                                education={input}
-                                index={index}
-                                onEducationUpdated={educationUpdateHandler}
-                            />
-                        )}
+                  <h2>Education</h2>
+                  <Button onClick={insertEducationForm}>Add Education</Button>
+                  {
+                    addedEducation.map((input, index) =>
+                      <AddEducationForm
+                        education={input}
+                        index={index}
+                        onEducationUpdated={educationUpdateHandler}
+                        onDelete={deleteEducation}
+                      />
+                    )}
                 </div>
                 <div id="WorkHistory">
-                    <h2>Work History</h2>
-                    <Button onClick={AddWorkForm}>Add Work History</Button>
-                    {addedWorkHistory.map((input, index) =>
-                        <AddWorkHistoryForm
-                            workHistory={input}
-                            index={index}
-                            onWorkHistoryUpdated={workHistoryUpdateHandler}
-                            skillsChecker={skillsChecker}
-                        />
-                    )}
-                    {skillsList.map(s => <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
+                  <h2>Work History</h2>
+                  <Button onClick={AddWorkForm}>Add Work History</Button>
+                  {addedWorkHistory.map((input, index) =>
+                    <AddWorkHistoryForm
+                      workHistory={input}
+                      index={index}
+                      onWorkHistoryUpdated={workHistoryUpdateHandler}
+                      skillsChecker={skillsChecker}
+                      onDelete={deleteWorkHistory}
+                    />
+        
+                  )}
+                  {skillsList.map(s => <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
                 </div>
                 <div id="AppUserInfo">
-                    <h2>User Info</h2>
-                            <AddAppUserInfoForm
-                                appUserInfo={addedAppUserInfo}
-                                onAppUserInfoUpdated={appUserInfoUpdateHandler}
-                            />
-                        
+                  
+                  <h2>User Info</h2>
+                  <AddAppUserInfoForm
+                    appUserInfo={addedAppUserInfo}
+                    onAppUserInfoUpdated={appUserInfoUpdateHandler}
+                  />
+                </div>
+                <div>
+                  <fieldset onChange={templateUpdateHandler}>
+                  <legend>Choose a template</legend>
+                  <input type="radio" name="template" value={1} id="template1" required/><label for="template1">Template 1</label>
+                  <input type="radio" name="template" value={2} id="template2" required/><label for="template2">Template 2</label>
+                  <input type="radio" name="template" value={3} id="template3" required/><label for="template3">Template 3</label>
+                  </fieldset>
                 </div>
                 <Button onClick={onSubmit}>Submit</Button>
+              </div>
+              <ErrorMessages errorList={errors} />
             </div>
-        </div>
-    );
+          );
 
 }
 
