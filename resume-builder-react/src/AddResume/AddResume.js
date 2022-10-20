@@ -33,17 +33,17 @@ function AddResume(props) {
 
     setAddedWorkHistory([...addedWorkHistory, newfield]);
   }
-  function deleteEducation(index){
-    
-    const newList = addedEducation.filter(s=> s !== addedEducation[index])
+  function deleteEducation(index) {
+
+    const newList = addedEducation.filter(s => s !== addedEducation[index])
     setAddedEducation(newList)
   }
-  function deleteWorkHistory(index){
-    
-    const newList = addedWorkHistory.filter(s=> s !== addedWorkHistory[index])
+  function deleteWorkHistory(index) {
+
+    const newList = addedWorkHistory.filter(s => s !== addedWorkHistory[index])
     setAddedWorkHistory(newList)
   }
-  
+
   useEffect(
     () => {
       getToken();
@@ -87,49 +87,49 @@ function AddResume(props) {
   }
 
   function skillsChecker(description) {
-     // setAddedSkills([])
+    // setAddedSkills([])
 
-     fetch(
+    fetch(
       "https://emsiservices.com/skills/versions/latest/extract?language=en",
       {
-          method: "POST",
-          body: JSON.stringify(description),
-          headers: {
-              Authorization: `Bearer ${token.access_token}`,
-              "Content-Type": "application/json"
-          },
+        method: "POST",
+        body: JSON.stringify(description),
+        headers: {
+          Authorization: `Bearer ${token.access_token}`,
+          "Content-Type": "application/json"
+        },
       }
-  ).then(async (response) => {
+    ).then(async (response) => {
       if (response.status === 200) {
 
-          console.log("Success");
-          return await response.json();
+        console.log("Success");
+        return await response.json();
       } else if (response.status === 400) {
-          setErrors(await response.json());
+        setErrors(await response.json());
       } else setErrors(await response.json());
-  }).then((skillList) => {
-      const tempList = skillList.data.map(s => s.skill.name).filter(s=> !skillsList.includes(s))
+    }).then((skillList) => {
+      const tempList = skillList.data.map(s => s.skill.name).filter(s => !skillsList.includes(s))
       console.log(tempList)
-      setSkills([...skillsList , ...tempList])
+      setSkills([...skillsList, ...tempList])
       // console.log(skillList);
-  });
+    });
 
+  }
+  function addSkillClick(evt) {
+    const btn = document.getElementById(evt.target.value);
+
+
+    console.log(btn.style.backgroundColor)
+    if (btn.style.backgroundColor != 'green') {
+      btn.style.backgroundColor = 'green'
+      const newSkillsList = addedSkills.concat({ skillName: evt.target.value })
+      setAddedSkills(newSkillsList)
     }
-    function addSkillClick(evt) {
-        const btn = document.getElementById(evt.target.value);
-
-
-        console.log(btn.style.backgroundColor)
-        if (btn.style.backgroundColor != 'green') {
-            btn.style.backgroundColor = 'green'
-            const newSkillsList = addedSkills.concat({ skillName: evt.target.value })
-            setAddedSkills(newSkillsList)
-        }
-        else {
-            btn.style.backgroundColor = ''
-            const newSkillsList = addedSkills.filter(s => s.skillName != evt.target.value)
-            setAddedSkills(newSkillsList)
-        }
+    else {
+      btn.style.backgroundColor = ''
+      const newSkillsList = addedSkills.filter(s => s.skillName != evt.target.value)
+      setAddedSkills(newSkillsList)
+    }
 
 
   }
@@ -149,7 +149,7 @@ function AddResume(props) {
     setAddedWorkHistory(copy);
   }
   function appUserInfoUpdateHandler(newValue, propertyName) {
-    const copy = {...addedAppUserInfo};
+    const copy = { ...addedAppUserInfo };
 
     copy[propertyName] = newValue;
     setAddedAppUserInfo(copy);
@@ -159,7 +159,7 @@ function AddResume(props) {
     setTemplate(evt.target.value);
   }
 
-  
+
 
 
   function addSkillClick(evt) {
@@ -210,20 +210,20 @@ function AddResume(props) {
         return Promise.reject(await response.json());
       }
     })
-    .catch(error => {
-      if (error instanceof TypeError) {
+      .catch(error => {
+        if (error instanceof TypeError) {
           setErrors(["Could not connect to api ☹"])
-      } else {
+        } else {
           setErrors(error);
-      }
-  });
+        }
+      });
   }
-  
+
   return (
-    
-    
+
+
     <div className="container">
-    
+
       <div className="addForm">
         <nav aria-label="You are here:" role="navigation">
           <ul className="breadcrumbs">
@@ -252,7 +252,7 @@ function AddResume(props) {
                 onEducationUpdated={educationUpdateHandler}
                 onDelete={deleteEducation}
               />
-              
+
             )}
         </div>
         <div id="WorkHistory">
@@ -271,7 +271,7 @@ function AddResume(props) {
           {skillsList.map(s => <Button className="pill" id={s} value={s} onClick={addSkillClick}> {s}</Button>)}
         </div>
         <div id="AppUserInfo">
-          
+
           <h2>User Info</h2>
           <AddAppUserInfoForm
             appUserInfo={addedAppUserInfo}
@@ -280,15 +280,15 @@ function AddResume(props) {
         </div>
         <div>
           <fieldset onChange={templateUpdateHandler}>
-          <legend>Choose a template</legend>
-          <input type="radio" name="template" value={1} id="template1" required/><label for="template1">Template 1</label>
-          <input type="radio" name="template" value={2} id="template2" required/><label for="template2">Template 2</label>
-          <input type="radio" name="template" value={3} id="template3" required/><label for="template3">Template 3</label>
+            <legend>Choose a template</legend>
+            <input type="radio" name="template" value={1} id="template1" required /><label for="template1">Template 1</label>
+            <input type="radio" name="template" value={2} id="template2" required /><label for="template2">Template 2</label>
+            <input type="radio" name="template" value={3} id="template3" required /><label for="template3">Template 3</label>
           </fieldset>
         </div>
         <Button onClick={onSubmit}>Submit</Button>
       </div>
-      <ErrorMessages errorList={errors} />
+      {errors.length > 0 ? <ErrorMessages errorList={errors} /> : null}
     </div>
   );
 }

@@ -9,14 +9,18 @@ function ErrorMessages({ errorList }) {
         //     </div>
         // </div>
         
-        <div data-alert className="alert-box">
+        // <div data-alert className="alert-box">
+
+        //     <a href="#" class="close">&times;</a>
+        // </div>
+        
+        <div className="callout alert small" data-closable="slide-out-right">
             <ul>
                 {errorList.map(e => (
-                    <li key={e}>{e}</li>
+                     <div key={e}>{e}</div>
                 ))}
             </ul>
-        </div>
-        
+      </div>
 );
 }
 export default ErrorMessages;
