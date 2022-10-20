@@ -112,6 +112,7 @@ function EditResume(props) {
           setAddedAppUserInfo(resumeInfo.userInfo);
           setResumeId(resumeInfo.resumeId);
           setTemplate(resumeInfo.templateId);
+          setResumeName(resumeInfo.resumeName)
         });
     }
   }, [id]);
@@ -306,7 +307,7 @@ function EditResume(props) {
         </div>
         <div>
             <legend>Resume Name</legend>
-            <input type='text' name="resumeName" onChange={resumeNameUpdate}/>
+            <input type='text' name="resumeName" value={resumeName} onChange={resumeNameUpdate}/>
         </div>
         <div>
           <fieldset onChange={templateUpdateHandler}>

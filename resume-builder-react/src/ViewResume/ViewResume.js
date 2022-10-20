@@ -51,6 +51,7 @@ function ViewResume() {
               key={c.resumeId}
               resumeId={c.resumeId}
               templateId={c.templateId}
+              resumeName={c.resumeName}
             />
           ))}
 
