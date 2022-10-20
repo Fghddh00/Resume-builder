@@ -281,9 +281,11 @@ function AddResume(props) {
         <div>
           <fieldset onChange={templateUpdateHandler}>
             <legend>Choose a template</legend>
-            <input type="radio" name="template" value={1} id="template1" required /><label for="template1">Template 1</label>
-            <input type="radio" name="template" value={2} id="template2" required /><label for="template2">Template 2</label>
-            <input type="radio" name="template" value={3} id="template3" required /><label for="template3">Template 3</label>
+            <input type="radio" name="template" value={1} id="template1" required /><label for="template1">Professional-Light</label>
+            <input type="radio" name="template" value={2} id="template2" required /><label for="template2">Professional-Dark</label>
+            <input type="radio" name="template" value={3} id="template3" required /><label for="template3">Fun Icon Resume</label>
+            <input type="radio" name="template" value={4} id="template4" required /><label for="template4">Basic Table</label>
+            <input type="radio" name="template" value={5} id="template5" required /><label for="template5">Goofy Resume-Pink</label>
           </fieldset>
         </div>
         <Button onClick={onSubmit}>Submit</Button>
