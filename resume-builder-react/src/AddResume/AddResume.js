@@ -14,6 +14,7 @@ function AddResume(props) {
   const [addedEducation, setAddedEducation] = useState([]);
   const [addedWorkHistory, setAddedWorkHistory] = useState([]);
   const [addedAppUserInfo, setAddedAppUserInfo] = useState({});
+  const [resumeName, setResumeName] = useState("");
   const [addedSkills, setAddedSkills] = useState([]);
   const [template, setTemplate] = useState(0);
   const [token, setToken] = useState(null);
@@ -158,6 +159,9 @@ function AddResume(props) {
     console.log(evt.target.value)
     setTemplate(evt.target.value);
   }
+  function resumeNameUpdate(evt) {
+    setResumeName(evt.target.value);
+  }
 
 
 
@@ -186,8 +190,8 @@ function AddResume(props) {
       educations: addedEducation,
       skills: addedSkills,
       userInfo: addedAppUserInfo,
-      templateId: template
-
+      templateId: template,
+      resumeName:resumeName
     };
 
     console.log(resume.userInfo)
@@ -277,6 +281,10 @@ function AddResume(props) {
             appUserInfo={addedAppUserInfo}
             onAppUserInfoUpdated={appUserInfoUpdateHandler}
           />
+        </div>
+        <div>
+            <legend>Resume Name</legend>
+            <input type='text' name="resumeName" onChange={resumeNameUpdate}/>
         </div>
         <div>
           <fieldset onChange={templateUpdateHandler}>

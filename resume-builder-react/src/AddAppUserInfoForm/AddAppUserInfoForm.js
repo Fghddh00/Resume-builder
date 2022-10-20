@@ -41,7 +41,7 @@ function AddAppUserInfoForm({appUserInfo, onAppUserInfoUpdated, index}){
         <FormInput
           inputType={"text"}
           identifier={"address"}
-          labelText={"Addrress"}
+          labelText={"Address"}
           currVal={appUserInfo.address}
           onChangeHandler={updateAppUserInfo}
         />

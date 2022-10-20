@@ -12,6 +12,7 @@ function EditResume(props) {
   const [addedEducation, setAddedEducation] = useState([]);
   const [addedWorkHistory, setAddedWorkHistory] = useState([]);
   const [addedAppUserInfo, setAddedAppUserInfo] = useState([]);
+  const [resumeName, setResumeName] = useState("");
   const [template, setTemplate] = useState(0);
   const [resumeId, setResumeId] = useState(null);
   const [token, setToken] = useState(null);
@@ -48,22 +49,14 @@ function EditResume(props) {
     copy[index] = workHistory;
     setAddedWorkHistory(copy);
   }
-  function insertAppUserInfoFrom() {
-    let newfield = {
-      email: "",
-      firstName: "",
-      lastName: "",
-      address: "",
-      phoneNumber: "",
-    };
-
-    setAddedAppUserInfo([...addedAppUserInfo, newfield]);
-  }
   function appUserInfoUpdateHandler(newValue, propertyName) {
     const copy = { ...addedAppUserInfo };
 
     copy[propertyName] = newValue;
     setAddedAppUserInfo(copy);
+  }
+  function resumeNameUpdate(evt) {
+    setResumeName(evt.target.value);
   }
   function templateUpdateHandler(evt) {
     console.log(evt.target.value);
@@ -111,7 +104,7 @@ function EditResume(props) {
           } else console.log(await response.json());
         })
         .then((resumeInfo) => {
-          console.log(resumeInfo);
+         
           setAddedEducation(resumeInfo.educations);
           setAddedWorkHistory(resumeInfo.workHistories);
           setAddedSkills(resumeInfo.skills);
@@ -219,6 +212,7 @@ function EditResume(props) {
       userInfo: addedAppUserInfo,
       templateId: template,
       resumeId: resumeId,
+      resumeName: resumeName
     };
     const userId = userData.claims.jti;
     const jwt = userData.jwt;
@@ -251,6 +245,8 @@ function EditResume(props) {
       });
   }
 
+  
+  
   return (
     <div className="container">
       <div className="addForm">
@@ -307,6 +303,10 @@ function EditResume(props) {
             appUserInfo={addedAppUserInfo}
             onAppUserInfoUpdated={appUserInfoUpdateHandler}
           />
+        </div>
+        <div>
+            <legend>Resume Name</legend>
+            <input type='text' name="resumeName" onChange={resumeNameUpdate}/>
         </div>
         <div>
           <fieldset onChange={templateUpdateHandler}>
