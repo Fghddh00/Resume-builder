@@ -87,6 +87,7 @@ function Resume(props) {
             </div>
           </motion.div>
           }
+  
         </motion.div>
       </div>
   )

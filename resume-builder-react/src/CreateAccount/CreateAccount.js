@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import ErrorMessages from "../ErrorMessages/ErrorMessages";
 import './CreateAccount.css';
 
+
 function CreateAccount() {
     const history = useHistory();
     const [account, setAccount] = useState({});
@@ -82,12 +83,11 @@ function CreateAccount() {
                         <Link to="/login"> Already Have an account? Click here to login</Link>
                     </div>
                 </form>
-            
-
             </GridContainer>
-
-        <ErrorMessages errorList={errors} />
+         {errors.length > 0 ? <ErrorMessages id="createAccountErrors" errorList={errors}/> : null }
+            
         </div>
+        
     );
 }
 

@@ -314,7 +314,7 @@ function EditResume(props) {
                 </div>
                 <Button onClick={onSubmit}>Submit</Button>
               </div>
-              <ErrorMessages errorList={errors} />
+              {errors.length > 0 ? <ErrorMessages errorList={errors}/> : null }
             </div>
           );
 
