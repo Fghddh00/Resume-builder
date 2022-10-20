@@ -104,7 +104,7 @@ function EditResume(props) {
           } else console.log(await response.json());
         })
         .then((resumeInfo) => {
-         
+         console.log(resumeInfo);
           setAddedEducation(resumeInfo.educations);
           setAddedWorkHistory(resumeInfo.workHistories);
           setAddedSkills(resumeInfo.skills);
@@ -112,6 +112,7 @@ function EditResume(props) {
           setAddedAppUserInfo(resumeInfo.userInfo);
           setResumeId(resumeInfo.resumeId);
           setTemplate(resumeInfo.templateId);
+          setResumeName(resumeInfo.resumeName);
         });
     }
   }, [id]);
