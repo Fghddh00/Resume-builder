@@ -112,11 +112,7 @@ function EditResume(props) {
           setAddedAppUserInfo(resumeInfo.userInfo);
           setResumeId(resumeInfo.resumeId);
           setTemplate(resumeInfo.templateId);
-<<<<<<< HEAD
-          setResumeName(resumeInfo.resumeName);
-=======
           setResumeName(resumeInfo.resumeName)
->>>>>>> 61152a5d361e3808e7cd34ed93ceb199c60daa9f
         });
     }
   }, [id]);
@@ -254,7 +250,7 @@ function EditResume(props) {
   
   return (
     <div className="container">
-      <div className="addForm">
+      <div className="editForm">
         <nav aria-label="You are here:" role="navigation">
           <ul className="breadcrumbs">
             <li>
@@ -359,6 +355,7 @@ function EditResume(props) {
           </fieldset>
         </div>
         <Button onClick={onSubmit}>Submit</Button>
+        
       </div>
       {errors.length > 0 ? <ErrorMessages errorList={errors} /> : null}
     </div>
