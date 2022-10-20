@@ -133,6 +133,9 @@ public class ResumeService {
         if (resume.getTemplateId() < 1){
             result.addMessage("Resume Template is required", ResultType.INVALID);
         }
+        if (resume.getResumeName() == null || resume.getResumeName().isBlank()){
+            result.addMessage("Resume name is required", ResultType.INVALID);
+        }
 
         return result;
     }

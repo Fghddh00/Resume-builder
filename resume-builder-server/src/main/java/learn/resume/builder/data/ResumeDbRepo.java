@@ -53,13 +53,14 @@ public class ResumeDbRepo implements ResumeRepo{
             return null;
         }
 
-        final String sql = "insert into resume_app (template_id, info_id, user_id) values (?,?, ?);";
+        final String sql = "insert into resume_app (resume_name, template_id, info_id, user_id) values (?,?,?,?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, resumeToAdd.getTemplateId());
-            ps.setInt(2, resumeToAdd.getUserInfo().getInfoId());
-            ps.setInt(3,resumeToAdd.getUser().getUserId());
+            ps.setString(1, resumeToAdd.getResumeName());
+            ps.setInt(2, resumeToAdd.getTemplateId());
+            ps.setInt(3, resumeToAdd.getUserInfo().getInfoId());
+            ps.setInt(4,resumeToAdd.getUser().getUserId());
             return ps;
         }, keyHolder);
         if (rowsAffected <= 0){
@@ -107,7 +108,8 @@ public class ResumeDbRepo implements ResumeRepo{
         updateResumeWorkHistory(resume);
         updateResumeSkill(resume);
         updateResumeEducation(resume);
-        return jdbcTemplate.update("update resume_app set template_id = ? where resume_id = ?;", resume.getTemplateId(), resume.getResumeId()) > 0;
+        return jdbcTemplate.update("update resume_app set template_id = ?, resume_name=? where resume_id = ?;",
+                resume.getTemplateId(), resume.getResumeName(), resume.getResumeId()) > 0;
     }
 
     private void updateResumeEducation(Resume resume) {

@@ -7,6 +7,7 @@ public class Resume {
 
     private int resumeId;
     private int templateId;
+    private String resumeName;
     private AppUser user;
     private AppUserInfo userInfo;
     List<Education> educations;
@@ -28,7 +29,13 @@ public class Resume {
     public void setTemplateId(int templateId) {
         this.templateId = templateId;
     }
+    public String getResumeName() {
+        return resumeName;
+    }
 
+    public void setResumeName(String resumeName) {
+        this.resumeName = resumeName;
+    }
     public AppUser getUser() {
         return user;
     }

@@ -52,8 +52,8 @@ function AddResume(props) {
 
   function getToken() {
     const data = {
-      client_id: "ba200t98i66anfvg",
-      client_secret: "9x9a7EYe",
+      client_id: "xut45ai73o05u4rd",
+      client_secret: "lvnvNzQF",
       grant_type: "client_credentials",
       scope: "emsi_open",
     };
@@ -203,7 +203,7 @@ function AddResume(props) {
     }).then(async response => {
       if (response.status === 201) {
 
-        history.push("/api/resume/1");
+        history.push("/api/resume");
 
 
       } else if (response.status === 400) {
