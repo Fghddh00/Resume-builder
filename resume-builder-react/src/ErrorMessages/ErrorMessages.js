@@ -9,7 +9,7 @@ function ErrorMessages({ errorList }) {
         //     </div>
         // </div>
         
-        <div className="errors">
+        <div data-alert className="alert-box">
             <ul>
                 {errorList.map(e => (
                     <li key={e}>{e}</li>

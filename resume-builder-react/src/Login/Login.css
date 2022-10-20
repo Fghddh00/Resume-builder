@@ -22,5 +22,8 @@
     border-radius: 50px;
     
   }
+#loginError{
+	border: 7px hidden #466451 !important;
+}
 
 
