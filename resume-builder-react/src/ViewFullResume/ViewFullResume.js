@@ -112,6 +112,11 @@ function ViewFullResume(props) {
     return (
 
         <div className="page">
+            <GenericPdfDownloader
+            downloadFileName="resume.pdf" 
+            rootElementId="Resume" 
+            />
+        
             {!isEmpty ?
                 <div id="Resume">
                     {loadResume()}
