@@ -61,6 +61,7 @@ create table skill (
 
 create table resume_app (
 	resume_id 		int primary key auto_increment,
+    resume_name		varchar(50) not null,
     template_id 	int not null,
 	info_id 		int not null,
     user_id			int not null,
@@ -170,7 +171,7 @@ create table resume_skill (
     
     insert into resume_app 
     values
-    (1, 5, 1, 1);
+    (1, "professional resume", 5, 1, 1);
     
     
     insert into resume_education

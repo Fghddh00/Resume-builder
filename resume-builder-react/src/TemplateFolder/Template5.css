@@ -7,24 +7,20 @@
 	background-color: rgb(255, 255, 255);
 }
 
-.portfolio-resume-spacing {
+.resume-spacing {
   margin-bottom: 2rem;
   background-color: #00eeff2a;
 
 }
 
-.portfolio-resume-wrapper {
+.resume-wrapper {
   padding: 2rem 4rem;
   background-color: #ff00ea2a;
 
 }
 
-.portfolio-resume-headshot {
-  margin-bottom: 2rem;
-  border-radius: 50%;
-}
 
-.portfolio-resume-header {
+.resume-header {
   text-transform: uppercase;
   padding-bottom: 1rem;
   border-bottom: 1px solid #00eeff;
@@ -32,15 +28,15 @@
   margin-bottom: 1rem;
 }
 
-.portfolio-resume-contact-info {
+.resume-user-info {
   margin-bottom: 0.75rem;
 }
 
-.portfolio-resume-contact-info a {
+.resume-user-info a {
   color: #0a0a0a;
 }
 
-.portfolio-resume-contact-info .fa {
+.resume-user-info .fa {
   font-size: 1.4rem;
   padding-right: 0.8rem;
   vertical-align: middle;
