@@ -77,7 +77,6 @@ function ViewFullResume(props) {
                         userInfo={userInfo} />
                 )
             case 3:
-
                 return (
                     <Template3
                         key={resume.resumeId}
@@ -104,8 +103,6 @@ function ViewFullResume(props) {
                         workHistories={workHistories}
                         userInfo={userInfo} />
                 )
-        
-        
             default:
                 break;
         }
@@ -115,11 +112,6 @@ function ViewFullResume(props) {
     return (
 
         <div className="page">
-            <GenericPdfDownloader
-            downloadFileName="resume.pdf" 
-            rootElementId="Resume" 
-            />
-        
             {!isEmpty ?
                 <div id="Resume">
                     {loadResume()}

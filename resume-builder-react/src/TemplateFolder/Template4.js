@@ -1,179 +1,63 @@
+import UserInfoFromResume from "../Template5Components/UserInfoFromResume/UserInfoFromResume";
+import WorkHistoriesFromResume from "../Template5Components/WorkHistoriesFromResume/WorkHistoriesFromResume";
+import EducationsFromResume from "../Template5Components/EducationsFromResume/EducationsFromResume";
+import SkillsFromResume from "../Template5Components/SkillsFromResume/SkillsFromResume";
+import "./Template5.css";
 
 
 function Template4({ educations, skills, workHistories, userInfo }) {
-
     return (
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-9">
-                    <div class="row align-items-center">
-                        <div class="col-lg-5">
-                            <div class="resume-base bg-primary user-dashboard-info-box p-4">
-                                <div class="profile">
-                                    <div class="jobster-user-info">
-                                        <div class="profile-avatar">
-                                            <img class="img-fluid " src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="avatar"/>
-                                        </div>
-                                        <div class="profile-avatar-info mt-3">
-                                            <h5 class="text-white">Vickie Meyer</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="about-candidate border-top">
-                                    <div class="candidate-info">
-                                        <h6 class="text-white">Name:</h6>
-                                        <p class="text-white">Anne Smith</p>
-                                    </div>
-                                    <div class="candidate-info">
-                                        <h6 class="text-white">Email:</h6>
-                                        <p class="text-white">test04@gmail.com</p>
-                                    </div>
-                                    <div class="candidate-info">
-                                        <h6 class="text-white">Phone:</h6>
-                                        <p class="text-white">(123) 345-6789</p>
-                                    </div>
-                                    <div class="candidate-info">
-                                        <h6 class="text-white">Date Of Birth:</h6>
-                                        <p class="text-white">1993-12-28</p>
-                                    </div>
-                                    <div class="candidate-info">
-                                        <h6 class="text-white">Address:</h6>
-                                        <p class="text-white">Maine Turnpike, Hallowell, ME, USA</p>
-                                    </div>
-                                    <div class="candidate-info">
-                                        <h6 class="text-white">Gender:</h6>
-                                        <p class="text-white">Female</p>
-                                    </div>
-                                </div>
-                                <div class="mt-0">
-                                    <h5 class="text-white">Professional Skill:</h5>
-                                    <div class="progress bg-dark">
-                                        <div class="progress-bar bg-white" role="progressbar" style="width:55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
-                                            <div class="progress-bar-title text-white">Photoshop</div>
-                                            <span class="progress-bar-number text-white">70%</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress bg-dark">
-                                        <div class="progress-bar bg-white" role="progressbar" style="width:80%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
-                                            <div class="progress-bar-title text-white">JavaScript</div>
-                                            <span class="progress-bar-number text-white">80%</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress bg-dark">
-                                        <div class="progress-bar bg-white" role="progressbar" style="width:55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
-                                            <div class="progress-bar-title text-white">HTML/CSS</div>
-                                            <span class="progress-bar-number text-white">55%</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress bg-dark mb-md-0">
-                                        <div class="progress-bar bg-white" role="progressbar" style="width:60%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                            <div class="progress-bar-title text-white">PHP</div>
-                                            <span class="progress-bar-number text-white">60%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="resume-experience">
-                                <div class="timeline-box">
-                                    <h5 class="resume-experience-title">Education:</h5>
-                                    <div class="jobster-candidate-timeline">
-                                        <div class="jobster-timeline-item">
-                                            <div class="jobster-timeline-cricle">
-                                                <i class="far fa-circle"></i>
-                                            </div>
-                                            <div class="jobster-timeline-info">
-                                                <div class="dashboard-timeline-info">
-                                                    <span class="jobster-timeline-time">2014 - 2018</span>
-                                                    <h6 class="mb-2">Diploma in Graphics Design</h6>
-                                                    <span>- Graphic Arts Institute</span>
-                                                    <p class="mt-2">Have some fun and hypnotize yourself to be your very own “Ghost of Christmas future” and see what the future holds for you.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="jobster-timeline-item mb-0">
-                                            <div class="jobster-timeline-cricle">
-                                                <i class="far fa-circle"></i>
-                                            </div>
-                                            <div class="jobster-timeline-info">
-                                                <div class="dashboard-timeline-info">
-                                                    <span class="jobster-timeline-time">2018 - Pres</span>
-                                                    <h6 class="mb-2">Masters in Software Engineering</h6>
-                                                    <span>- Engineering University</span>
-                                                    <p class="mt-2">This is the beginning of creating the life that you want to live. Know what the future holds for you as a result of the choice you can make today.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="timeline-box mt-4">
-                                    <h5 class="resume-experience-title">Work &amp; Experience:</h5>
-                                    <div class="jobster-candidate-timeline">
-                                        <div class="jobster-timeline-item">
-                                            <div class="jobster-timeline-cricle">
-                                                <i class="far fa-circle"></i>
-                                            </div>
-                                            <div class="jobster-timeline-info">
-                                                <div class="dashboard-timeline-info">
-                                                    <span class="jobster-timeline-time">2020-6-01 to 2020-6-01</span>
-                                                    <h6 class="mb-2">Web Designer</h6>
-                                                    <span>- Inwave Studio</span>
-                                                    <p class="mt-2">One of the main areas that I work on with my clients is shedding these non-supportive beliefs and replacing them with beliefs that will help them to accomplish their desires.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="jobster-timeline-item mb-0">
-                                            <div class="jobster-timeline-cricle">
-                                                <i class="far fa-circle"></i>
-                                            </div>
-                                            <div class="jobster-timeline-info">
-                                                <div class="dashboard-timeline-info">
-                                                    <span class="jobster-timeline-time">2020-6-01 to 2020-6-01</span>
-                                                    <h6 class="mb-2">Secondary School Certificate</h6>
-                                                    <span>- Engineering High School</span>
-                                                    <p class="mt-2">Figure out what you want, put a plan together to achieve it, understand the cost, believe in yourself then go and get it!</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="timeline-box mt-4">
-                                    <h5 class="resume-experience-title">Awards:</h5>
-                                    <div class="jobster-candidate-timeline">
-                                        <div class="jobster-timeline-item">
-                                            <div class="jobster-timeline-cricle">
-                                                <i class="far fa-circle"></i>
-                                            </div>
-                                            <div class="jobster-timeline-info">
-                                                <div class="dashboard-timeline-info">
-                                                    <span class="jobster-timeline-time">2020-6-01 to 2020-6-01</span>
-                                                    <h6 class="mb-2">Web Designer</h6>
-                                                    <span>- Inwave Studio</span>
-                                                    <p class="mt-2">One of the main areas that I work on with my clients is shedding these non-supportive beliefs and replacing them with beliefs that will help them to accomplish their desires.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="jobster-timeline-item mb-0">
-                                            <div class="jobster-timeline-cricle">
-                                                <i class="far fa-circle"></i>
-                                            </div>
-                                            <div class="jobster-timeline-info">
-                                                <div class="dashboard-timeline-info">
-                                                    <span class="jobster-timeline-time">2020-6-01 to 2020-6-01</span>
-                                                    <h6 class="mb-2">Secondary School Certificate</h6>
-                                                    <span>- Engineering High School</span>
-                                                    <p class="mt-2">Figure out what you want, put a plan together to achieve it, understand the cost, believe in yourself then go and get it!</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div>
+            <h3>Basic Resume Information Table</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>FirstName</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <UserInfoFromResume key={userInfo.infoId} infoData={userInfo} />
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>School Name</th>
+                        <th>Education Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {educations.map(e => <EducationsFromResume key={e.educationId} educationData={e} />)}
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Job Title</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Job Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {workHistories.map(w => <WorkHistoriesFromResume key={w.workHistoryId} workHistoriesData={w} />)}
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Skill Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {skills.map(s => <SkillsFromResume key={s.skillId} skillData={s} />)}
+                </tbody>
+            </table>
         </div>
     );
 }

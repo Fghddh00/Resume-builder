@@ -6,7 +6,6 @@ public class Education {
     private int educationId;
     private String schoolName;
     private String educationLevel;
-    List<Resume> resumes;
 
     public Education(int educationId, String schoolName, String educationLevel) {
         this.educationId = educationId;
@@ -39,12 +38,5 @@ public class Education {
 
     public void setEducationLevel(String educationLevel) {
         this.educationLevel = educationLevel;
-    }
-    public List<Resume> getResumes() {
-        return resumes;
-    }
-
-    public void setResumes(List<Resume> resumes) {
-        this.resumes = resumes;
     }
 }

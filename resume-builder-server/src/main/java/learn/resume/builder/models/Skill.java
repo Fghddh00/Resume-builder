@@ -5,7 +5,6 @@ import java.util.List;
 public class Skill {
     private int skillId;
     private String skillName;
-    List<Resume> resumes;
 
 
     public Skill(int skillId, String skillName) {
@@ -32,11 +31,4 @@ public class Skill {
         this.skillName = skillName;
     }
 
-    public List<Resume> getResumes() {
-        return resumes;
-    }
-
-    public void setResumes(List<Resume> resumes) {
-        this.resumes = resumes;
-    }
 }

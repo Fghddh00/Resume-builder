@@ -1,63 +1,51 @@
-import UserInfoFromResume from "../Template5Components/UserInfoFromResume/UserInfoFromResume";
-import WorkHistoriesFromResume from "../Template5Components/WorkHistoriesFromResume/WorkHistoriesFromResume";
-import EducationsFromResume from "../Template5Components/EducationsFromResume/EducationsFromResume";
-import SkillsFromResume from "../Template5Components/SkillsFromResume/SkillsFromResume";
-import "./Template5.css";
 
 
 function Template5({ educations, skills, workHistories, userInfo }) {
+
     return (
-        <div>
-            <h3>Basic Resume Information Table</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>FirstName</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Phone Number</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <UserInfoFromResume key={userInfo.infoId} infoData={userInfo} />
-                </tbody>
-            </table>
-            <table>
-                <thead>
-                    <tr>
-                        <th>School Name</th>
-                        <th>Education Level</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {educations.map(e => <EducationsFromResume key={e.educationId} educationData={e} />)}
-                </tbody>
-            </table>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Company</th>
-                        <th>Job Title</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Job Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {workHistories.map(w => <WorkHistoriesFromResume key={w.workHistoryId} workHistoriesData={w} />)}
-                </tbody>
-            </table>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Skill Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {skills.map(s => <SkillsFromResume key={s.skillId} skillData={s} />)}
-                </tbody>
-            </table>
+        <div className="resumePage">
+            <div className="portfolio-resume row">
+                <div className="large-4 columns">
+                    <div className="portfolio-resume-wrapper">
+                        <h2><strong>{userInfo.firstName} {userInfo.lastName}</strong></h2>
+                        {/* SKils */}
+                        <div className="large-4 columns">
+                            <div className="portfolio-resume-wrapper">
+                                <h3 className="portfolio-resume-header">Skills</h3>
+                                <ul>
+                                    {skills.map(s =>
+                                        <li>{s.skillName}</li>
+                                    )}
+                                </ul>
+                                <h3>Education</h3>
+                                {educations.map(e =>
+                                    <div className="portfolio-resume-spacing">
+                                        <h5><strong>{e.schoolName}</strong></h5>
+                                        <h6><em>{e.educationLevel}</em></h6>                            </div>
+                                )}
+                                <h3>Experience</h3>
+                                {workHistories.map(w =>
+                                    <div className="portfolio-resume-spacing">
+                                        <h5><strong>{w.jobTitle}</strong></h5>
+                                        <h6><em>{w.company}</em></h6>
+                                        <p>{w.jobDescription}</p>
+                                    </div>
+                                )}
+                                <h3>About Me</h3>
+                                <div className="portfolio-resume-contact-info">
+                                    <i className="fa fa-envelope" aria-hidden="true"></i>{userInfo.email}
+                                </div>
+                                <div className="portfolio-resume-contact-info">
+                                    <i className="fa-solid fa-location-pin" aria-hidden="true"></i>{userInfo.address}
+                                </div>
+                                <div className="portfolio-resume-contact-info">
+                                    <i className="fa fa-phone" aria-hidden="true"></i>{userInfo.phoneNumber}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

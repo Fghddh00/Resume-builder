@@ -114,9 +114,13 @@ public class WorkHistoryService {
                 result.addMessage("Work History could not be updated", workHistoryResult.getType());
                 return result;
             }
-            repository.update(workHistory);
+           if(!repository.update(workHistory)){
+               result.addMessage("Could not update Work History", ResultType.INVALID);
+           }
         }
-        result.setPayload(workHistories);
+        if(!result.getType().equals(ResultType.INVALID)){
+            result.setPayload(workHistories);
+        }
         return result;
 
     }

@@ -73,8 +73,8 @@ create table resume_app (
 );
 
 create table resume_education (
-    education_id 		int not null,
     resume_id 			int not null,
+    education_id 		int not null,
     constraint fk_resume_education_resume_id
         foreign key (resume_id)
         references resume_app(resume_id),
@@ -109,7 +109,7 @@ create table resume_skill (
         foreign key (skill_id)
         references skill(skill_id),
 	constraint pk_resume_education
-        primary key (skill_id, resume_id)
+        primary key (resume_id,skill_id)
 );
 
 	delete from resume_skill;
@@ -188,4 +188,4 @@ create table resume_skill (
     (1,3),
     (1,4),
     (1,5);
-    
+      
