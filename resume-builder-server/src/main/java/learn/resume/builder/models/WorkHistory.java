@@ -12,7 +12,6 @@ public class WorkHistory {
     private LocalDate startDate;
     private LocalDate endDate;
     private String jobDescription;
-    List<Resume> resumes;
 
 
     public WorkHistory(int workHistoryId, String company, String jobTitle, LocalDate startDate, LocalDate endDate, String jobDescription) {
@@ -34,14 +33,6 @@ public class WorkHistory {
 
     public void setCompany(String company) {
         this.company = company;
-    }
-
-    public List<Resume> getResumes() {
-        return resumes;
-    }
-
-    public void setResumes(List<Resume> resumes) {
-        this.resumes = resumes;
     }
 
     public int getWorkHistoryId() {
@@ -89,11 +80,11 @@ public class WorkHistory {
         if (this == o) return true;
         if (!(o instanceof WorkHistory)) return false;
         WorkHistory that = (WorkHistory) o;
-        return workHistoryId == that.workHistoryId && Objects.equals(jobTitle, that.jobTitle) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(jobDescription, that.jobDescription) && Objects.equals(resumes, that.resumes);
+        return workHistoryId == that.workHistoryId && Objects.equals(jobTitle, that.jobTitle) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(jobDescription, that.jobDescription);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(workHistoryId, jobTitle, startDate, endDate, jobDescription, resumes);
+        return Objects.hash(workHistoryId, jobTitle, startDate, endDate, jobDescription);
     }
 }
