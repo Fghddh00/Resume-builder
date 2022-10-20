@@ -59,7 +59,7 @@ hr {
 
 }
 #workHistoryHeader{
-    margin-top: -1vh !important;
+    margin-top: -vh !important;
     margin-left: 0.2vh !important;
     text-align: left !important;
     font-family: Georgia, serif !important;
@@ -80,7 +80,7 @@ hr {
     margin-top: -4vh !important;
     font-weight: 200 !important;
     color: #000000 !important;
-    margin-bottom: -3vh !important;
+    margin-bottom: 4vh !important;
 
 }
 .educationLevel {
