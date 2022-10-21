@@ -53,8 +53,8 @@ function AddResume(props) {
 
   function getToken() {
     const data = {
-      client_id: "xut45ai73o05u4rd",
-      client_secret: "lvnvNzQF",
+      client_id: "dhyve40aqrmz8hqh",
+      client_secret: "3cadGUb6",
       grant_type: "client_credentials",
       scope: "emsi_open",
     };
