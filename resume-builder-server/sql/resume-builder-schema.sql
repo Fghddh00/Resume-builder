@@ -189,4 +189,7 @@ create table resume_skill (
     (1,3),
     (1,4),
     (1,5);
-      
+    
+    update resume_app set template_id=100, resume_name="kobe" where resume_id=1;
+    
+    select * from resume_app;
