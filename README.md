@@ -15,3 +15,8 @@ Welcome to the **Resume Builder Extraordinaire**! This end-to-end project helps 
 - **Backend:** Springboot
 - **Database:** MySQL
 - **Authentication:** JWT
+
+## 👥 Meet the teams + more project details
+https://prezi.com/view/fh9J36t3fgHp7kw5aQph/
+
+
